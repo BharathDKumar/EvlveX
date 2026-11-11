@@ -17,6 +17,9 @@ export const config = {
   publicDomain: (env.PUBLIC_DOMAIN || '').trim().replace(/^https?:\/\//, '').replace(/\/+$/, ''),
   type: (env.METAOBJECT_TYPE || 'evlvex_certificate').trim(),
   urlPrefix: (env.URL_PREFIX || 'authentic').trim(),
+  // Story pages (docs/spec/qr-certificates.md §5.2). Fixed: the theme expects these names.
+  storyType: 'evlvex_story',
+  storyUrlPrefix: 'stories',
 };
 
 export function requireApi() {

@@ -13,8 +13,30 @@
       <link rel="icon" type="image/svg+xml" href="{{ 'evlvex-monogram.svg' | asset_url }}">
     {%- endif -%}
 
-    {%- comment -%} EvlveX: certificate pages show the owner's name, so keep them out of search engines. {%- endcomment -%}
-    {%- if template.name == 'metaobject' -%}
+    {%- liquid
+      # EvlveX metaobject pages (docs/spec/theme.md §5, docs/spec/qr-certificates.md §4):
+      # - story pages are indexable and get "<title> — <model>" + the excerpt as their meta tags;
+      # - every other metaobject page (certificates show the owner's name) stays out of search engines.
+      #   If the story can't be recognised, the page falls back to noindex, never the other way round.
+      assign evx_title = page_title
+      assign evx_description = page_description
+      assign evx_image = page_image
+      assign evx_is_story = false
+      if template.name == 'metaobject'
+        if metaobject.system.type == 'evlvex_story'
+          assign evx_is_story = true
+        endif
+      endif
+      if evx_is_story
+        assign evx_title = metaobject.title.value | default: page_title
+        if metaobject.model_name.value != blank
+          assign evx_title = evx_title | append: ' — ' | append: metaobject.model_name.value
+        endif
+        assign evx_description = metaobject.excerpt.value | default: page_description | strip_newlines
+        assign evx_image = metaobject.hero_image.value | default: page_image
+      endif
+    -%}
+    {%- if template.name == 'metaobject' and evx_is_story == false -%}
       <meta name="robots" content="noindex,nofollow">
     {%- endif -%}
 
@@ -23,17 +45,17 @@
     {%- endunless -%}
 
     <title>
-      {{ page_title }}
+      {{ evx_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless evx_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
+    {% if evx_description %}
+      <meta name="description" content="{{ evx_description | escape }}">
     {% endif %}
 
-    {% render 'meta-tags' %}
+    {% render 'meta-tags', title: evx_title, description: evx_description, image: evx_image %}
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
@@ -76,6 +98,8 @@
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+      # EvlveX: Cormorant italic for story titles, pull quotes and signatures.
+      assign header_font_italic = settings.type_header_font | font_modify: 'style', 'italic'
     %}
 
     {% style %}
@@ -84,6 +108,7 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {{ header_font_italic | font_face: font_display: 'swap' }}
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}

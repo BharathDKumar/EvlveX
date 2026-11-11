@@ -97,6 +97,29 @@
                   >
                     {{- block.settings.text -}}
                   </p>
+                {%- when 'evlvex_story_line' -%}
+                  {%- comment -%} EvlveX: chapter eyebrow or story excerpt (docs/spec/theme.md §4). {%- endcomment -%}
+                  {%- assign evx_story = product.metafields.evlvex.story.value -%}
+                  {%- if block.settings.content == 'chapter' -%}
+                    {%- if evx_story != blank -%}
+                      <p class="product__text caption-with-letter-spacing evx-product-chapter" {{ block.shopify_attributes }}>
+                        {%- render 'evlvex-chapter-label', story: evx_story, with_model: true -%}
+                      </p>
+                    {%- elsif block.settings.fallback_text != blank -%}
+                      <p class="product__text caption-with-letter-spacing evx-product-chapter" {{ block.shopify_attributes }}>
+                        {{- block.settings.fallback_text | escape -}}
+                      </p>
+                    {%- endif -%}
+                  {%- elsif evx_story.excerpt.value != blank -%}
+                    <p class="evx-product-excerpt" {{ block.shopify_attributes }}>
+                      {{ evx_story.excerpt.value | escape | newline_to_br }}
+                      {%- if block.settings.link_label != blank %}
+                        <a class="link underlined-link evx-product-excerpt__link" href="#EvlveXProductStory">
+                          {{- block.settings.link_label | escape -}}
+                        </a>
+                      {%- endif -%}
+                    </p>
+                  {%- endif -%}
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
@@ -758,6 +781,36 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "evlvex_story_line",
+      "name": "EvlveX story line",
+      "settings": [
+        {
+          "type": "select",
+          "id": "content",
+          "label": "Show",
+          "options": [
+            { "value": "chapter", "label": "Chapter and model (e.g. CHAPTER 01 · COURT 01)" },
+            { "value": "excerpt", "label": "Story excerpt" }
+          ],
+          "default": "chapter"
+        },
+        {
+          "type": "text",
+          "id": "fallback_text",
+          "label": "Text when the product has no story",
+          "info": "Chapter only.",
+          "default": "The House of EvlveX"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link to the story section",
+          "info": "Excerpt only. Leave empty to hide.",
+          "default": "Read the story"
+        }
+      ]
     },
     {
       "type": "text",

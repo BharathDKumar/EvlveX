@@ -14,14 +14,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Caring for your pair",
+            "heading": "A story is kept by the one who wears it",
             "heading_size": "h0"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>A few minutes of care keeps leather supple and suede rich for years. These are the rituals we follow at the Maison.</p>"
+            "text": "<p>A few minutes of care keeps leather supple, suede rich and woven leather soft for years. These are the rituals we follow at the Maison, material by material.</p>"
           }
         }
       },
@@ -43,16 +43,16 @@
           "settings": {
             "heading": "Before first wear",
             "icon": "shoe",
-            "row_content": "<p>Apply a suede protector spray from 20 cm away and let it dry for 24 hours. This guards the suede overlays against water and stains.</p>",
+            "row_content": "<p>Apply a suede protector spray to suede pairs and suede overlays from 20 cm away, and let it dry for 24 hours. Insert cedar shoe trees into leather pairs the evening you bring them home.</p>",
             "page": ""
           }
         },
         "leather": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Leather",
+            "heading": "Smooth leather",
             "icon": "leather",
-            "row_content": "<p>Wipe with a soft, dry cotton cloth after wear. Every few months, apply a small amount of neutral leather cream, let it absorb, then buff gently.</p>",
+            "row_content": "<p>For Court 01, the Atelier Oxford and the Promenade Loafer. Wipe with a soft, dry cotton cloth after wear. Every few months, apply a little neutral leather cream, let it absorb, then buff gently. A whole-cut keeps its shine best with a light wax on the toe.</p>",
             "page": ""
           }
         },
@@ -61,16 +61,25 @@
           "settings": {
             "heading": "Suede",
             "icon": "star",
-            "row_content": "<p>Use a soft suede brush, always in one direction, to lift the nap. For marks, use a suede eraser. Never use water or leather cream on suede.</p>",
+            "row_content": "<p>For the Nocturne Chelsea and suede overlays. Use a soft suede brush, always in one direction, to lift the nap. For marks, use a suede eraser. Never use water or leather cream on suede.</p>",
+            "page": ""
+          }
+        },
+        "woven": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Woven leather",
+            "icon": "heart",
+            "row_content": "<p>For the Riviera Mule. Dust the weave with a soft brush. If it gets wet or salt-marked, blot it, let it dry slowly away from heat, then feed lightly with neutral cream. Never soak it.</p>",
             "page": ""
           }
         },
         "soles": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Midsoles & laces",
+            "heading": "Soles & laces",
             "icon": "washing",
-            "row_content": "<p>Clean midsoles with a damp cloth and mild soap. Laces can be removed and hand-washed in lukewarm water, then air-dried.</p>",
+            "row_content": "<p>Clean rubber soles and midsoles with a damp cloth and mild soap. Leather soles need a day's rest between wears. Laces can be removed and hand-washed in lukewarm water, then air-dried.</p>",
             "page": ""
           }
         },
@@ -79,7 +88,7 @@
           "settings": {
             "heading": "Storage",
             "icon": "box",
-            "row_content": "<p>Insert cedar shoe trees, keep the pair in its dust bag, and store away from direct sunlight and heat. Let shoes rest a day between wears.</p>",
+            "row_content": "<p>Keep each pair in its dust bag with cedar shoe trees, away from direct sunlight and heat. Keep the workshop card with the box: it carries your pair's chapter.</p>",
             "page": ""
           }
         },
@@ -93,7 +102,7 @@
           }
         }
       },
-      "block_order": ["first-wear", "leather", "suede", "soles", "storage", "help"],
+      "block_order": ["first-wear", "leather", "suede", "woven", "soles", "storage", "help"],
       "settings": {
         "caption": "",
         "heading": "",

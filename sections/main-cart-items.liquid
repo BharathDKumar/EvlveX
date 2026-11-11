@@ -119,6 +119,10 @@
                           modal_id: cart_disclosure_modal_id
                         -%}
                       </div>
+                      {%- assign evx_story = item.product.metafields.evlvex.story.value -%}
+                      {%- if evx_story != blank -%}
+                        <p class="evx-cart-story">{{ evx_story.title.value | escape }}</p>
+                      {%- endif -%}
 
                       {%- if item.original_price != item.final_price -%}
                         <div class="cart-item__discounted-prices">

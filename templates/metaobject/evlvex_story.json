@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-story",
+      "settings": {
+        "opener_color_scheme": "scheme-3",
+        "body_color_scheme": "scheme-2",
+        "signoff": "Every pair has a story.",
+        "show_signature": true,
+        "signature_label": "The detail",
+        "signature_color_scheme": "scheme-1",
+        "show_gallery": true,
+        "show_products": true,
+        "products_heading": "Wear the story",
+        "products_columns": 3,
+        "products_color_scheme": "scheme-1",
+        "nav_label": "Other chapters"
+      }
+    }
+  },
+  "order": ["main"]
+}

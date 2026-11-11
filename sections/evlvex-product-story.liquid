@@ -1,0 +1,144 @@
+{%- comment -%}
+  EvlveX — product page "The Story": plate, story, signature detail, link to the full story.
+  Reads product.metafields.evlvex.story (docs/spec/qr-certificates.md §5.3).
+  Renders nothing when the product has no story (docs/spec/theme.md §5).
+{%- endcomment -%}
+
+{%- assign story = product.metafields.evlvex.story.value -%}
+
+{%- if story != blank -%}
+  {{ 'evlvex-story.css' | asset_url | stylesheet_tag }}
+
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
+
+  <div id="EvlveXProductStory" class="evx-product-story color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width section-{{ section.id }}-padding">
+      <div class="evx-product-story__grid">
+        <div class="evx-product-story__media">
+          {%- render 'evlvex-story-plate',
+            image: story.hero_image.value,
+            ratio: '4 / 5',
+            sizes: '(min-width: 990px) 45vw, 100vw',
+            label: story.title.value
+          -%}
+        </div>
+
+        <div class="evx-product-story__content">
+          {%- if section.settings.caption != blank -%}
+            <p class="evx-eyebrow">{{ section.settings.caption | escape }}</p>
+          {%- endif -%}
+          <p class="evx-eyebrow evx-eyebrow--gold">
+            {%- render 'evlvex-chapter-label', story: story, with_model: true -%}
+          </p>
+          <h2 class="evx-story-title h1">{{ story.title.value | escape }}</h2>
+          {%- if story.setting.value != blank -%}
+            <p class="evx-story-setting">{{ story.setting.value | escape }}</p>
+          {%- endif -%}
+          <span class="evx-rule" aria-hidden="true"></span>
+
+          {%- if story.body != blank -%}
+            <div class="evx-story-body rte">{{ story.body | metafield_tag }}</div>
+          {%- elsif story.excerpt.value != blank -%}
+            <p class="evx-story-body">{{ story.excerpt.value | escape | newline_to_br }}</p>
+          {%- endif -%}
+
+          {%- if section.settings.show_signature_detail and story.signature_detail.value != blank -%}
+            <div class="evx-signature">
+              <p class="evx-eyebrow">{{ section.settings.signature_label | escape }}</p>
+              <p class="evx-signature__text">{{ story.signature_detail.value | escape | newline_to_br }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank -%}
+            <a class="button button--secondary evx-product-story__button" href="{{ story.system.url }}">
+              {{- section.settings.button_label | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX product story",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows the story linked in the product's Story metafield. Hidden when the product has no story."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Eyebrow",
+      "default": "The Story"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_signature_detail",
+      "label": "Show signature detail",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "signature_label",
+      "label": "Signature detail label",
+      "default": "The detail"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Read the full story"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX product story"
+    }
+  ]
+}
+{% endschema %}

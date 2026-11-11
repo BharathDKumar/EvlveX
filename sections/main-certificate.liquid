@@ -1,7 +1,7 @@
 {%- comment -%}
-  EvlveX — Certificate of Authenticity / personal thank-you page.
+  EvlveX — Certificate of Authenticity / personal thank-you page and the story of the pair.
   Rendered for each `evlvex_certificate` metaobject entry at /pages/authentic/<serial>.
-  Spec: docs/SPEC.md §4. NEVER output metaobject.order_number or metaobject.batch here.
+  Spec: docs/spec/qr-certificates.md §2–4. NEVER output metaobject.order_number or metaobject.batch here.
 {%- endcomment -%}
 
 {{ 'section-certificate.css' | asset_url | stylesheet_tag }}
@@ -14,6 +14,30 @@
   assign size = cert.size.value | strip
   assign purchase_date = cert.purchase_date.value
   assign personal_message = cert.personal_message.value | strip
+
+  # The pair's own chapter (belongs to the pair, kept when the owner changes).
+  assign pair_number = cert.pair_number.value
+  assign artisan = cert.artisan.value | strip
+  assign finished_on = cert.finished_on.value
+  assign pair_note = cert.pair_note.value | strip
+
+  # The model's story, via the product.
+  assign story = cert_product.metafields.evlvex.story.value
+  assign model_name = story.model_name.value | default: cert_product.title
+
+  if pair_number != blank
+    if pair_number < 1000
+      assign pair_label = pair_number | prepend: '000' | slice: -4, 4
+    else
+      assign pair_label = pair_number
+    endif
+  endif
+
+  if pair_number != blank or artisan != blank or finished_on != blank or pair_note != blank
+    assign has_chapter = true
+  else
+    assign has_chapter = false
+  endif
 
   if buyer_name != blank
     assign is_assigned = true
@@ -93,7 +117,63 @@
       </p>
     {%- endif -%}
 
-    <dl class="certificate__details certificate__reveal" style="--reveal-delay: 850ms;">
+    {%- if has_chapter -%}
+      <section
+        class="certificate__chapter certificate__reveal"
+        style="--reveal-delay: 800ms;"
+        aria-labelledby="CertificateChapter-{{ section.id }}"
+      >
+        <h2 id="CertificateChapter-{{ section.id }}" class="certificate__chapter-heading">
+          {{- section.settings.chapter_heading | escape -}}
+        </h2>
+        {%- if pair_label != blank -%}
+          <p class="certificate__chapter-line">
+            Pair No.&nbsp;{{ pair_label }}
+            {%- if model_name != blank %} of {{ model_name | escape }}{% endif -%}
+            .
+          </p>
+        {%- endif -%}
+        {%- if artisan != blank and finished_on != blank -%}
+          <p class="certificate__chapter-line">
+            Finished by {{ artisan | escape }} on {{ finished_on | date: '%-d %B %Y' }}.
+          </p>
+        {%- elsif artisan != blank -%}
+          <p class="certificate__chapter-line">Finished by {{ artisan | escape }}.</p>
+        {%- elsif finished_on != blank -%}
+          <p class="certificate__chapter-line">Finished on {{ finished_on | date: '%-d %B %Y' }}.</p>
+        {%- endif -%}
+        {%- if pair_note != blank -%}
+          <blockquote class="certificate__chapter-note">
+            <p>&ldquo;{{ pair_note | escape | newline_to_br }}&rdquo;</p>
+          </blockquote>
+        {%- endif -%}
+      </section>
+    {%- endif -%}
+
+    {%- if section.settings.show_story and story != blank -%}
+      <section
+        class="certificate__story certificate__reveal"
+        style="--reveal-delay: 850ms;"
+        aria-labelledby="CertificateStory-{{ section.id }}"
+      >
+        <p class="certificate__story-eyebrow">
+          {%- render 'evlvex-chapter-label', story: story, with_model: true -%}
+        </p>
+        <h2 id="CertificateStory-{{ section.id }}" class="certificate__story-title">
+          {{- story.title.value | escape -}}
+        </h2>
+        {%- if story.excerpt.value != blank -%}
+          <p class="certificate__story-excerpt">{{ story.excerpt.value | escape | newline_to_br }}</p>
+        {%- endif -%}
+        {%- if section.settings.story_link_label != blank -%}
+          <a class="link underlined-link certificate__story-link" href="{{ story.system.url }}">
+            {{- section.settings.story_link_label | escape -}}
+          </a>
+        {%- endif -%}
+      </section>
+    {%- endif -%}
+
+    <dl class="certificate__details certificate__reveal" style="--reveal-delay: 900ms;">
       <div class="certificate__detail">
         <dt>{{ 'evlvex.certificate.serial' | t }}</dt>
         <dd class="certificate__serial">{{ serial | escape }}</dd>
@@ -181,7 +261,7 @@
       "id": "message",
       "label": "Thank-you message",
       "info": "Shown under \"Thank you, {Buyer name}.\"",
-      "default": "<p>This pair was made for you, and is now registered in your name. Every EvlveX is cut, stitched and finished with patience — we hope it walks with you for many years.</p>"
+      "default": "<p>Every EvlveX begins as a story. This pair now carries yours. It was cut, stitched and finished by hand, and is registered in your name for as long as it walks with you. Take it somewhere worth remembering.</p>"
     },
     {
       "type": "richtext",
@@ -193,7 +273,31 @@
       "type": "richtext",
       "id": "unassigned_message",
       "label": "Message before a pair is registered",
-      "default": "<p>This pair is authentic and awaiting its owner. Once it is yours, this page will carry your name.</p>"
+      "default": "<p>This pair is authentic. Its story is waiting for its owner.</p>"
+    },
+    {
+      "type": "header",
+      "content": "The story of the pair"
+    },
+    {
+      "type": "text",
+      "id": "chapter_heading",
+      "label": "Pair chapter heading",
+      "info": "Above the pair number, artisan, finished date and pair note. Each line only shows when it is filled in.",
+      "default": "The Story of Your Pair"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_story",
+      "label": "Show the model's story excerpt",
+      "info": "From the product's Story metafield.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "story_link_label",
+      "label": "Story link label",
+      "default": "Read the full story"
     },
     {
       "type": "header",

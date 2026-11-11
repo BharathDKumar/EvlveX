@@ -54,7 +54,10 @@ const CERT_FIELDS = `
   id
   handle
   updatedAt
-  fields { key value reference { ... on Product { id title handle } } }
+  fields {
+    key value
+    reference { ... on Product { id title handle story: metafield(namespace: "evlvex", key: "story") { value } } }
+  }
 `;
 
 export async function getCertificate(handle) {
@@ -65,6 +68,54 @@ export async function getCertificate(handle) {
     { handle: { type: config.type, handle } }
   );
   return data.metaobjectByHandle;
+}
+
+/** Model group of a product: its story's id, or the product id when it has no story yet. */
+export const modelGroup = (productId, storyId) => storyId || productId || null;
+
+/** Story id of a product, or null. */
+export async function getProductStoryId(productId) {
+  const data = await gql(
+    `query($id: ID!) { product(id: $id) { story: metafield(namespace: "evlvex", key: "story") { value } } }`,
+    { id: productId }
+  );
+  return data.product?.story?.value || null;
+}
+
+/**
+ * Every certificate's pair number and model group, for numbering pairs per model.
+ * Returns [{ handle, group, pairNumber }].
+ */
+export async function listCertificateChapters() {
+  const out = [];
+  let after = null;
+  do {
+    const data = await gql(
+      `query($type: String!, $after: String) {
+        metaobjects(type: $type, first: 250, after: $after) {
+          nodes {
+            handle
+            pairNumber: field(key: "pair_number") { value }
+            product: field(key: "product") {
+              value
+              reference { ... on Product { story: metafield(namespace: "evlvex", key: "story") { value } } }
+            }
+          }
+          pageInfo { hasNextPage endCursor }
+        }
+      }`,
+      { type: config.type, after }
+    );
+    for (const n of data.metaobjects.nodes) {
+      out.push({
+        handle: n.handle,
+        group: modelGroup(n.product?.value, n.product?.reference?.story?.value),
+        pairNumber: n.pairNumber?.value ?? null,
+      });
+    }
+    after = data.metaobjects.pageInfo.hasNextPage ? data.metaobjects.pageInfo.endCursor : null;
+  } while (after);
+  return out;
 }
 
 /** Turn a metaobject's field list into { key: value } (product reference → title). */

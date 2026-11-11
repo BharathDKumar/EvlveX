@@ -1,0 +1,265 @@
+{%- comment -%}
+  EvlveX — story page, rendered for each `evlvex_story` entry at /pages/stories/<handle>.
+  Opener (chapter, title, setting, hero plate) · story body · plates · signature detail ·
+  "Wear the story" products · previous / next chapter. Spec: docs/spec/theme.md §4.
+{%- endcomment -%}
+
+{{ 'evlvex-story.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign story = metaobject
+  assign gallery = story.gallery.value
+  assign signature_image = gallery | first
+  assign story_products = story.products.value
+
+  capture ordered_handles
+    render 'evlvex-story-handles', order: 'asc'
+  endcapture
+  assign ordered_handles = ordered_handles | strip | split: ','
+  assign current_index = -1
+  for handle in ordered_handles
+    if handle == story.system.handle
+      assign current_index = forloop.index0
+    endif
+  endfor
+  assign prev_story = nil
+  assign next_story = nil
+  if current_index > 0
+    assign prev_index = current_index | minus: 1
+    assign prev_handle = ordered_handles[prev_index]
+    assign prev_story = shop.metaobjects.evlvex_story[prev_handle]
+  endif
+  if current_index >= 0
+    assign next_index = current_index | plus: 1
+    if next_index < ordered_handles.size
+      assign next_handle = ordered_handles[next_index]
+      assign next_story = shop.metaobjects.evlvex_story[next_handle]
+    endif
+  endif
+-%}
+
+<article class="evx-story" aria-labelledby="StoryTitle-{{ section.id }}">
+  <header class="evx-story__opener color-{{ section.settings.opener_color_scheme }} gradient">
+    <div class="page-width evx-story__opener-text">
+      {%- render 'evlvex-monogram', size: 40, class: 'evx-story__mark' -%}
+      <p class="evx-eyebrow evx-eyebrow--gold">
+        {%- render 'evlvex-chapter-label', story: story, with_model: true -%}
+      </p>
+      <h1 id="StoryTitle-{{ section.id }}" class="evx-story-title h0">{{ story.title.value | escape }}</h1>
+      {%- if story.setting.value != blank -%}
+        <p class="evx-story-setting">{{ story.setting.value | escape }}</p>
+      {%- endif -%}
+    </div>
+    <div class="evx-story__hero">
+      {%- render 'evlvex-story-plate',
+        image: story.hero_image.value,
+        ratio: '16 / 9',
+        sizes: '100vw',
+        loading: 'eager',
+        label: story.title.value,
+        class: 'evx-story__hero-plate'
+      -%}
+    </div>
+  </header>
+
+  <div class="evx-story__body color-{{ section.settings.body_color_scheme }} gradient">
+    <div class="evx-story__reading">
+      {%- if story.body != blank -%}
+        <div class="evx-story-body evx-story-body--long rte">{{ story.body | metafield_tag }}</div>
+      {%- elsif story.excerpt.value != blank -%}
+        <p class="evx-story-body evx-story-body--long">{{ story.excerpt.value | escape | newline_to_br }}</p>
+      {%- endif -%}
+      <p class="evx-story__signoff">{{ section.settings.signoff | escape }}</p>
+    </div>
+  </div>
+
+  {%- if section.settings.show_signature and story.signature_detail.value != blank -%}
+    <div class="evx-story__signature color-{{ section.settings.signature_color_scheme }} gradient">
+      <div class="page-width">
+        <div class="evx-featured__grid{% if signature_image == blank %} evx-featured__grid--text-only{% endif %}">
+          {%- if signature_image != blank -%}
+            <div class="evx-featured__media">
+              {%- render 'evlvex-story-plate', image: signature_image, ratio: '4 / 5', sizes: '(min-width: 990px) 50vw, 100vw' -%}
+            </div>
+          {%- endif -%}
+          <div class="evx-featured__content">
+            <p class="evx-eyebrow evx-eyebrow--gold">{{ section.settings.signature_label | escape }}</p>
+            <p class="evx-signature__lead">{{ story.signature_detail.value | escape | newline_to_br }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_gallery and gallery.size > 1 -%}
+    <div class="evx-story__gallery color-{{ section.settings.body_color_scheme }} gradient">
+      <div class="page-width">
+        <ul class="evx-story__plates list-unstyled" role="list">
+          {%- for plate in gallery offset: 1 -%}
+            <li class="evx-story__plate-item">
+              {%- render 'evlvex-story-plate', image: plate, ratio: 'auto', sizes: '(min-width: 750px) 50vw, 100vw' -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_products and story_products.size > 0 -%}
+    <div class="evx-story__products color-{{ section.settings.products_color_scheme }} gradient">
+      <div class="page-width">
+        <div class="evx-stories__header">
+          <p class="evx-eyebrow">{{ story.model_name.value | escape }}</p>
+          <h2 class="evx-stories__heading h1">{{ section.settings.products_heading | escape }}</h2>
+        </div>
+        <ul
+          class="grid product-grid contains-card--product grid--2-col-tablet-down grid--{{ section.settings.products_columns }}-col-desktop"
+          role="list"
+        >
+          {%- for product in story_products limit: 8 -%}
+            <li class="grid__item">
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: 'portrait',
+                image_shape: 'default',
+                lazy_load: true,
+                show_secondary_image: true,
+                show_vendor: false,
+                show_rating: false,
+                skip_styles: true,
+                section_id: section.id,
+                quick_add: 'none',
+                product_view_context: 'collection'
+              %}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if prev_story != blank or next_story != blank -%}
+    <nav class="evx-story__nav color-{{ section.settings.opener_color_scheme }} gradient" aria-label="{{ section.settings.nav_label | escape }}">
+      <div class="page-width evx-story__nav-grid">
+        {%- if prev_story != blank -%}
+          <a class="evx-story__nav-link evx-story__nav-link--prev" href="{{ prev_story.system.url }}" rel="prev">
+            <span class="evx-eyebrow">← {% render 'evlvex-chapter-label', story: prev_story %}</span>
+            <span class="evx-story__nav-title">{{ prev_story.title.value | escape }}</span>
+          </a>
+        {%- else -%}
+          <span></span>
+        {%- endif -%}
+        {%- if next_story != blank -%}
+          <a class="evx-story__nav-link evx-story__nav-link--next" href="{{ next_story.system.url }}" rel="next">
+            <span class="evx-eyebrow">{% render 'evlvex-chapter-label', story: next_story %} →</span>
+            <span class="evx-story__nav-title">{{ next_story.title.value | escape }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </nav>
+  {%- endif -%}
+</article>
+
+{% schema %}
+{
+  "name": "EvlveX story",
+  "tag": "section",
+  "class": "section section--story",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "opener_color_scheme",
+      "label": "Opener and chapter navigation",
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "body_color_scheme",
+      "label": "Story text and plates",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "signoff",
+      "label": "Sign-off under the story",
+      "default": "Every pair has a story."
+    },
+    {
+      "type": "header",
+      "content": "Signature detail"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_signature",
+      "label": "Show signature detail",
+      "info": "Uses the first plate in the story's Plates list.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "signature_label",
+      "label": "Label",
+      "default": "The detail"
+    },
+    {
+      "type": "color_scheme",
+      "id": "signature_color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Plates"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gallery",
+      "label": "Show remaining plates",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products",
+      "label": "Show the model's products",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "products_heading",
+      "label": "Heading",
+      "default": "Wear the story"
+    },
+    {
+      "type": "range",
+      "id": "products_columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
+    {
+      "type": "color_scheme",
+      "id": "products_color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Chapter navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_label",
+      "label": "Accessible label",
+      "default": "Other chapters"
+    }
+  ]
+}
+{% endschema %}

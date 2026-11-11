@@ -2,7 +2,7 @@
   EvlveX — global luxury layer over Dawn.
   Loaded right after base.css (layout/theme.liquid). Colors and fonts come from
   Theme settings (config/settings_data.json); this file only adds typography detail,
-  spacing and motion. Brand system: docs/SPEC.md §2.
+  spacing and motion. Brand system: docs/spec/brand-and-content.md.
 */
 
 :root {
@@ -44,6 +44,49 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
 
 ::selection {
   background: rgba(var(--evx-gold), 0.35);
+}
+
+.evx-eyebrow {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-body-family);
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.evx-eyebrow--gold {
+  color: rgb(var(--evx-gold));
+}
+
+/* ---------- Story lines outside story sections ---------- */
+/* Product page: excerpt under the price (main-product block "EvlveX story line") */
+.evx-product-excerpt {
+  margin: 1.6rem 0 0.8rem;
+  max-width: 44rem;
+  font-family: var(--font-heading-family);
+  font-size: 1.9rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+.evx-product-excerpt__link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-style: normal;
+  letter-spacing: var(--evx-tracking-wide);
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+}
+
+/* Cart: the model's story title under the product name */
+.evx-cart-story {
+  margin: 0.4rem 0 0.8rem;
+  font-family: var(--font-heading-family);
+  font-size: 1.6rem;
+  font-style: italic;
+  line-height: 1.3;
+  color: rgba(var(--color-foreground), 0.7);
 }
 
 /* ---------- Logo lockup (snippets/evlvex-logo.liquid) ---------- */

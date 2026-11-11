@@ -15,13 +15,17 @@ if (!cert) fail(`${serial} was not found in Shopify.`);
 const f = fieldMap(cert);
 const rows = [
   ['Serial', f.serial],
-  ['Status', f.buyer_name ? 'Registered' : 'Awaiting its owner'],
+  ['Status', f.buyer_name ? 'Registered' : 'Waiting for its owner'],
   ['Buyer', f.buyer_name],
   ['Product', f.product],
   ['Size', f.size],
   ['Purchased', f.purchase_date],
   ['Order', f.order_number],
   ['Message', f.personal_message],
+  ['Pair', f.pair_number ? `No. ${String(f.pair_number).padStart(4, '0')}` : ''],
+  ['Artisan', f.artisan],
+  ['Finished', f.finished_on],
+  ['Note', f.pair_note],
   ['Batch', f.batch],
   ['Updated', cert.updatedAt],
   ['URL', certificateUrl(publicBaseUrl(), handle)],

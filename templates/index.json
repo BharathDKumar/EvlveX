@@ -13,25 +13,32 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Crafted to evolve",
+            "heading": "Every Pair Has a Story",
             "heading_size": "hxl"
+          }
+        },
+        "subheading": {
+          "type": "text",
+          "settings": {
+            "text": "Luxury shoes made by hand, each born from a story of its own.",
+            "text_style": "body"
           }
         },
         "button": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Discover Court 01",
+            "button_label_1": "Discover the Collection",
             "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_label_2": "Read the Stories",
+            "button_link_2": "shopify://pages/the-stories",
+            "button_style_secondary_2": true
           }
         }
       },
-      "block_order": ["caption", "heading", "button"],
+      "block_order": ["caption", "heading", "subheading", "button"],
       "settings": {
-        "image_overlay_opacity": 30,
+        "image_overlay_opacity": 35,
         "image_height": "large",
         "desktop_content_position": "bottom-center",
         "show_text_box": false,
@@ -40,7 +47,7 @@
         "color_scheme": "scheme-3",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
-        "show_text_below": false
+        "show_text_below": true
       }
     },
     "statement": {
@@ -49,7 +56,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "Our philosophy",
+            "caption": "The House",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -57,14 +64,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Fewer pairs. Made with intention. Built to stay with you.",
+            "heading": "A shoe begins as a story.",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>EvlveX makes quiet-luxury sneakers from full-grain leather and soft suede, finished by hand and numbered one by one. No noise, no shouting logos: only proportion, material and craft.</p>"
+            "text": "<p>At EvlveX, a shoe begins as a story: a seaside court at dusk, a river walked every Sunday, a night train arriving at dawn. We shape leather around that story by hand until it can be worn. Then each pair is numbered, signed by the artisan who finished it, and registered to the person who will carry the story further.</p>"
           }
         }
       },
@@ -81,13 +88,13 @@
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "title": "The Court 01",
+        "title": "The Collection",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
         "collection": "all",
-        "products_to_show": 4,
+        "products_to_show": 8,
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
         "full_width": false,
@@ -106,13 +113,43 @@
         "padding_bottom": 80
       }
     },
-    "craft": {
+    "featured-story": {
+      "type": "evlvex-featured-story",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "layout": "image_first",
+        "caption": "Featured story",
+        "button_label": "Read the story",
+        "product_link_label": "Discover",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "stories": {
+      "type": "evlvex-stories-grid",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "caption": "The Stories",
+        "heading": "Where each pair begins",
+        "heading_size": "h1",
+        "text": "<p>Every model of the house is born from a story. Read where each one comes from.</p>",
+        "show_all": false,
+        "limit": 3,
+        "columns_desktop": 3,
+        "swipe_on_mobile": true,
+        "link_label": "Read all the stories",
+        "link": "shopify://pages/the-stories",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "atelier": {
       "type": "image-with-text",
       "blocks": {
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "The craft",
+            "caption": "From the Atelier",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -120,21 +157,21 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Leather, suede and patience",
+            "heading": "Signed by the hands that finished it",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Each Court 01 pairs smooth full-grain leather with brushed suede overlays, a cushioned cupsole and an embroidered monogram. Every seam is checked by hand before the pair is numbered and boxed.</p>",
+            "text": "<p>When a pair leaves the bench, its artisan writes a workshop card: the pair's number, the day it was finished, and one true line about this pair alone. The card travels in the box. The same words appear on the pair's certificate.</p>",
             "text_style": "body"
           }
         },
         "button": {
           "type": "button",
           "settings": {
-            "button_label": "Our story",
+            "button_label": "Visit the Maison",
             "button_link": "shopify://pages/the-maison",
             "button_style_secondary": true
           }
@@ -144,7 +181,7 @@
       "settings": {
         "height": "large",
         "desktop_image_width": "medium",
-        "layout": "image_first",
+        "layout": "text_first",
         "image_behavior": "none",
         "content_layout": "no-overlap",
         "desktop_content_position": "middle",
@@ -156,14 +193,14 @@
         "padding_bottom": 0
       }
     },
-    "certified": {
+    "chapter": {
       "type": "multicolumn",
       "blocks": {
         "column-1": {
           "type": "column",
           "settings": {
-            "title": "Individually numbered",
-            "text": "<p>Every pair carries its own serial and QR tag, sewn under the tongue and repeated on the box.</p>",
+            "title": "Numbered",
+            "text": "<p>Each pair carries its place in the chapter, from No. 0001 onward.</p>",
             "link_label": "",
             "link": ""
           }
@@ -171,8 +208,8 @@
         "column-2": {
           "type": "column",
           "settings": {
-            "title": "Registered to you",
-            "text": "<p>When your pair ships, its certificate is registered in your name. Scan the tag to see it.</p>",
+            "title": "Signed by its artisan",
+            "text": "<p>The hands that finished it, and the day they did.</p>",
             "link_label": "",
             "link": ""
           }
@@ -180,16 +217,16 @@
         "column-3": {
           "type": "column",
           "settings": {
-            "title": "Verifiable for life",
-            "text": "<p>Anyone can confirm a pair is genuine EvlveX, anywhere, at any time.</p>",
-            "link_label": "Verify a pair",
+            "title": "Registered to you",
+            "text": "<p>Scan the tag inside and your name is written into its story.</p>",
+            "link_label": "How it works",
             "link": "shopify://pages/authenticity"
           }
         }
       },
       "block_order": ["column-1", "column-2", "column-3"],
       "settings": {
-        "title": "Every pair, individually certified",
+        "title": "Every pair, its own chapter",
         "heading_size": "h1",
         "image_width": "third",
         "image_ratio": "adapt",
@@ -205,50 +242,20 @@
         "padding_bottom": 96
       }
     },
-    "collections": {
-      "type": "collection-list",
-      "blocks": {
-        "men": {
-          "type": "featured_collection",
-          "settings": { "collection": "men" }
-        },
-        "women": {
-          "type": "featured_collection",
-          "settings": { "collection": "women" }
-        },
-        "limited": {
-          "type": "featured_collection",
-          "settings": { "collection": "limited" }
-        }
-      },
-      "block_order": ["men", "women", "limited"],
-      "settings": {
-        "title": "Shop by collection",
-        "heading_size": "h1",
-        "image_ratio": "portrait",
-        "columns_desktop": 3,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 96,
-        "padding_bottom": 80
-      }
-    },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Join the Maison",
+            "heading": "Receive each new chapter first",
             "heading_size": "h1"
           }
         },
         "paragraph": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>First access to new colorways and limited editions. Rarely, and only when it matters.</p>"
+            "text": "<p>One letter when a new story is told. Nothing else.</p>"
           }
         },
         "email_form": {
@@ -265,5 +272,5 @@
       }
     }
   },
-  "order": ["hero", "statement", "featured", "craft", "certified", "collections", "newsletter"]
+  "order": ["hero", "statement", "featured", "featured-story", "stories", "atelier", "chapter", "newsletter"]
 }

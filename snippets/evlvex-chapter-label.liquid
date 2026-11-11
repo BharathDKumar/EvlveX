@@ -1,0 +1,23 @@
+{%- doc -%}
+  Outputs a story's chapter label, e.g. "Chapter 01" or "Chapter 01 · Court 01" (plain text, escaped).
+
+  @param {object} story - An `evlvex_story` metaobject
+  @param {boolean} [with_model] - Append " · <model name>"
+  @param {string} [prefix] - Word before the number (default "Chapter")
+
+  @example
+  {% render 'evlvex-chapter-label', story: story, with_model: true %}
+{%- enddoc -%}
+{%- liquid
+  assign chapter_number = story.chapter.value | default: 0
+  if chapter_number < 10
+    assign chapter_number = '0' | append: chapter_number
+  endif
+  echo prefix | default: 'Chapter' | escape
+  echo ' '
+  echo chapter_number
+  if with_model and story.model_name.value != blank
+    echo ' · '
+    echo story.model_name.value | escape
+  endif
+-%}

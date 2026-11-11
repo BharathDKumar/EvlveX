@@ -8,15 +8,15 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Complimentary shipping · Every pair individually certified",
+            "text": "Complimentary shipping · Every pair numbered, certified and told",
             "link": "shopify://pages/authenticity"
           }
         },
         "announcement-bar-1": {
           "type": "announcement",
           "settings": {
-            "text": "Court 01 — now available in Ivory Sand and Noir",
-            "link": "shopify://collections/all"
+            "text": "Chapter 01 · Court 01 — The Last Set at Dusk",
+            "link": "shopify://pages/the-stories"
           }
         }
       },
@@ -37,7 +37,7 @@
         "logo_position": "top-center",
         "mobile_logo_position": "center",
         "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
         "color_scheme": "scheme-1",

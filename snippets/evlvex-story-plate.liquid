@@ -1,0 +1,47 @@
+{%- doc -%}
+  Renders a story plate (docs/spec/brand-and-content.md §5, family B). Until the plates are shot,
+  shows a Noir panel with the gold monogram and a label instead of a broken or stock image.
+
+  @param {object} [image] - Image or media image (e.g. story.hero_image.value)
+  @param {string} [alt] - Alt text; defaults to the image's own alt text
+  @param {string} [ratio] - CSS aspect ratio, e.g. '4 / 5' (default) or '16 / 9'; 'auto' keeps the image's ratio
+  @param {string} [sizes] - sizes attribute (default 100vw)
+  @param {string} [loading] - 'lazy' (default) or 'eager'
+  @param {string} [label] - Text under the monogram in the placeholder (e.g. the story title)
+  @param {string} [class] - Extra classes
+
+  @example
+  {% render 'evlvex-story-plate', image: story.hero_image.value, ratio: '16 / 9', label: story.title.value %}
+{%- enddoc -%}
+{%- liquid
+  assign plate_ratio = ratio | default: '4 / 5'
+  assign plate_alt = alt | default: image.alt | default: ''
+  assign plate_sizes = sizes | default: '100vw'
+  assign plate_loading = loading | default: 'lazy'
+-%}
+<div
+  class="evx-plate{% if image == blank %} evx-plate--empty{% endif %}{% if class != blank %} {{ class }}{% endif %}"
+  {% if plate_ratio != 'auto' or image == blank %}
+    style="--evx-plate-ratio: {% if plate_ratio == 'auto' %}4 / 5{% else %}{{ plate_ratio }}{% endif %};"
+  {% endif %}
+>
+  {%- if image != blank -%}
+    {{
+      image
+      | image_url: width: 2400
+      | image_tag:
+        widths: '400, 600, 800, 1000, 1400, 1800, 2400',
+        sizes: plate_sizes,
+        loading: plate_loading,
+        alt: plate_alt,
+        class: 'evx-plate__image'
+    }}
+  {%- else -%}
+    <div class="evx-plate__placeholder">
+      {%- render 'evlvex-monogram', size: 56, class: 'evx-plate__mark' -%}
+      {%- if label != blank -%}
+        <span class="evx-plate__label">{{ label | escape }}</span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

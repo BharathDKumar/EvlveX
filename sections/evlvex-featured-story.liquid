@@ -1,0 +1,162 @@
+{%- comment -%}
+  EvlveX — home page "Featured story": a story plate with its chapter, title, setting and excerpt.
+  The story is chosen in the theme editor; without a choice, the newest chapter is shown.
+  Spec: docs/spec/theme.md §4.
+{%- endcomment -%}
+
+{{ 'evlvex-story.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign story = section.settings.story
+  if story == blank
+    capture newest_handle
+      render 'evlvex-story-handles'
+    endcapture
+    assign newest_handle = newest_handle | strip | split: ',' | first
+    if newest_handle != blank
+      assign story = shop.metaobjects.evlvex_story[newest_handle]
+    endif
+  endif
+-%}
+
+{%- if story != blank or request.design_mode -%}
+  <div class="evx-featured color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width section-{{ section.id }}-padding">
+      <div class="evx-featured__grid{% if section.settings.layout == 'text_first' %} evx-featured__grid--reverse{% endif %}">
+        <div class="evx-featured__media">
+          {%- render 'evlvex-story-plate',
+            image: story.hero_image.value,
+            ratio: '4 / 5',
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            label: story.title.value
+          -%}
+        </div>
+        <div class="evx-featured__content">
+          {%- if section.settings.caption != blank -%}
+            <p class="evx-eyebrow">{{ section.settings.caption | escape }}</p>
+          {%- endif -%}
+          {%- if story != blank -%}
+            <p class="evx-eyebrow evx-eyebrow--gold">
+              {%- render 'evlvex-chapter-label', story: story, with_model: true -%}
+            </p>
+            <h2 class="evx-story-title h0">{{ story.title.value | escape }}</h2>
+            {%- if story.setting.value != blank -%}
+              <p class="evx-story-setting">{{ story.setting.value | escape }}</p>
+            {%- endif -%}
+            <span class="evx-rule" aria-hidden="true"></span>
+            {%- if story.excerpt.value != blank -%}
+              <p class="evx-featured__excerpt">{{ story.excerpt.value | escape | newline_to_br }}</p>
+            {%- endif -%}
+            <div class="evx-featured__actions">
+              {%- if section.settings.button_label != blank -%}
+                <a class="button" href="{{ story.system.url }}">{{ section.settings.button_label | escape }}</a>
+              {%- endif -%}
+              {%- assign first_product = story.products.value | first -%}
+              {%- if section.settings.product_link_label != blank and first_product != blank -%}
+                <a class="link underlined-link evx-featured__product-link" href="{{ first_product.url }}">
+                  {{- section.settings.product_link_label | escape }}
+                  {{ story.model_name.value | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <h2 class="evx-story-title h0">The Last Set at Dusk</h2>
+            <p class="evx-featured__excerpt">
+              Choose a story in this section's settings, or add an active EvlveX Story entry.
+            </p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX featured story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "metaobject",
+      "id": "story",
+      "metaobject_type": "evlvex_story",
+      "label": "Story",
+      "info": "Leave empty to show the newest chapter."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop layout",
+      "options": [
+        { "value": "image_first", "label": "Plate first" },
+        { "value": "text_first", "label": "Text first" }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Eyebrow",
+      "default": "Featured story"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Read the story"
+    },
+    {
+      "type": "text",
+      "id": "product_link_label",
+      "label": "Product link label",
+      "info": "Followed by the model name, e.g. \"Discover Court 01\". Leave empty to hide.",
+      "default": "Discover"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX featured story"
+    }
+  ]
+}
+{% endschema %}

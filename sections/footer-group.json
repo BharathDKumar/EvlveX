@@ -25,19 +25,19 @@
             "menu": "footer"
           }
         },
-        "authenticity": {
+        "stories": {
           "type": "text",
           "settings": {
-            "heading": "Authenticity",
-            "subtext": "<p>Every EvlveX pair carries a numbered QR tag. <a href=\"/pages/authenticity\" title=\"Authenticity\">Verify your pair</a>.</p>"
+            "heading": "Stories",
+            "subtext": "<p><em>Every pair has a story.</em></p><p><a href=\"/pages/the-stories\" title=\"The Stories\">Read the stories</a></p><p><a href=\"/pages/authenticity\" title=\"Authenticity\">Verify your pair</a></p>"
           }
         }
       },
-      "block_order": ["brand", "shop", "client-care", "authenticity"],
+      "block_order": ["brand", "shop", "stories", "client-care"],
       "settings": {
         "color_scheme": "scheme-5",
         "newsletter_enable": true,
-        "newsletter_heading": "Join the Maison",
+        "newsletter_heading": "Join the Maison: receive each new chapter first",
         "enable_follow_on_shop": false,
         "show_social": true,
         "enable_country_selector": true,

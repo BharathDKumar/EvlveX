@@ -1,0 +1,28 @@
+{%- doc -%}
+  Outputs the handles of all active `evlvex_story` entries as a comma-separated list, sorted by chapter.
+  Liquid cannot sort metaobjects by a field value, so this builds sortable "1xxxx:handle" keys.
+  Spec: docs/spec/theme.md §5.
+
+  @param {string} [order] - 'desc' (default, newest chapter first) or 'asc'
+
+  @example
+  {%- capture handles -%}{% render 'evlvex-story-handles', order: 'asc' %}{%- endcapture -%}
+  {%- assign handles = handles | split: ',' -%}
+{%- enddoc -%}
+{%- liquid
+  assign keys = ''
+  for story in shop.metaobjects.evlvex_story.values
+    assign chapter_key = story.chapter.value | default: 0 | plus: 10000
+    assign keys = keys | append: chapter_key | append: ':' | append: story.system.handle | append: ','
+  endfor
+  assign keys = keys | split: ',' | sort
+  if order != 'asc'
+    assign keys = keys | reverse
+  endif
+  for key in keys
+    echo key | split: ':' | last
+    unless forloop.last
+      echo ','
+    endunless
+  endfor
+-%}

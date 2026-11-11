@@ -3,11 +3,12 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
+        "chapter": {
+          "type": "evlvex_story_line",
           "settings": {
-            "text": "The House of EvlveX",
-            "text_style": "uppercase"
+            "content": "chapter",
+            "fallback_text": "The House of EvlveX",
+            "link_label": ""
           }
         },
         "title": {
@@ -17,6 +18,14 @@
         "price": {
           "type": "price",
           "settings": {}
+        },
+        "excerpt": {
+          "type": "evlvex_story_line",
+          "settings": {
+            "content": "excerpt",
+            "fallback_text": "",
+            "link_label": "Read the story"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -45,7 +54,7 @@
           "settings": {
             "heading": "Materials & craft",
             "icon": "leather",
-            "content": "<p>Full-grain leather upper with brushed suede overlays. Leather lining, cushioned insole and a stitched rubber cupsole. Monogram embroidered by hand-guided machine.</p>",
+            "content": "<p>Every EvlveX is cut, stitched and finished by hand from full-grain leathers and suedes chosen to age well. The materials of this model are described above; each pair's maker and finishing date are recorded on its certificate.</p>",
             "page": ""
           }
         },
@@ -54,7 +63,7 @@
           "settings": {
             "heading": "Size & fit",
             "icon": "ruler",
-            "content": "<p>True to size. If you are between sizes, we recommend the larger size. EU sizing; see the size guide for UK/US equivalents.</p>",
+            "content": "<p>EU sizing. Most models are true to size; if you are between sizes, we recommend the larger size. Hand-sewn loafers soften to the foot within a week of wear.</p>",
             "page": ""
           }
         },
@@ -63,7 +72,7 @@
           "settings": {
             "heading": "Care",
             "icon": "washing",
-            "content": "<p>Wipe leather with a soft, dry cloth. Brush suede gently in one direction and protect it with a suede spray before first wear. Store in the dust bag, away from direct sunlight. <a href=\"/pages/care\" title=\"Care guide\">Full care guide</a>.</p>",
+            "content": "<p>Smooth leather: wipe with a soft, dry cloth and feed with neutral cream every few months. Suede: brush gently in one direction and protect before first wear. Woven leather: dust with a soft brush, never soak. Store in the dust bag with cedar shoe trees. <a href=\"/pages/care\" title=\"Care guide\">Full care guide</a>.</p>",
             "page": ""
           }
         },
@@ -72,24 +81,25 @@
           "settings": {
             "heading": "Shipping & returns",
             "icon": "truck",
-            "content": "<p>Complimentary shipping on every order. Returns accepted within 14 days in original, unworn condition with the certificate tag attached.</p>",
+            "content": "<p>Complimentary shipping on every order. Returns accepted within 14 days in original, unworn condition with the certificate tag and workshop card in the box.</p>",
             "page": ""
           }
         },
-        "tab_authenticity": {
+        "tab_certificate": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Authenticity certificate",
+            "heading": "Your pair's certificate",
             "icon": "check_mark",
-            "content": "<p>Every pair carries a unique serial and QR tag. When your order ships, its certificate is registered in your name: scan the tag to view it. <a href=\"/pages/authenticity\" title=\"Authenticity\">How it works</a>.</p>",
+            "content": "<p>Every pair is numbered, signed by the artisan who finished it, and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair. <a href=\"/pages/authenticity\" title=\"Authenticity\">How it works</a>.</p>",
             "page": ""
           }
         }
       },
       "block_order": [
-        "vendor",
+        "chapter",
         "title",
         "price",
+        "excerpt",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
@@ -98,7 +108,7 @@
         "tab_fit",
         "tab_care",
         "tab_shipping",
-        "tab_authenticity"
+        "tab_certificate"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -114,6 +124,18 @@
         "enable_video_looping": false,
         "padding_top": 24,
         "padding_bottom": 48
+      }
+    },
+    "story": {
+      "type": "evlvex-product-story",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "caption": "The Story",
+        "show_signature_detail": true,
+        "signature_label": "The detail",
+        "button_label": "Read the full story",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "disclosures": {
@@ -144,6 +166,7 @@
   },
   "order": [
     "main",
+    "story",
     "disclosures",
     "related-products"
   ]

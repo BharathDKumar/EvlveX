@@ -2,7 +2,7 @@
 // npm run generate -- --reprint EVX-7F3K9QMD[,EVX-…]
 //
 // Creates new serials as Active `evlvex_certificate` metaobjects in Shopify and writes
-// out/<batch>/{svg/*.svg, tags.pdf, manifest.csv}. See docs/SPEC.md §5.1 and §6.
+// out/<batch>/{svg/*.svg, tags.pdf, manifest.csv}. See docs/spec/qr-tooling.md and docs/spec/operations.md §1.
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { parseArgs } from 'node:util';

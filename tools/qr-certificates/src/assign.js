@@ -1,11 +1,21 @@
-// npm run assign -- --serial EVX-7F3K9QMD --order 1001 [--size 42] [--message "…"] [--name "…"] [--line 2] [--force]
+// npm run assign -- --serial EVX-7F3K9QMD --order 1001 [--size 42] [--message "…"] [--name "…"] [--line 2]
+//                   [--artisan "Marco R."] [--finished 2026-11-03] [--note "…"] [--pair-number 42] [--force]
 // npm run assign -- --serial EVX-7F3K9QMD --clear
 //
-// Links a pair's certificate to an order: buyer's full name, product, size, purchase date.
-// See docs/SPEC.md §5.2–5.3.
+// Links a pair's certificate to an order (buyer's full name, product, size, purchase date) and records
+// the pair's own chapter from its workshop card. See docs/spec/qr-tooling.md §3 and docs/spec/operations.md §3.
 import { parseArgs } from 'node:util';
 import { certificateUrl, fail, publicBaseUrl } from './config.js';
-import { assertNoUserErrors, fieldMap, getCertificate, gql } from './shopify.js';
+import { CLEAR_FIELDS, chapterFields, formatPairNumber, nextPairNumber } from './chapter.js';
+import {
+  assertNoUserErrors,
+  fieldMap,
+  getCertificate,
+  getProductStoryId,
+  gql,
+  listCertificateChapters,
+  modelGroup,
+} from './shopify.js';
 import { normaliseSerial, serialToHandle } from './serial.js';
 
 const { values: args } = parseArgs({
@@ -16,6 +26,10 @@ const { values: args } = parseArgs({
     message: { type: 'string' },
     name: { type: 'string' },
     line: { type: 'string' },
+    artisan: { type: 'string' },
+    finished: { type: 'string' },
+    note: { type: 'string' },
+    'pair-number': { type: 'string' },
     force: { type: 'boolean', default: false },
     clear: { type: 'boolean', default: false },
     help: { type: 'boolean', short: 'h', default: false },
@@ -29,8 +43,12 @@ if (args.help || !args.serial) {
        [--message "..."]     personal/gift message shown on the page
        [--name "..."]        override buyer name (e.g. gift recipient)
        [--line 2]            which shoe line item to use if the order has several
+       [--artisan "Marco R."]   who finished the pair (from the workshop card; only with consent)
+       [--finished 2026-11-03]  date the pair was finished
+       [--note "..."]        pair note from the workshop card (max 200 characters)
+       [--pair-number 42]    override the automatic next pair number for the model
        [--force]             overwrite an already-assigned certificate
-  npm run assign -- --serial EVX-7F3K9QMD --clear                 un-assign (returns)`);
+  npm run assign -- --serial EVX-7F3K9QMD --clear                 un-assign (returns); keeps the pair's chapter`);
   process.exit(args.help ? 0 : 1);
 }
 
@@ -38,20 +56,24 @@ const serial = normaliseSerial(args.serial);
 if (!serial) fail(`"${args.serial}" is not a valid serial (expected EVX-XXXXXXXX).`);
 const handle = serialToHandle(serial);
 
+const chapter = chapterFields({
+  artisan: args.artisan,
+  finished: args.finished,
+  note: args.note,
+  pairNumber: args['pair-number'],
+});
+if (chapter.errors.length) fail(chapter.errors.join('\n  '));
+
 const cert = await getCertificate(handle);
 if (!cert) fail(`${serial} was not found in Shopify. Check the tag, or generate it first.`);
 const current = fieldMap(cert);
 
 if (args.clear) {
-  await update(cert.id, [
-    { key: 'buyer_name', value: '' },
-    { key: 'product', value: '' },
-    { key: 'size', value: '' },
-    { key: 'purchase_date', value: '' },
-    { key: 'personal_message', value: '' },
-    { key: 'order_number', value: '' },
-  ]);
-  console.log(`✔ ${serial} cleared. It is back to "awaiting its owner".`);
+  await update(cert.id, CLEAR_FIELDS.map((key) => ({ key, value: '' })));
+  console.log(`✔ ${serial} cleared. It is back to "waiting for its owner".`);
+  if (current.pair_number || current.artisan) {
+    console.log(`  Kept the pair's chapter: No. ${current.pair_number ? formatPairNumber(current.pair_number) : '—'}${current.artisan ? ', finished by ' + current.artisan : ''}.`);
+  }
   process.exit(0);
 }
 
@@ -94,14 +116,33 @@ const fields = [
   { key: 'order_number', value: order.name },
 ];
 if (args.message !== undefined) fields.push({ key: 'personal_message', value: args.message });
+fields.push(...chapter.fields);
+
+// Pair number: keep an existing one; otherwise the next number for this model.
+let pairNumber = chapter.fields.find((f) => f.key === 'pair_number')?.value || current.pair_number || null;
+if (!pairNumber) {
+  const group = modelGroup(line.product.id, await getProductStoryId(line.product.id));
+  pairNumber = String(nextPairNumber(await listCertificateChapters(), group, handle));
+  fields.push({ key: 'pair_number', value: pairNumber });
+}
 
 await update(cert.id, fields);
+
+const finalValue = (key) => fields.find((f) => f.key === key)?.value ?? current[key];
+const artisan = finalValue('artisan');
+const finishedOn = finalValue('finished_on');
+const pairNote = finalValue('pair_note');
 
 console.log(`✔ ${serial} registered`);
 console.log(`  Name     ${buyerName}`);
 console.log(`  Product  ${line.product.title}${size ? ' · size ' + size : ''}`);
 console.log(`  Date     ${purchaseDate}   Order ${order.name}`);
 if (args.message) console.log(`  Message  ${args.message}`);
+console.log(`  Pair     No. ${formatPairNumber(pairNumber)}`);
+if (artisan) console.log(`  Artisan  ${artisan}${finishedOn ? ' · finished ' + finishedOn : ''}`);
+else if (finishedOn) console.log(`  Finished ${finishedOn}`);
+if (pairNote) console.log(`  Note     ${pairNote}`);
+if (!artisan && !finishedOn) console.log('  (No workshop card details recorded. Add them with --artisan / --finished / --note.)');
 console.log(`\n  ${certificateUrl(publicBaseUrl(), handle)}\n  Scan the tag to double-check before closing the box.`);
 
 async function update(id, fields) {

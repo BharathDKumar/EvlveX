@@ -1,0 +1,42 @@
+{%- doc -%}
+  Story card: plate, chapter number, title, model, excerpt; links to the story page.
+  Used by the home page "The Stories" and the stories index (sections/evlvex-stories-grid.liquid).
+
+  @param {object} story - An `evlvex_story` metaobject
+  @param {string} [sizes] - sizes attribute for the plate
+  @param {boolean} [eager] - Load the plate eagerly (first row)
+
+  @example
+  {% render 'evlvex-story-card', story: story, sizes: '(min-width: 990px) 33vw, 85vw' %}
+{%- enddoc -%}
+{%- liquid
+  if eager
+    assign card_loading = 'eager'
+  else
+    assign card_loading = 'lazy'
+  endif
+-%}
+<article class="evx-story-card">
+  <a class="evx-story-card__link" href="{{ story.system.url }}">
+    {%- render 'evlvex-story-plate',
+      image: story.hero_image.value,
+      ratio: '4 / 5',
+      sizes: sizes,
+      loading: card_loading,
+      label: story.title.value,
+      class: 'evx-story-card__plate'
+    -%}
+    <div class="evx-story-card__text">
+      <p class="evx-eyebrow evx-story-card__eyebrow">
+        {%- render 'evlvex-chapter-label', story: story, with_model: true -%}
+      </p>
+      <h3 class="evx-story-card__title">{{ story.title.value | escape }}</h3>
+      {%- if story.setting.value != blank -%}
+        <p class="evx-story-card__setting">{{ story.setting.value | escape }}</p>
+      {%- endif -%}
+      {%- if story.excerpt.value != blank -%}
+        <p class="evx-story-card__excerpt">{{ story.excerpt.value | escape | newline_to_br }}</p>
+      {%- endif -%}
+    </div>
+  </a>
+</article>

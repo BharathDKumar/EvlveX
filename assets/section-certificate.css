@@ -161,6 +161,89 @@
   letter-spacing: 0.04em;
 }
 
+/* The Story of Your Pair (docs/spec/qr-certificates.md §3) */
+.certificate__chapter {
+  max-width: 44rem;
+  margin: 4rem auto 0;
+  padding: 2.8rem 0 0;
+  border-top: 1px solid rgba(var(--cert-gold), 0.35);
+}
+
+.certificate__chapter-heading {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgb(var(--cert-gold));
+}
+
+.certificate__chapter-line {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.certificate__chapter-note {
+  margin: 1.6rem 0 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-heading-family);
+  font-size: 1.8rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.certificate__chapter-note p {
+  margin: 0;
+}
+
+/* The model's story */
+.certificate__story {
+  max-width: 44rem;
+  margin: 3.6rem auto 0;
+  padding: 2.8rem 2.4rem;
+  background: rgba(var(--cert-gold), 0.08);
+  border: 1px solid rgba(var(--cert-gold), 0.25);
+}
+
+.certificate__story-eyebrow {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgb(var(--cert-gold));
+}
+
+.certificate__story-title {
+  margin: 1rem 0 0;
+  font-family: var(--font-heading-family);
+  font-size: calc(var(--font-heading-scale) * 2.6rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.certificate__story-excerpt {
+  margin: 1.2rem 0 0;
+  font-size: 1.5rem;
+  line-height: 1.7;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.certificate__story-link {
+  display: inline-block;
+  margin-top: 1.6rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+}
+
 /* Details */
 .certificate__details {
   max-width: 44rem;

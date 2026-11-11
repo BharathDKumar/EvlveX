@@ -1,14 +1,20 @@
 {%- doc -%}
   Renders Open Graph and Twitter metadata for the current page.
 
+  @param {string} [title] - Overrides page_title (EvlveX story pages)
+  @param {string} [description] - Overrides page_description
+  @param {object} [image] - Overrides page_image; an image or a media image
+
   @example
   {% render 'meta-tags' %}
 {%- enddoc -%}
 {%- liquid
-  assign og_title = page_title | default: shop.name
+  assign og_title = title | default: page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name
+  assign og_description = description | default: page_description | default: shop.description | default: shop.name
+  assign og_image = image | default: page_image
+  assign og_image = og_image.preview_image | default: og_image
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -25,11 +31,11 @@
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description | escape }}">
 
-{%- if page_image -%}
-  <meta property="og:image" content="http:{{ page_image | image_url }}">
-  <meta property="og:image:secure_url" content="https:{{ page_image | image_url }}">
-  <meta property="og:image:width" content="{{ page_image.width }}">
-  <meta property="og:image:height" content="{{ page_image.height }}">
+{%- if og_image -%}
+  <meta property="og:image" content="http:{{ og_image | image_url }}">
+  <meta property="og:image:secure_url" content="https:{{ og_image | image_url }}">
+  <meta property="og:image:width" content="{{ og_image.width }}">
+  <meta property="og:image:height" content="{{ og_image.height }}">
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}

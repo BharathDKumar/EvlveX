@@ -27,12 +27,48 @@
     {{ 'templates.404.subtext' | t }}
   </p>
   <h1 class="title">
-    {{ 'templates.404.title' | t }}
+    {%- if section.settings.heading != blank -%}
+      {{ section.settings.heading | escape }}
+    {%- else -%}
+      {{ 'templates.404.title' | t }}
+    {%- endif -%}
   </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
+  <a href="{{ section.settings.button_link | default: routes.root_url }}" class="button">
+    {%- if section.settings.button_label != blank -%}
+      {{ section.settings.button_label | escape }}
+    {%- else -%}
+      {{ 'general.continue_shopping' | t }}
+    {%- endif -%}
   </a>
   <p class="template-404__serial">
     {{ 'evlvex.not_found.serial_html' | t: url: '/pages/authenticity' }}
   </p>
 </div>
+
+{% schema %}
+{
+  "name": "404 page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "This page has no story yet."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Return to the Maison"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Defaults to the home page."
+    }
+  ]
+}
+{% endschema %}

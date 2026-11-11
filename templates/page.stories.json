@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "The Stories",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Every pair has a story",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every EvlveX begins as a story: a place, an hour, a person, a journey. We shape leather around it by hand until it can be worn. Read them before you choose. Each chapter is a model of the house.</p>"
+          }
+        }
+      },
+      "block_order": ["caption", "heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 96,
+        "padding_bottom": 24
+      }
+    },
+    "stories": {
+      "type": "evlvex-stories-grid",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "caption": "",
+        "heading": "",
+        "heading_size": "h1",
+        "show_all": true,
+        "limit": 12,
+        "columns_desktop": 3,
+        "swipe_on_mobile": false,
+        "link_label": "",
+        "link": "",
+        "padding_top": 40,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["intro", "stories"]
+}
