@@ -1,0 +1,244 @@
+{%- comment -%}
+  EvlveX — Authenticity program explainer + manual serial lookup.
+  Redirects to /pages/<url_prefix>/<serial in lowercase>, the certificate page (docs/SPEC.md §4).
+{%- endcomment -%}
+
+{{ 'section-certificate.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="authenticity color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="authenticity__grid">
+      <div class="authenticity__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'lazy',
+              widths: '500, 800, 1100, 1400',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              class: 'authenticity__image'
+          }}
+        {%- else -%}
+          <img
+            class="authenticity__image"
+            src="{{ 'sample-court-noir.jpg' | asset_url }}"
+            alt="{{ 'evlvex.authenticity.image_alt' | t }}"
+            width="1024"
+            height="768"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+
+      <div class="authenticity__content">
+        {%- render 'evlvex-monogram', size: 48, class: 'authenticity__mark' -%}
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="certificate__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h1 class="authenticity__heading {{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h1>
+        {%- if section.settings.text != blank -%}
+          <div class="authenticity__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ol class="authenticity__steps list-unstyled">
+            {%- for block in section.blocks -%}
+              <li class="authenticity__step" {{ block.shopify_attributes }}>
+                <span class="authenticity__step-number" aria-hidden="true">{{ forloop.index | prepend: '0' }}</span>
+                <div>
+                  <h2 class="authenticity__step-title">{{ block.settings.title | escape }}</h2>
+                  <div class="authenticity__step-text rte">{{ block.settings.text }}</div>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ol>
+        {%- endif -%}
+
+        <form
+          class="authenticity__form"
+          id="AuthenticityForm-{{ section.id }}"
+          data-url-prefix="{{ section.settings.url_prefix | default: 'authentic' | handleize }}"
+          novalidate
+        >
+          <div class="field">
+            <input
+              class="field__input"
+              type="text"
+              id="AuthenticitySerial-{{ section.id }}"
+              name="serial"
+              autocomplete="off"
+              autocapitalize="characters"
+              spellcheck="false"
+              placeholder="{{ 'evlvex.authenticity.placeholder' | t }}"
+              aria-describedby="AuthenticityError-{{ section.id }}"
+              required
+            >
+            <label class="field__label" for="AuthenticitySerial-{{ section.id }}">
+              {{- 'evlvex.authenticity.label' | t -}}
+            </label>
+          </div>
+          <button type="submit" class="button">{{ 'evlvex.authenticity.submit' | t }}</button>
+          <p
+            class="authenticity__error form__message"
+            id="AuthenticityError-{{ section.id }}"
+            role="alert"
+            hidden
+          >
+            {{- 'evlvex.authenticity.error' | t -}}
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var form = document.getElementById('AuthenticityForm-{{ section.id }}');
+    if (!form) return;
+    var input = form.querySelector('input[name="serial"]');
+    var error = form.querySelector('.authenticity__error');
+    // Crockford Base32: digits + letters without I, L, O, U.
+    var SERIAL = /^EVX-?([0-9A-HJKMNP-TV-Z]{8})$/;
+
+    function normalise(value) {
+      var v = (value || '').trim();
+      // Accept a pasted certificate URL.
+      var fromUrl = v.match(/\/([a-z0-9-]+)\/?(?:[?#].*)?$/i);
+      if (/^https?:\/\//i.test(v) && fromUrl) v = fromUrl[1];
+      v = v.toUpperCase().replace(/[\s_.]/g, '');
+      // Bare 8-character code → add prefix.
+      if (/^[0-9A-Z]{8}$/.test(v)) v = 'EVX' + v;
+      var body = v.replace(/^EVX-?/, '');
+      // Common misreadings: O→0, I/L→1.
+      body = body.replace(/O/g, '0').replace(/[IL]/g, '1');
+      return 'EVX-' + body;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var serial = normalise(input.value);
+      if (!SERIAL.test(serial)) {
+        error.hidden = false;
+        input.setAttribute('aria-invalid', 'true');
+        input.focus();
+        return;
+      }
+      error.hidden = true;
+      input.removeAttribute('aria-invalid');
+      var prefix = form.getAttribute('data-url-prefix');
+      window.location.href = '{{ routes.root_url | remove_last: '/' }}/pages/' + prefix + '/' + serial.toLowerCase();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Authenticity lookup",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Ideally a close-up of the QR tag or the embroidered monogram."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Authenticity"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Every pair, individually certified"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Each EvlveX pair carries a unique serial and QR code. Scan it, or enter the serial below, to confirm your pair is genuine and view its certificate.</p>"
+    },
+    {
+      "type": "text",
+      "id": "url_prefix",
+      "label": "Certificate URL handle",
+      "default": "authentic",
+      "info": "Must match the metaobject's Online Store URL handle."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Find your tag" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Look under the tongue or on the shoe box.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Authenticity lookup",
+      "blocks": [
+        { "type": "step" }
+      ]
+    }
+  ]
+}
+{% endschema %}

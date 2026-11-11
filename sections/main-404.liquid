@@ -8,10 +8,22 @@
       margin-top: 2rem;
     }
   }
+
+  .template-404__mark {
+    color: rgb(184, 155, 106);
+    margin-bottom: 2rem;
+  }
+
+  .template-404__serial {
+    margin-top: 3.2rem;
+    font-size: 1.4rem;
+    color: rgba(var(--color-foreground), 0.75);
+  }
 </style>
 
 <div class="template-404 page-width page-margin center">
-  <p>
+  {%- render 'evlvex-monogram', size: 56, class: 'template-404__mark' -%}
+  <p class="caption-with-letter-spacing">
     {{ 'templates.404.subtext' | t }}
   </p>
   <h1 class="title">
@@ -20,4 +32,7 @@
   <a href="{{ routes.all_products_collection_url }}" class="button">
     {{ 'general.continue_shopping' | t }}
   </a>
+  <p class="template-404__serial">
+    {{ 'evlvex.not_found.serial_html' | t: url: '/pages/authenticity' }}
+  </p>
 </div>

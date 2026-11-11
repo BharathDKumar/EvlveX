@@ -1,0 +1,24 @@
+{
+  "name": "evlvex-qr-certificates",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generate EvlveX per-pair QR certificate tags and assign them to orders (Shopify metaobjects).",
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "setup": "node src/setup.js",
+    "generate": "node src/generate.js",
+    "assign": "node src/assign.js",
+    "lookup": "node src/lookup.js",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "dependencies": {
+    "pdfkit": "^0.15.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "jsqr": "^1.4.0"
+  }
+}

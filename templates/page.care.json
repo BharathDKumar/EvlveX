@@ -1,0 +1,114 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Client care",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Caring for your pair",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A few minutes of care keeps leather supple and suede rich for years. These are the rituals we follow at the Maison.</p>"
+          }
+        }
+      },
+      "block_order": ["caption", "heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 96,
+        "padding_bottom": 40
+      }
+    },
+    "rituals": {
+      "type": "collapsible-content",
+      "blocks": {
+        "first-wear": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Before first wear",
+            "icon": "shoe",
+            "row_content": "<p>Apply a suede protector spray from 20 cm away and let it dry for 24 hours. This guards the suede overlays against water and stains.</p>",
+            "page": ""
+          }
+        },
+        "leather": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Leather",
+            "icon": "leather",
+            "row_content": "<p>Wipe with a soft, dry cotton cloth after wear. Every few months, apply a small amount of neutral leather cream, let it absorb, then buff gently.</p>",
+            "page": ""
+          }
+        },
+        "suede": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Suede",
+            "icon": "star",
+            "row_content": "<p>Use a soft suede brush, always in one direction, to lift the nap. For marks, use a suede eraser. Never use water or leather cream on suede.</p>",
+            "page": ""
+          }
+        },
+        "soles": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Midsoles & laces",
+            "icon": "washing",
+            "row_content": "<p>Clean midsoles with a damp cloth and mild soap. Laces can be removed and hand-washed in lukewarm water, then air-dried.</p>",
+            "page": ""
+          }
+        },
+        "storage": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Storage",
+            "icon": "box",
+            "row_content": "<p>Insert cedar shoe trees, keep the pair in its dust bag, and store away from direct sunlight and heat. Let shoes rest a day between wears.</p>",
+            "page": ""
+          }
+        },
+        "help": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Repairs & questions",
+            "icon": "chat_bubble",
+            "row_content": "<p>Write to us with your pair's serial (printed under the QR tag) and we will advise on care or repair.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": ["first-wear", "leather", "suede", "soles", "storage", "help"],
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["intro", "rituals"]
+}

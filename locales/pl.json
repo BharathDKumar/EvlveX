@@ -225,6 +225,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Nie znaleziono strony",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Nie znaleziono wyników dla “{{ terms }}”. Sprawdź pisownię lub użyj innego słowa lub zwrotu.",
       "page": "Strona",
@@ -278,10 +282,6 @@
         "error_heading": "Dostosuj następujące dane:",
         "title": "Formularz kontaktowy"
       }
-    },
-    "404": {
-      "title": "Nie znaleziono strony",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -550,6 +550,29 @@
       "send_on_label": "Wyślij dnia (opcjonalnie)",
       "expanded": "Rozwinięty formularz odbiorcy karty prezentowej",
       "collapsed": "Zwinięty formularz odbiorcy karty prezentowej"
+    }
+  },
+  "evlvex": {
+    "certificate": {
+      "thank_you": "Thank you,",
+      "genuine_heading": "Genuine EvlveX",
+      "serial": "Serial",
+      "size": "Size",
+      "acquired": "Acquired",
+      "status": "Status",
+      "status_registered": "Genuine · Registered",
+      "status_awaiting": "Genuine · Awaiting its owner",
+      "footnote": "Issued by {{ shop }}. Each serial is unique and belongs to a single pair."
+    },
+    "authenticity": {
+      "label": "Serial number",
+      "placeholder": "EVX-XXXXXXXX",
+      "submit": "Verify",
+      "error": "Please enter the serial printed under the QR code, e.g. EVX-7F3K9QMD.",
+      "image_alt": "EvlveX Court 01 with the embroidered monogram"
+    },
+    "not_found": {
+      "serial_html": "Scanned a tag that didn&#39;t open? <a href=\"{{ url }}\" class=\"link underlined-link\">Verify your serial</a>."
     }
   }
 }

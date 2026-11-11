@@ -217,6 +217,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "ページが見つかりません",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "「{{ terms }}」に一致する結果は見つかりませんでした。スペルを確認するか、別の単語やフレーズを使用してください。",
       "results_with_count": {
@@ -260,10 +264,6 @@
         "error_heading": "以下を確認してください。",
         "title": "お問い合わせフォーム"
       }
-    },
-    "404": {
-      "title": "ページが見つかりません",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -526,6 +526,29 @@
       "send_on_label": "送信日 (任意)",
       "expanded": "ギフトカードカードの受取人フォームを展開しました",
       "collapsed": "ギフトカードカードの受取人フォームを折りたたみました"
+    }
+  },
+  "evlvex": {
+    "certificate": {
+      "thank_you": "Thank you,",
+      "genuine_heading": "Genuine EvlveX",
+      "serial": "Serial",
+      "size": "Size",
+      "acquired": "Acquired",
+      "status": "Status",
+      "status_registered": "Genuine · Registered",
+      "status_awaiting": "Genuine · Awaiting its owner",
+      "footnote": "Issued by {{ shop }}. Each serial is unique and belongs to a single pair."
+    },
+    "authenticity": {
+      "label": "Serial number",
+      "placeholder": "EVX-XXXXXXXX",
+      "submit": "Verify",
+      "error": "Please enter the serial printed under the QR code, e.g. EVX-7F3K9QMD.",
+      "image_alt": "EvlveX Court 01 with the embroidered monogram"
+    },
+    "not_found": {
+      "serial_html": "Scanned a tag that didn&#39;t open? <a href=\"{{ url }}\" class=\"link underlined-link\">Verify your serial</a>."
     }
   }
 }

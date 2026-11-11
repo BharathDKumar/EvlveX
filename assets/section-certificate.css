@@ -1,0 +1,439 @@
+/* EvlveX — Certificate of Authenticity (sections/main-certificate.liquid) */
+
+.certificate {
+  --cert-gold: 184, 155, 106; /* Sand-gold #B89B6A */
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100svh - var(--header-height, 0px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.6rem 4rem;
+  text-align: center;
+}
+
+.certificate__glow {
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 80%;
+  background: radial-gradient(ellipse at 50% 20%, rgba(var(--cert-gold), 0.16), transparent 60%);
+  pointer-events: none;
+}
+
+.certificate__card {
+  position: relative;
+  width: 100%;
+  max-width: 62rem;
+  padding: 4.8rem 2.4rem 4rem;
+  border: 1px solid rgba(var(--cert-gold), 0.55);
+  outline: 1px solid rgba(var(--cert-gold), 0.25);
+  outline-offset: 0.6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .certificate {
+    padding: 8rem 3rem 5rem;
+  }
+  .certificate__card {
+    padding: 6.4rem 6.4rem 5.6rem;
+  }
+}
+
+/* Seal */
+.certificate__seal-wrap {
+  display: flex;
+  justify-content: center;
+  color: rgb(var(--cert-gold));
+}
+
+.certificate__seal circle {
+  stroke-dasharray: 286;
+  stroke-dashoffset: 0;
+}
+
+/* Eyebrow + rule */
+.certificate__eyebrow {
+  margin: 2.4rem 0 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgb(var(--cert-gold));
+}
+
+.certificate__rule {
+  display: block;
+  width: 4.8rem;
+  height: 1px;
+  margin: 2rem auto 0;
+  background: rgba(var(--cert-gold), 0.7);
+}
+
+/* Heading */
+.certificate__heading {
+  margin: 2.8rem 0 0;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+.certificate__heading-lead {
+  display: block;
+  font-size: calc(var(--font-heading-scale) * 2.4rem);
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.certificate__name {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: calc(var(--font-heading-scale) * 3.6rem);
+  word-break: break-word;
+  background: linear-gradient(100deg, rgb(var(--color-foreground)) 0%, rgb(var(--color-foreground)) 40%, rgb(var(--cert-gold)) 50%, rgb(var(--color-foreground)) 60%, rgb(var(--color-foreground)) 100%);
+  background-size: 250% 100%;
+  background-position: 0% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (min-width: 750px) {
+  .certificate__heading-lead {
+    font-size: calc(var(--font-heading-scale) * 3rem);
+  }
+  .certificate__name {
+    font-size: calc(var(--font-heading-scale) * 5.2rem);
+  }
+}
+
+/* Message + dedication */
+.certificate__message {
+  max-width: 46rem;
+  margin: 2.4rem auto 0;
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.certificate__message p {
+  margin: 0;
+}
+
+.certificate__dedication {
+  max-width: 44rem;
+  margin: 2.4rem auto 0;
+  padding: 1.6rem 0 0;
+  border: 0;
+  border-top: 1px solid rgba(var(--cert-gold), 0.35);
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.certificate__dedication p {
+  margin: 0;
+}
+
+/* Product */
+.certificate__product {
+  margin: 4rem auto 0;
+  max-width: 52rem;
+}
+
+.certificate__product-frame {
+  overflow: hidden;
+  background: rgba(var(--color-foreground), 0.04);
+  aspect-ratio: 4 / 3;
+}
+
+.certificate__product-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.certificate__product-title {
+  margin: 1.6rem 0 0;
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+}
+
+/* Details */
+.certificate__details {
+  max-width: 44rem;
+  margin: 3.6rem auto 0;
+  padding: 0;
+  border-top: 1px solid rgba(var(--cert-gold), 0.35);
+  text-align: left;
+}
+
+.certificate__detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.6rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(var(--cert-gold), 0.35);
+}
+
+.certificate__detail dt {
+  font-size: 1.1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.certificate__detail dd {
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: right;
+}
+
+.certificate__detail dt {
+  flex-shrink: 0;
+}
+
+.certificate__serial {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+.certificate__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.certificate__status-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: rgb(var(--cert-gold));
+  box-shadow: 0 0 0 0.3rem rgba(var(--cert-gold), 0.25);
+}
+
+/* Signature + actions */
+.certificate__signature {
+  margin-top: 3.2rem;
+  font-family: var(--font-heading-family);
+  font-size: 1.9rem;
+  line-height: 1.5;
+}
+
+.certificate__signature p {
+  margin: 0;
+}
+
+.certificate__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 3.6rem;
+}
+
+.certificate__actions .button {
+  width: 100%;
+  min-width: 0;
+  padding: 0 1.6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .certificate__actions .button {
+    width: auto;
+    min-width: 22rem;
+    padding: 0 3.6rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .certificate {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+  .certificate__card {
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+  }
+  .certificate__actions .button {
+    font-size: 1.1rem;
+    letter-spacing: 0.14em;
+  }
+  .certificate__eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.22em;
+  }
+  .certificate__detail dt {
+    letter-spacing: 0.16em;
+  }
+  .certificate__detail dd {
+    font-size: 1.4rem;
+  }
+  .certificate__serial {
+    letter-spacing: 0.06em;
+  }
+}
+
+.certificate__footnote {
+  position: relative;
+  max-width: 48rem;
+  margin: 3.2rem auto 0;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+/* Motion: staggered reveal, ring draw, name shimmer */
+@media (prefers-reduced-motion: no-preference) {
+  .certificate__reveal {
+    opacity: 0;
+    transform: translateY(1.6rem);
+    animation: certificate-reveal 900ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  .certificate__seal circle {
+    stroke-dashoffset: 286;
+    animation: certificate-ring 1600ms cubic-bezier(0.6, 0, 0.2, 1) 200ms forwards;
+  }
+
+  .certificate__card--assigned .certificate__name {
+    animation: certificate-shimmer 2400ms ease-in-out 1200ms 1 both;
+  }
+}
+
+@keyframes certificate-reveal {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes certificate-ring {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes certificate-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+
+/* ---------- Authenticity page (sections/authenticity-lookup.liquid) ---------- */
+.authenticity__grid {
+  display: grid;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 990px) {
+  .authenticity__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+  }
+}
+
+.authenticity__media {
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: rgba(var(--color-foreground), 0.04);
+}
+
+.authenticity__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.authenticity__mark {
+  color: rgb(184, 155, 106);
+}
+
+.authenticity__content .certificate__eyebrow {
+  margin-top: 2rem;
+}
+
+.authenticity__heading {
+  margin: 1.2rem 0 0;
+}
+
+.authenticity__text {
+  margin-top: 2rem;
+  max-width: 48rem;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.authenticity__steps {
+  margin: 3.2rem 0 0;
+  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+}
+
+.authenticity__step {
+  display: grid;
+  grid-template-columns: 4.4rem 1fr;
+  gap: 1.2rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.15);
+}
+
+.authenticity__step-number {
+  font-family: var(--font-heading-family);
+  font-size: 2.2rem;
+  line-height: 1;
+  color: rgb(184, 155, 106);
+}
+
+.authenticity__step-title {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.authenticity__step-text {
+  margin-top: 0.6rem;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.authenticity__step-text p {
+  margin: 0;
+}
+
+.authenticity__form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  margin-top: 3.6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .authenticity__form {
+    grid-template-columns: 1fr auto;
+  }
+  .authenticity__form .button {
+    min-width: 16rem;
+  }
+}
+
+.authenticity__form .field__input {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.authenticity__error {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 1.3rem;
+  color: rgb(var(--color-foreground));
+}

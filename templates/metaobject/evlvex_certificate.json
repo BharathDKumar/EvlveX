@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-certificate",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "eyebrow": "Certificate of Authenticity",
+        "show_product": true,
+        "button_label_1": "Care for your pair",
+        "button_link_1": "/pages/care",
+        "button_label_2": "Discover the collection",
+        "button_link_2": "shopify://collections/all"
+      }
+    }
+  },
+  "order": ["main"]
+}

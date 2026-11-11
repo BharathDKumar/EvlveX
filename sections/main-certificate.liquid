@@ -1,0 +1,243 @@
+{%- comment -%}
+  EvlveX — Certificate of Authenticity / personal thank-you page.
+  Rendered for each `evlvex_certificate` metaobject entry at /pages/authentic/<serial>.
+  Spec: docs/SPEC.md §4. NEVER output metaobject.order_number or metaobject.batch here.
+{%- endcomment -%}
+
+{{ 'section-certificate.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign cert = metaobject
+  assign buyer_name = cert.buyer_name.value | strip
+  assign serial = cert.serial.value | default: cert.handle | upcase
+  assign cert_product = cert.product.value
+  assign size = cert.size.value | strip
+  assign purchase_date = cert.purchase_date.value
+  assign personal_message = cert.personal_message.value | strip
+
+  if buyer_name != blank
+    assign is_assigned = true
+  else
+    assign is_assigned = false
+  endif
+
+  assign product_image = cert_product.featured_media.preview_image
+  if product_image == blank and section.settings.fallback_image != blank
+    assign product_image = section.settings.fallback_image
+  endif
+-%}
+
+<div class="certificate color-{{ section.settings.color_scheme }} gradient">
+  <div class="certificate__glow" aria-hidden="true"></div>
+
+  <article
+    class="certificate__card{% if is_assigned %} certificate__card--assigned{% else %} certificate__card--unassigned{% endif %}"
+    aria-labelledby="CertificateHeading-{{ section.id }}"
+  >
+    <div class="certificate__seal-wrap certificate__reveal" style="--reveal-delay: 0ms;">
+      {%- render 'evlvex-monogram', size: 72, class: 'certificate__seal', title: shop.name -%}
+    </div>
+
+    <p class="certificate__eyebrow certificate__reveal" style="--reveal-delay: 150ms;">
+      {{ section.settings.eyebrow | escape }}
+    </p>
+    <span class="certificate__rule certificate__reveal" style="--reveal-delay: 250ms;" aria-hidden="true"></span>
+
+    {%- if is_assigned -%}
+      <h1 id="CertificateHeading-{{ section.id }}" class="certificate__heading certificate__reveal" style="--reveal-delay: 350ms;">
+        <span class="certificate__heading-lead">{{ 'evlvex.certificate.thank_you' | t }}</span>
+        <span class="certificate__name">{{ buyer_name | escape }}.</span>
+      </h1>
+
+      {%- if section.settings.message != blank -%}
+        <div class="certificate__message rte certificate__reveal" style="--reveal-delay: 550ms;">
+          {{ section.settings.message }}
+        </div>
+      {%- endif -%}
+
+      {%- if personal_message != blank -%}
+        <blockquote class="certificate__dedication certificate__reveal" style="--reveal-delay: 650ms;">
+          <p>{{ personal_message | escape | newline_to_br }}</p>
+        </blockquote>
+      {%- endif -%}
+    {%- else -%}
+      <h1 id="CertificateHeading-{{ section.id }}" class="certificate__heading certificate__reveal" style="--reveal-delay: 350ms;">
+        <span class="certificate__name">{{ 'evlvex.certificate.genuine_heading' | t }}</span>
+      </h1>
+      <div class="certificate__message rte certificate__reveal" style="--reveal-delay: 550ms;">
+        {{ section.settings.unassigned_message }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_product and product_image != blank -%}
+      <figure class="certificate__product certificate__reveal" style="--reveal-delay: 750ms;">
+        <div class="certificate__product-frame">
+          {{
+            product_image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'eager',
+              widths: '400, 600, 800, 1000, 1200',
+              sizes: '(min-width: 750px) 520px, calc(100vw - 6rem)',
+              alt: cert_product.title,
+              class: 'certificate__product-image'
+          }}
+        </div>
+        {%- if cert_product != blank -%}
+          <figcaption class="certificate__product-title">{{ cert_product.title | escape }}</figcaption>
+        {%- endif -%}
+      </figure>
+    {%- elsif section.settings.show_product and cert_product != blank -%}
+      <p class="certificate__product-title certificate__reveal" style="--reveal-delay: 750ms;">
+        {{ cert_product.title | escape }}
+      </p>
+    {%- endif -%}
+
+    <dl class="certificate__details certificate__reveal" style="--reveal-delay: 850ms;">
+      <div class="certificate__detail">
+        <dt>{{ 'evlvex.certificate.serial' | t }}</dt>
+        <dd class="certificate__serial">{{ serial | escape }}</dd>
+      </div>
+      {%- if is_assigned and size != blank -%}
+        <div class="certificate__detail">
+          <dt>{{ 'evlvex.certificate.size' | t }}</dt>
+          <dd>{{ size | escape }}</dd>
+        </div>
+      {%- endif -%}
+      {%- if is_assigned and purchase_date != blank -%}
+        <div class="certificate__detail">
+          <dt>{{ 'evlvex.certificate.acquired' | t }}</dt>
+          <dd>{{ purchase_date | date: '%-d %B %Y' }}</dd>
+        </div>
+      {%- endif -%}
+      <div class="certificate__detail">
+        <dt>{{ 'evlvex.certificate.status' | t }}</dt>
+        <dd class="certificate__status">
+          <span class="certificate__status-dot" aria-hidden="true"></span>
+          {%- if is_assigned -%}
+            {{ 'evlvex.certificate.status_registered' | t }}
+          {%- else -%}
+            {{ 'evlvex.certificate.status_awaiting' | t }}
+          {%- endif -%}
+        </dd>
+      </div>
+    </dl>
+
+    {%- if is_assigned and section.settings.signature != blank -%}
+      <div class="certificate__signature certificate__reveal" style="--reveal-delay: 950ms;">
+        {{ section.settings.signature }}
+      </div>
+    {%- endif -%}
+
+    <div class="certificate__actions certificate__reveal" style="--reveal-delay: 1050ms;">
+      {%- if is_assigned and section.settings.button_label_1 != blank -%}
+        <a
+          class="button"
+          {% if section.settings.button_link_1 != blank %}
+            href="{{ section.settings.button_link_1 }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+        >
+          {{- section.settings.button_label_1 | escape -}}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank -%}
+        <a
+          class="button button--secondary"
+          href="{{ section.settings.button_link_2 | default: routes.all_products_collection_url }}"
+        >
+          {{- section.settings.button_label_2 | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </article>
+
+  <p class="certificate__footnote">
+    {{ 'evlvex.certificate.footnote' | t: shop: shop.name }}
+  </p>
+</div>
+
+{% schema %}
+{
+  "name": "EvlveX certificate",
+  "tag": "section",
+  "class": "section section--certificate",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Certificate of Authenticity"
+    },
+    {
+      "type": "richtext",
+      "id": "message",
+      "label": "Thank-you message",
+      "info": "Shown under \"Thank you, {Buyer name}.\"",
+      "default": "<p>This pair was made for you, and is now registered in your name. Every EvlveX is cut, stitched and finished with patience — we hope it walks with you for many years.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "signature",
+      "label": "Signature",
+      "default": "<p><em>With gratitude,</em><br><em>The House of EvlveX</em></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "unassigned_message",
+      "label": "Message before a pair is registered",
+      "default": "<p>This pair is authentic and awaiting its owner. Once it is yours, this page will carry your name.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product",
+      "label": "Show product image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback image",
+      "info": "Used when the certificate has no product linked."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Primary button label",
+      "default": "Care for your pair"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Primary button link",
+      "info": "Usually your Care page."
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary button label",
+      "default": "Discover the collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary button link"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,299 @@
+/*
+  EvlveX — global luxury layer over Dawn.
+  Loaded right after base.css (layout/theme.liquid). Colors and fonts come from
+  Theme settings (config/settings_data.json); this file only adds typography detail,
+  spacing and motion. Brand system: docs/SPEC.md §2.
+*/
+
+:root {
+  --evx-noir: 14, 14, 14;
+  --evx-ivory: 245, 240, 230;
+  --evx-sand: 205, 186, 152;
+  --evx-gold: 184, 155, 106;
+  --evx-caramel: 180, 115, 74;
+  --evx-tracking-wide: 0.22em;
+  --evx-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ---------- Typography ---------- */
+body {
+  letter-spacing: 0.02em;
+}
+
+h1, h2, h3, .h0, .h1, .h2, .h3 {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.h0 {
+  letter-spacing: 0;
+}
+
+.title,
+.title-wrapper-with-link .title {
+  font-weight: 400;
+}
+
+.caption-with-letter-spacing,
+.subtitle,
+.evx-eyebrow {
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+::selection {
+  background: rgba(var(--evx-gold), 0.35);
+}
+
+/* ---------- Logo lockup (snippets/evlvex-logo.liquid) ---------- */
+.evlvex-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  color: rgb(var(--color-foreground));
+  line-height: 1;
+}
+
+.evlvex-logo--stacked {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.evlvex-logo__mark {
+  flex-shrink: 0;
+  color: rgb(var(--evx-gold));
+}
+
+.evlvex-logo__word {
+  font-family: var(--font-body-family);
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  margin-right: -0.42em; /* optical centering for the trailing tracking */
+}
+
+@media screen and (max-width: 749px) {
+  .evlvex-logo {
+    gap: 0.8rem;
+  }
+  .evlvex-logo__mark {
+    width: 28px;
+    height: 28px;
+  }
+  .evlvex-logo__word {
+    font-size: 1.5rem;
+    letter-spacing: 0.32em;
+    margin-right: -0.32em;
+  }
+}
+
+/* ---------- Announcement bar ---------- */
+.announcement-bar__message {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: var(--evx-tracking-wide);
+  text-transform: uppercase;
+}
+
+/* ---------- Header & navigation ---------- */
+.header__menu-item,
+.menu-drawer__menu-item {
+  font-size: 1.2rem;
+  letter-spacing: var(--evx-tracking-wide);
+  text-transform: uppercase;
+}
+
+.header__menu-item span,
+.header__active-menu-item {
+  text-decoration: none;
+  background-image: linear-gradient(rgb(var(--evx-gold)), rgb(var(--evx-gold)));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  transition: background-size 400ms var(--evx-ease);
+  padding-bottom: 0.3rem;
+}
+
+.header__menu-item:hover span,
+.header__active-menu-item {
+  text-decoration: none;
+  background-size: 100% 1px;
+}
+
+.header--top-center .header__inline-menu {
+  margin-top: 0.4rem;
+}
+
+/* ---------- Buttons ---------- */
+.button,
+.shopify-challenge__button,
+.customer button,
+.cart__checkout-button {
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  letter-spacing: var(--evx-tracking-wide);
+  text-transform: uppercase;
+  min-height: 5rem;
+  padding: 0 3.6rem;
+  transition: background-color 300ms var(--evx-ease), color 300ms var(--evx-ease);
+}
+
+.button--secondary:not([disabled]):hover {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+/* Inline links: thin gold underline */
+.rte a,
+.link--text.underlined-link,
+.underlined-link {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35rem;
+  text-decoration-color: rgba(var(--evx-gold), 0.8);
+}
+
+/* ---------- Product cards ---------- */
+.card-wrapper .card__media .media img {
+  transition: transform 1400ms var(--evx-ease);
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .card-wrapper:hover .card__media .media img {
+    transform: scale(1.04);
+  }
+}
+
+.card__heading,
+.card-information .card__heading {
+  font-family: var(--font-heading-family);
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.card__heading a:hover {
+  text-decoration: none;
+}
+
+.card-information .price,
+.price {
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+}
+
+.badge {
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+}
+
+/* ---------- Product page ---------- */
+.product__title h1 {
+  font-weight: 400;
+}
+
+.product__text.caption-with-letter-spacing {
+  color: rgb(var(--evx-gold));
+}
+
+.product .price--large {
+  font-size: 1.8rem;
+  letter-spacing: 0.08em;
+}
+
+.product-form__input .form__label,
+.product-form__input legend {
+  font-size: 1.1rem;
+  letter-spacing: var(--evx-tracking-wide);
+  text-transform: uppercase;
+}
+
+.product-form__input input[type='radio'] + label {
+  min-width: 5.2rem;
+  justify-content: center;
+  letter-spacing: 0.06em;
+}
+
+.product-form__input input[type='radio']:checked + label {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.product__accordion .accordion__title {
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  letter-spacing: var(--evx-tracking-wide);
+  text-transform: uppercase;
+}
+
+.accordion .icon-accordion {
+  color: rgb(var(--evx-gold));
+  fill: rgb(var(--evx-gold));
+}
+
+/* ---------- Sections ---------- */
+.rich-text__heading,
+.image-with-text__heading,
+.banner__heading {
+  font-weight: 400;
+}
+
+.rich-text__text,
+.image-with-text__text {
+  line-height: 1.8;
+}
+
+.multicolumn-card__info .inline-richtext,
+.multicolumn-card__info h3 {
+  font-weight: 400;
+}
+
+.multicolumn-card__info h3 {
+  font-size: calc(var(--font-heading-scale) * 2rem);
+}
+
+.banner__heading.h0 {
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Footer ---------- */
+.footer-block__heading {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgb(var(--evx-gold));
+}
+
+.footer-block__details-content .list-menu__item--link {
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+
+.footer__copyright,
+.copyright__content {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.footer .newsletter-form__field-wrapper .field__input {
+  background: transparent;
+}
+
+/* ---------- Forms ---------- */
+.field__input,
+.select__select,
+.customer .field input {
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-trigger.animate--slide-in {
+    animation-duration: 900ms;
+    animation-timing-function: var(--evx-ease);
+  }
+}

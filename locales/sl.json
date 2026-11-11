@@ -225,6 +225,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Strani ni mogoče najti",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Za »{{ terms }}« ni bil najden noben rezultat. Preverite črkovanje ali uporabite drugo besedo ali frazo.",
       "page": "Stran",
@@ -278,10 +282,6 @@
         "error_heading": "Prilagodite naslednje:",
         "title": "Obrazec za stik"
       }
-    },
-    "404": {
-      "title": "Strani ni mogoče najti",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -550,6 +550,29 @@
       "send_on_label": "Pošlji na datum (izbirno)",
       "expanded": "Razširjen obrazec prejemnika darilnega bona",
       "collapsed": "Strnjen obrazec prejemnika darilnega bona"
+    }
+  },
+  "evlvex": {
+    "certificate": {
+      "thank_you": "Thank you,",
+      "genuine_heading": "Genuine EvlveX",
+      "serial": "Serial",
+      "size": "Size",
+      "acquired": "Acquired",
+      "status": "Status",
+      "status_registered": "Genuine · Registered",
+      "status_awaiting": "Genuine · Awaiting its owner",
+      "footnote": "Issued by {{ shop }}. Each serial is unique and belongs to a single pair."
+    },
+    "authenticity": {
+      "label": "Serial number",
+      "placeholder": "EVX-XXXXXXXX",
+      "submit": "Verify",
+      "error": "Please enter the serial printed under the QR code, e.g. EVX-7F3K9QMD.",
+      "image_alt": "EvlveX Court 01 with the embroidered monogram"
+    },
+    "not_found": {
+      "serial_html": "Scanned a tag that didn&#39;t open? <a href=\"{{ url }}\" class=\"link underlined-link\">Verify your serial</a>."
     }
   }
 }
