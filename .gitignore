@@ -1,0 +1,4 @@
+node_modules/
+.env
+tools/qr-certificates/out/
+.shopify/
