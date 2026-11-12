@@ -5,7 +5,7 @@ Part of the [EvlveX specification](../SPEC.md). **Audience:** brand, copywriters
 ---
 
 ## 1. Logo
-- **Monogram:** a heavy ring enclosing two mirrored "E"s back to back, as embroidered on the side panel of Court 01.
+- **Monogram:** a heavy ring enclosing two mirrored "E"s back to back, worn on the outer side of every pair: embroidered in white on The Silent Grind, embossed in sand on A Fresh Start.
 - **Wordmark:** `EVLVEX` in a custom stencil-cut logotype: the Es are three bars, each V is split, and the X has a broken arm.
 - **Signature line:** *Every pair has a story.* Set in Cormorant italic beneath the wordmark on packaging, workshop cards and the certificate page.
 - **Master artwork** (final, supplied 12 Nov 2026): `docs/brand/logos/`. It holds the original monogram and wordmark PNGs in black and white on transparent backgrounds, plus `evlvex-monogram.svg` and `evlvex-wordmark.svg`, vectors traced from them for print and partners.
@@ -21,7 +21,7 @@ Part of the [EvlveX specification](../SPEC.md). **Audience:** brand, copywriters
   - Never stretch, outline, add shadows, or place on busy photography.
 
 ## 2. Color palette
-The house palette is taken from the first model, Court 01. Individual models may come in other leathers (Cognac, Oxblood, Espresso), but the **website and packaging always use the house palette**.
+The house palette is taken from the two COMEBACK models: Noir from The Silent Grind, Ivory and Sand from A Fresh Start. The **website and packaging always use the house palette**.
 
 | Name | Hex | Source | Use |
 |---|---|---|---|
@@ -95,76 +95,42 @@ The sample photos (`assets/sample-court-ivory.jpg`, `assets/sample-court-noir.jp
 
 **File naming:** `<model>-<colorway>-<nn>.jpg` for product shots (e.g. `court-01-noir-01.jpg`), `story-<model>-<nn>.jpg` for story plates (e.g. `story-court-01-01.jpg`), `atelier-<nn>.jpg`, `packaging-<nn>.jpg`.
 
-Export at ≥ 2400 px on the long edge, sRGB, JPG quality 85. Every image gets descriptive alt text written in the house voice (e.g. *"Court 01 in Ivory Sand on an empty clay court at dusk"*).
+Export at ≥ 2400 px on the long edge, sRGB, JPG quality 85. Every image gets descriptive alt text written in the house voice (e.g. *"The Silent Grind in black, side profile, the white monogram catching the light"*).
 
-## 6. The Collection: models and their stories
+## 6. The Collection: COMEBACK
 
-Each model is a **chapter** of the house, numbered in order of release. The working names, colorways and stories below are **proposed drafts** for brand approval ([open items](../SPEC.md#open-items)); only Court 01 exists physically today. Each story is stored as an `evlvex_story` entry ([qr-certificates.md §5](qr-certificates.md)).
+EvlveX tells **one story**, COMEBACK, in **chapters**. Each model carries one chapter (a sub-concept). The story is the brand's own text and is used word for word on the site.
 
-| Ch. | Model | Type | Colorways | Story | Signature detail |
+| Ch. | Model | Shoe | Colorway | Chapter (sub-concept) | Signature detail |
 |---|---|---|---|---|---|
-| 01 | **Court 01** | low-top leather court sneaker | Ivory Sand, Noir | *The Last Set at Dusk* | sand suede, caramel sole stripe, embroidered gold monogram |
-| 02 | **Promenade Loafer** | hand-sewn penny loafer | Cognac, Noir | *Sunday, Unhurried* | hand-stitched moccasin toe, brass monogram coin in the strap |
-| 03 | **Atelier Oxford** | whole-cut oxford | Noir, Oxblood | *The First Commission* | cut from one panel of leather, single seam at the heel |
-| 04 | **Nocturne Chelsea** | suede Chelsea boot | Sand, Espresso | *The Night Train* | leather lining, quiet rubber sole, pulls on without laces |
-| 05 | **Riviera Mule** | hand-woven leather mule | Ivory, Caramel | *The Salt Hour* | woven calf strips, nine hours of weaving per pair |
+| — | **COMEBACK** | the collection | — | main concept | the EvlveX monogram on every pair |
+| 01 | **The Silent Grind** | low-top sneaker | Noir: black upper, black suede toe and collar, white cupsole | *The Silent Grind* | monogram embroidered in white |
+| 02 | **A Fresh Start** | low-top sneaker | Cream and Sand: cream upper, sand suede overlays, caramel sole stripe | *A Fresh Start* | monogram embossed in sand |
 
-### Chapter 01 — Court 01: *The Last Set at Dusk*
-*A seaside club, late summer.*
+### COMEBACK: main concept
+> COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new. It is a reminder that falling behind is not the end; sometimes, it is where the comeback begins.
 
-> There was a club by the sea where the members played one last set each evening, long after the score stopped mattering. The light came in low and turned the clay to sand. The baseline glowed caramel for a moment before it disappeared. Nobody wanted to be the first to walk off the court.
->
-> Court 01 is made from that hour. The suede is the color of clay dust on white leather. The caramel stripe is the baseline at dusk. The gold monogram on its side is the last of the light. It is a shoe for the evenings you stay a little longer than you planned.
+**Line:** *Falling behind is not the end.*
 
-**Excerpt:** *A seaside club, one last set, and the hour when clay turns to sand. Court 01 is made from that light.*
-**Story plates:** an empty clay court at golden hour; a towel over the net post; a chalked baseline in long shadow; Court 01 resting on a wooden bench, laces loose.
+### Chapter 01: The Silent Grind
+> THE SILENT GRIND represents the chapters lived in the dark: the struggles, setbacks, and battles that aren't always seen. It is about holding on through the weight of those moments and finding the strength to rise from them.
 
-### Chapter 02 — Promenade Loafer: *Sunday, Unhurried*
-*A river town, every Sunday for forty years.*
+**Excerpt:** *The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.*
+**Imagery:** dark and monochrome. Noir backgrounds, hard light on the white monogram and cupsole.
 
-> In the old quarter there lived a watchmaker who polished one pair of loafers every Saturday night: a soft cloth, a little wax, the radio low. On Sunday morning he walked the length of the river and back. In forty years, nobody ever saw him hurry.
->
-> The Promenade is sewn the way he walked: by hand, one stitch at a time, in a single sitting around a moccasin toe that softens to your foot within a week. The strap holds a small brass coin pressed with the monogram, for luck, as his did. It is a shoe for the days that ask nothing of you.
+### Chapter 02: A Fresh Start
+> A FRESH START represents the moment after the struggle, when you stop looking back and choose what comes next. It is about carrying the lessons forward, leaving the weight behind, and taking the first step into a new chapter.
 
-**Excerpt:** *A watchmaker, a river, and forty years of Sundays without hurry. The Promenade is hand-sewn at the same pace.*
-**Story plates:** a stone river embankment in early mist; polished loafers on a doorstep beside a folded newspaper; a hand buffing leather under a kitchen lamp; a pocket watch on linen.
+**Excerpt:** *The moment after the struggle, when you stop looking back and choose what comes next.*
+**Imagery:** light and airy. Ivory backgrounds, soft daylight, the sand suede and embossed monogram.
 
-### Chapter 03 — Atelier Oxford: *The First Commission*
-*An atelier bench, three weeks before a wedding.*
-
-> A young man came to the bench with a wedding in three weeks and no shoes worth the occasion. He could afford one pair, so it had to be the right one. The cutter chose a whole-cut: a single panel of leather, no seams to hide behind, no second chance with the knife.
->
-> He wore them to that wedding, then to his own, then to his daughter's. The Atelier Oxford is still cut from one piece and closed with a single seam at the heel. Buy it for one occasion. Keep it for all of them.
-
-**Excerpt:** *One young man, one wedding, one pair of shoes cut from a single panel of leather. Made for one occasion; kept for all of them.*
-**Story plates:** a full hide laid across the cutting bench; a paper pattern and a cutting knife; a wedding invitation propped against a last; the finished oxfords beside a folded pocket square.
-
-> ⚠️ This story is told as a fable. If it is presented as the house's actual first commission, it must be true.
-
-### Chapter 04 — Nocturne Chelsea: *The Night Train*
-*An overnight sleeper, arriving at dawn.*
-
-> Some journeys are made to be slept through. The night train leaves after dinner and arrives with the dawn, in a city where nobody knows you yet. You wake to fogged glass and a knock at the door, and you have four minutes to be ready.
->
-> The Nocturne is made for those four minutes. A suede Chelsea boot that pulls on without laces, a leather lining that has kept warm under the berth all night, a sole that stays quiet on station marble. Sand for the morning you arrive. Espresso for the long way home.
-
-**Excerpt:** *A sleeper train, a city at dawn, four minutes to be ready. The Nocturne pulls on without laces and steps out quietly.*
-**Story plates:** a sleeper compartment at first light, window fogged; the boots beside a leather bag under the berth; a platform in blue dawn, seen from the train door; a ticket and a folded scarf.
-
-### Chapter 05 — Riviera Mule: *The Salt Hour*
-*A sunlit terrace above the sea, after the last swim.*
-
-> After the last swim of the day there is an hour when the salt dries on your skin and nobody wants to go indoors. Towels on warm stone, a glass of something cold, bare feet looking for something easy to step into.
->
-> The Riviera is woven by hand from strips of soft calf, nine hours to a pair, over a cushioned footbed that forgives the walk back up from the water. It is the shoe you keep by the door all summer, and find again, a little salt-marked, the next.
-
-**Excerpt:** *The hour after the last swim, salt drying on warm stone. The Riviera is woven by hand for bare feet and slow evenings.*
-**Story plates:** a sun-bleached stone terrace with a striped towel; the mules beside a cold glass; hands weaving leather strips; wet footprints fading on stone.
+### Product photography
+The site currently uses graded crops of two phone photos ([docs/brand/shoe-images.md](../brand/shoe-images.md)). For launch, shoot each model on a seamless background at 3000 px or more: a side profile, a three-quarter view, the monogram, the suede toe and the sole.
 
 ## 7. Every pair's own chapter
 Beyond the model story, **every individual pair** carries its own short chapter, recorded when it leaves the atelier and shown on its certificate page ([qr-certificates.md](qr-certificates.md)):
 
-- **Pair number:** its place in the model's chapter, e.g. *Pair No. 0042 of Court 01*.
+- **Pair number:** its place in the model's chapter, e.g. *Pair No. 0042 of The Silent Grind*.
 - **Artisan:** who finished it (first name and initial, with their consent), e.g. *Finished by Marco R.*
 - **Finished on:** the date it left the bench.
 - **Pair note:** an optional line from the workshop about this pair alone, e.g. *"The last pair cut from hide lot 12. The grain runs especially fine across the toe."*
@@ -174,12 +140,12 @@ The same details are handwritten on a **workshop card** placed in the box ([oper
 
 ## 8. Site copy (editable in the theme editor)
 
-**Announcement bar:** "Complimentary shipping · Every pair numbered, certified and told"
+**Announcement bar:** "Complimentary shipping · Every pair numbered, certified and told" · "COMEBACK · The Silent Grind & A Fresh Start"
 
-**Home hero:** eyebrow "THE HOUSE OF EVLVEX" · headline "Every Pair Has a Story" · sub "Luxury shoes made by hand, each born from a story of its own." · CTAs "Discover the Collection", "Read the Stories"
+**Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), five scenes: *COMEBACK* (both shoes, the main concept) → *The Silent Grind* → "Hold on through the weight" (monogram) → *A Fresh Start* → "Take the first step" (laces and suede). Each scene uses the brand text above.
 
 **Home brand statement**
-> At EvlveX, a shoe begins as a story: a seaside court at dusk, a river walked every Sunday, a night train arriving at dawn. We shape leather around that story by hand until it can be worn. Then each pair is numbered, signed by the artisan who finished it, and registered to the person who will carry the story further.
+> **Falling behind is not the end.** Sometimes, it is where the comeback begins. EvlveX tells one story in two chapters: *The Silent Grind*, for the battles no one sees, and *A Fresh Start*, for the first step into what comes next. Every pair is numbered and registered to the person writing their own comeback.
 
 **"Every pair, its own chapter" (multicolumn)**
 - **Numbered.** Each pair carries its place in the chapter, from No. 0001 onward.
@@ -191,7 +157,7 @@ The same details are handwritten on a **workshop card** placed in the box ([oper
 
 **Authenticity "How it works":** *Made and numbered* → *Signed and recorded* → *Registered to you*
 
-**Care intro:** "A story is kept by the one who wears it."
+**Care intro:** "Keep your comeback going."
 
 **404:** "This page has no story yet." · "Return to the Maison" · "Scanned a tag? Verify your serial"
 

@@ -1,8 +1,8 @@
 {%- doc -%}
-  EvlveX demo photography: a real footwear photograph (CC0 / public domain, credits in docs/brand/demo-images.md)
-  shown wherever no image has been chosen yet, instead of Dawn's apparel placeholder illustrations.
-  Controlled by Theme settings → EvlveX → "Show demo photography" (settings.evx_demo_images).
-  When that setting is off, the EvlveX monogram plate is shown instead, so no stock placeholder ever appears.
+  EvlveX shoe imagery: graded photographs of the two COMEBACK models (The Silent Grind, black; A Fresh Start, cream),
+  shown wherever no image has been chosen yet, instead of Dawn's placeholder illustrations.
+  Source photos and crops: docs/brand/shoe-images.md. Controlled by Theme settings → EvlveX → "Show demo photography"
+  (settings.evx_demo_images); when that is off, the EvlveX monogram plate is shown instead.
 
   @param {string} kind - 'hero', 'editorial', 'lifestyle', 'atelier', 'product', 'collection' or 'article'
   @param {string} [seed] - Number or text used to pick an image from the pool, so neighbouring cards differ
@@ -17,24 +17,34 @@
 {%- enddoc -%}
 {%- if settings.evx_demo_images -%}
   {%- liquid
+    assign sg_full = 'evx-sg-full|1024|768|The Silent Grind: black leather sneaker with a suede toe and the white EvlveX monogram'
+    assign sg_card = 'evx-sg-card|1024|1280|The Silent Grind: black leather sneaker with a suede toe and the white EvlveX monogram'
+    assign sg_mono = 'evx-sg-monogram|480|480|The white EvlveX monogram on the side of The Silent Grind'
+    assign sg_sole = 'evx-sg-sole|600|375|Suede toe and white cupsole of The Silent Grind'
+    assign fs_full = 'evx-fs-full|768|1024|A Fresh Start: cream leather sneaker with sand suede and an embossed EvlveX monogram'
+    assign fs_card = 'evx-fs-card|768|960|A Fresh Start: cream leather sneaker with sand suede and an embossed EvlveX monogram'
+    assign fs_wide = 'evx-fs-wide|1366|1024|A Fresh Start: cream leather sneaker with sand suede and an embossed EvlveX monogram'
+    assign fs_mono = 'evx-fs-monogram|400|400|The embossed EvlveX monogram on A Fresh Start'
+    assign fs_lace = 'evx-fs-laces|400|500|Sand laces and suede panels of A Fresh Start'
+    assign pair = 'evx-comeback-pair|1600|1000|COMEBACK: The Silent Grind in black and A Fresh Start in cream, side by side'
+
     case kind
-    when 'hero'
-      assign demo_pool = 'hero-2|1800|900|1200|A leather shoe resting on a wooden stool in warm evening light;hero-1|1800|900|1012|Leather shoes and boots in low light;hero-3|1800|900|1129|A pair of oxblood brogues on dark wood;editorial-1|1800|900|1200|Black leather shoes beside a travel case, ready to leave'
-    when 'editorial'
-      assign demo_pool = 'editorial-1|1800|900|1200|Black leather shoes beside a travel case, ready to leave;editorial-2|1800|900|1200|Brown leather boots on a wooden floor;editorial-3|1800|900|1195|Close-up of polished black leather oxfords;hero-3|1800|900|1129|A pair of oxblood brogues on dark wood;hero-2|1800|900|1200|A leather shoe resting on a wooden stool in warm evening light'
-    when 'lifestyle'
-      assign demo_pool = 'lifestyle-1|1800|900|1200|A man in a suit tying his leather shoes;lifestyle-2|1800|900|2249|Brown leather shoes above a running creek;lifestyle-3|1800|900|1200|Brown brogues balanced on a ledge;lifestyle-4|1800|900|1200|Tying the laces of dark leather shoes on a wooden deck;lifestyle-5|1800|900|1155|Leather moccasin shoes worn with denim;lifestyle-6|1800|900|1800|White sneakers on a pebble shore'
-    when 'atelier'
-      assign demo_pool = 'atelier-1|1800|900|1197|Wooden shoe lasts;atelier-2|1800|900|2707|Shelves of wooden shoe lasts in a workshop;editorial-3|1800|900|1195|Close-up of polished black leather oxfords;atelier-3|1800|900|1200|Brown leather hide, close up'
-    when 'product'
-      assign demo_pool = 'product-1|1200|600|1500|Cognac leather penny loafer;product-6|1200|600|1500|Black plain derby;product-3|1200|600|1500|Brown suede derby with brogue detail;product-8|1200|600|1500|Brown leather ankle boots;product-2|1200|600|1500|Black leather loafers;product-5|1200|600|1500|Tan cap-toe derby with quarter brogues;product-4|1200|600|1500|Dark brown calf derby with brogue detail;product-7|1200|600|1500|Brown cap-toe derby'
-    when 'collection'
-      assign demo_pool = 'lifestyle-5|1800|900|1155|Leather moccasin shoes worn with denim;editorial-3|1800|900|1195|Close-up of polished black leather oxfords;editorial-2|1800|900|1200|Brown leather boots on a wooden floor;lifestyle-6|1800|900|1800|White sneakers on a pebble shore;lifestyle-2|1800|900|2249|Brown leather shoes above a running creek;hero-3|1800|900|1129|A pair of oxblood brogues on dark wood'
-    when 'article'
-      assign demo_pool = 'editorial-1|1800|900|1200|Black leather shoes beside a travel case, ready to leave;lifestyle-2|1800|900|2249|Brown leather shoes above a running creek;atelier-1|1800|900|1197|Wooden shoe lasts;lifestyle-1|1800|900|1200|A man in a suit tying his leather shoes;editorial-2|1800|900|1200|Brown leather boots on a wooden floor;atelier-2|1800|900|2707|Shelves of wooden shoe lasts in a workshop'
+      when 'hero'
+        assign demo_pool = pair | append: ';' | append: sg_full | append: ';' | append: fs_wide
+      when 'lifestyle'
+        assign demo_pool = sg_sole | append: ';' | append: fs_lace | append: ';' | append: sg_full | append: ';' | append: fs_full
+      when 'atelier'
+        assign demo_pool = sg_mono | append: ';' | append: fs_mono | append: ';' | append: sg_sole | append: ';' | append: fs_lace
+      when 'product'
+        assign demo_pool = sg_card | append: ';' | append: fs_card
+      when 'collection'
+        assign demo_pool = pair | append: ';' | append: sg_card | append: ';' | append: fs_card
+      when 'article'
+        assign demo_pool = sg_full | append: ';' | append: fs_wide | append: ';' | append: sg_mono | append: ';' | append: fs_mono
       else
-        assign demo_pool = 'editorial-1|1800|900|1200|Black leather shoes beside a travel case, ready to leave;editorial-2|1800|900|1200|Brown leather boots on a wooden floor;editorial-3|1800|900|1195|Close-up of polished black leather oxfords;hero-3|1800|900|1129|A pair of oxblood brogues on dark wood;hero-2|1800|900|1200|A leather shoe resting on a wooden stool in warm evening light'
+        assign demo_pool = sg_full | append: ';' | append: fs_wide | append: ';' | append: sg_mono | append: ';' | append: fs_lace
     endcase
+
     assign demo_items = demo_pool | split: ';'
     assign demo_seed = seed | plus: 0
     if demo_seed == 0 and seed != blank
@@ -42,20 +52,14 @@
     endif
     assign demo_index = demo_seed | abs | modulo: demo_items.size
     assign demo_parts = demo_items[demo_index] | split: '|'
-    assign demo_name = 'evx-demo-' | append: demo_parts[0]
-    assign demo_big = demo_parts[1]
-    assign demo_small = demo_parts[2]
-    assign demo_height = demo_parts[3]
-    assign demo_alt = alt | default: demo_parts[4]
-    assign demo_src_small = demo_name | append: '-' | append: demo_small | append: '.jpg' | asset_url
-    assign demo_src_big = demo_name | append: '-' | append: demo_big | append: '.jpg' | asset_url
+    assign demo_src = demo_parts[0] | append: '.jpg' | asset_url
+    assign demo_alt = alt | default: demo_parts[3]
   -%}
   <img
-    src="{{ demo_src_small }}"
-    srcset="{{ demo_src_small }} {{ demo_small }}w, {{ demo_src_big }} {{ demo_big }}w"
+    src="{{ demo_src }}"
     sizes="{{ sizes | default: '100vw' }}"
-    width="{{ demo_big }}"
-    height="{{ demo_height }}"
+    width="{{ demo_parts[1] }}"
+    height="{{ demo_parts[2] }}"
     alt="{{ demo_alt | escape }}"
     loading="{{ loading | default: 'lazy' }}"
     fetchpriority="{{ fetchpriority | default: 'auto' }}"

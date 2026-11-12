@@ -1,7 +1,7 @@
 {%- doc -%}
   Title or price for a sample product card (snippets/card-product.liquid, shown when no product is chosen,
   e.g. a featured collection without a collection). With demo photography on (Theme settings → EvlveX), it shows
-  a name from the EvlveX lineup and a believable price in the store currency. With it off, it shows Dawn's defaults.
+  a COMEBACK model name (matching the shoe photo for the same seed) and a believable price in the store currency. With it off, it shows Dawn's defaults.
 
   @param {string} part - 'title' or 'price'
   @param {number} [seed] - Sample index; picks the name and price (matches the demo photo for the same seed)
@@ -11,8 +11,8 @@
   {% render 'evlvex-sample-product', part: 'title', seed: 2 %}
 {%- enddoc -%}
 {%- liquid
-  assign sample_names = 'Promenade Loafer — Cognac|Atelier Oxford — Noir|Atelier Oxford — Espresso Suede|Nocturne Chelsea — Espresso|Promenade Loafer — Noir|Atelier Oxford — Cognac|Atelier Oxford — Chocolate|Atelier Oxford — Oxblood' | split: '|'
-  assign sample_prices = '295,345,325,395,295,345,335,365' | split: ','
+  assign sample_names = 'The Silent Grind — Noir|A Fresh Start — Sand' | split: '|'
+  assign sample_prices = '189,189' | split: ','
   assign sample_index = seed | default: 0 | modulo: sample_names.size
 -%}
 {%- if settings.evx_demo_images -%}

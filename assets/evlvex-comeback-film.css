@@ -1,0 +1,615 @@
+/*
+  EvlveX — COMEBACK film (sections/evlvex-comeback-film.liquid).
+  Full-screen 3D carousel that plays like a film: scenes turn in 3D, each shot has a slow camera move,
+  the shoe tilts with the pointer (--rx / --ry from the script) and floats when idle, copy reveals in sequence,
+  and the timeline fills like a video scrubber. Everything that moves is disabled under prefers-reduced-motion.
+*/
+
+.evx-film-section {
+  margin: 0;
+}
+
+evlvex-comeback-film {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: rgb(14, 14, 14);
+  color: rgb(245, 240, 230);
+  --evx-film-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.evx-film__scenes {
+  position: relative;
+  height: max(62rem, min(100svh, 96rem));
+  perspective: 1800px;
+  perspective-origin: 50% 45%;
+}
+
+.evx-film--large .evx-film__scenes {
+  height: max(56rem, min(82svh, 84rem));
+}
+
+/* ---------- Scenes & 3D turn ---------- */
+.evx-film__scene {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(9%, 0, -320px) rotateY(-16deg);
+  transform-origin: 50% 50%;
+  transition:
+    transform 1.25s var(--evx-film-ease),
+    opacity 0.9s var(--evx-film-ease),
+    visibility 0s linear 1.25s;
+  backface-visibility: hidden;
+}
+
+.evx-film__scene.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+  z-index: 2;
+}
+
+.evx-film__scene.is-leaving {
+  visibility: visible;
+  opacity: 0;
+  transform: translate3d(-9%, 0, -320px) rotateY(16deg);
+  transition-delay: 0s;
+  z-index: 1;
+}
+
+evlvex-comeback-film[data-dir='back'] .evx-film__scene:not(.is-active):not(.is-leaving) {
+  transform: translate3d(-9%, 0, -320px) rotateY(16deg);
+}
+
+evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
+  transform: translate3d(9%, 0, -320px) rotateY(-16deg);
+}
+
+/* Tones */
+.evx-film__scene--dark {
+  background: radial-gradient(ellipse at 62% 45%, rgb(34, 32, 29) 0%, rgb(14, 14, 14) 62%);
+  color: rgb(245, 240, 230);
+  --film-accent: 184, 155, 106;
+  --film-muted: 245, 240, 230;
+}
+
+.evx-film__scene--light {
+  background: radial-gradient(ellipse at 62% 45%, rgb(252, 249, 243) 0%, rgb(236, 228, 214) 70%);
+  color: rgb(14, 14, 14);
+  --film-accent: 150, 120, 72;
+  --film-muted: 14, 14, 14;
+}
+
+/* Blurred backdrop of the same shot: depth and colour behind the frame */
+.evx-film__backdrop {
+  position: absolute;
+  inset: -6%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.evx-film__backdrop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(48px) saturate(0.7);
+  transform: scale(1.15);
+}
+
+.evx-film__scene--dark .evx-film__backdrop-img {
+  opacity: 0.28;
+}
+
+.evx-film__scene--light .evx-film__backdrop-img {
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+
+/* Film grade: letterbox gradient top and bottom */
+.evx-film__scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent 18%, transparent 74%, rgba(0, 0, 0, 0.45));
+}
+
+.evx-film__scene--light::after {
+  background: linear-gradient(to bottom, rgba(236, 228, 214, 0.6), transparent 18%, transparent 78%, rgba(236, 228, 214, 0.7));
+}
+
+/* ---------- Visual: frame(s) in 3D ---------- */
+.evx-film__visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4vw;
+  padding: 9rem 2rem 2rem;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.6s var(--evx-film-ease);
+}
+
+.evx-film__frame {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: var(--frame-ratio, 1);
+  /* Width-led sizing capped by the available height, so the photo keeps its ratio (never cropped) */
+  width: min(84vw, calc(min(46svh, 46rem) * var(--frame-ratio, 1)));
+  height: auto;
+  transform: translateZ(40px);
+  box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.75);
+}
+
+.evx-film__scene--light .evx-film__frame {
+  box-shadow: 0 50px 90px -45px rgba(80, 60, 30, 0.45);
+}
+
+.evx-film__scene--pair .evx-film__frame {
+  width: min(40vw, calc(min(36svh, 38rem) * var(--frame-ratio, 1)));
+}
+
+.evx-film__frame--left {
+  transform: translateZ(10px) rotateY(16deg);
+}
+
+.evx-film__frame--right {
+  transform: translateZ(10px) rotateY(-16deg);
+}
+
+.evx-film__camera {
+  position: absolute;
+  inset: 0;
+}
+
+.evx-film__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: var(--fx, 50%) var(--fy, 50%);
+}
+
+/* ---------- Copy ---------- */
+.evx-film__copy {
+  position: relative;
+  z-index: 2;
+  padding: 0 2rem 15rem;
+  max-width: 64rem;
+}
+
+.evx-film__copy > * {
+  opacity: 0;
+  transform: translateY(1.8rem);
+  transition:
+    opacity 0.9s var(--evx-film-ease),
+    transform 0.9s var(--evx-film-ease);
+}
+
+.evx-film__scene.is-active .evx-film__copy > * {
+  opacity: 1;
+  transform: none;
+}
+
+.evx-film__scene.is-active .evx-film__copy > :nth-child(1) { transition-delay: 0.35s; }
+.evx-film__scene.is-active .evx-film__copy > :nth-child(2) { transition-delay: 0.5s; }
+.evx-film__scene.is-active .evx-film__copy > :nth-child(3) { transition-delay: 0.68s; }
+.evx-film__scene.is-active .evx-film__copy > :nth-child(4) { transition-delay: 0.85s; }
+
+.evx-film__eyebrow {
+  margin: 0 0 1.4rem;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgb(var(--film-accent));
+}
+
+.evx-film__heading {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1;
+  color: inherit;
+}
+
+.evx-film__heading--display {
+  font-size: clamp(4rem, 11.5vw, 7.2rem);
+  letter-spacing: 0.12em;
+  margin-right: -0.12em;
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 990px) {
+  .evx-film__heading--display {
+    font-size: clamp(6rem, 5vw, 9.6rem);
+  }
+}
+
+.evx-film__heading--title {
+  font-size: clamp(3rem, 4.6vw, 6.4rem);
+  letter-spacing: 0.1em;
+}
+
+.evx-film__text {
+  margin: 2rem 0 0;
+  max-width: 44ch;
+  font-family: var(--font-heading-family);
+  font-size: 1.9rem;
+  line-height: 1.55;
+  color: rgba(var(--film-muted), 0.82);
+}
+
+.evx-film__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-top: 2.8rem;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+}
+
+.evx-film__cta-line {
+  display: block;
+  width: 4.8rem;
+  height: 1px;
+  background: rgb(var(--film-accent));
+  transition: width 0.5s var(--evx-film-ease);
+}
+
+.evx-film__cta:hover .evx-film__cta-line,
+.evx-film__cta:focus-visible .evx-film__cta-line {
+  width: 8rem;
+}
+
+/* ---------- Timeline & controls ---------- */
+.evx-film__chrome {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 2.4rem;
+  padding: 0 2rem 2.4rem;
+  color: rgb(245, 240, 230);
+  transition: color 0.8s var(--evx-film-ease);
+}
+
+evlvex-comeback-film.is-light .evx-film__chrome {
+  color: rgb(14, 14, 14);
+}
+
+.evx-film__timeline {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+
+.evx-film__chapter-item {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.evx-film__chapter {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.2rem 0 0.4rem;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.evx-film__bar {
+  position: relative;
+  display: block;
+  height: 2px;
+  overflow: hidden;
+  background: currentColor;
+  opacity: 0.25;
+}
+
+.evx-film__chapter[aria-current='true'] .evx-film__bar,
+.evx-film__chapter.is-done .evx-film__bar {
+  opacity: 1;
+  background: rgba(127, 127, 127, 0.35);
+}
+
+.evx-film__fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: rgb(184, 155, 106);
+}
+
+.evx-film__chapter.is-done .evx-film__fill {
+  transform: scaleX(1);
+}
+
+.evx-film__chapter.is-playing .evx-film__fill {
+  animation: evx-film-fill var(--evx-film-duration, 7s) linear forwards;
+}
+
+.evx-film__chapter.is-static .evx-film__fill {
+  transform: scaleX(1);
+}
+
+evlvex-comeback-film.is-paused .evx-film__fill,
+evlvex-comeback-film.is-paused .evx-film__img {
+  animation-play-state: paused !important;
+}
+
+.evx-film__chapter-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: var(--font-body-family);
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  transition: opacity 0.4s;
+}
+
+.evx-film__chapter[aria-current='true'] .evx-film__chapter-label,
+.evx-film__chapter:hover .evx-film__chapter-label {
+  opacity: 1;
+}
+
+.evx-film__controls {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 0.2rem;
+}
+
+.evx-film__counter {
+  margin: 0 1.2rem 0 0;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  font-variant-numeric: tabular-nums;
+}
+
+.evx-film__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.evx-film__button:hover {
+  opacity: 1;
+}
+
+.evx-film__button .icon-caret {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+[data-evx-film-prev] .icon-caret {
+  transform: rotate(90deg);
+}
+
+[data-evx-film-next] .icon-caret {
+  transform: rotate(-90deg);
+}
+
+.evx-film__toggle .icon {
+  width: 0.9rem;
+  height: 1.2rem;
+}
+
+.evx-film__toggle-play,
+evlvex-comeback-film.is-user-paused .evx-film__toggle-pause {
+  display: none;
+}
+
+evlvex-comeback-film.is-user-paused .evx-film__toggle-play,
+.evx-film__toggle-pause {
+  display: inline-flex;
+}
+
+/* ---------- Desktop: copy left, shoe right ---------- */
+@media screen and (min-width: 990px) {
+  .evx-film__scene {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-rows: minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .evx-film__visual {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 8rem 6vw 12rem 0;
+  }
+
+  .evx-film__copy {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0 0 6rem 6vw;
+    align-self: center;
+  }
+
+  .evx-film__frame {
+    width: min(50vw, calc(min(60svh, 64rem) * var(--frame-ratio, 1)));
+  }
+
+  /* Pair: size by width so each frame keeps its photo's ratio (black 4:3, cream 3:4) */
+  .evx-film__scene--pair .evx-film__frame {
+    height: auto;
+    max-width: none;
+  }
+
+  .evx-film__scene--pair .evx-film__frame--left {
+    width: min(27vw, 46rem);
+  }
+
+  .evx-film__scene--pair .evx-film__frame--right {
+    width: min(17vw, 30rem);
+  }
+
+  .evx-film__chrome {
+    padding: 0 6vw 3.6rem;
+    gap: 4rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .evx-film__chapter-label {
+    display: none;
+  }
+
+  .evx-film__counter {
+    display: none;
+  }
+
+  .evx-film__text {
+    font-size: 1.7rem;
+  }
+
+  .evx-film__visual {
+    gap: 3vw;
+  }
+
+  .evx-film__scene--pair .evx-film__frame {
+    height: auto;
+    max-width: none;
+  }
+
+  .evx-film__scene--pair .evx-film__frame--left {
+    width: 52vw;
+  }
+
+  .evx-film__scene--pair .evx-film__frame--right {
+    width: 32vw;
+  }
+}
+
+/* ---------- Motion (camera, float) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .evx-film__scene.is-active .evx-film__img {
+    animation: evx-cam-push var(--evx-film-duration, 7s) linear both;
+  }
+
+  .evx-film__scene--cam-pull.is-active .evx-film__img {
+    animation-name: evx-cam-pull;
+  }
+
+  .evx-film__scene--cam-pan-left.is-active .evx-film__img {
+    animation-name: evx-cam-pan-left;
+  }
+
+  .evx-film__scene--cam-pan-right.is-active .evx-film__img {
+    animation-name: evx-cam-pan-right;
+  }
+
+  .evx-film__scene.is-active .evx-film__frame {
+    animation: evx-film-float 9s ease-in-out infinite;
+  }
+
+  .evx-film__scene.is-active .evx-film__frame--left {
+    animation-name: evx-film-float-left;
+  }
+
+  .evx-film__scene.is-active .evx-film__frame--right {
+    animation-name: evx-film-float-right;
+  }
+}
+
+@keyframes evx-cam-push {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.16); }
+}
+
+@keyframes evx-cam-pull {
+  from { transform: scale(1.18); }
+  to { transform: scale(1.03); }
+}
+
+@keyframes evx-cam-pan-left {
+  from { transform: scale(1.14) translateX(3.5%); }
+  to { transform: scale(1.14) translateX(-3.5%); }
+}
+
+@keyframes evx-cam-pan-right {
+  from { transform: scale(1.14) translateX(-3.5%); }
+  to { transform: scale(1.14) translateX(3.5%); }
+}
+
+@keyframes evx-film-float {
+  0%, 100% { transform: translateZ(40px) rotateY(-4deg) translateY(0); }
+  50% { transform: translateZ(60px) rotateY(4deg) translateY(-1rem); }
+}
+
+@keyframes evx-film-float-left {
+  0%, 100% { transform: translateZ(10px) rotateY(18deg) translateY(0); }
+  50% { transform: translateZ(30px) rotateY(12deg) translateY(-1rem); }
+}
+
+@keyframes evx-film-float-right {
+  0%, 100% { transform: translateZ(10px) rotateY(-18deg) translateY(-0.6rem); }
+  50% { transform: translateZ(30px) rotateY(-12deg) translateY(0.4rem); }
+}
+
+@keyframes evx-film-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Reduced motion: simple crossfade, no 3D turn, no camera, no tilt */
+@media (prefers-reduced-motion: reduce) {
+  .evx-film__scene,
+  .evx-film__scene.is-leaving,
+  evlvex-comeback-film[data-dir='back'] .evx-film__scene:not(.is-active):not(.is-leaving),
+  evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
+    transform: none;
+    transition: opacity 0.4s linear, visibility 0s linear 0.4s;
+  }
+
+  .evx-film__visual {
+    transform: none;
+  }
+
+  .evx-film__copy > * {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .evx-film__chapter.is-playing .evx-film__fill {
+    animation: none;
+    transform: scaleX(1);
+  }
+}

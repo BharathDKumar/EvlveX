@@ -1,0 +1,497 @@
+{%- comment -%}
+  EvlveX — COMEBACK film: a full-screen, video-like 3D carousel for the home page.
+  Each scene is a block: one of the two COMEBACK models (The Silent Grind / A Fresh Start, or both) or an uploaded image,
+  a camera move that plays while the scene is on screen, and its own copy. Scenes turn in 3D, the shoe tilts with the
+  pointer, and a timeline at the bottom fills like a video scrubber.
+  Behaviour: assets/evlvex-comeback-film.js · Styles: assets/evlvex-comeback-film.css · Story: docs/spec/brand-and-content.md
+{%- endcomment -%}
+
+{{ 'evlvex-comeback-film.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'evlvex-comeback-film.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign scene_total = section.blocks.size
+  assign of_label = 'general.slider.of' | t
+  assign film_label = section.settings.label | default: 'COMEBACK'
+  assign autoplay = false
+  if section.settings.autoplay and scene_total > 1
+    assign autoplay = true
+  endif
+-%}
+
+{%- if scene_total > 0 -%}
+  <evlvex-comeback-film
+    id="EvxFilm-{{ section.id }}"
+    class="evx-film evx-film--{{ section.settings.height }}"
+    role="region"
+    aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
+    aria-label="{{ film_label | escape }}"
+    data-autoplay="{{ autoplay }}"
+    data-speed="{{ section.settings.speed }}"
+    style="--evx-film-duration: {{ section.settings.speed }}s;"
+  >
+    <div class="evx-film__scenes" aria-live="{% if autoplay %}off{% else %}polite{% endif %}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign s = block.settings
+          assign loading = 'lazy'
+          assign priority = 'auto'
+          if forloop.first and section.index <= 2
+            assign loading = 'eager'
+            if section.index == 1
+              assign priority = 'high'
+            endif
+          endif
+
+          case s.shoe
+            when 'fresh-start'
+              assign prefix = 'evx-fs-'
+              case s.shot
+                when 'monogram'
+                  assign shot = 'monogram|400|400'
+                when 'texture'
+                  assign shot = 'laces|400|500'
+                else
+                  assign shot = 'full|768|1024'
+              endcase
+            else
+              assign prefix = 'evx-sg-'
+              case s.shot
+                when 'monogram'
+                  assign shot = 'monogram|480|480'
+                when 'texture'
+                  assign shot = 'sole|600|375'
+                else
+                  assign shot = 'full|1024|768'
+              endcase
+          endcase
+          assign shot_parts = shot | split: '|'
+          assign asset_src = prefix | append: shot_parts[0] | append: '.jpg' | asset_url
+          assign alt = s.alt | default: s.heading
+
+          if s.image != blank
+            assign frame_ratio = s.image.aspect_ratio
+          else
+            assign frame_ratio = shot_parts[1] | times: 1.0 | divided_by: shot_parts[2]
+          endif
+        -%}
+        <article
+          id="EvxFilmScene-{{ section.id }}-{{ forloop.index }}"
+          class="evx-film__scene evx-film__scene--{{ s.tone }} evx-film__scene--cam-{{ s.camera }}{% if s.shoe == 'both' and s.image == blank %} evx-film__scene--pair{% endif %}{% if forloop.first %} is-active{% endif %}"
+          role="group"
+          aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
+          aria-label="{{ forloop.index }} {{ of_label }} {{ scene_total }}"
+          style="--fx: {{ s.focus_x }}%; --fy: {{ s.focus_y }}%; --frame-ratio: {{ frame_ratio }};"
+          {{ block.shopify_attributes }}
+        >
+          <div class="evx-film__backdrop" aria-hidden="true">
+            {%- if s.image != blank -%}
+              {{ s.image | image_url: width: 600 | image_tag: loading: loading, alt: '', class: 'evx-film__backdrop-img' }}
+            {%- elsif s.shoe == 'both' -%}
+              <img src="{{ 'evx-comeback-pair.jpg' | asset_url }}" alt="" loading="{{ loading }}" width="1600" height="1000" class="evx-film__backdrop-img">
+            {%- else -%}
+              <img src="{{ asset_src }}" alt="" loading="{{ loading }}" width="{{ shot_parts[1] }}" height="{{ shot_parts[2] }}" class="evx-film__backdrop-img">
+            {%- endif -%}
+          </div>
+
+          <div class="evx-film__visual">
+            {%- if s.image != blank -%}
+              <figure class="evx-film__frame">
+                <div class="evx-film__camera">
+                  {{
+                    s.image
+                    | image_url: width: 2000
+                    | image_tag:
+                      widths: '600, 900, 1200, 1600, 2000',
+                      sizes: '(min-width: 990px) 55vw, 100vw',
+                      loading: loading,
+                      fetchpriority: priority,
+                      alt: alt,
+                      class: 'evx-film__img'
+                  }}
+                </div>
+              </figure>
+            {%- elsif s.shoe == 'both' -%}
+              <figure class="evx-film__frame evx-film__frame--left" style="--frame-ratio: 1.3333;">
+                <div class="evx-film__camera">
+                  <img src="{{ 'evx-sg-full.jpg' | asset_url }}" alt="The Silent Grind, black" loading="{{ loading }}" fetchpriority="{{ priority }}" width="1024" height="768" class="evx-film__img">
+                </div>
+              </figure>
+              <figure class="evx-film__frame evx-film__frame--right" style="--frame-ratio: 0.75;">
+                <div class="evx-film__camera">
+                  <img src="{{ 'evx-fs-full.jpg' | asset_url }}" alt="A Fresh Start, cream" loading="{{ loading }}" width="768" height="1024" class="evx-film__img">
+                </div>
+              </figure>
+            {%- else -%}
+              <figure class="evx-film__frame">
+                <div class="evx-film__camera">
+                  <img src="{{ asset_src }}" alt="{{ alt | escape }}" loading="{{ loading }}" fetchpriority="{{ priority }}" width="{{ shot_parts[1] }}" height="{{ shot_parts[2] }}" class="evx-film__img">
+                </div>
+              </figure>
+            {%- endif -%}
+          </div>
+
+          <div class="evx-film__copy">
+            {%- if s.eyebrow != blank -%}
+              <p class="evx-film__eyebrow">{{ s.eyebrow | escape }}</p>
+            {%- endif -%}
+            {%- if s.heading != blank -%}
+              {%- if forloop.first -%}
+                <h2 class="evx-film__heading evx-film__heading--{{ s.heading_size }}">{{ s.heading | escape }}</h2>
+              {%- else -%}
+                <h3 class="evx-film__heading evx-film__heading--{{ s.heading_size }}">{{ s.heading | escape }}</h3>
+              {%- endif -%}
+            {%- endif -%}
+            {%- if s.text != blank -%}
+              <p class="evx-film__text">{{ s.text | escape }}</p>
+            {%- endif -%}
+            {%- if s.button_label != blank and s.button_link != blank -%}
+              <a class="evx-film__cta" href="{{ s.button_link }}">
+                <span>{{ s.button_label | escape }}</span>
+                <span class="evx-film__cta-line" aria-hidden="true"></span>
+              </a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if scene_total > 1 -%}
+      <div class="evx-film__chrome">
+        <ol class="evx-film__timeline">
+          {%- for block in section.blocks -%}
+            <li class="evx-film__chapter-item">
+              <button
+                type="button"
+                class="evx-film__chapter"
+                data-evx-goto="{{ forloop.index0 }}"
+                aria-controls="EvxFilmScene-{{ section.id }}-{{ forloop.index }}"
+                aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ of_label }} {{ scene_total }}: {{ block.settings.chapter_label | default: block.settings.heading | escape }}"
+                {% if forloop.first %}
+                  aria-current="true"
+                {% endif %}
+              >
+                <span class="evx-film__bar" aria-hidden="true"><span class="evx-film__fill"></span></span>
+                <span class="evx-film__chapter-label" aria-hidden="true">
+                  {{- block.settings.chapter_label | default: block.settings.heading | escape -}}
+                </span>
+              </button>
+            </li>
+          {%- endfor -%}
+        </ol>
+        <div class="evx-film__controls">
+          <p class="evx-film__counter" aria-hidden="true">
+            <span data-evx-film-current>01</span> / {% if scene_total < 10 %}0{% endif %}{{ scene_total }}
+          </p>
+          <button
+            type="button"
+            class="evx-film__button"
+            data-evx-film-prev
+            aria-controls="EvxFilm-{{ section.id }}"
+            aria-label="{{ 'sections.slideshow.previous_slideshow' | t }}"
+          >
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </button>
+          <button
+            type="button"
+            class="evx-film__button evx-film__toggle"
+            data-evx-film-toggle
+            aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}"
+            data-label-pause="{{ 'sections.slideshow.pause_slideshow' | t }}"
+            data-label-play="{{ 'sections.slideshow.play_slideshow' | t }}"
+          >
+            <span class="evx-film__toggle-pause">{{- 'icon-pause.svg' | inline_asset_content -}}</span>
+            <span class="evx-film__toggle-play">{{- 'icon-play.svg' | inline_asset_content -}}</span>
+          </button>
+          <button
+            type="button"
+            class="evx-film__button"
+            data-evx-film-next
+            aria-controls="EvxFilm-{{ section.id }}"
+            aria-label="{{ 'sections.slideshow.next_slideshow' | t }}"
+          >
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </button>
+        </div>
+      </div>
+    {%- endif -%}
+  </evlvex-comeback-film>
+{%- elsif request.design_mode -%}
+  <div class="page-width">
+    <p class="evx-carousel-notice">EvlveX COMEBACK film: add a scene to show this section.</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX COMEBACK film",
+  "tag": "section",
+  "class": "section evx-film-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "A full-screen, video-like 3D carousel. Each scene shows The Silent Grind, A Fresh Start, both, or an image you upload, with its own camera move and copy."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Name for screen readers",
+      "default": "COMEBACK"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full screen"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Play automatically",
+      "default": true,
+      "info": "Pauses on keyboard focus, when the tab is hidden or the film is scrolled away, and starts paused for visitors who prefer reduced motion."
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "Scene length",
+      "default": 7
+    }
+  ],
+  "blocks": [
+    {
+      "type": "scene",
+      "name": "Scene",
+      "settings": [
+        {
+          "type": "select",
+          "id": "shoe",
+          "label": "Shoe",
+          "options": [
+            {
+              "value": "silent-grind",
+              "label": "The Silent Grind (black)"
+            },
+            {
+              "value": "fresh-start",
+              "label": "A Fresh Start (cream)"
+            },
+            {
+              "value": "both",
+              "label": "Both (COMEBACK)"
+            }
+          ],
+          "default": "silent-grind"
+        },
+        {
+          "type": "select",
+          "id": "shot",
+          "label": "Shot",
+          "options": [
+            {
+              "value": "full",
+              "label": "Full shoe"
+            },
+            {
+              "value": "monogram",
+              "label": "Detail: monogram"
+            },
+            {
+              "value": "texture",
+              "label": "Detail: suede, laces and sole"
+            }
+          ],
+          "default": "full"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. Replaces the shoe photograph chosen above."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Tone",
+          "options": [
+            {
+              "value": "dark",
+              "label": "Dark (Noir)"
+            },
+            {
+              "value": "light",
+              "label": "Light (Ivory)"
+            }
+          ],
+          "default": "dark"
+        },
+        {
+          "type": "select",
+          "id": "camera",
+          "label": "Camera move",
+          "options": [
+            {
+              "value": "push",
+              "label": "Push in"
+            },
+            {
+              "value": "pull",
+              "label": "Pull out"
+            },
+            {
+              "value": "pan-left",
+              "label": "Pan left"
+            },
+            {
+              "value": "pan-right",
+              "label": "Pan right"
+            }
+          ],
+          "default": "push"
+        },
+        {
+          "type": "range",
+          "id": "focus_x",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Camera focus (horizontal)",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "focus_y",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Camera focus (vertical)",
+          "default": 50
+        },
+        {
+          "type": "text",
+          "id": "chapter_label",
+          "label": "Timeline label",
+          "info": "Short name under the timeline. Defaults to the heading."
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "COMEBACK"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "display",
+              "label": "Display"
+            },
+            {
+              "value": "title",
+              "label": "Title"
+            }
+          ],
+          "default": "title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX COMEBACK film",
+      "blocks": [
+        {
+          "type": "scene",
+          "settings": {
+            "shoe": "both",
+            "tone": "dark",
+            "camera": "push",
+            "eyebrow": "EvlveX · Chapter One",
+            "heading": "COMEBACK",
+            "heading_size": "display",
+            "chapter_label": "Comeback",
+            "text": "What happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.",
+            "button_label": "Discover the collection",
+            "button_link": "/collections/all"
+          }
+        },
+        {
+          "type": "scene",
+          "settings": {
+            "shoe": "silent-grind",
+            "shot": "full",
+            "tone": "dark",
+            "camera": "push",
+            "focus_x": 60,
+            "focus_y": 50,
+            "eyebrow": "Sub-concept I",
+            "heading": "The Silent Grind",
+            "chapter_label": "The Silent Grind",
+            "text": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen."
+          }
+        },
+        {
+          "type": "scene",
+          "settings": {
+            "shoe": "fresh-start",
+            "shot": "full",
+            "tone": "light",
+            "camera": "pull",
+            "eyebrow": "Sub-concept II",
+            "heading": "A Fresh Start",
+            "chapter_label": "A Fresh Start",
+            "text": "The moment after the struggle, when you stop looking back and choose what comes next."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

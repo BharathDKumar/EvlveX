@@ -1,62 +1,12 @@
 {
   "sections": {
-    "hero": {
-      "type": "image-banner",
-      "blocks": {
-        "caption": {
-          "type": "text",
-          "settings": {
-            "text": "The House of EvlveX",
-            "text_style": "caption-with-letter-spacing"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Every Pair Has a Story",
-            "heading_size": "hxl"
-          }
-        },
-        "subheading": {
-          "type": "text",
-          "settings": {
-            "text": "Luxury shoes made by hand, each born from a story of its own.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Discover the Collection",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "Read the Stories",
-            "button_link_2": "shopify://pages/the-stories",
-            "button_style_secondary_2": true
-          }
-        }
-      },
-      "block_order": ["caption", "heading", "subheading", "button"],
-      "settings": {
-        "image_overlay_opacity": 30,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "ambient",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": true
-      }
-    },
     "statement": {
       "type": "rich-text",
       "blocks": {
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "The House",
+            "caption": "COMEBACK",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -64,18 +14,22 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "A shoe begins as a story.",
+            "heading": "Falling behind is not the end.",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>At EvlveX, a shoe begins as a story: a seaside court at dusk, a river walked every Sunday, a night train arriving at dawn. We shape leather around that story by hand until it can be worn. Then each pair is numbered, signed by the artisan who finished it, and registered to the person who will carry the story further.</p>"
+            "text": "<p>Sometimes, it is where the comeback begins. EvlveX tells one story in two chapters: <em>The Silent Grind</em>, for the battles no one sees, and <em>A Fresh Start</em>, for the first step into what comes next. Every pair is numbered and registered to the person writing their own comeback.</p>"
           }
         }
       },
-      "block_order": ["caption", "heading", "text"],
+      "block_order": [
+        "caption",
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -85,60 +39,10 @@
         "padding_bottom": 80
       }
     },
-    "story-carousel": {
-      "type": "evlvex-story-carousel",
-      "blocks": {
-        "slide_court": {
-          "type": "slide",
-          "settings": {
-            "eyebrow": "Chapter 01 · Court 01",
-            "heading": "The Last Set at Dusk",
-            "story": "A seaside club, late summer. The suede is the color of clay dust on white leather; the caramel stripe is the baseline at dusk.",
-            "button_label": "Read the story",
-            "button_url": "shopify://pages/the-stories"
-          }
-        },
-        "slide_atelier": {
-          "type": "slide",
-          "settings": {
-            "eyebrow": "The Atelier",
-            "heading": "Finished by One Pair of Hands",
-            "story": "Every pair is cut, stitched and finished at a single bench. The artisan who completes it signs the workshop card in the box.",
-            "button_label": "Meet the Maison",
-            "button_url": "shopify://pages/the-maison"
-          }
-        },
-        "slide_pair": {
-          "type": "slide",
-          "settings": {
-            "eyebrow": "Your Pair",
-            "heading": "A Chapter of Its Own",
-            "story": "Each pair is numbered and registered to the person who wears it. Scan the tag beneath the tongue to read the story of your pair.",
-            "button_label": "How it works",
-            "button_url": "shopify://pages/authenticity"
-          }
-        }
-      },
-      "block_order": ["slide_court", "slide_atelier", "slide_pair"],
-      "settings": {
-        "slide_source": "blocks",
-        "eyebrow": "From the Maison",
-        "heading": "",
-        "layout": "image-left",
-        "desktop_ratio": "4-5",
-        "mobile_ratio": "4-5",
-        "text_alignment": "left",
-        "color_scheme": "scheme-2",
-        "autoplay": true,
-        "autoplay_speed": 7,
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "title": "The Collection",
+        "title": "Two chapters, one comeback",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
@@ -179,15 +83,15 @@
       "type": "evlvex-stories-grid",
       "settings": {
         "color_scheme": "scheme-1",
-        "caption": "The Stories",
-        "heading": "Where each pair begins",
+        "caption": "The Chapters",
+        "heading": "The story behind each pair",
         "heading_size": "h1",
-        "text": "<p>Every model of the house is born from a story. Read where each one comes from.</p>",
+        "text": "<p>The Silent Grind and A Fresh Start. Each model carries one chapter of COMEBACK.</p>",
         "show_all": false,
         "limit": 3,
         "columns_desktop": 3,
         "swipe_on_mobile": true,
-        "link_label": "Read all the stories",
+        "link_label": "Read the chapters",
         "link": "shopify://pages/the-stories",
         "padding_top": 96,
         "padding_bottom": 96
@@ -199,7 +103,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "From the Atelier",
+            "caption": "The Mark",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -207,27 +111,32 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Signed by the hands that finished it",
+            "heading": "Worn on the side of every pair",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>When a pair leaves the bench, its artisan writes a workshop card: the pair's number, the day it was finished, and one true line about this pair alone. The card travels in the box. The same words appear on the pair's certificate.</p>",
+            "text": "<p>The EvlveX monogram sits on every pair: white on black for The Silent Grind, embossed in sand for A Fresh Start. A mark for everyone who chose to keep going.</p>",
             "text_style": "body"
           }
         },
         "button": {
           "type": "button",
           "settings": {
-            "button_label": "Visit the Maison",
+            "button_label": "About EvlveX",
             "button_link": "shopify://pages/the-maison",
             "button_style_secondary": true
           }
         }
       },
-      "block_order": ["caption", "heading", "text", "button"],
+      "block_order": [
+        "caption",
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "height": "large",
         "desktop_image_width": "medium",
@@ -274,7 +183,11 @@
           }
         }
       },
-      "block_order": ["column-1", "column-2", "column-3"],
+      "block_order": [
+        "column-1",
+        "column-2",
+        "column-3"
+      ],
       "settings": {
         "title": "Every pair, its own chapter",
         "heading_size": "h1",
@@ -313,14 +226,133 @@
           "settings": {}
         }
       },
-      "block_order": ["heading", "paragraph", "email_form"],
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
       "settings": {
         "color_scheme": "scheme-4",
         "full_width": true,
         "padding_top": 80,
         "padding_bottom": 88
       }
+    },
+    "film": {
+      "type": "evlvex-comeback-film",
+      "blocks": {
+        "comeback": {
+          "type": "scene",
+          "settings": {
+            "shoe": "both",
+            "shot": "full",
+            "tone": "dark",
+            "camera": "push",
+            "focus_x": 50,
+            "focus_y": 50,
+            "chapter_label": "Comeback",
+            "eyebrow": "EvlveX · Chapter One",
+            "heading": "COMEBACK",
+            "heading_size": "display",
+            "text": "COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.",
+            "button_label": "Discover the collection",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "grind": {
+          "type": "scene",
+          "settings": {
+            "shoe": "silent-grind",
+            "shot": "full",
+            "tone": "dark",
+            "camera": "push",
+            "focus_x": 60,
+            "focus_y": 50,
+            "chapter_label": "The Silent Grind",
+            "eyebrow": "Sub-concept I",
+            "heading": "The Silent Grind",
+            "heading_size": "title",
+            "text": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.",
+            "button_label": "Shop The Silent Grind",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "grind_detail": {
+          "type": "scene",
+          "settings": {
+            "shoe": "silent-grind",
+            "shot": "monogram",
+            "tone": "dark",
+            "camera": "pan-left",
+            "focus_x": 50,
+            "focus_y": 50,
+            "chapter_label": "Hold on",
+            "eyebrow": "The Silent Grind",
+            "heading": "Hold on through the weight",
+            "heading_size": "title",
+            "text": "Holding on through the weight of those moments, and finding the strength to rise from them."
+          }
+        },
+        "fresh": {
+          "type": "scene",
+          "settings": {
+            "shoe": "fresh-start",
+            "shot": "full",
+            "tone": "light",
+            "camera": "pull",
+            "focus_x": 50,
+            "focus_y": 50,
+            "chapter_label": "A Fresh Start",
+            "eyebrow": "Sub-concept II",
+            "heading": "A Fresh Start",
+            "heading_size": "title",
+            "text": "The moment after the struggle, when you stop looking back and choose what comes next.",
+            "button_label": "Shop A Fresh Start",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "fresh_detail": {
+          "type": "scene",
+          "settings": {
+            "shoe": "fresh-start",
+            "shot": "texture",
+            "tone": "light",
+            "camera": "pan-right",
+            "focus_x": 50,
+            "focus_y": 40,
+            "chapter_label": "First step",
+            "eyebrow": "A Fresh Start",
+            "heading": "Take the first step",
+            "heading_size": "title",
+            "text": "Carry the lessons forward, leave the weight behind, and take the first step into a new chapter.",
+            "button_label": "Begin your comeback",
+            "button_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "comeback",
+        "grind",
+        "grind_detail",
+        "fresh",
+        "fresh_detail"
+      ],
+      "settings": {
+        "label": "COMEBACK",
+        "height": "full",
+        "autoplay": true,
+        "speed": 7
+      }
     }
   },
-  "order": ["hero", "statement", "story-carousel", "featured", "featured-story", "stories", "atelier", "chapter", "newsletter"]
+  "order": [
+    "film",
+    "statement",
+    "featured",
+    "featured-story",
+    "stories",
+    "atelier",
+    "chapter",
+    "newsletter"
+  ]
 }

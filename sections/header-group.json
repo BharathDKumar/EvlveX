@@ -15,12 +15,15 @@
         "announcement-bar-1": {
           "type": "announcement",
           "settings": {
-            "text": "Chapter 01 · Court 01 — The Last Set at Dusk",
+            "text": "COMEBACK · The Silent Grind & A Fresh Start",
             "link": "shopify://pages/the-stories"
           }
         }
       },
-      "block_order": ["announcement-bar-0", "announcement-bar-1"],
+      "block_order": [
+        "announcement-bar-0",
+        "announcement-bar-1"
+      ],
       "settings": {
         "auto_rotate": true,
         "change_slides_speed": 6,
@@ -50,5 +53,8 @@
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

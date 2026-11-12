@@ -114,14 +114,14 @@ Each model story ([brand-and-content.md §6](brand-and-content.md)) is stored on
 |---|---|---|---|
 | Title | `title` | Single line text | *The Last Set at Dusk* |
 | Chapter | `chapter` | Integer | `1` (shown as "Chapter 01") |
-| Model | `model_name` | Single line text | Court 01 |
+| Model | `model_name` | Single line text | The Silent Grind |
 | Setting | `setting` | Single line text | *A seaside club, late summer.* |
 | Excerpt | `excerpt` | Multi-line text (≤ 280 chars) | shown on product, cards and certificate |
 | Story | `body` | Rich text | the full 90–150-word story |
 | Signature detail | `signature_detail` | Multi-line text | how the story shows in the shoe |
 | Hero plate | `hero_image` | File (image) | `story-court-01-01.jpg` |
 | Plates | `gallery` | List of files (images) | 2–4 further story plates |
-| Products | `products` | List of product references | Court 01 Ivory Sand, Court 01 Noir |
+| Products | `products` | List of product references | The Silent Grind |
 
 ### 5.3 Product metafield
 - **`evlvex.story`**, type metaobject reference → `evlvex_story`, set on every product.

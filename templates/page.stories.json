@@ -6,7 +6,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "The Stories",
+            "caption": "COMEBACK",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -14,18 +14,22 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Every pair has a story",
+            "heading": "One story, two chapters",
             "heading_size": "h0"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Every EvlveX begins as a story: a place, an hour, a person, a journey. We shape leather around it by hand until it can be worn. Read them before you choose. Each chapter is a model of the house.</p>"
+            "text": "<p>COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new. Each EvlveX model carries one chapter: The Silent Grind and A Fresh Start.</p>"
           }
         }
       },
-      "block_order": ["caption", "heading", "text"],
+      "block_order": [
+        "caption",
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -53,5 +57,8 @@
       }
     }
   },
-  "order": ["intro", "stories"]
+  "order": [
+    "intro",
+    "stories"
+  ]
 }

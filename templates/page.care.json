@@ -14,18 +14,22 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "A story is kept by the one who wears it",
+            "heading": "Keep your comeback going",
             "heading_size": "h0"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>A few minutes of care keeps leather supple, suede rich and woven leather soft for years. These are the rituals we follow at the Maison, material by material.</p>"
+            "text": "<p>A few minutes of care keeps the smooth panels clean and the suede rich for years. These are the rituals we follow.</p>"
           }
         }
       },
-      "block_order": ["caption", "heading", "text"],
+      "block_order": [
+        "caption",
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -50,9 +54,9 @@
         "leather": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Smooth leather",
+            "heading": "Smooth panels",
             "icon": "leather",
-            "row_content": "<p>For Court 01, the Atelier Oxford and the Promenade Loafer. Wipe with a soft, dry cotton cloth after wear. Every few months, apply a little neutral leather cream, let it absorb, then buff gently. A whole-cut keeps its shine best with a light wax on the toe.</p>",
+            "row_content": "<p>For the smooth upper of The Silent Grind and A Fresh Start. Wipe with a soft, dry cloth after wear. Every few months, feed with a neutral cream and buff gently.</p>",
             "page": ""
           }
         },
@@ -61,25 +65,16 @@
           "settings": {
             "heading": "Suede",
             "icon": "star",
-            "row_content": "<p>For the Nocturne Chelsea and suede overlays. Use a soft suede brush, always in one direction, to lift the nap. For marks, use a suede eraser. Never use water or leather cream on suede.</p>",
-            "page": ""
-          }
-        },
-        "woven": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Woven leather",
-            "icon": "heart",
-            "row_content": "<p>For the Riviera Mule. Dust the weave with a soft brush. If it gets wet or salt-marked, blot it, let it dry slowly away from heat, then feed lightly with neutral cream. Never soak it.</p>",
+            "row_content": "<p>For the suede toe, eyestay and collar of both models. Use a soft suede brush, always in one direction, to lift the nap. Lift marks with a suede eraser; never soak suede. A Fresh Start's sand suede benefits from a protector spray before first wear.</p>",
             "page": ""
           }
         },
         "soles": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Soles & laces",
+            "heading": "Midsoles & laces",
             "icon": "washing",
-            "row_content": "<p>Clean rubber soles and midsoles with a damp cloth and mild soap. Leather soles need a day's rest between wears. Laces can be removed and hand-washed in lukewarm water, then air-dried.</p>",
+            "row_content": "<p>Clean the white cupsole with a damp cloth and a little mild soap; an eraser sponge lifts scuffs. Laces can be hand-washed and dried flat.</p>",
             "page": ""
           }
         },
@@ -102,7 +97,14 @@
           }
         }
       },
-      "block_order": ["first-wear", "leather", "suede", "woven", "soles", "storage", "help"],
+      "block_order": [
+        "first-wear",
+        "leather",
+        "suede",
+        "soles",
+        "storage",
+        "help"
+      ],
       "settings": {
         "caption": "",
         "heading": "",
@@ -119,5 +121,8 @@
       }
     }
   },
-  "order": ["intro", "rituals"]
+  "order": [
+    "intro",
+    "rituals"
+  ]
 }

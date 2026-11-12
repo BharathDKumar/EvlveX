@@ -7,7 +7,7 @@
           "type": "evlvex_story_line",
           "settings": {
             "content": "chapter",
-            "fallback_text": "The House of EvlveX",
+            "fallback_text": "COMEBACK",
             "link_label": ""
           }
         },
@@ -54,7 +54,7 @@
           "settings": {
             "heading": "Materials & craft",
             "icon": "leather",
-            "content": "<p>Every EvlveX is cut, stitched and finished by hand from full-grain leathers and suedes chosen to age well. The materials of this model are described above; each pair's maker and finishing date are recorded on its certificate.</p>",
+            "content": "<p>Smooth upper with suede overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole. The EvlveX monogram sits on the outer side: white on The Silent Grind, embossed on A Fresh Start.</p>",
             "page": ""
           }
         },
@@ -63,7 +63,7 @@
           "settings": {
             "heading": "Size & fit",
             "icon": "ruler",
-            "content": "<p>EU sizing. Most models are true to size; if you are between sizes, we recommend the larger size. Hand-sewn loafers soften to the foot within a week of wear.</p>",
+            "content": "<p>EU sizing. True to size; if you are between sizes, we recommend the larger size.</p>",
             "page": ""
           }
         },
@@ -72,7 +72,7 @@
           "settings": {
             "heading": "Care",
             "icon": "washing",
-            "content": "<p>Smooth leather: wipe with a soft, dry cloth and feed with neutral cream every few months. Suede: brush gently in one direction and protect before first wear. Woven leather: dust with a soft brush, never soak. Store in the dust bag with cedar shoe trees. <a href=\"/pages/care\" title=\"Care guide\">Full care guide</a>.</p>",
+            "content": "<p>Smooth panels: wipe with a soft, dry cloth. Suede: brush gently in one direction and protect before first wear. Cupsole: a damp cloth and mild soap. <a href=\"/pages/care\" title=\"Care guide\">Full care guide</a>.</p>",
             "page": ""
           }
         },

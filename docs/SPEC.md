@@ -13,7 +13,7 @@ This file is the entry point. The detail lives in separate files, one per area.
 
 | File | What it covers | Main readers |
 |---|---|---|
-| [brand-and-content.md](spec/brand-and-content.md) | Logo, palette, typography, tone of voice, imagery, the five model stories, each pair's chapter, site copy | brand, copy, photography |
+| [brand-and-content.md](spec/brand-and-content.md) | Logo, palette, typography, tone of voice, imagery, the COMEBACK story and its chapters, each pair's chapter, site copy | brand, copy, photography |
 | [theme.md](spec/theme.md) | **Website code:** theme settings, site map, page and section specs, implementation rules, theme build changes | theme developers |
 | [qr-certificates.md](spec/qr-certificates.md) | Certificate feature: user stories, formats, page states, privacy, **data models** (certificate, story, product metafield) | developers, brand |
 | [qr-tooling.md](spec/qr-tooling.md) | **Tooling code:** CLI setup, commands, `assign` behaviour, outputs, tooling code changes | developers, ops |
@@ -26,7 +26,7 @@ This file is the entry point. The detail lives in separate files, one per area.
 
 **EvlveX is a luxury shoe house where every pair has a story.** Each model in the collection is born from a story: a place, an hour, a person, a journey. Each individual pair then gains its own chapter: who finished it, when, its number, and finally the name of the person who owns it.
 
-The collection spans sneakers, loafers, formal shoes, boots and summer mules ([brand-and-content.md §6](spec/brand-and-content.md)). The first model, **Court 01**, is a low-top leather court sneaker in two colorways (Ivory Sand, Noir).
+The first collection is **COMEBACK**, told in two chapters, one per model: **The Silent Grind** (black low-top sneaker) and **A Fresh Start** (cream and sand low-top sneaker) ([brand-and-content.md §6](spec/brand-and-content.md)).
 
 The website must:
 
@@ -48,9 +48,9 @@ The website must:
 | # | Item | Owner | Needed for |
 |---|---|---|---|
 | 1 | ~~Original logo vector file~~ **Done 12 Nov 2026:** the original artwork is in `docs/brand/logos/`, traced to SVG in the theme | Brand | ~~replace redrawn monogram~~ |
-| 2 | Approve the model lineup, names and colorways (only Court 01 exists today) | Brand | products, collections |
-| 3 | Approve or rewrite the five model stories; confirm which details are fable and which are fact (e.g. "first commission", "nine hours of weaving") | Brand / copy | story entries, product pages |
-| 4 | Product still life, story plates, atelier and packaging photography | Brand / photographer | every page |
+| 2 | Confirm materials, sizes and prices of The Silent Grind and A Fresh Start (the site shows sample prices until products exist) | Brand | products |
+| 3 | ~~Approve the model stories~~ **Done 13 Nov 2026:** COMEBACK, The Silent Grind, A Fresh Start (brand text) | Brand / copy | — |
+| 4 | Studio photography of both models at 3000 px+ on seamless backgrounds; the site uses graded phone photos until then ([shoe-images.md](brand/shoe-images.md)) | Brand / photographer | every page |
 | 5 | Final prices, size ranges (men's / women's), materials and care text per model | Brand | products & tabs |
 | 6 | Written consent from each artisan to be named on certificates | Atelier / legal | `artisan` field |
 | 7 | Workshop card design and print run | Brand / production | workshop cards |

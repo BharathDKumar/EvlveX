@@ -51,6 +51,6 @@ The CLI runs on a packing-station computer, not on Shopify.
 - [ ] Menus: *Main menu* (Shop mega menu, The Stories, The Maison, Authenticity); *Footer* (Stories, Care, Shipping & Returns, Privacy, Contact)
 - [ ] Theme editor: choose hero, featured story, atelier and collection images, and the slide images of the home **Story carousel**. The header already draws the original logo (monogram + wordmark); upload a logo image only if you want to replace it.
 - [ ] Print workshop cards ([operations.md §2](operations.md))
-- [ ] **Before launch:** replace the demo photography with EvlveX's own by uploading images in the theme editor and on products, collections and articles. Then turn off Theme settings → **EvlveX → Show demo photography** ([docs/brand/demo-images.md](../brand/demo-images.md)).
+- [ ] **Before launch:** upload studio photography of both models on products, collections and in the theme editor (the COMEBACK film scenes take an uploaded image too). Then turn off Theme settings → **EvlveX → Show demo photography** ([docs/brand/shoe-images.md](../brand/shoe-images.md)).
 - [ ] Checkout and customer accounts are hosted by Shopify. Brand them in Admin → Settings → **Checkout → Customize** (logo: `docs/brand/logos/`; colors Ivory `#F5F0E6`, Noir `#0E0E0E`, Sand-gold `#B89B6A`; fonts Cormorant / Jost). Customer account pages use the same branding.
 - [ ] Policies: add the certificate privacy wording ([open items](../SPEC.md#open-items))

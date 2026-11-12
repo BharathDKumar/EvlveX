@@ -6,19 +6,22 @@
         "caption": {
           "type": "text",
           "settings": {
-            "text": "The Maison",
+            "text": "EvlveX",
             "text_style": "caption-with-letter-spacing"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Every pair has a story",
+            "heading": "Built for the comeback",
             "heading_size": "h0"
           }
         }
       },
-      "block_order": ["caption", "heading"],
+      "block_order": [
+        "caption",
+        "heading"
+      ],
       "settings": {
         "image_overlay_opacity": 30,
         "image_height": "medium",
@@ -38,18 +41,21 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "The House of EvlveX",
+            "heading": "One story, two chapters",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>EvlveX is a house of shoes made by hand, and every one of them begins as a story. A seaside court at dusk. A river walked every Sunday. A night train arriving at dawn. We keep the story close while we cut, stitch and finish, until the shoe can carry it.</p><p>Each model is a chapter of the house, numbered in the order it was told. Each pair then gains a chapter of its own: who finished it, the day they did, and finally the name of the person who will wear it further. That is the promise in our name. A well-made pair evolves with its owner, and its story goes on.</p>"
+            "text": "<p>EvlveX began with one idea: falling behind is not the end; sometimes, it is where the comeback begins. COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.</p><p>Our first collection tells that story in two chapters, one for each model. Every pair carries the EvlveX monogram, a number of its own, and a certificate registered to the person who wears it.</p>"
           }
         }
       },
-      "block_order": ["heading", "text"],
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -65,7 +71,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "The Atelier",
+            "caption": "Sub-concept I",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -73,19 +79,23 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Cut, stitched and finished by hand",
+            "heading": "The Silent Grind",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>A pair passes through few hands, and each one leaves something. The cutter reads the hide and chooses where the story will sit. The stitcher sets the seams that will hold it. The finisher burnishes, laces and inspects, then signs the pair as their own.</p>",
+            "text": "<p>The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen. Holding on through the weight of those moments, and finding the strength to rise from them. In black, with the monogram in white.</p>",
             "text_style": "body"
           }
         }
       },
-      "block_order": ["caption", "heading", "text"],
+      "block_order": [
+        "caption",
+        "heading",
+        "text"
+      ],
       "settings": {
         "height": "large",
         "desktop_image_width": "medium",
@@ -107,7 +117,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "The Workshop Card",
+            "caption": "Sub-concept II",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -115,27 +125,32 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Each pair's own chapter, written by hand",
+            "heading": "A Fresh Start",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>When a pair leaves the bench, its artisan writes a card: the pair's number, the day it was finished, and one true line about this pair alone, perhaps the hide it was cut from, or the grain across the toe. The card travels in the box. The same words are written into the pair's certificate, under your name.</p>",
+            "text": "<p>The moment after the struggle, when you stop looking back and choose what comes next. Carry the lessons forward, leave the weight behind, and take the first step into a new chapter. In cream and sand, with the monogram embossed.</p>",
             "text_style": "body"
           }
         },
         "button": {
           "type": "button",
           "settings": {
-            "button_label": "About authenticity",
-            "button_link": "shopify://pages/authenticity",
+            "button_label": "Discover the collection",
+            "button_link": "shopify://collections/all",
             "button_style_secondary": true
           }
         }
       },
-      "block_order": ["caption", "heading", "text", "button"],
+      "block_order": [
+        "caption",
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "height": "large",
         "desktop_image_width": "medium",
@@ -152,5 +167,10 @@
       }
     }
   },
-  "order": ["banner", "story", "atelier", "workshop-card"]
+  "order": [
+    "banner",
+    "story",
+    "atelier",
+    "workshop-card"
+  ]
 }
