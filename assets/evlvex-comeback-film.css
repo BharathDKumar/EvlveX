@@ -20,7 +20,8 @@ evlvex-comeback-film {
 
 .evx-film__scenes {
   position: relative;
-  height: max(62rem, min(100svh, 96rem));
+  /* Fill the first screen below the announcement bar and header (--evx-film-top is measured by the script). */
+  height: max(56rem, min(calc(100svh - var(--evx-film-top, 0px)), 96rem));
   perspective: 1800px;
   perspective-origin: 50% 45%;
 }

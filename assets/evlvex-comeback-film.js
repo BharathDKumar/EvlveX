@@ -90,6 +90,15 @@ if (!customElements.get('evlvex-comeback-film')) {
         if (this.scenes.includes(event.target)) this.setState({ editor: false });
       }, { signal });
 
+      // Fit the first screen: subtract whatever sits above the film (announcement bar, header) when it opens the page.
+      const measureTop = () => {
+        const top = this.getBoundingClientRect().top + window.scrollY;
+        this.style.setProperty('--evx-film-top', top < window.innerHeight * 0.5 ? `${Math.round(top)}px` : '0px');
+      };
+      measureTop();
+      window.addEventListener('resize', measureTop, { signal });
+      window.addEventListener('load', measureTop, { signal, once: true });
+
       this.show(0, { initial: true });
       this.updateToggle();
       this.update();
