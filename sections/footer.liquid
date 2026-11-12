@@ -150,7 +150,7 @@
                           >
                         </div>
                       {%- else -%}
-                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                        {%- render 'evlvex-demo-image', kind: 'atelier', seed: 1, sizes: '200px' -%}
                       {%- endif -%}
                     </div>
                 {%- endcase -%}
@@ -302,7 +302,8 @@
         <small class="copyright__content"
           >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
         </small>
-        <small class="copyright__content">{{ powered_by_link }}</small>
+        {%- comment -%} EvlveX: brand signature instead of "Powered by Shopify" {%- endcomment -%}
+        <small class="copyright__content evx-footer-signature">Every pair has a story.</small>
         {%- if section.settings.show_policy -%}
           <ul class="policies list-unstyled">
             {%- for policy in shop.policies -%}

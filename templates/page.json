@@ -3,12 +3,64 @@
     "main": {
       "type": "main-page",
       "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
+        "padding_top": 72,
+        "padding_bottom": 56
+      }
+    },
+    "care": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "caption",
+          "settings": {
+            "caption": "Client care",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "b2": {
+          "type": "heading",
+          "settings": {
+            "heading": "A question about your pair?",
+            "heading_size": "h2"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Write to the Maison and an atelier advisor will answer within one working day.</p>"
+          }
+        },
+        "b4": {
+          "type": "button",
+          "settings": {
+            "button_label": "Contact the Maison",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": true,
+            "button_label_2": "Care guide",
+            "button_link_2": "shopify://pages/care",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": false,
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "care"
   ]
 }

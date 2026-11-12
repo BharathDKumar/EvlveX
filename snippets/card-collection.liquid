@@ -22,6 +22,21 @@
   if ratio == 0 or ratio == null
     assign ratio = 1
   endif
+  assign coll_seed = card_collection.id
+  if coll_seed == blank
+    assign coll_seed = placeholder_image | split: '-' | last
+  endif
+  assign coll_has_media = false
+  assign coll_demo_media = false
+  if card_collection.featured_image
+    assign coll_has_media = true
+  elsif settings.evx_demo_images
+    assign coll_has_media = true
+    assign coll_demo_media = true
+    if media_aspect_ratio == 'portrait' or media_aspect_ratio == 'adapt'
+      assign ratio = 0.8
+    endif
+  endif
   assign card_color_scheme = settings.card_color_scheme
   assign card_style = settings.card_style
   if wrapper_class == null or wrapper_class == 'none'
@@ -35,15 +50,15 @@
     class="
       card
       card--{{ card_style }}
-      {% if card_collection.featured_image %} card--media{% else %} card--text{% endif %}
+      {% if coll_has_media %} card--media{% else %} card--text{% endif %}
       {% if card_style == 'card' %} color-{{ card_color_scheme }} gradient{% endif %}
       {% if extend_height %} card--extend-height{% endif %}
-      {% if card_collection.featured_image == nil and card_style == 'card' %} ratio{% endif %}
+      {% if coll_has_media == false and card_style == 'card' %} ratio{% endif %}
     "
     style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
   >
     <div
-      class="card__inner {% if card_style == 'standard' %}color-{{ card_color_scheme }} gradient{% endif %}{% if card_collection.featured_image or card_style == 'standard' %} ratio{% endif %}"
+      class="card__inner {% if card_style == 'standard' %}color-{{ card_color_scheme }} gradient{% endif %}{% if coll_has_media or card_style == 'standard' %} ratio{% endif %}"
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       {%- if card_collection.featured_image -%}
@@ -74,11 +89,15 @@
             >
           </div>
         </div>
+      {%- elsif coll_demo_media -%}
+        <div class="card__media">
+          <div class="media media--transparent media--hover-effect">
+            {%- render 'evlvex-demo-image', kind: 'collection', seed: coll_seed, class: 'motion-reduce', sizes: '(min-width: 750px) 33vw, 100vw' -%}
+          </div>
+        </div>
       {%- endif -%}
       {%- if card_collection == blank -%}
-        <div class="card__media">
-          {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
-        </div>
+        {%- comment -%} Sample collection: the demo photo above is its media {%- endcomment -%}
       {%- else -%}
         <div class="card__content">
           <div class="card__information">

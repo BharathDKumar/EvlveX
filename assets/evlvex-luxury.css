@@ -330,6 +330,212 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
   letter-spacing: 0.04em;
 }
 
+/* Hairline fields instead of Dawn's boxed inputs */
+.contact .field:after,
+.contact .field:before,
+.main-search .field:after,
+.main-search .field:before,
+.template-search .field:after,
+.template-search .field:before {
+  box-shadow: none;
+}
+
+.contact .field__input,
+.contact .text-area {
+  border: 0;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.35);
+  background: transparent;
+  box-shadow: none;
+}
+
+.contact .field__input:focus,
+.contact .text-area:focus {
+  border-bottom-color: rgb(var(--evx-gold));
+}
+
+.field__label,
+.contact .field__label {
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Demo photography (snippets/evlvex-demo-image.liquid) ---------- */
+.evx-demo-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.evx-plate--fill {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+/* Product page without its own media: one demo photograph in place of the gallery */
+.evx-demo-gallery__frame {
+  padding-top: 125%;
+}
+
+@media screen and (min-width: 750px) {
+  .evx-demo-gallery.product__column-sticky {
+    position: sticky;
+    top: 3rem;
+  }
+}
+
+/* ---------- Page titles (cart, search, collections, blog, pages) ---------- */
+.title--primary,
+.main-page-title,
+.blog__title,
+.collection-hero__title,
+.template-search__header h1,
+.cart__title,
+.title-wrapper--no-top-margin > .title {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.main-page-title {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.main-page-title + .rte {
+  max-width: 68rem;
+  margin-inline: auto;
+}
+
+.rte {
+  line-height: 1.85;
+}
+
+.rte h2,
+.rte h3 {
+  font-weight: 400;
+  margin-top: 3.2rem;
+}
+
+/* ---------- Cart ---------- */
+.cart-items thead th,
+.cart-item__details .product-option,
+.totals__total,
+.tax-note {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+.cart-item__name {
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.totals__total-value {
+  font-family: var(--font-heading-family);
+  font-size: 2.4rem;
+  letter-spacing: 0.02em;
+}
+
+.cart__empty-text {
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.cart-items td,
+.cart-items th {
+  border-color: rgba(var(--color-foreground), 0.12);
+}
+
+/* ---------- Search, filters, sorting ---------- */
+.template-search__header .h2,
+.template-search__results {
+  letter-spacing: 0.04em;
+}
+
+.facets__summary,
+.facet-filters__label,
+.facets__heading,
+.product-count__text,
+.active-facets__button {
+  font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.active-facets__button-inner {
+  border-radius: 0;
+  box-shadow: 0 0 0 1px rgba(var(--color-foreground), 0.25);
+}
+
+/* ---------- Pagination ---------- */
+.pagination__item {
+  font-family: var(--font-heading-family);
+  font-size: 1.8rem;
+}
+
+.pagination__item--current::after,
+.pagination__item:hover::after {
+  background-color: rgb(var(--evx-gold));
+}
+
+/* ---------- Journal (blog & articles) ---------- */
+.article-card .card__heading {
+  font-size: 2.2rem;
+  line-height: 1.25;
+}
+
+.article-card__info,
+.article-template__title + .caption-with-letter-spacing,
+.circle-divider {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+.article-template__title {
+  font-weight: 400;
+  text-align: center;
+}
+
+.article-template__content {
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  line-height: 1.7;
+}
+
+/* ---------- Policies (Shopify-rendered /policies pages) ---------- */
+.shopify-policy__container {
+  max-width: 72rem;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+}
+
+.shopify-policy__title h1 {
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.shopify-policy__body {
+  line-height: 1.85;
+}
+
+/* ---------- Footer signature (replaces "Powered by Shopify") ---------- */
+.evx-footer-signature {
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: rgb(var(--evx-gold));
+}
+
 /* ---------- Motion ---------- */
 @media (prefers-reduced-motion: no-preference) {
   .scroll-trigger.animate--slide-in {

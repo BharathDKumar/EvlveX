@@ -23,6 +23,15 @@
     if media_aspect_ratio != null
       assign ratio = media_aspect_ratio
     endif
+    assign art_has_media = false
+    assign art_demo_media = false
+    if show_image and article.image
+      assign art_has_media = true
+    elsif show_image and settings.evx_demo_images
+      assign art_has_media = true
+      assign art_demo_media = true
+      assign ratio = 1.5
+    endif
   -%}
   <div class="article-card-wrapper card-wrapper underline-links-hover">
     {% comment %} <article aria-labelledby="Article-{{ article.id }}"> {% endcomment %}
@@ -31,14 +40,14 @@
         card article-card
         card--{{ settings.blog_card_style }}
         {% if media_height and media_height != 'adapt' %} article-card__image--{{ media_height }}{% endif %}
-        {% if article.image and show_image %} card--media{% else %} card--text{% endif %}
+        {% if art_has_media %} card--media{% else %} card--text{% endif %}
         {% if settings.blog_card_style == 'card' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}
-        {% if settings.blog_card_style == 'card' and media_height == nil and article.image == empty or show_image == false %} ratio{% endif %}
+        {% if settings.blog_card_style == 'card' and media_height == nil and art_has_media == false or show_image == false %} ratio{% endif %}
       "
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div
-        class="card__inner {% if settings.blog_card_style == 'standard' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}{% if article.image and show_image or settings.blog_card_style == 'standard' %} ratio{% endif %}"
+        class="card__inner {% if settings.blog_card_style == 'standard' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}{% if art_has_media or settings.blog_card_style == 'standard' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         {%- if show_image == true and article.image -%}
@@ -71,6 +80,12 @@
                 height="{{ article.image.height }}"
               >
               {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+            </div>
+          </div>
+        {%- elsif art_demo_media -%}
+          <div class="article-card__image-wrapper card__media">
+            <div class="article-card__image media media--hover-effect">
+              {%- render 'evlvex-demo-image', kind: 'article', seed: article.id, class: 'motion-reduce', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw' -%}
             </div>
           </div>
         {%- endif -%}

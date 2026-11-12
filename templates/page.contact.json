@@ -10,16 +10,106 @@
     "form": {
       "type": "contact-form",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
+        "heading": "Send a letter",
+        "heading_size": "h2",
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 88
+      }
+    },
+    "hero": {
+      "type": "image-banner",
+      "blocks": {
+        "caption": {
+          "type": "text",
+          "settings": {
+            "text": "Client care",
+            "text_style": "caption-with-letter-spacing"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Write to the Maison",
+            "heading_size": "h0"
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading"
+      ],
+      "settings": {
+        "image_overlay_opacity": 35,
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "image_behavior": "none",
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "details": {
+      "type": "multicolumn",
+      "blocks": {
+        "column-1": {
+          "type": "column",
+          "settings": {
+            "title": "The atelier",
+            "text": "<p>Visits by appointment, Monday to Saturday.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column-2": {
+          "type": "column",
+          "settings": {
+            "title": "Client care",
+            "text": "<p>Answers within one working day, in English.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column-3": {
+          "type": "column",
+          "settings": {
+            "title": "Your certificate",
+            "text": "<p>Changes to the name on a certificate are made on request.</p>",
+            "link_label": "Authenticity",
+            "link": "shopify://pages/authenticity"
+          }
+        }
+      },
+      "block_order": [
+        "column-1",
+        "column-2",
+        "column-3"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
         "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 64,
+        "padding_bottom": 24
       }
     }
   },
   "order": [
+    "hero",
     "main",
+    "details",
     "form"
   ]
 }

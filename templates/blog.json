@@ -3,17 +3,91 @@
     "main": {
       "type": "main-blog",
       "settings": {
-        "layout": "collage",
+        "layout": "grid",
         "show_image": true,
-        "image_height": "medium",
+        "image_height": "large",
         "show_date": true,
         "show_author": false,
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "caption",
+          "settings": {
+            "caption": "The Journal",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "b2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Notes from the Maison",
+            "heading_size": "h1"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Leathers, lasts and the people who shape them. Letters from the bench, written slowly.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 80,
+        "padding_bottom": 0
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Receive each new chapter first",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>One letter when a new story is told. Nothing else.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 88
+      }
     }
   },
   "order": [
-    "main"
+    "intro",
+    "main",
+    "newsletter"
   ]
 }

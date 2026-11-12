@@ -41,6 +41,15 @@
     if ratio == 0 or ratio == null
       assign ratio = 1
     endif
+    comment
+      EvlveX: a product without media still gets an image card, with demo photography (Theme settings → EvlveX).
+    endcomment
+    assign card_has_media = settings.evx_demo_images | default: false
+    if card_product.featured_media
+      assign card_has_media = true
+    elsif card_has_media
+      assign ratio = media_aspect_ratio | replace: 'portrait', '0.8' | replace: 'adapt', '0.8' | replace: 'square', '1' | default: '1' | plus: 0
+    endif
   -%}
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
@@ -48,17 +57,17 @@
       <div
         class="
           card card--{{ settings.card_style }}
-          {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
+          {% if card_has_media %} card--media{% else %} card--text{% endif %}
           {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
           {% if image_shape and image_shape != 'default' %} card--shape{% endif %}
           {% if extend_height %} card--extend-height{% endif %}
-          {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
+          {% if card_has_media == false and settings.card_style == 'card' %} ratio{% endif %}
           {% if horizontal_class %} card--horizontal{% endif %}
         "
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         <div
-          class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
+          class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_has_media or settings.card_style == 'standard' %} ratio{% endif %}"
           style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
         >
           {%- if card_product.featured_media -%}
@@ -109,12 +118,18 @@
                 {%- endif -%}
               </div>
             </div>
+          {%- elsif card_has_media -%}
+            <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
+              <div class="media media--transparent media--hover-effect">
+                {%- render 'evlvex-demo-image', kind: 'product', seed: card_product.id, class: 'motion-reduce', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw' -%}
+              </div>
+            </div>
           {%- endif -%}
           <div class="card__content">
             <div class="card__information">
               <h3
                 class="card__heading"
-                {% if card_product.featured_media == null and settings.card_style == 'standard' %}
+                {% if card_has_media == false and settings.card_style == 'standard' %}
                   id="title-{{ section_id }}-{{ card_product.id }}"
                 {% endif %}
               >
@@ -150,8 +165,8 @@
         <div class="card__content">
           <div class="card__information">
             <h3
-              class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
-              {% if card_product.featured_media or settings.card_style == 'card' %}
+              class="card__heading{% if card_has_media or settings.card_style == 'standard' %} h5{% endif %}"
+              {% if card_has_media or settings.card_style == 'card' %}
                 id="title-{{ section_id }}-{{ card_product.id }}"
               {% endif %}
             >
@@ -600,11 +615,8 @@
           <div
             class="media media--transparent"
           >
-            {%- if placeholder_image -%}
-              {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- else -%}
-              {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
-            {% endif %}
+            {%- assign evx_sample_seed = placeholder_image | default: 'product-apparel-1' | split: '-' | last | plus: 0 -%}
+            {%- render 'evlvex-demo-image', kind: 'product', seed: evx_sample_seed, sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw' -%}
           </div>
         </div>
       </div>
@@ -612,7 +624,7 @@
         <div class="card__information">
           <h3 class="card__heading card__heading--placeholder{% if settings.card_style == 'standard' %} h5{% endif %}">
             <a role="link" aria-disabled="true" class="full-unstyled-link">
-              {{ 'onboarding.product_title' | t }}
+              {%- render 'evlvex-sample-product', part: 'title', seed: evx_sample_seed -%}
             </a>
           </h3>
           <div class="card-information">
@@ -620,7 +632,7 @@
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
               <div class="caption-with-letter-spacing light">{{ 'products.product.vendor' | t }}</div>
             {%- endif -%}
-            {% render 'price', placeholder: placeholder, show_compare_at_price: true %}
+            {%- render 'evlvex-sample-product', part: 'price', seed: evx_sample_seed, placeholder: placeholder -%}
           </div>
         </div>
       </div>

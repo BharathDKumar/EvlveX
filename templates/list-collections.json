@@ -3,15 +3,74 @@
     "main": {
       "type": "main-list-collections",
       "settings": {
-        "title": "Collections",
-        "sort": "alphabetical",
-        "image_ratio": "square",
+        "title": "",
+        "sort": "products_high",
+        "image_ratio": "portrait",
         "columns_desktop": 3,
         "columns_mobile": "2"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "caption",
+          "settings": {
+            "caption": "The House of EvlveX",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "b2": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Collection",
+            "heading_size": "h1"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Five models, each born from a story, each made by hand. Choose a family to begin.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 80,
+        "padding_bottom": 8
+      }
+    },
+    "stories": {
+      "type": "evlvex-stories-grid",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "caption": "The Stories",
+        "heading": "Where each pair begins",
+        "heading_size": "h1",
+        "text": "<p>Every model of the house is born from a story. Read where each one comes from.</p>",
+        "show_all": false,
+        "limit": 3,
+        "columns_desktop": 3,
+        "swipe_on_mobile": true,
+        "link_label": "Read all the stories",
+        "link": "shopify://pages/the-stories",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     }
   },
   "order": [
-    "main"
+    "intro",
+    "main",
+    "stories"
   ]
 }

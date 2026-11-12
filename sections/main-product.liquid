@@ -75,9 +75,18 @@
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
     <div class="page-width">
-      <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+      <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 or settings.evx_demo_images %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper">
-          {% render 'product-media-gallery', variant_images: variant_images %}
+          {%- if product.media.size == 0 and settings.evx_demo_images -%}
+            {%- comment -%} EvlveX: demo photograph until the product has its own media (Theme settings → EvlveX) {%- endcomment -%}
+            <div class="evx-demo-gallery{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}">
+              <div class="media media--transparent evx-demo-gallery__frame">
+                {%- render 'evlvex-demo-image', kind: 'product', seed: product.id, loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 990px) 55vw, 100vw' -%}
+              </div>
+            </div>
+          {%- else -%}
+            {% render 'product-media-gallery', variant_images: variant_images %}
+          {%- endif -%}
         </div>
         <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <section

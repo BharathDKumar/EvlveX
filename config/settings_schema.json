@@ -1466,5 +1466,17 @@
         "label": "t:settings_schema.customer_accounts.settings.customer_account_menu.label"
       }
     ]
+  },
+  {
+    "name": "EvlveX",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "evx_demo_images",
+        "label": "Show demo photography",
+        "default": true,
+        "info": "Shows sample footwear photographs wherever no image has been chosen: sections, products, collections, articles and story plates. Turn off before launch; empty spots then show the EvlveX monogram panel."
+      }
+    ]
   }
 ]

@@ -58,7 +58,14 @@ Home
 | **Care** | `page.care.json` | Aftercare (linked from certificate) | intro + collapsible care steps per material (smooth leather, suede, woven leather, soles) | care instructions per material | stacked |
 | **Authenticity** | `page.authenticity.json` | Explain the QR program; manual serial lookup | intro, "How it works" 3 steps, **serial lookup form** | packaging imagery (family D) | full-width input |
 | **Certificate** | `metaobject/evlvex_certificate.json` | Thank-you, the pair's story, proof of authenticity | see [qr-certificates.md §2](qr-certificates.md) | populated automatically per pair | single column; thank-you and seal fit one phone screen above the fold |
-| **Cart** | `cart.json` | Review | Dawn default, restyled; each line shows the model's story title in italic under the product name | — | — |
+| **Cart** | `cart.json` | Review | line items (story title in italic under each product name) · subtotal and checkout · "The EvlveX promise" (shipping, certificate, 14-day returns) · "You may also admire" | — | stacked |
+| **Search** | `search.json` | Find | results grid (portrait cards) with filters · "Perhaps you were looking for" | — | 2 columns |
+| **All collections** | `list-collections.json` | Browse families | intro "The Collection" · collection cards · "The Stories" cards | collection images | 2 columns |
+| **The Journal** (blog) | `blog.json` | Brand content | intro "Notes from the Maison" · article grid · newsletter | article images | 1 column |
+| **Article** | `article.json` | Read | featured image, title, content, share · "More from the Journal" · newsletter | article image | stacked |
+| **Page** (generic) | `page.json` | Shipping, privacy and other text pages | page content · "Client care" strip (Contact, Care guide) | — | stacked |
+| **Contact** | `page.contact.json` | Write to the Maison | atelier banner · page content · atelier / client care / certificate details · contact form | atelier image | stacked |
+| **Gift card** | `gift_card.liquid` | Show a gift card | EvlveX card (monogram + wordmark on Noir) unless a logo is uploaded | — | — |
 | **404** | `404.json` | Recovery | message, "Return to the Maison", link to Authenticity | — | — |
 
 ## 5. Implementation rules
@@ -75,6 +82,8 @@ Home
   - Behaviour: native scroll-snap plus `assets/evlvex-story-carousel.js` (`<evlvex-story-carousel>`). It has arrows, dots, swipe and arrow/Home/End keys. Autoplay is optional; it pauses on hover, keyboard focus, a hidden tab, when the carousel is off-screen and when a block is selected in the theme editor, and it starts paused for visitors who prefer reduced motion.
   - Images: only the first slide's image may load eagerly, and only when the section is one of the first two on the page. When a slide becomes active, the next slide's image starts loading.
 - **Missing plates:** until story plates are uploaded, `snippets/evlvex-story-plate.liquid` shows a Noir panel with the gold monogram and the story title, never a broken or stock image.
+- **No stock placeholders, ever.** Wherever no image has been chosen, `snippets/evlvex-demo-image.liquid` shows demo footwear photography ([docs/brand/demo-images.md](../brand/demo-images.md)) instead of Dawn's clothing illustrations. This covers image sections, product, collection and article cards, products without media (one image in place of the gallery), article pages and story plates. The setting is Theme settings → **EvlveX → Show demo photography**; with it off, those spots show the monogram plate instead. Sample products (featured collection with no collection chosen) carry lineup names and prices in the store currency.
+- **No Shopify branding:** the footer shows *Every pair has a story.* instead of "Powered by Shopify"; the password page, gift card and favicon use the EvlveX marks.
 - Run `shopify theme check` before every push ([deployment.md §2](deployment.md)).
 
 ## 6. Changes from v1.0 (implemented in v1.1)
@@ -90,6 +99,7 @@ Home
 | SEO | `layout/theme.liquid`, `snippets/meta-tags.liquid`: story pages indexable with their own title, description and image; every other metaobject page `noindex` |
 | Story carousel | `sections/evlvex-story-carousel.liquid`, `snippets/evlvex-story-slide.liquid`, `assets/evlvex-story-carousel.css`, `assets/evlvex-story-carousel.js`; added to `templates/index.json` (after the statement) and `templates/product.json` (after "The Story") |
 | Logos | original artwork in `docs/brand/logos/`; `snippets/evlvex-monogram.liquid`, new `snippets/evlvex-wordmark.liquid`, `snippets/evlvex-logo.liquid`, `assets/evlvex-monogram.svg` (favicon) |
+| Demo photography & every page | `snippets/evlvex-demo-image.liquid`, `assets/evx-demo-*.jpg`, `docs/brand/demo-images.md`; demo fallbacks in `sections/{collage,featured-blog,featured-product,footer,image-banner,image-with-text,multirow,slideshow,video,main-article,main-product}.liquid` and `snippets/{card-product,card-collection,article-card,evlvex-story-plate}.liquid`; Theme setting *EvlveX → Show demo photography* (`config/settings_schema.json`); page content in `templates/{cart,search,list-collections,blog,article,page,page.contact}.json`; `templates/gift_card.liquid`; "Powered by Shopify" removed in `sections/footer.liquid`; page styles in `assets/evlvex-luxury.css` |
 | Shared | `snippets/evlvex-chapter-label.liquid`, `snippets/evlvex-story-plate.liquid`, `assets/evlvex-story.css`; Cormorant italic loaded in `layout/theme.liquid` |
 | Copy | `templates/index.json`, `product.json`, `page.about.json`, `page.care.json`, `page.authenticity.json`, `collection.json`, `sections/header-group.json` (mega menu), `sections/footer-group.json`, `sections/main-404.liquid`, brand text in `config/settings_data.json` |
 

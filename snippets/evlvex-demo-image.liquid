@@ -1,0 +1,66 @@
+{%- doc -%}
+  EvlveX demo photography: a real footwear photograph (CC0 / public domain, credits in docs/brand/demo-images.md)
+  shown wherever no image has been chosen yet, instead of Dawn's apparel placeholder illustrations.
+  Controlled by Theme settings → EvlveX → "Show demo photography" (settings.evx_demo_images).
+  When that setting is off, the EvlveX monogram plate is shown instead, so no stock placeholder ever appears.
+
+  @param {string} kind - 'hero', 'editorial', 'lifestyle', 'atelier', 'product', 'collection' or 'article'
+  @param {string} [seed] - Number or text used to pick an image from the pool, so neighbouring cards differ
+  @param {string} [sizes] - sizes attribute (default 100vw)
+  @param {string} [loading] - 'lazy' (default) or 'eager'
+  @param {string} [fetchpriority] - 'auto' (default) or 'high'
+  @param {string} [class] - Extra classes for the img
+  @param {string} [alt] - Alt text override
+
+  @example
+  {% render 'evlvex-demo-image', kind: 'product', seed: card_product.id, sizes: '50vw' %}
+{%- enddoc -%}
+{%- if settings.evx_demo_images -%}
+  {%- liquid
+    case kind
+    when 'hero'
+      assign demo_pool = 'hero-2|1800|900|1200|A leather shoe resting on a wooden stool in warm evening light;hero-1|1800|900|1012|Leather shoes and boots in low light;hero-3|1800|900|1129|A pair of oxblood brogues on dark wood;editorial-1|1800|900|1200|Black leather shoes beside a travel case, ready to leave'
+    when 'editorial'
+      assign demo_pool = 'editorial-1|1800|900|1200|Black leather shoes beside a travel case, ready to leave;editorial-2|1800|900|1200|Brown leather boots on a wooden floor;editorial-3|1800|900|1195|Close-up of polished black leather oxfords;hero-3|1800|900|1129|A pair of oxblood brogues on dark wood;hero-2|1800|900|1200|A leather shoe resting on a wooden stool in warm evening light'
+    when 'lifestyle'
+      assign demo_pool = 'lifestyle-1|1800|900|1200|A man in a suit tying his leather shoes;lifestyle-2|1800|900|2249|Brown leather shoes above a running creek;lifestyle-3|1800|900|1200|Brown brogues balanced on a ledge;lifestyle-4|1800|900|1200|Tying the laces of dark leather shoes on a wooden deck;lifestyle-5|1800|900|1155|Leather moccasin shoes worn with denim;lifestyle-6|1800|900|1800|White sneakers on a pebble shore'
+    when 'atelier'
+      assign demo_pool = 'atelier-1|1800|900|1197|Wooden shoe lasts;atelier-2|1800|900|2707|Shelves of wooden shoe lasts in a workshop;editorial-3|1800|900|1195|Close-up of polished black leather oxfords;atelier-3|1800|900|1200|Brown leather hide, close up'
+    when 'product'
+      assign demo_pool = 'product-1|1200|600|1500|Cognac leather penny loafer;product-6|1200|600|1500|Black plain derby;product-3|1200|600|1500|Brown suede derby with brogue detail;product-8|1200|600|1500|Brown leather ankle boots;product-2|1200|600|1500|Black leather loafers;product-5|1200|600|1500|Tan cap-toe derby with quarter brogues;product-4|1200|600|1500|Dark brown calf derby with brogue detail;product-7|1200|600|1500|Brown cap-toe derby'
+    when 'collection'
+      assign demo_pool = 'lifestyle-5|1800|900|1155|Leather moccasin shoes worn with denim;editorial-3|1800|900|1195|Close-up of polished black leather oxfords;editorial-2|1800|900|1200|Brown leather boots on a wooden floor;lifestyle-6|1800|900|1800|White sneakers on a pebble shore;lifestyle-2|1800|900|2249|Brown leather shoes above a running creek;hero-3|1800|900|1129|A pair of oxblood brogues on dark wood'
+    when 'article'
+      assign demo_pool = 'editorial-1|1800|900|1200|Black leather shoes beside a travel case, ready to leave;lifestyle-2|1800|900|2249|Brown leather shoes above a running creek;atelier-1|1800|900|1197|Wooden shoe lasts;lifestyle-1|1800|900|1200|A man in a suit tying his leather shoes;editorial-2|1800|900|1200|Brown leather boots on a wooden floor;atelier-2|1800|900|2707|Shelves of wooden shoe lasts in a workshop'
+      else
+        assign demo_pool = 'editorial-1|1800|900|1200|Black leather shoes beside a travel case, ready to leave;editorial-2|1800|900|1200|Brown leather boots on a wooden floor;editorial-3|1800|900|1195|Close-up of polished black leather oxfords;hero-3|1800|900|1129|A pair of oxblood brogues on dark wood;hero-2|1800|900|1200|A leather shoe resting on a wooden stool in warm evening light'
+    endcase
+    assign demo_items = demo_pool | split: ';'
+    assign demo_seed = seed | plus: 0
+    if demo_seed == 0 and seed != blank
+      assign demo_seed = seed | size
+    endif
+    assign demo_index = demo_seed | abs | modulo: demo_items.size
+    assign demo_parts = demo_items[demo_index] | split: '|'
+    assign demo_name = 'evx-demo-' | append: demo_parts[0]
+    assign demo_big = demo_parts[1]
+    assign demo_small = demo_parts[2]
+    assign demo_height = demo_parts[3]
+    assign demo_alt = alt | default: demo_parts[4]
+    assign demo_src_small = demo_name | append: '-' | append: demo_small | append: '.jpg' | asset_url
+    assign demo_src_big = demo_name | append: '-' | append: demo_big | append: '.jpg' | asset_url
+  -%}
+  <img
+    src="{{ demo_src_small }}"
+    srcset="{{ demo_src_small }} {{ demo_small }}w, {{ demo_src_big }} {{ demo_big }}w"
+    sizes="{{ sizes | default: '100vw' }}"
+    width="{{ demo_big }}"
+    height="{{ demo_height }}"
+    alt="{{ demo_alt | escape }}"
+    loading="{{ loading | default: 'lazy' }}"
+    fetchpriority="{{ fetchpriority | default: 'auto' }}"
+    class="evx-demo-image evx-demo-image--{{ kind }}{% if class != blank %} {{ class }}{% endif %}"
+  >
+{%- else -%}
+  {%- render 'evlvex-story-plate', ratio: 'auto', class: 'evx-plate--fill' -%}
+{%- endif -%}

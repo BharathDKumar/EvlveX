@@ -1,1 +1,94 @@
-{"sections":{"main":{"type":"main-article","blocks":{"featured_image":{"type":"featured_image","settings":{"image_height":"adapt"}},"title":{"type":"title","settings":{"blog_show_date":true,"blog_show_author":false}},"share":{"type":"share","settings":{"share_label":"Share"}},"content":{"type":"content","settings":{}}},"block_order":["featured_image","title","share","content"],"settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "image_height": "adapt"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "blog_show_date": true,
+            "blog_show_author": false
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "featured_image",
+        "title",
+        "share",
+        "content"
+      ],
+      "settings": {}
+    },
+    "more": {
+      "type": "featured-blog",
+      "settings": {
+        "heading": "More from the Journal",
+        "heading_size": "h1",
+        "blog": "news",
+        "post_limit": 3,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-2",
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Receive each new chapter first",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>One letter when a new story is told. Nothing else.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 88
+      }
+    }
+  },
+  "order": [
+    "main",
+    "more",
+    "newsletter"
+  ]
+}

@@ -1,6 +1,6 @@
 {%- doc -%}
-  Renders a story plate (docs/spec/brand-and-content.md §5, family B). Until the plates are shot,
-  shows a Noir panel with the gold monogram and a label instead of a broken or stock image.
+  Renders a story plate (docs/spec/brand-and-content.md §5, family B). Until the plates are shot, shows demo
+  photography (Theme settings → EvlveX), or, with that off, a Noir panel with the gold monogram and a label.
 
   @param {object} [image] - Image or media image (e.g. story.hero_image.value)
   @param {string} [alt] - Alt text; defaults to the image's own alt text
@@ -20,7 +20,7 @@
   assign plate_loading = loading | default: 'lazy'
 -%}
 <div
-  class="evx-plate{% if image == blank %} evx-plate--empty{% endif %}{% if class != blank %} {{ class }}{% endif %}"
+  class="evx-plate{% if image == blank and settings.evx_demo_images != true %} evx-plate--empty{% endif %}{% if class != blank %} {{ class }}{% endif %}"
   {% if plate_ratio != 'auto' or image == blank %}
     style="--evx-plate-ratio: {% if plate_ratio == 'auto' %}4 / 5{% else %}{{ plate_ratio }}{% endif %};"
   {% endif %}
@@ -36,6 +36,8 @@
         alt: plate_alt,
         class: 'evx-plate__image'
     }}
+  {%- elsif settings.evx_demo_images -%}
+    {%- render 'evlvex-demo-image', kind: 'editorial', seed: label, sizes: plate_sizes, loading: plate_loading, class: 'evx-plate__image' -%}
   {%- else -%}
     <div class="evx-plate__placeholder">
       {%- render 'evlvex-monogram', size: 56, class: 'evx-plate__mark' -%}

@@ -81,9 +81,11 @@
             <div class="product__media-item">
               <div
                 class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
-                style="--ratio: 1.0; --preview-ratio: 1.0;"
+                style="--ratio: 0.8; --preview-ratio: 0.8;"
               >
-                {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                <div class="media media--transparent" style="padding-top: 125%;">
+                  {%- render 'evlvex-demo-image', kind: 'product', seed: 1, sizes: '(min-width: 990px) 50vw, 100vw' -%}
+                </div>
               </div>
             </div>
           {%- endunless -%}

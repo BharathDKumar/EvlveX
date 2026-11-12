@@ -12,6 +12,8 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="icon" type="image/svg+xml" href="{{ 'evlvex-monogram.svg' | asset_url }}">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? -%}
@@ -133,14 +135,15 @@
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
           {{ settings.logo | image_url: width: 570 | image_tag: class: 'gift-card__image', alt: logo_alt }}
         {%- else %}
-          <img
-            class="gift-card__image"
-            src="{{ 'gift-card/card.svg' | shopify_asset_url }}"
-            alt=""
-            height="{{ 570 | divided_by: 1.5 }}"
-            width="570"
-            loading="eager"
-          >
+          {%- comment -%} EvlveX gift card: gold monogram and wordmark on Noir instead of the stock card illustration {%- endcomment -%}
+          <style>
+            .evx-gift-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.4rem; width: 100%; max-width: 57rem; aspect-ratio: 3 / 2; margin: 0 auto; background: radial-gradient(ellipse at 50% 30%, rgba(184, 155, 106, 0.22), transparent 65%), #0e0e0e; color: #b89b6a; }
+            .evx-gift-card__word { height: 2.2rem; width: auto; color: #f5f0e6; }
+          </style>
+          <div class="gift-card__image evx-gift-card" role="img" aria-label="{{ shop.name | escape }}">
+            {%- render 'evlvex-monogram', size: 72 -%}
+            {%- render 'evlvex-wordmark', class: 'evx-gift-card__word' -%}
+          </div>
         {%- endif %}
       </div>
       <h2>{{ shop.name }}</h2>

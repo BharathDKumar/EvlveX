@@ -39,6 +39,12 @@
               >
             </div>
           </div>
+        {%- elsif settings.evx_demo_images -%}
+          <div class="article-template__hero-container" {{ block.shopify_attributes }}>
+            <div class="article-template__hero-{{ block.settings.image_height }} media">
+              {%- render 'evlvex-demo-image', kind: 'article', seed: article.id, loading: 'eager', fetchpriority: 'high' -%}
+            </div>
+          </div>
         {%- endif -%}
 
       {%- when 'title' -%}

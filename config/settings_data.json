@@ -1,6 +1,7 @@
 {
   "current": {
     "logo_width": 90,
+    "evx_demo_images": true,
     "customer_account_menu": "customer-account-main-menu",
     "color_schemes": {
       "scheme-1": {

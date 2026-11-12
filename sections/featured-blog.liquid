@@ -82,7 +82,6 @@
         {%- else -%}
           {% for i in (1..section.settings.post_limit) -%}
             {%- assign placeholder_image_index = forloop.index0 | modulo: 3 | plus: 1 -%}
-            {%- assign placeholder_image = 'blog-apparel-' | append: placeholder_image_index -%}
             <li
               id="Slide-{{ section.id }}-{{ forloop.index }}"
               class="blog__post grid__item article slider__slide slider__slide--full-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -107,7 +106,7 @@
                     {%- if section.settings.show_image == true -%}
                       <div class="article-card__image-wrapper card__media">
                         <div class="article-card__image media">
-                          {{ placeholder_image | placeholder_svg_tag: 'blog-placeholder-svg' }}
+                          {%- render 'evlvex-demo-image', kind: 'article', seed: placeholder_image_index, sizes: '(min-width: 750px) 33vw, 100vw' -%}
                         </div>
                       </div>
                     {%- endif -%}
