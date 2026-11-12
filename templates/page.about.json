@@ -20,7 +20,7 @@
       },
       "block_order": ["caption", "heading"],
       "settings": {
-        "image_overlay_opacity": 35,
+        "image_overlay_opacity": 30,
         "image_height": "medium",
         "desktop_content_position": "middle-center",
         "show_text_box": false,
