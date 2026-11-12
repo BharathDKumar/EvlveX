@@ -5,18 +5,20 @@ Part of the [EvlveX specification](../SPEC.md). **Audience:** brand, copywriters
 ---
 
 ## 1. Logo
-- **Monogram:** a thin circle enclosing two mirrored "E"s back to back, as embroidered on the side panel of Court 01.
-- **Wordmark:** `EVLVEX` in capitals with wide letter-spacing (≈ 0.35em).
+- **Monogram:** a heavy ring enclosing two mirrored "E"s back to back, as embroidered on the side panel of Court 01.
+- **Wordmark:** `EVLVEX` in a custom stencil-cut logotype: the Es are three bars, each V is split, and the X has a broken arm.
 - **Signature line:** *Every pair has a story.* Set in Cormorant italic beneath the wordmark on packaging, workshop cards and the certificate page.
+- **Master artwork** (final, supplied 12 Nov 2026): `docs/brand/logos/`. It holds the original monogram and wordmark PNGs in black and white on transparent backgrounds, plus `evlvex-monogram.svg` and `evlvex-wordmark.svg`, vectors traced from them for print and partners.
 - **Files in theme:**
-  - `assets/evlvex-monogram.svg`: standalone file, used for the favicon and downloads
-  - `snippets/evlvex-monogram.liquid`: inline SVG that takes its color from the surrounding text color (`currentColor`)
+  - `assets/evlvex-monogram.svg`: standalone file in Sand-gold, used for the favicon and downloads
+  - `snippets/evlvex-monogram.liquid`: inline SVG monogram that takes its color from the surrounding text color (`currentColor`)
+  - `snippets/evlvex-wordmark.liquid`: inline SVG wordmark (`currentColor`), sized by CSS height
+  - `snippets/evlvex-logo.liquid`: header lockup (monogram + wordmark), used when no logo image is uploaded in Theme settings
 - **Usage rules:**
   - Clear space around the monogram ≥ ½ of its diameter.
   - Minimum size: 16 px on screen, 6 mm in print.
   - On light backgrounds use Noir or Sand-gold; on dark backgrounds use Ivory or Sand-gold.
   - Never stretch, outline, add shadows, or place on busy photography.
-- ⚠️ The current SVG is a redraw from product photos. Replace it with the original vector when available ([open items](../SPEC.md#open-items)).
 
 ## 2. Color palette
 The house palette is taken from the first model, Court 01. Individual models may come in other leathers (Cognac, Oxblood, Espresso), but the **website and packaging always use the house palette**.

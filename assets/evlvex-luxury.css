@@ -109,11 +109,10 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
 }
 
 .evlvex-logo__word {
-  font-family: var(--font-body-family);
-  font-size: 1.8rem;
-  font-weight: 400;
-  letter-spacing: 0.42em;
-  margin-right: -0.42em; /* optical centering for the trailing tracking */
+  display: block;
+  height: 1.8rem;
+  width: auto;
+  flex-shrink: 0;
 }
 
 @media screen and (max-width: 749px) {
@@ -125,9 +124,7 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
     height: 28px;
   }
   .evlvex-logo__word {
-    font-size: 1.5rem;
-    letter-spacing: 0.32em;
-    margin-right: -0.32em;
+    height: 1.4rem;
   }
 }
 

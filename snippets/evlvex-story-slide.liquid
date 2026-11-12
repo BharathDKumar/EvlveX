@@ -1,0 +1,100 @@
+{%- doc -%}
+  Renders one slide of the EvlveX story carousel (sections/evlvex-story-carousel.liquid).
+  The section passes values from a section block or from an evlvex_story_slide metaobject, so both render the same markup.
+  Without an image, the brand plate placeholder (Noir with the monogram) is shown instead.
+
+  @param {string} section_id - Section id, used for unique element ids
+  @param {number} index - 1-based slide position
+  @param {number} total - Number of slides
+  @param {object} [image] - Desktop image (image or media image)
+  @param {object} [mobile_image] - Optional image for screens under 750px
+  @param {string} [alt] - Alt text; falls back to the image's own alt text, then the heading
+  @param {string} [eyebrow] - Small label above the heading
+  @param {string} [heading] - Slide heading
+  @param {string} [story] - Short story (plain text; line breaks are kept)
+  @param {string} [button_label] - Optional link label
+  @param {string} [button_url] - Optional link URL
+  @param {string} [heading_tag] - 'h2' (default) or 'h3'
+  @param {string} [sizes] - sizes attribute for the desktop image
+  @param {string} [loading] - 'lazy' (default) or 'eager'
+  @param {string} [fetchpriority] - 'auto' (default) or 'high'
+  @param {string} [attributes] - Extra attributes for the slide element (block.shopify_attributes)
+
+  @example
+  {% render 'evlvex-story-slide', section_id: section.id, index: 1, total: 3, image: block.settings.image, heading: block.settings.heading %}
+{%- enddoc -%}
+{%- liquid
+  assign slide_image = image | default: mobile_image
+  assign slide_alt = alt | default: slide_image.alt | default: heading | default: ''
+  assign slide_heading_tag = heading_tag | default: 'h2'
+  assign slide_sizes = sizes | default: '100vw'
+  assign slide_loading = loading | default: 'lazy'
+  assign slide_priority = fetchpriority | default: 'auto'
+  assign of_label = 'general.slider.of' | t
+-%}
+<li
+  id="Slide-{{ section_id }}-{{ index }}"
+  class="evx-carousel__slide{% if index == 1 %} is-active{% endif %}"
+  role="group"
+  aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
+  aria-label="{{ index }} {{ of_label }} {{ total }}"
+  {{ attributes }}
+>
+  <div class="evx-carousel__media">
+    {%- if slide_image != blank -%}
+      <picture>
+        {%- if mobile_image != blank and image != blank -%}
+          {%- assign candidate_widths = '375,550,750,1100,1500' | split: ',' -%}
+          {%- capture mobile_srcset -%}
+            {%- for w in candidate_widths -%}
+              {%- assign w_num = w | plus: 0 -%}
+              {%- if w_num <= mobile_image.width or forloop.first -%}
+                {{ mobile_image | image_url: width: w_num }} {{ w_num }}w,
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ mobile_srcset | strip | remove_last: ',' }}"
+            sizes="100vw"
+            width="{{ mobile_image.width }}"
+            height="{{ mobile_image.height }}"
+          >
+        {%- endif -%}
+        {{
+          slide_image
+          | image_url: width: 3000
+          | image_tag:
+            widths: '550, 750, 1100, 1500, 1800, 2400, 3000',
+            sizes: slide_sizes,
+            loading: slide_loading,
+            fetchpriority: slide_priority,
+            alt: slide_alt,
+            class: 'evx-carousel__image'
+        }}
+      </picture>
+    {%- else -%}
+      {%- render 'evlvex-story-plate', ratio: 'auto', label: heading -%}
+    {%- endif -%}
+  </div>
+
+  <div class="evx-carousel__content">
+    {%- if eyebrow != blank -%}
+      <p class="evx-eyebrow evx-eyebrow--gold evx-carousel__eyebrow">{{ eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if heading != blank -%}
+      <{{ slide_heading_tag }} class="evx-story-title evx-carousel__heading h1">
+        {{- heading | escape -}}
+      </{{ slide_heading_tag }}>
+    {%- endif -%}
+    {%- if story != blank -%}
+      <span class="evx-rule evx-carousel__rule" aria-hidden="true"></span>
+      <p class="evx-story-body evx-carousel__story">{{ story | escape | newline_to_br }}</p>
+    {%- endif -%}
+    {%- if button_label != blank and button_url != blank -%}
+      <a class="button button--secondary evx-carousel__button" href="{{ button_url | escape }}">
+        {{- button_label | escape -}}
+      </a>
+    {%- endif -%}
+  </div>
+</li>

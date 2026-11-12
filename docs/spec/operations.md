@@ -61,3 +61,12 @@ The tool reads the customer's full name, the product and the order date from the
 4. On each product of that model, set the **Story** metafield to the new entry.
 5. Set the entry to **Active**. It appears on The Stories page and its product pages straight away.
 6. Optional: choose it as the home page's *Featured story* in the theme editor.
+
+## 7. Add story slides to a product (brand / copywriter)
+Each product can have its own carousel of editorial images, each with a short story. It appears below "The Story" on the product page. A product without slides shows no carousel.
+1. Upload the images in Admin → **Content → Files**. You can also upload a separate portrait crop for phones. Give each image alt text that describes the photograph.
+2. In Admin → **Content → Metaobjects → EvlveX Story Slide**, choose **Add entry** for each slide. Fill in the image, the optional mobile image, the eyebrow, the heading, a story of two or three sentences and the alt text. Add a button label and URL if the slide should link somewhere.
+3. Open the product, go to **Metafields → Story slides** and select the entries. Drag them to reorder; the list order is the slide order.
+4. Save, then check the product page. An entry can be reused on another product, but slides are meant to be specific to each product.
+
+**Home page carousel:** go to Online Store → Themes → Customize → Home page → **EvlveX story carousel**. Here you can add, remove, reorder (drag) and edit slides, which are section blocks. The section settings control the layout, image ratios, text alignment, color scheme and autoplay.

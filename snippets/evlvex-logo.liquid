@@ -1,11 +1,13 @@
 {%- comment -%}
   EvlveX logo lockup (monogram + wordmark). Used by the header when no logo image is uploaded.
+  Both marks are the original brand artwork (docs/brand/logos/) and take the surrounding text color.
   Accepts:
   - size: {Number} monogram size in px (default 34)
   - stacked: {Boolean} put the wordmark under the monogram
 {%- endcomment -%}
 {%- assign mark_size = size | default: 34 -%}
+{%- assign logo_title = shop.name | default: 'EvlveX' -%}
 <span class="evlvex-logo{% if stacked %} evlvex-logo--stacked{% endif %}">
   {%- render 'evlvex-monogram', size: mark_size, class: 'evlvex-logo__mark' -%}
-  <span class="evlvex-logo__word">{{ shop.name | default: 'EvlveX' | upcase }}</span>
+  {%- render 'evlvex-wordmark', class: 'evlvex-logo__word', title: logo_title -%}
 </span>

@@ -47,7 +47,7 @@ The website must:
 ## Open items
 | # | Item | Owner | Needed for |
 |---|---|---|---|
-| 1 | Original logo vector file (SVG/AI/PDF) | Brand | replace redrawn monogram |
+| 1 | ~~Original logo vector file~~ **Done 12 Nov 2026:** the original artwork is in `docs/brand/logos/`, traced to SVG in the theme | Brand | ~~replace redrawn monogram~~ |
 | 2 | Approve the model lineup, names and colorways (only Court 01 exists today) | Brand | products, collections |
 | 3 | Approve or rewrite the five model stories; confirm which details are fable and which are fact (e.g. "first commission", "nine hours of weaving") | Brand / copy | story entries, product pages |
 | 4 | Product still life, story plates, atelier and packaging photography | Brand / photographer | every page |

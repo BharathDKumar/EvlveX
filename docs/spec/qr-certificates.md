@@ -126,3 +126,31 @@ Each model story ([brand-and-content.md §6](brand-and-content.md)) is stored on
 ### 5.3 Product metafield
 - **`evlvex.story`**, type metaobject reference → `evlvex_story`, set on every product.
 - The product page, cart and certificate read the story through `product.metafields.evlvex.story`.
+- **`evlvex.story_slides`**, type list of metaobject references → `evlvex_story_slide`, optional. It holds each product's own slides for the product page's story carousel (§5.4). The list order is the slide order.
+
+### 5.4 Story slide metaobject (product story carousel)
+One entry per slide. Unlike the model story, slides belong to a single product. `sections/evlvex-story-carousel.liquid` shows them on the product page. **`npm run setup` does not create this definition.** Set it up by hand as described below.
+
+- Name: **EvlveX Story Slide**
+- Type (API handle): **`evlvex_story_slide`**
+- Access: **Storefronts** ON (the theme cannot read the entries without it)
+- Capabilities: none. Slides have no Online Store page, and *Active/Draft status* can stay off.
+- Display name field: `heading`
+
+| Field name | Key | Type | Required | Notes |
+|---|---|---|---|---|
+| Image | `image` | File (images only) | yes | desktop image; landscape or 4:5, to match the section setting |
+| Mobile image | `mobile_image` | File (images only) | no | used on screens under 750 px wide |
+| Eyebrow | `eyebrow` | Single line text | no | small gold label, e.g. *The Sole* |
+| Heading | `heading` | Single line text | no | e.g. *A Caramel Baseline* |
+| Story | `story` | Multi-line text | no | two or three sentences; line breaks are kept |
+| Alt text | `alt_text` | Single line text | no | describes the photograph. If empty, the file's own alt text is used, then the heading. |
+| Button label | `button_label` | Single line text | no | the link appears only when both label and URL are set |
+| Button URL | `button_url` | URL | no | |
+
+**Shopify Admin steps**
+1. Go to **Settings → Custom data → Metaobject definitions → Add definition**. Name it *EvlveX Story Slide* and check that the type is `evlvex_story_slide` (change it if Admin suggested a different handle). Add the eight fields above with exactly these keys. For both file fields, choose **Images** under *Accept*. Set **Display name** to *Heading*, turn **Storefronts** on under *Access*, and save.
+2. Go to **Settings → Custom data → Products → Add definition**. Name it *Story slides* and set **Namespace and key** to `evlvex.story_slides`. For the type, choose **Metaobject → EvlveX Story Slide**, then **List of entries**. Turn on **Storefronts** access and save.
+3. Add slides to each product as described in [operations.md §7](operations.md).
+
+The carousel skips any slide that has neither an image nor a heading, and shows at most 12 slides.

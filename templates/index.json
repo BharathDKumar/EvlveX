@@ -85,6 +85,56 @@
         "padding_bottom": 80
       }
     },
+    "story-carousel": {
+      "type": "evlvex-story-carousel",
+      "blocks": {
+        "slide_court": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Chapter 01 · Court 01",
+            "heading": "The Last Set at Dusk",
+            "story": "A seaside club, late summer. The suede is the color of clay dust on white leather; the caramel stripe is the baseline at dusk.",
+            "button_label": "Read the story",
+            "button_url": "shopify://pages/the-stories"
+          }
+        },
+        "slide_atelier": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "The Atelier",
+            "heading": "Finished by One Pair of Hands",
+            "story": "Every pair is cut, stitched and finished at a single bench. The artisan who completes it signs the workshop card in the box.",
+            "button_label": "Meet the Maison",
+            "button_url": "shopify://pages/the-maison"
+          }
+        },
+        "slide_pair": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Your Pair",
+            "heading": "A Chapter of Its Own",
+            "story": "Each pair is numbered and registered to the person who wears it. Scan the tag beneath the tongue to read the story of your pair.",
+            "button_label": "How it works",
+            "button_url": "shopify://pages/authenticity"
+          }
+        }
+      },
+      "block_order": ["slide_court", "slide_atelier", "slide_pair"],
+      "settings": {
+        "slide_source": "blocks",
+        "eyebrow": "From the Maison",
+        "heading": "",
+        "layout": "image-left",
+        "desktop_ratio": "4-5",
+        "mobile_ratio": "4-5",
+        "text_alignment": "left",
+        "color_scheme": "scheme-2",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "featured": {
       "type": "featured-collection",
       "settings": {
@@ -272,5 +322,5 @@
       }
     }
   },
-  "order": ["hero", "statement", "featured", "featured-story", "stories", "atelier", "chapter", "newsletter"]
+  "order": ["hero", "statement", "story-carousel", "featured", "featured-story", "stories", "atelier", "chapter", "newsletter"]
 }

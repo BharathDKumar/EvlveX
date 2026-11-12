@@ -1,0 +1,520 @@
+{%- comment -%}
+  EvlveX — editorial story carousel: one image and one short story per slide.
+  Slides come from either:
+  - section blocks ("Section blocks"): homepage and other templates, edited in the theme editor;
+  - the product metafield evlvex.story_slides ("Product story slides"): a list of evlvex_story_slide
+    metaobject entries, so every product has its own slides. Hidden when the product has none.
+  Setup: docs/spec/theme.md §4–5 and docs/spec/operations.md.
+{%- endcomment -%}
+
+{%- liquid
+  assign use_product = false
+  if section.settings.slide_source == 'product'
+    assign use_product = true
+  endif
+
+  assign slide_total = 0
+  if use_product
+    assign product_slides = product.metafields.evlvex.story_slides.value
+    for entry in product_slides limit: 12
+      if entry.image.value != blank or entry.heading.value != blank
+        assign slide_total = slide_total | plus: 1
+      endif
+    endfor
+  else
+    assign slide_total = section.blocks.size
+  endif
+
+  assign ratio_desktop = section.settings.desktop_ratio | replace: '-', ' / '
+  assign ratio_mobile = section.settings.mobile_ratio | replace: '-', ' / '
+
+  if section.settings.layout == 'stacked'
+    assign image_sizes = '(min-width: 1440px) 1360px, 100vw'
+  else
+    assign image_sizes = '(min-width: 1440px) 800px, (min-width: 990px) 58vw, 100vw'
+  endif
+
+  assign first_loading = 'lazy'
+  assign first_priority = 'auto'
+  if section.index == 1
+    assign first_loading = 'eager'
+    assign first_priority = 'high'
+  elsif section.index == 2
+    assign first_loading = 'eager'
+  endif
+
+  assign slide_heading_tag = 'h2'
+  if section.settings.heading != blank
+    assign slide_heading_tag = 'h3'
+  endif
+
+  assign carousel_label = section.settings.heading | default: section.settings.eyebrow
+  if carousel_label == blank
+    assign carousel_label = 'sections.slideshow.carousel' | t
+  endif
+
+  assign autoplay = false
+  if section.settings.autoplay and slide_total > 1
+    assign autoplay = true
+  endif
+  assign of_label = 'general.slider.of' | t
+-%}
+
+{%- if slide_total > 0 -%}
+  {{ 'evlvex-story.css' | asset_url | stylesheet_tag }}
+  {{ 'evlvex-story-carousel.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'evlvex-story-carousel.js' | asset_url }}" defer="defer"></script>
+
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="evx-carousel-section color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width section-{{ section.id }}-padding">
+      {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+        <div class="evx-carousel-section__header evx-carousel--align-{{ section.settings.text_alignment }}">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="evx-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="evx-carousel-section__heading h1">{{ section.settings.heading | escape }}</h2>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <evlvex-story-carousel
+        id="EvxCarousel-{{ section.id }}"
+        class="evx-carousel evx-carousel--{{ section.settings.layout }} evx-carousel--align-{{ section.settings.text_alignment }}"
+        style="--evx-ratio-desktop: {{ ratio_desktop }}; --evx-ratio-mobile: {{ ratio_mobile }};"
+        role="region"
+        aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
+        aria-label="{{ carousel_label | escape }}"
+        data-autoplay="{{ autoplay }}"
+        data-speed="{{ section.settings.autoplay_speed }}"
+      >
+        <ul
+          id="EvxCarouselTrack-{{ section.id }}"
+          class="evx-carousel__track"
+          aria-live="{% if autoplay %}off{% else %}polite{% endif %}"
+        >
+          {%- if use_product -%}
+            {%- assign slide_index = 0 -%}
+            {%- for entry in product_slides limit: 12 -%}
+              {%- if entry.image.value != blank or entry.heading.value != blank -%}
+                {%- liquid
+                  assign slide_index = slide_index | plus: 1
+                  assign slide_loading = 'lazy'
+                  assign slide_priority = 'auto'
+                  if slide_index == 1
+                    assign slide_loading = first_loading
+                    assign slide_priority = first_priority
+                  endif
+                -%}
+                {%- render 'evlvex-story-slide',
+                  section_id: section.id,
+                  index: slide_index,
+                  total: slide_total,
+                  image: entry.image.value,
+                  mobile_image: entry.mobile_image.value,
+                  alt: entry.alt_text.value,
+                  eyebrow: entry.eyebrow.value,
+                  heading: entry.heading.value,
+                  story: entry.story.value,
+                  button_label: entry.button_label.value,
+                  button_url: entry.button_url.value,
+                  heading_tag: slide_heading_tag,
+                  sizes: image_sizes,
+                  loading: slide_loading,
+                  fetchpriority: slide_priority
+                -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign slide_loading = 'lazy'
+                assign slide_priority = 'auto'
+                if forloop.first
+                  assign slide_loading = first_loading
+                  assign slide_priority = first_priority
+                endif
+              -%}
+              {%- render 'evlvex-story-slide',
+                section_id: section.id,
+                index: forloop.index,
+                total: slide_total,
+                image: block.settings.image,
+                mobile_image: block.settings.mobile_image,
+                alt: block.settings.alt_text,
+                eyebrow: block.settings.eyebrow,
+                heading: block.settings.heading,
+                story: block.settings.story,
+                button_label: block.settings.button_label,
+                button_url: block.settings.button_url,
+                heading_tag: slide_heading_tag,
+                sizes: image_sizes,
+                loading: slide_loading,
+                fetchpriority: slide_priority,
+                attributes: block.shopify_attributes
+              -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+
+        {%- if slide_total > 1 -%}
+          <div class="evx-carousel__controls">
+            <p class="evx-carousel__counter" aria-hidden="true">
+              <span data-evx-current>01</span>
+              <span class="evx-carousel__counter-rule"></span>
+              <span>{% if slide_total < 10 %}0{% endif %}{{ slide_total }}</span>
+            </p>
+
+            <div class="evx-carousel__dots">
+              {%- for i in (1..slide_total) -%}
+                <button
+                  type="button"
+                  class="evx-carousel__dot"
+                  data-evx-dot="{{ forloop.index0 }}"
+                  aria-controls="EvxCarouselTrack-{{ section.id }}"
+                  aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ i }} {{ of_label }} {{ slide_total }}"
+                  {% if forloop.first %}
+                    aria-current="true"
+                  {% endif %}
+                >
+                  <span class="evx-carousel__dot-line" aria-hidden="true"></span>
+                </button>
+              {%- endfor -%}
+            </div>
+
+            <div class="evx-carousel__buttons">
+              {%- if autoplay -%}
+                <button
+                  type="button"
+                  class="evx-carousel__toggle"
+                  data-evx-toggle
+                  aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}"
+                  data-label-pause="{{ 'sections.slideshow.pause_slideshow' | t }}"
+                  data-label-play="{{ 'sections.slideshow.play_slideshow' | t }}"
+                >
+                  <span class="evx-carousel__toggle-pause">{{- 'icon-pause.svg' | inline_asset_content -}}</span>
+                  <span class="evx-carousel__toggle-play">{{- 'icon-play.svg' | inline_asset_content -}}</span>
+                </button>
+              {%- endif -%}
+              <button
+                type="button"
+                class="evx-carousel__arrow evx-carousel__arrow--prev"
+                data-evx-prev
+                aria-controls="EvxCarouselTrack-{{ section.id }}"
+                aria-label="{{ 'sections.slideshow.previous_slideshow' | t }}"
+              >
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </button>
+              <button
+                type="button"
+                class="evx-carousel__arrow evx-carousel__arrow--next"
+                data-evx-next
+                aria-controls="EvxCarouselTrack-{{ section.id }}"
+                aria-label="{{ 'sections.slideshow.next_slideshow' | t }}"
+              >
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </button>
+            </div>
+          </div>
+        {%- endif -%}
+      </evlvex-story-carousel>
+    </div>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="page-width">
+    <p class="evx-carousel-notice">
+      {%- if use_product -%}
+        EvlveX story carousel: this product has no story slides yet. Add entries to its <strong>Story slides</strong> metafield (evlvex.story_slides). The section is hidden on the live store until then.
+      {%- else -%}
+        EvlveX story carousel: add a slide to show this section.
+      {%- endif -%}
+    </p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX story carousel",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "select",
+      "id": "slide_source",
+      "label": "Slides",
+      "options": [
+        {
+          "value": "blocks",
+          "label": "Section blocks"
+        },
+        {
+          "value": "product",
+          "label": "Product story slides"
+        }
+      ],
+      "default": "blocks",
+      "info": "\"Product story slides\" shows the entries in the product's Story slides metafield (evlvex.story_slides) and is hidden on products without any. Use it on product templates only; blocks are then ignored."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop layout",
+      "options": [
+        {
+          "value": "image-left",
+          "label": "Image left, story right"
+        },
+        {
+          "value": "image-right",
+          "label": "Image right, story left"
+        },
+        {
+          "value": "stacked",
+          "label": "Story below image"
+        }
+      ],
+      "default": "image-left"
+    },
+    {
+      "type": "select",
+      "id": "desktop_ratio",
+      "label": "Image aspect ratio (desktop)",
+      "options": [
+        {
+          "value": "16-9",
+          "label": "Landscape 16:9"
+        },
+        {
+          "value": "3-2",
+          "label": "Landscape 3:2"
+        },
+        {
+          "value": "4-3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "1-1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4-5",
+          "label": "Portrait 4:5"
+        }
+      ],
+      "default": "4-5"
+    },
+    {
+      "type": "select",
+      "id": "mobile_ratio",
+      "label": "Image aspect ratio (mobile)",
+      "options": [
+        {
+          "value": "4-5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "3-4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "1-1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "16-9",
+          "label": "Landscape 16:9"
+        }
+      ],
+      "default": "4-5"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": false,
+      "info": "Pauses on hover, keyboard focus and hidden tabs. Off for visitors who prefer reduced motion unless they press play."
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 7
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image",
+          "info": "Optional. Shown on screens under 750px wide."
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Image alt text",
+          "info": "Describe the photograph for screen readers. Defaults to the image's own alt text."
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Chapter 01"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Every pair has a story"
+        },
+        {
+          "type": "textarea",
+          "id": "story",
+          "label": "Story",
+          "default": "A short story of two or three sentences about the moment, the place or the hands behind this pair."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX story carousel",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Chapter 01 · Court 01",
+            "heading": "The Last Set at Dusk",
+            "story": "A seaside club, late summer. The suede is the color of clay dust on white leather; the caramel stripe is the baseline at dusk.",
+            "button_label": "Discover the collection",
+            "button_url": "/collections/all"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "The Atelier",
+            "heading": "Finished by One Pair of Hands",
+            "story": "Every pair is cut, stitched and finished at a single bench. The artisan who completes it signs the workshop card in the box."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Your Pair",
+            "heading": "A Chapter of Its Own",
+            "story": "Each pair is numbered and registered to the person who wears it. Scan the tag beneath the tongue to read the story of your pair."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -46,8 +46,9 @@ The CLI runs on a packing-station computer, not on Shopify.
 - [ ] Do not create pages with the handles `stories` or `authentic`
 - [ ] Create story entries for every model ([brand-and-content.md §6](brand-and-content.md)) and upload their story plates
 - [ ] Create collections: The Collection (all), Sneakers, Loafers & Mules, Formal, Boots
-- [ ] Create products for each model and colorway with size variants, and set each product's **Story** metafield
+- [ ] Create the **EvlveX Story Slide** metaobject and the **Story slides** product metafield (`evlvex.story_slides`) by hand, following [qr-certificates.md §5.4](qr-certificates.md). `npm run setup` does not create them.
+- [ ] Create products for each model and colorway with size variants, and set each product's **Story** metafield. Optionally add its **Story slides** too ([operations.md §7](operations.md)).
 - [ ] Menus: *Main menu* (Shop mega menu, The Stories, The Maison, Authenticity); *Footer* (Stories, Care, Shipping & Returns, Privacy, Contact)
-- [ ] Theme editor: choose hero, featured story, atelier and collection images; upload the logo
+- [ ] Theme editor: choose hero, featured story, atelier and collection images, and the slide images of the home **Story carousel**. The header already draws the original logo (monogram + wordmark); upload a logo image only if you want to replace it.
 - [ ] Print workshop cards ([operations.md §2](operations.md))
 - [ ] Policies: add the certificate privacy wording ([open items](../SPEC.md#open-items))

@@ -138,6 +138,23 @@
         "padding_bottom": 80
       }
     },
+    "story-slides": {
+      "type": "evlvex-story-carousel",
+      "settings": {
+        "slide_source": "product",
+        "eyebrow": "",
+        "heading": "",
+        "layout": "image-left",
+        "desktop_ratio": "4-5",
+        "mobile_ratio": "4-5",
+        "text_alignment": "left",
+        "color_scheme": "scheme-1",
+        "autoplay": false,
+        "autoplay_speed": 7,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
     "disclosures": {
       "type": "disclosures",
       "settings": {
@@ -167,6 +184,7 @@
   "order": [
     "main",
     "story",
+    "story-slides",
     "disclosures",
     "related-products"
   ]

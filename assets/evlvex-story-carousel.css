@@ -1,0 +1,374 @@
+/*
+  EvlveX — editorial story carousel (sections/evlvex-story-carousel.liquid, snippets/evlvex-story-slide.liquid).
+  Native scroll-snap track, one slide per view. Shared story type (.evx-story-title, .evx-story-body,
+  .evx-rule, .evx-plate) comes from evlvex-story.css; tokens (--evx-*) from evlvex-luxury.css.
+*/
+
+.evx-carousel-section__header {
+  display: flex;
+  flex-direction: column;
+  align-items: var(--evx-carousel-items, flex-start);
+  margin-bottom: 3.2rem;
+  text-align: var(--evx-carousel-text, left);
+}
+
+.evx-carousel-section__heading {
+  margin: 0;
+  font-weight: 400;
+}
+
+@media screen and (min-width: 750px) {
+  .evx-carousel-section__header {
+    margin-bottom: 4.8rem;
+  }
+}
+
+/* ---------- Alignment ---------- */
+.evx-carousel--align-left {
+  --evx-carousel-items: flex-start;
+  --evx-carousel-text: left;
+}
+
+.evx-carousel--align-center {
+  --evx-carousel-items: center;
+  --evx-carousel-text: center;
+}
+
+.evx-carousel--align-right {
+  --evx-carousel-items: flex-end;
+  --evx-carousel-text: right;
+}
+
+/* ---------- Carousel ---------- */
+evlvex-story-carousel {
+  display: block;
+  position: relative;
+}
+
+.evx-carousel__track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.evx-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.evx-carousel__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.8rem;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ---------- Media ---------- */
+.evx-carousel__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--evx-ratio-mobile, 4 / 5);
+  background: rgba(var(--color-foreground), 0.04);
+}
+
+.evx-carousel__media picture,
+.evx-carousel__media .evx-plate {
+  position: absolute;
+  inset: 0;
+}
+
+.evx-carousel__media .evx-plate {
+  aspect-ratio: auto;
+}
+
+.evx-carousel__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 750px) {
+  .evx-carousel__media {
+    aspect-ratio: var(--evx-ratio-desktop, 4 / 5);
+  }
+}
+
+/* ---------- Story ---------- */
+.evx-carousel__content {
+  display: flex;
+  flex-direction: column;
+  align-items: var(--evx-carousel-items, flex-start);
+  min-width: 0;
+  text-align: var(--evx-carousel-text, left);
+}
+
+.evx-carousel__eyebrow {
+  margin-bottom: 1.6rem;
+}
+
+.evx-carousel__heading {
+  margin: 0;
+  max-width: 16ch;
+  overflow-wrap: anywhere;
+}
+
+.evx-carousel__rule {
+  margin: 2.4rem 0;
+}
+
+.evx-carousel--align-center .evx-carousel__rule {
+  margin-inline: auto;
+}
+
+.evx-carousel--align-right .evx-carousel__rule {
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+.evx-carousel__story {
+  margin: 0;
+  max-width: 44ch;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+.evx-carousel__button {
+  margin-top: 3.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .evx-carousel__story {
+    font-size: 2rem;
+  }
+}
+
+/* Split layouts from 990px: image about 58%, story about 42%. */
+@media screen and (min-width: 990px) {
+  .evx-carousel--image-left .evx-carousel__slide,
+  .evx-carousel--image-right .evx-carousel__slide {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+    gap: 0;
+  }
+
+  .evx-carousel--image-left .evx-carousel__content {
+    padding: 4rem 0 4rem clamp(4rem, 6vw, 9.6rem);
+  }
+
+  .evx-carousel--image-right .evx-carousel__slide {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .evx-carousel--image-right .evx-carousel__media {
+    order: 2;
+  }
+
+  .evx-carousel--image-right .evx-carousel__content {
+    padding: 4rem clamp(4rem, 6vw, 9.6rem) 4rem 0;
+  }
+
+  .evx-carousel--stacked .evx-carousel__slide {
+    gap: 4rem;
+  }
+
+  .evx-carousel--stacked .evx-carousel__content {
+    width: 100%;
+    max-width: 76rem;
+  }
+
+  .evx-carousel--stacked.evx-carousel--align-center .evx-carousel__content {
+    margin-inline: auto;
+  }
+
+  .evx-carousel--stacked.evx-carousel--align-right .evx-carousel__content {
+    margin-inline-start: auto;
+  }
+}
+
+/* ---------- Controls ---------- */
+.evx-carousel__controls {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 2.4rem;
+}
+
+.evx-carousel__counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  letter-spacing: var(--evx-tracking-wide, 0.22em);
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.evx-carousel__counter-rule {
+  display: block;
+  width: 2.4rem;
+  height: 1px;
+  background: rgba(var(--color-foreground), 0.35);
+}
+
+.evx-carousel__dots {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.evx-carousel__dot,
+.evx-carousel__arrow,
+.evx-carousel__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.evx-carousel__dot {
+  width: 3.6rem;
+  height: 4.4rem;
+}
+
+.evx-carousel__dot-line {
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: rgba(var(--color-foreground), 0.3);
+  transition: width 0.4s var(--evx-ease, ease), background-color 0.4s var(--evx-ease, ease), height 0.4s;
+}
+
+.evx-carousel__dot:hover .evx-carousel__dot-line {
+  background: rgba(var(--color-foreground), 0.6);
+}
+
+.evx-carousel__dot[aria-current='true'] .evx-carousel__dot-line {
+  width: 3.2rem;
+  height: 2px;
+  background: rgb(var(--evx-gold));
+}
+
+.evx-carousel__buttons {
+  display: flex;
+  align-items: center;
+}
+
+.evx-carousel__arrow,
+.evx-carousel__toggle {
+  width: 4.4rem;
+  height: 4.4rem;
+  opacity: 0.75;
+  transition: opacity 0.3s;
+}
+
+.evx-carousel__arrow:hover,
+.evx-carousel__toggle:hover {
+  opacity: 1;
+}
+
+.evx-carousel__arrow .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.evx-carousel__arrow--prev .icon {
+  transform: rotate(90deg);
+}
+
+.evx-carousel__arrow--next .icon {
+  transform: rotate(-90deg);
+}
+
+.evx-carousel__toggle .icon {
+  width: 0.9rem;
+  height: 1.2rem;
+}
+
+.evx-carousel__toggle-play,
+.evx-carousel__toggle.is-paused .evx-carousel__toggle-pause {
+  display: none;
+}
+
+.evx-carousel__toggle.is-paused .evx-carousel__toggle-play,
+.evx-carousel__toggle-pause {
+  display: inline-flex;
+}
+
+@media screen and (max-width: 749px) {
+  .evx-carousel__counter {
+    display: none;
+  }
+
+  .evx-carousel__controls {
+    gap: 0.8rem;
+  }
+
+  .evx-carousel__dots {
+    justify-content: flex-start;
+  }
+
+  .evx-carousel__dot {
+    width: 2.4rem;
+  }
+
+  .evx-carousel__dot-line {
+    width: 1.4rem;
+  }
+
+  .evx-carousel__dot[aria-current='true'] .evx-carousel__dot-line {
+    width: 2rem;
+  }
+}
+
+/* ---------- Motion (only once the script is running, so text never stays hidden) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .evx-carousel.is-ready .evx-carousel__content {
+    transition:
+      opacity 0.7s var(--evx-ease, ease) 0.12s,
+      transform 0.7s var(--evx-ease, ease) 0.12s;
+  }
+
+  .evx-carousel.is-ready .evx-carousel__slide:not(.is-active) .evx-carousel__content {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+
+  .evx-carousel.is-ready .evx-carousel__image {
+    transition: transform 1.6s var(--evx-ease, ease);
+  }
+
+  .evx-carousel.is-ready .evx-carousel__slide:not(.is-active) .evx-carousel__image {
+    transform: scale(1.03);
+  }
+}
+
+/* ---------- Theme editor notice ---------- */
+.evx-carousel-notice {
+  margin: 2.4rem 0;
+  padding: 1.6rem 2rem;
+  font-size: 1.3rem;
+  background: rgba(var(--evx-gold), 0.12);
+  color: rgb(var(--color-foreground));
+}
