@@ -25,11 +25,11 @@ The store runs **Dawn 16.1.1, customised**. Brand rules (palette, fonts, voice, 
 ```
 Home
 ├── Shop (collection: all, "The Collection")
-│   ├── Sneakers / Loafers & Mules / Formal / Boots
+│   ├── The Silent Grind / A Fresh Start (one collection per chapter, optional)
 │   └── Product: The Silent Grind (Noir), A Fresh Start (Cream & Sand)
 ├── The Stories (index)                /pages/the-stories
 │   └── Story (one per model)          /pages/stories/<story-handle>
-├── The Maison (about)                 /pages/the-maison
+├── About ("Built for the comeback")   /pages/the-maison
 ├── Care                               /pages/care
 ├── Authenticity                       /pages/authenticity
 │   └── Certificate (one per pair)     /pages/authentic/<serial>
@@ -42,7 +42,7 @@ Home
 ## 3. Global elements
 - **Announcement bar** (Noir): copy in [brand-and-content.md §8](brand-and-content.md).
 - **Header** (Ivory): logo centred, menu centred below it, search / account / cart icons on the right. Sticky when scrolling up.
-- **Main menu:** Shop (mega menu: The Collection, Sneakers, Loafers & Mules, Formal, Boots), The Stories, The Maison, Authenticity.
+- **Main menu:** Shop (The Collection, The Silent Grind, A Fresh Start), The Chapters (stories), About, Authenticity. *(Store data: the store currently shows Shopify's default menu.)*
 - **Footer** (Noir footer): "Join the Maison: receive each new chapter first" newsletter, menus (Shop, Stories, Maison, Client Care), social icons, payment icons, signature line *Every pair has a story.*
 
 ## 4. Page specifications
@@ -52,10 +52,10 @@ Home
 | **Home** | `index.json` | Brand first impression, route to stories and products | 1. **COMEBACK film**: full-screen 3D carousel, five scenes (COMEBACK → The Silent Grind → detail → A Fresh Start → detail) · 2. Brand statement "Falling behind is not the end." · 3. Featured collection "Two chapters, one comeback" · 4. Featured story · 5. "The Chapters": story cards · 6. Image-with-text "The Mark" (monogram) · 7. Multicolumn "Every pair, its own chapter" + link to Authenticity · 8. Newsletter | shoe photography ([shoe-images.md](../brand/shoe-images.md)) | film stacks the shoe above the copy; product grid 2 columns |
 | **Collection** | `collection.json` | Browse | banner (story plate of the lead model), collection description written as a short story intro, product grid with filters (type, colorway, size) | collection image + description | 2 columns, filter drawer |
 | **Product** | `product.json` | Convert through story | media gallery · eyebrow "CHAPTER 0X", title, price, size buttons, add to cart, one-line story excerpt under the price · **"The Story" section** (story plate + story body + signature detail + "Read the full story") · **Story carousel** (the product's own slides from `evlvex.story_slides`; hidden when there are none) · collapsible tabs: Materials & Craft, Size & Fit, Care, Shipping & Returns, Your Pair's Certificate · "You may also admire" | 5–8 product images + 1–2 story plates, size chart, materials text, linked story | gallery swipes, sticky add-to-cart area under gallery |
-| **The Stories** (index) | `page.stories.json` | Read before you buy | intro rich text ("Every EvlveX begins as a story…") · grid of all active story entries, newest chapter first (plate, chapter number, title, setting, excerpt) | — (pulls from story metaobjects) | 1 column |
+| **The Stories** (index) | `page.stories.json` | Read before you buy | intro "COMEBACK · One story, two chapters" · grid of all active story entries, newest chapter first | — (pulls from story metaobjects) | 1 column |
 | **Story** | `metaobject/evlvex_story.json` | Long-form story per model | Noir opener: chapter eyebrow, title (Cormorant italic), setting line, full-bleed plate · story body (Bone, reading width) · plate gallery · signature detail (image-with-text) · the model's products ("Wear the story") · next / previous chapter | from the story entry | stacked, reading width 100% minus 24 px gutters |
-| **The Maison** | `page.about.json` | The house and its makers | image banner (atelier), rich text "Every pair has a story", image-with-text ×2: *The Atelier*, *The Workshop Card* | house story, atelier photography | stacked |
-| **Care** | `page.care.json` | Aftercare (linked from certificate) | intro + collapsible care steps per material (smooth leather, suede, woven leather, soles) | care instructions per material | stacked |
+| **About** | `page.about.json` | The story behind the house | image banner "Built for the comeback" · rich text "One story, two chapters" · image-with-text ×2: *The Silent Grind*, *A Fresh Start* | detail photography | stacked |
+| **Care** | `page.care.json` | Aftercare (linked from certificate) | intro "Keep your comeback going" + collapsible care steps: before first wear, smooth panels, suede, midsoles & laces, storage, repairs | — | stacked |
 | **Authenticity** | `page.authenticity.json` | Explain the QR program; manual serial lookup | intro, "How it works" 3 steps, **serial lookup form** | packaging imagery (family D) | full-width input |
 | **Certificate** | `metaobject/evlvex_certificate.json` | Thank-you, the pair's story, proof of authenticity | see [qr-certificates.md §2](qr-certificates.md) | populated automatically per pair | single column; thank-you and seal fit one phone screen above the fold |
 | **Cart** | `cart.json` | Review | line items (story title in italic under each product name) · subtotal and checkout · "The EvlveX promise" (shipping, certificate, 14-day returns) · "You may also admire" | — | stacked |
@@ -85,9 +85,12 @@ Home
 - **Only EvlveX shoes, ever.** Wherever no image has been chosen, `snippets/evlvex-demo-image.liquid` shows graded photography of the two COMEBACK models ([docs/brand/shoe-images.md](../brand/shoe-images.md)) instead of Dawn's clothing illustrations. This covers image sections, product, collection and article cards, products without media, article pages and story plates. The setting is Theme settings → **EvlveX → Show demo photography**; with it off, those spots show the monogram plate. Sample product cards are named *The Silent Grind — Noir* and *A Fresh Start — Sand*, with a sample price.
 - **COMEBACK film** (`sections/evlvex-comeback-film.liquid`, `assets/evlvex-comeback-film.{css,js}`): scenes turn in 3D; each shot has a camera move (push, pull, pan); the shoe tilts with the pointer and floats when idle; copy reveals in sequence; the timeline fills like a video scrubber. It pauses on keyboard focus, when the tab is hidden or the film is scrolled away, and while a scene block is selected in the theme editor. Under *prefers-reduced-motion* it uses a simple crossfade and starts paused. Scenes are blocks: shoe (The Silent Grind / A Fresh Start / both) and shot (full / monogram / suede, laces and sole), or an uploaded image.
 - **No Shopify branding:** the footer shows *Every pair has a story.* instead of "Powered by Shopify"; the password page, gift card and favicon use the EvlveX marks.
-- Run `shopify theme check` before every push ([deployment.md §2](deployment.md)).
+- Run `shopify theme check` **and** `node tools/validate-templates.js` before every push ([deployment.md §2](deployment.md)). Template setting values must match their section schema exactly: a range value on its step (e.g. overlay opacity 30, not 35), a select value from its options, an existing block type. Otherwise Shopify **silently rejects the whole template file** when the GitHub-connected theme syncs, and the live store keeps the old version. This happened to `index.json`, `page.about.json` and `page.contact.json` until 13 Nov 2026.
+- Leave out unset image and URL settings in template JSON rather than writing empty strings.
 
-## 6. Changes from v1.0 (implemented in v1.1)
+## 6. Changes by version
+
+v1.1 and v1.2 (13 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK.
 
 | Area | Files |
 |---|---|
@@ -102,6 +105,8 @@ Home
 | Logos | original artwork in `docs/brand/logos/`; `snippets/evlvex-monogram.liquid`, new `snippets/evlvex-wordmark.liquid`, `snippets/evlvex-logo.liquid`, `assets/evlvex-monogram.svg` (favicon) |
 | Demo photography & every page | `snippets/evlvex-demo-image.liquid`, `assets/evx-{sg,fs,comeback}-*.jpg`, `docs/brand/shoe-images.md`; demo fallbacks in `sections/{collage,featured-blog,featured-product,footer,image-banner,image-with-text,multirow,slideshow,video,main-article,main-product}.liquid` and `snippets/{card-product,card-collection,article-card,evlvex-story-plate}.liquid`; Theme setting *EvlveX → Show demo photography* (`config/settings_schema.json`); page content in `templates/{cart,search,list-collections,blog,article,page,page.contact}.json`; `templates/gift_card.liquid`; "Powered by Shopify" removed in `sections/footer.liquid`; page styles in `assets/evlvex-luxury.css` |
 | COMEBACK | `sections/evlvex-comeback-film.liquid`, `assets/evlvex-comeback-film.css`, `assets/evlvex-comeback-film.js`; story copy in `templates/{index,page.about,page.care,page.stories,product}.json`, `sections/header-group.json`, `snippets/evlvex-sample-product.liquid` |
+| Password page & gift card | `layout/password.liquid` (EvlveX styles, favicon), `sections/main-password-header.liquid` (logo lockup), `templates/gift_card.liquid` (EvlveX card) |
+| Tooling | `tools/validate-templates.js` (template values against schemas), `tools/build-shoe-images.js` (graded shoe crops) |
 | Shared | `snippets/evlvex-chapter-label.liquid`, `snippets/evlvex-story-plate.liquid`, `assets/evlvex-story.css`; Cormorant italic loaded in `layout/theme.liquid` |
 | Copy | `templates/index.json`, `product.json`, `page.about.json`, `page.care.json`, `page.authenticity.json`, `collection.json`, `sections/header-group.json` (mega menu), `sections/footer-group.json`, `sections/main-404.liquid`, brand text in `config/settings_data.json` |
 

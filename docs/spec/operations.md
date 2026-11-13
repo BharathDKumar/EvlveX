@@ -56,7 +56,7 @@ The tool reads the customer's full name, the product and the order date from the
 
 ## 6. Publish a new model story (brand / copywriter)
 1. Write the story following [brand-and-content.md §4](brand-and-content.md) (90–150 words, excerpt ≤ 280 characters).
-2. Upload the story plates to Admin → **Content → Files** (naming per [brand-and-content.md §5](brand-and-content.md)).
+2. Upload the chapter frames (story plates) to Admin → **Content → Files** (naming per [brand-and-content.md §5](brand-and-content.md)).
 3. Admin → **Content → Metaobjects → EvlveX Story → Add entry**. Fill in all fields ([qr-certificates.md §5.2](qr-certificates.md)).
 4. On each product of that model, set the **Story** metafield to the new entry.
 5. Set the entry to **Active**. It appears on The Stories page and its product pages straight away.

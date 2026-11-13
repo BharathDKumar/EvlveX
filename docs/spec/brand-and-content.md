@@ -40,47 +40,48 @@ The Shopify color-scheme mapping is in [theme.md §1](theme.md).
 | Headings, story titles | **Cormorant** (`cormorant_n4`, italic `cormorant_i4`) | Elegant high-contrast serif; heading scale 130%. Italic for story titles, pull quotes and signatures |
 | Body / UI | **Jost** (`jost_n4`) | Clean geometric sans that echoes the monogram |
 | Story body text | Cormorant 20–22 px, line-height 1.6, max 62 characters per line | Long-form reading on story pages only |
-| Navigation, buttons, eyebrows | Jost, uppercase, letter-spacing 0.2em, 12–13 px | e.g. eyebrow "CHAPTER 01 · COURT 01" |
+| Navigation, buttons, eyebrows | Jost, uppercase, letter-spacing 0.2em, 12–13 px | e.g. eyebrow "CHAPTER 01 · THE SILENT GRIND" |
 
 Fallbacks if a font is unavailable in the store's font picker: Playfair Display / Montserrat.
 
 ## 4. Tone of voice
-**Storytelling, quiet and specific.** We write like a good short-story writer: concrete sensory detail (light, leather, place, hands, hour of day) instead of adjectives. Short sentences. One idea per paragraph. No exclamation marks, no "SALE!!!", no emoji, no superlatives ("best", "ultimate", "iconic").
+**Resilient, quiet and direct.** COMEBACK speaks to people who have been knocked down and kept going. We write with calm conviction, not hype: short sentences, plain words, one idea per line. No exclamation marks, no "SALE!!!", no emoji, no superlatives ("best", "ultimate", "iconic"). Use the brand's own story text word for word where it fits (§6).
 
 Every piece of product copy answers three questions, in this order:
-1. **The story:** where does this shoe come from? (a place, an hour, a person)
-2. **The detail:** which part of the shoe carries the story? (a stitch, a color, a shape)
+1. **The chapter:** which part of the comeback is this shoe? (The Silent Grind / A Fresh Start)
+2. **The detail:** which part of the shoe carries it? (the monogram, the suede, the colour)
 3. **The invitation:** what moment in the owner's life is it made for?
 
-- ✅ "Every pair has a story. This one begins on a clay court, just after the light turns."
-- ✅ "Cut from a single panel of leather. No seams to hide behind."
+- ✅ "Falling behind is not the end. Sometimes, it is where the comeback begins."
+- ✅ "Black, with the monogram in white. For the battles no one sees."
 - ✅ "Every pair is numbered, signed by its artisan, and registered to its owner."
 - ❌ "Our most iconic sneaker ever — grab yours before they're gone!!"
 - ❌ "Premium luxury quality materials for the modern man."
 
 **Rules for stories:**
-- Stories may be fables (an unnamed club, a watchmaker in an old quarter), but **anything stated as fact about the house, its founders or its artisans must be true** ([open items](../SPEC.md#open-items)).
+- **Anything stated as fact about the house, its shoes, materials or people must be true** ([open items](../SPEC.md#open-items)). The COMEBACK story is a concept, not a biography: do not invent founders, athletes or events.
 - No real people's names without written consent. No other brands, clubs or hotels by name.
 - Model story: 90–150 words. Excerpt: ≤ 280 characters. Pair note: ≤ 200 characters.
 
 ## 5. Photography & imagery
 
-The sample photos (`assets/sample-court-ivory.jpg`, `assets/sample-court-noir.jpg`) are **placeholders only**: they were shot on boxes and walls. No placeholder imagery exists yet for the other models.
+Current imagery is made from two phone photos of the real shoes (`docs/brand/shoes/`; the same files are in the theme as `assets/sample-court-ivory.jpg` = A Fresh Start and `assets/sample-court-noir.jpg` = The Silent Grind, used on the Authenticity page). They were shot on boxes and walls, so the theme uses **graded crops** ([shoe-images.md](../brand/shoe-images.md)). They are stand-ins until studio photography exists.
 
 **Art direction (all images):**
-- Natural or soft directional light; warm, slightly filmic grade with fine grain; never glossy or "catalogue".
+- **Only EvlveX shoes.** No stock photography of other footwear or clothing anywhere.
+- **Grade by chapter:** *The Silent Grind* is dark and monochrome (Noir, hard light on the white monogram and cupsole); *A Fresh Start* is light and airy (Ivory, soft daylight on cream and sand).
 - Colors held close to the house palette: ivory, sand, stone, deep shadow. Avoid saturated blues and greens.
-- People appear as hands, feet, silhouettes or from behind. The shoe and the place are the subject.
+- People appear as hands, feet, silhouettes or from behind. The shoe is the subject.
 - No visible third-party logos, signage or brands.
-- Every image should feel like a still from the story it belongs to.
+- Every image should feel like a still from the COMEBACK film.
 
 **Image families:**
 
 | Family | What | Where it's used | Ratio |
 |---|---|---|---|
 | **A. Product still life** | per colorway, seamless ivory or stone backdrop | product gallery, collection cards | 4:5 |
-| **B. Story plates** | 3–5 atmospheric frames per model that set the story's scene (§6) | story pages, product "The Story" section, home hero, certificate | 16:9 and 4:5 crops |
-| **C. Atelier & material** | hands cutting and stitching, hides, tools, lasts, the workshop card being written | The Maison, home "From the Atelier", Care | 3:2 and 4:5 |
+| **B. Chapter frames** | 3–5 cinematic frames per model in its chapter's grade (§6): the shoe in darkness for The Silent Grind, in first light for A Fresh Start | COMEBACK film, story pages, product "The Story" section, certificate | 16:9 and 4:5 crops |
+| **C. Details & material** | the monogram (white and embossed), suede texture, laces, cupsole, the workshop card | home "The Mark", About, Care, film detail scenes | 1:1, 3:2 and 4:5 |
 | **D. Certificate & packaging** | the box, the QR tag under the tongue, the handwritten workshop card, a phone showing the certificate | Authenticity page, product "Certificate" tab | 4:5 |
 
 **Product still-life shot list (family A), per colorway:**
@@ -90,10 +91,10 @@ The sample photos (`assets/sample-court-ivory.jpg`, `assets/sample-court-noir.jp
 4. Back / heel
 5. Outsole
 6. Macro shots: monogram, leather grain or suede texture, stitching
-7. On-foot (2–3 frames), shot inside the model's story setting where possible
+7. On-foot (2–3 frames), graded to the model's chapter
 8. Box, workshop card and QR tag
 
-**File naming:** `<model>-<colorway>-<nn>.jpg` for product shots (e.g. `court-01-noir-01.jpg`), `story-<model>-<nn>.jpg` for story plates (e.g. `story-court-01-01.jpg`), `atelier-<nn>.jpg`, `packaging-<nn>.jpg`.
+**File naming:** `<model>-<colorway>-<nn>.jpg` for product shots (e.g. `the-silent-grind-noir-01.jpg`), `chapter-<model>-<nn>.jpg` for chapter frames (e.g. `chapter-a-fresh-start-01.jpg`), `detail-<nn>.jpg`, `packaging-<nn>.jpg`.
 
 Export at ≥ 2400 px on the long edge, sRGB, JPG quality 85. Every image gets descriptive alt text written in the house voice (e.g. *"The Silent Grind in black, side profile, the white monogram catching the light"*).
 
@@ -160,5 +161,11 @@ The same details are handwritten on a **workshop card** placed in the box ([oper
 **Care intro:** "Keep your comeback going."
 
 **404:** "This page has no story yet." · "Return to the Maison" · "Scanned a tag? Verify your serial"
+
+**About page:** "Built for the comeback" · "One story, two chapters" · *The Silent Grind* · *A Fresh Start*
+
+**Stories index:** "COMEBACK" · "One story, two chapters"
+
+**Product tabs:** Materials & craft ("Smooth upper with suede overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole…"), Size & fit ("EU sizing. True to size…"), Care, Shipping & returns, Your pair's certificate.
 
 **Certificate thank-you copy** is in [qr-certificates.md §3](qr-certificates.md).

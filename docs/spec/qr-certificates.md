@@ -112,10 +112,10 @@ Each model story ([brand-and-content.md §6](brand-and-content.md)) is stored on
 
 | Field name | Key | Type | Example |
 |---|---|---|---|
-| Title | `title` | Single line text | *The Last Set at Dusk* |
+| Title | `title` | Single line text | *The Silent Grind* |
 | Chapter | `chapter` | Integer | `1` (shown as "Chapter 01") |
 | Model | `model_name` | Single line text | The Silent Grind |
-| Setting | `setting` | Single line text | *A seaside club, late summer.* |
+| Setting | `setting` | Single line text | *The chapters lived in the dark.* |
 | Excerpt | `excerpt` | Multi-line text (≤ 280 chars) | shown on product, cards and certificate |
 | Story | `body` | Rich text | the full 90–150-word story |
 | Signature detail | `signature_detail` | Multi-line text | how the story shows in the shoe |
