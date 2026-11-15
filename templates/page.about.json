@@ -165,12 +165,128 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "steps": {
+      "type": "multicolumn",
+      "blocks": {
+        "fall": {
+          "type": "column",
+          "settings": {
+            "title": "01 The Fall",
+            "text": "<p>Life knocks you down. It happens to everyone. What matters is what you do next.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "grind": {
+          "type": "column",
+          "settings": {
+            "title": "02 The Grind",
+            "text": "<p>The quiet work no one sees: early starts, small wins, holding on when it would be easier to let go.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "turn": {
+          "type": "column",
+          "settings": {
+            "title": "03 The Turn",
+            "text": "<p>The day you stop looking back and choose what comes next. Carry the lessons. Leave the weight.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "comeback": {
+          "type": "column",
+          "settings": {
+            "title": "04 The Comeback",
+            "text": "<p>Not a return to who you were. A first step into who you are becoming.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "fall",
+        "grind",
+        "turn",
+        "comeback"
+      ],
+      "settings": {
+        "title": "Four steps of a comeback",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "never-give-up": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Why we make them",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Shoes for the long way back",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A comeback is rarely one big moment. It is a thousand small ones: getting up, showing up, starting again. We wanted to make something that stays with you through all of them.</p><p>So every EvlveX pair carries the monogram on its side: a small mark for a big decision. Not to say you have arrived. To say you never gave up.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Read the chapters",
+            "button_link": "/pages/the-stories",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": false,
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
     }
   },
   "order": [
     "banner",
     "story",
+    "steps",
     "atelier",
-    "workshop-card"
+    "workshop-card",
+    "never-give-up"
   ]
 }
