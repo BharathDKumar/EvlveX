@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | v1.2 — COMEBACK revision (supersedes v1.1) |
+| **Status** | v1.3 — Black & white revision (supersedes v1.2) |
 | **Date** | 13 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
@@ -33,7 +33,7 @@ The first collection is **COMEBACK**: *what happens after life knocks you down: 
 
 The website must:
 
-1. **Feel premium and editorial, never like a stock Shopify store:** restrained Noir / Ivory / Sand palette, generous white space, cinematic imagery of our own shoes only, no Dawn placeholders or "Powered by Shopify".
+1. **Feel premium and editorial, never like a stock Shopify store:** a strict black-and-white palette with bold sans typography, generous white space, cinematic imagery of our own shoes only, no Dawn placeholders or "Powered by Shopify".
 2. **Tell the story first, then sell:** the home page opens with the COMEBACK film (a full-screen 3D carousel); every model is introduced through its chapter; every product page carries that chapter; a clear path still leads from story → product → cart → Shopify checkout.
 3. **Give every pair an identity:** each pair carries a unique QR tag. When the owner scans it, they land on a personal page, *"Thank you, {Full Name}"*, which tells the story of their pair and proves it is genuine.
 
@@ -73,7 +73,8 @@ The website must:
 |---|---|---|
 | v1.0 | 11 Nov 2026 | First specification: luxury story-led store on Dawn, QR certificates |
 | v1.1 | 12 Nov 2026 | Story layer: story metaobject, story pages, product story, home featured story, story-aware cart and certificate |
-| **v1.2** | **13 Nov 2026** | **COMEBACK:** the brand's real story and two models replace the five invented models; original logos; COMEBACK film (3D carousel) on the home page; editorial story carousel (home and per product); only the brand's own shoe photography, no Dawn placeholders; every page customised (cart, search, collections, journal, contact, password page, gift card, footer); template validation added to the release workflow |
+| v1.2 | 13 Nov 2026 | COMEBACK: the brand's real story and two models replace the five invented models; original logos; COMEBACK film (3D carousel) on the home page; editorial story carousel (home and per product); only the brand's own shoe photography, no Dawn placeholders; every page customised (cart, search, collections, journal, contact, password page, gift card, footer); template validation added to the release workflow |
+| **v1.3** | **15 Nov 2026** | **Black & white:** the whole site moves to black, white and neutral greys (no gold, ivory or sand); bold uppercase Archivo headings and Archivo body replace Cormorant / Jost; pill buttons; shoe imagery and QR tags regraded to black and white |
 
 Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
 

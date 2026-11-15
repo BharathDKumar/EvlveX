@@ -44,7 +44,7 @@
   <header class="evx-story__opener color-{{ section.settings.opener_color_scheme }} gradient">
     <div class="page-width evx-story__opener-text">
       {%- render 'evlvex-monogram', size: 40, class: 'evx-story__mark' -%}
-      <p class="evx-eyebrow evx-eyebrow--gold">
+      <p class="evx-eyebrow evx-eyebrow--strong">
         {%- render 'evlvex-chapter-label', story: story, with_model: true -%}
       </p>
       <h1 id="StoryTitle-{{ section.id }}" class="evx-story-title h0">{{ story.title.value | escape }}</h1>
@@ -85,7 +85,7 @@
             </div>
           {%- endif -%}
           <div class="evx-featured__content">
-            <p class="evx-eyebrow evx-eyebrow--gold">{{ section.settings.signature_label | escape }}</p>
+            <p class="evx-eyebrow evx-eyebrow--strong">{{ section.settings.signature_label | escape }}</p>
             <p class="evx-signature__lead">{{ story.signature_detail.value | escape | newline_to_br }}</p>
           </div>
         </div>

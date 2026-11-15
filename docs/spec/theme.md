@@ -12,13 +12,13 @@ The store runs **Dawn 16.1.1, customised**. Brand rules (palette, fonts, voice, 
 
 | Scheme | Background | Text | Button / label | Used for |
 |---|---|---|---|---|
-| scheme-1 *Ivory* | Ivory | Noir | Noir / Ivory | default pages, header |
-| scheme-2 *Bone* | Bone | Noir | Noir / Bone | product cards, alternate sections, story text |
-| scheme-3 *Noir* | Noir | Ivory | Sand-gold / Noir | hero, story openers, certificate page, announcement bar |
-| scheme-4 *Sand* | Sand | Noir | Noir / Sand | feature blocks, newsletter |
-| scheme-5 *Noir footer* | Noir | Ivory | Ivory / Noir | footer |
+| scheme-1 *White* | White | Black | Black / White | default pages, header |
+| scheme-2 *Light grey* | Light grey | Black | Black / Light grey | product cards, alternate sections, story text |
+| scheme-3 *Black* | Black | White | White / Black | hero, story openers, certificate page, announcement bar |
+| scheme-4 *Grey* | Grey | Black | Black / Grey | feature blocks, newsletter, sale badge |
+| scheme-5 *Black footer* | Black | White | White / Black | footer |
 
-**Typography:** headings `cormorant_n4` (scale 130%), body `jost_n4`. Story body, eyebrow and button styles per [brand-and-content.md §3](brand-and-content.md), implemented in `assets/evlvex-luxury.css`.
+**Typography:** headings `archivo_n8` (scale 120%), body `archivo_n4`. Buttons, size chips and badges are pills (radius 40); card text is left-aligned. Story body, eyebrow and button styles per [brand-and-content.md §3](brand-and-content.md), implemented in `assets/evlvex-luxury.css`.
 
 ## 2. Site map
 
@@ -40,10 +40,10 @@ Home
 > Do not create ordinary pages with the handles `stories` or `authentic`; those URL prefixes belong to the story and certificate metaobjects.
 
 ## 3. Global elements
-- **Announcement bar** (Noir): copy in [brand-and-content.md §8](brand-and-content.md).
-- **Header** (Ivory): logo centred, menu centred below it, search / account / cart icons on the right. Sticky when scrolling up.
+- **Announcement bar** (Black): copy in [brand-and-content.md §8](brand-and-content.md).
+- **Header** (White): logo centred, menu centred below it, search / account / cart icons on the right. Sticky when scrolling up.
 - **Main menu:** Shop (The Collection, The Silent Grind, A Fresh Start), The Chapters (stories), About, Authenticity. *(Store data: the store currently shows Shopify's default menu.)*
-- **Footer** (Noir footer): "Join the Maison: receive each new chapter first" newsletter, menus (Shop, Stories, Maison, Client Care), social icons, payment icons, signature line *Every pair has a story.*
+- **Footer** (Black footer): "Join the Maison: receive each new chapter first" newsletter, menus (Shop, Stories, Maison, Client Care), social icons, payment icons, signature line *Every pair has a story.*
 
 ## 4. Page specifications
 
@@ -53,7 +53,7 @@ Home
 | **Collection** | `collection.json` | Browse | banner (story plate of the lead model), collection description written as a short story intro, product grid with filters (type, colorway, size) | collection image + description | 2 columns, filter drawer |
 | **Product** | `product.json` | Convert through story | media gallery · eyebrow "CHAPTER 0X", title, price, size buttons, add to cart, one-line story excerpt under the price · **"The Story" section** (story plate + story body + signature detail + "Read the full story") · **Story carousel** (the product's own slides from `evlvex.story_slides`; hidden when there are none) · collapsible tabs: Materials & Craft, Size & Fit, Care, Shipping & Returns, Your Pair's Certificate · "You may also admire" | 5–8 product images + 1–2 story plates, size chart, materials text, linked story | gallery swipes, sticky add-to-cart area under gallery |
 | **The Stories** (index) | `page.stories.json` | Read before you buy | intro "COMEBACK · One story, two chapters" · grid of all active story entries, newest chapter first | — (pulls from story metaobjects) | 1 column |
-| **Story** | `metaobject/evlvex_story.json` | Long-form story per model | Noir opener: chapter eyebrow, title (Cormorant italic), setting line, full-bleed plate · story body (Bone, reading width) · plate gallery · signature detail (image-with-text) · the model's products ("Wear the story") · next / previous chapter | from the story entry | stacked, reading width 100% minus 24 px gutters |
+| **Story** | `metaobject/evlvex_story.json` | Long-form story per model | Black opener: chapter eyebrow, title (bold uppercase), setting line, full-bleed plate · story body (Light grey, reading width) · plate gallery · signature detail (image-with-text) · the model's products ("Wear the story") · next / previous chapter | from the story entry | stacked, reading width 100% minus 24 px gutters |
 | **About** | `page.about.json` | The story behind the house | image banner "Built for the comeback" · rich text "One story, two chapters" · image-with-text ×2: *The Silent Grind*, *A Fresh Start* | detail photography | stacked |
 | **Care** | `page.care.json` | Aftercare (linked from certificate) | intro "Keep your comeback going" + collapsible care steps: before first wear, smooth panels, suede, midsoles & laces, storage, repairs | — | stacked |
 | **Authenticity** | `page.authenticity.json` | Explain the QR program; manual serial lookup | intro, "How it works" 3 steps, **serial lookup form** | packaging imagery (family D) | full-width input |
@@ -65,7 +65,7 @@ Home
 | **Article** | `article.json` | Read | featured image, title, content, share · "More from the Journal" · newsletter | article image | stacked |
 | **Page** (generic) | `page.json` | Shipping, privacy and other text pages | page content · "Client care" strip (Contact, Care guide) | — | stacked |
 | **Contact** | `page.contact.json` | Write to the Maison | atelier banner · page content · atelier / client care / certificate details · contact form | atelier image | stacked |
-| **Gift card** | `gift_card.liquid` | Show a gift card | EvlveX card (monogram + wordmark on Noir) unless a logo is uploaded | — | — |
+| **Gift card** | `gift_card.liquid` | Show a gift card | EvlveX card (white monogram + wordmark on Black) unless a logo is uploaded | — | — |
 | **404** | `404.json` | Recovery | message, "Return to the Maison", link to Authenticity | — | — |
 
 ## 5. Implementation rules
@@ -81,7 +81,7 @@ Home
   - *Slides: Product story slides* is for the product template. It reads `product.metafields.evlvex.story_slides.value` ([qr-certificates.md §5.4](qr-certificates.md)) and outputs nothing on products without slides. The theme editor shows a notice instead.
   - Behaviour: native scroll-snap plus `assets/evlvex-story-carousel.js` (`<evlvex-story-carousel>`). It has arrows, dots, swipe and arrow/Home/End keys. Autoplay is optional; it pauses on hover, keyboard focus, a hidden tab, when the carousel is off-screen and when a block is selected in the theme editor, and it starts paused for visitors who prefer reduced motion.
   - Images: only the first slide's image may load eagerly, and only when the section is one of the first two on the page. When a slide becomes active, the next slide's image starts loading.
-- **Missing plates:** until story plates are uploaded, `snippets/evlvex-story-plate.liquid` shows a Noir panel with the gold monogram and the story title, never a broken or stock image.
+- **Missing plates:** until story plates are uploaded, `snippets/evlvex-story-plate.liquid` shows a Black panel with the white monogram and the story title, never a broken or stock image.
 - **Only EvlveX shoes, ever.** Wherever no image has been chosen, `snippets/evlvex-demo-image.liquid` shows graded photography of the two COMEBACK models ([docs/brand/shoe-images.md](../brand/shoe-images.md)) instead of Dawn's clothing illustrations. This covers image sections, product, collection and article cards, products without media, article pages and story plates. The setting is Theme settings → **EvlveX → Show demo photography**; with it off, those spots show the monogram plate. Sample product cards are named *The Silent Grind — Noir* and *A Fresh Start — Sand*, with a sample price.
 - **COMEBACK film** (`sections/evlvex-comeback-film.liquid`, `assets/evlvex-comeback-film.{css,js}`): scenes turn in 3D; each shot has a camera move (push, pull, pan); the shoe tilts with the pointer and floats when idle; copy reveals in sequence; the timeline fills like a video scrubber. It pauses on keyboard focus, when the tab is hidden or the film is scrolled away, and while a scene block is selected in the theme editor. Under *prefers-reduced-motion* it uses a simple crossfade and starts paused. Scenes are blocks: shoe (The Silent Grind / A Fresh Start / both) and shot (full / monogram / suede, laces and sole), or an uploaded image.
 - **No Shopify branding:** the footer shows *Every pair has a story.* instead of "Powered by Shopify"; the password page, gift card and favicon use the EvlveX marks.
@@ -90,7 +90,7 @@ Home
 
 ## 6. Changes by version
 
-v1.1 and v1.2 (13 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK.
+v1.1, v1.2 (13 Nov 2026) and v1.3 (15 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white.
 
 | Area | Files |
 |---|---|
@@ -107,7 +107,8 @@ v1.1 and v1.2 (13 Nov 2026) are implemented as listed. v1.2 rows: story carousel
 | COMEBACK | `sections/evlvex-comeback-film.liquid`, `assets/evlvex-comeback-film.css`, `assets/evlvex-comeback-film.js`; story copy in `templates/{index,page.about,page.care,page.stories,product}.json`, `sections/header-group.json`, `snippets/evlvex-sample-product.liquid` |
 | Password page & gift card | `layout/password.liquid` (EvlveX styles, favicon), `sections/main-password-header.liquid` (logo lockup), `templates/gift_card.liquid` (EvlveX card) |
 | Tooling | `tools/validate-templates.js` (template values against schemas), `tools/build-shoe-images.js` (graded shoe crops) |
-| Shared | `snippets/evlvex-chapter-label.liquid`, `snippets/evlvex-story-plate.liquid`, `assets/evlvex-story.css`; Cormorant italic loaded in `layout/theme.liquid` |
+| Shared | `snippets/evlvex-chapter-label.liquid`, `snippets/evlvex-story-plate.liquid`, `assets/evlvex-story.css` |
+| Black & white (v1.3) | color schemes, fonts (Archivo) and pill radii in `config/settings_data.json`; `assets/evlvex-luxury.css` (tokens, bold uppercase headings, pill buttons, no gold); `assets/evlvex-comeback-film.css`, `assets/evlvex-story.css`, `assets/evlvex-story-carousel.css`, `assets/section-certificate.css`; gold removed from `sections/main-404.liquid`, `templates/gift_card.liquid`, `assets/evlvex-monogram.svg`, `tools/qr-certificates/src/qr.js`; `evx-eyebrow--gold` renamed `evx-eyebrow--strong`; `layout/theme.liquid` no longer loads a heading italic; images regraded by `tools/build-shoe-images.js`, `assets/sample-court-noir.jpg` made greyscale |
 | Copy | `templates/index.json`, `product.json`, `page.about.json`, `page.care.json`, `page.authenticity.json`, `collection.json`, `sections/header-group.json` (mega menu), `sections/footer-group.json`, `sections/main-404.liquid`, brand text in `config/settings_data.json` |
 
 Menus, collections, products and story entries are store data, created during store setup ([deployment.md §5](deployment.md)).
