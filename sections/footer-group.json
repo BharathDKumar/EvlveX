@@ -3,63 +3,63 @@
   "type": "footer",
   "sections": {
     "footer": {
-      "type": "footer",
+      "type": "evlvex-footer",
       "blocks": {
-        "brand": {
-          "type": "brand_information",
-          "settings": {
-            "show_social": true
-          }
-        },
         "shop": {
-          "type": "link_list",
+          "type": "column",
           "settings": {
             "heading": "Shop",
-            "menu": "main-menu"
+            "links": "<p><a href=\"/collections/all\" title=\"The Collection\">The Collection</a></p><p><a href=\"/products/the-silent-grind\" title=\"The Silent Grind\">The Silent Grind</a></p><p><a href=\"/products/a-fresh-start\" title=\"A Fresh Start\">A Fresh Start</a></p>"
           }
         },
-        "client-care": {
-          "type": "link_list",
+        "comeback": {
+          "type": "column",
           "settings": {
-            "heading": "Client care",
-            "menu": "footer"
+            "heading": "COMEBACK",
+            "links": "<p><a href=\"/pages/the-maison\" title=\"Our story\">Our story</a></p><p><a href=\"/pages/the-stories\" title=\"The chapters\">The chapters</a></p><p><a href=\"/pages/authenticity\" title=\"Authenticity\">Authenticity</a></p>"
           }
         },
-        "stories": {
-          "type": "text",
+        "help": {
+          "type": "column",
           "settings": {
-            "heading": "Stories",
-            "subtext": "<p>Every pair has a story.</p><p><a href=\"/pages/the-stories\" title=\"The Stories\">Read the stories</a></p><p><a href=\"/pages/authenticity\" title=\"Authenticity\">Verify your pair</a></p>"
+            "heading": "Help",
+            "links": "<p><a href=\"/policies/shipping-policy\" title=\"Shipping\">Shipping</a></p><p><a href=\"/policies/refund-policy\" title=\"Returns and exchanges\">Returns &amp; exchanges</a></p><p><a href=\"/pages/care\" title=\"Care guide\">Care guide</a></p><p><a href=\"/pages/contact\" title=\"Contact us\">Contact us</a></p>"
           }
         },
         "contact": {
-          "type": "text",
+          "type": "contact",
           "settings": {
-            "heading": "Contact",
-            "subtext": "<p><a href=\"mailto:support@evlvex.in\" title=\"Email EvlveX client care\">support@evlvex.in</a></p><p>Instagram <a href=\"https://www.instagram.com/evlvex\" title=\"EvlveX on Instagram\" target=\"_blank\">@evlvex</a></p><p>Answers within one working day.</p>"
+            "heading": "Get in touch",
+            "email": "support@evlvex.in",
+            "instagram_handle": "@evlvex",
+            "note": "We answer within one working day.",
+            "show_social": true
           }
         }
       },
       "block_order": [
-        "brand",
         "shop",
-        "stories",
-        "client-care",
+        "comeback",
+        "help",
         "contact"
       ],
       "settings": {
         "color_scheme": "scheme-5",
+        "statement": "Keep going.",
+        "statement_text": "Every comeback starts with one more step.",
         "newsletter_enable": true,
-        "newsletter_heading": "Join the Maison: receive each new chapter first",
-        "enable_follow_on_shop": false,
-        "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "payment_enable": true,
+        "newsletter_heading": "New chapters, first",
+        "newsletter_placeholder": "Your email",
+        "newsletter_note": "One letter per chapter. Nothing else.",
+        "show_wordmark": true,
+        "copyright_name": "EvlveX",
+        "origin": "Made in India",
+        "trust_line": "evlvex.in is the only official EvlveX store.",
         "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 64,
-        "padding_bottom": 40
+        "enable_country_selector": true,
+        "payment_enable": true,
+        "padding_top": 96,
+        "padding_bottom": 32
       }
     }
   },

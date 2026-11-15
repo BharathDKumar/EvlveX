@@ -126,8 +126,36 @@ EvlveX tells **one story**, COMEBACK, in **chapters**. Each model carries one ch
 **Excerpt:** *The moment after the struggle, when you stop looking back and choose what comes next.*
 **Imagery:** light and airy, in black and white. White backgrounds, soft daylight, the suede and embossed monogram.
 
+### COMEBACK literature: "never give up"
+Supporting copy around the official story, written in the same voice. It is not a replacement for it. Use it where the site needs more than the story text; keep each line in one place only.
+
+**The COMEBACK code** (home manifesto, black)
+> **Knocked down. Never out.**
+> Every comeback starts the same way: on the ground.
+> A missed chance. A closed door. A season that took more than it gave.
+> Nobody claps for the early mornings. Nobody sees the second attempt, or the tenth.
+> That is the silent grind. It is where the real work happens.
+> Then one day you stop looking back. You lace up. You take the first step.
+> That is a fresh start. It is where the story turns.
+> EvlveX is made for the road between the two: for everyone who fell behind and refused to stay there.
+> **Never give up on your comeback.**
+
+**Four steps of a comeback** (About page)
+1. **The Fall.** Life knocks you down. It happens to everyone. What matters is what you do next.
+2. **The Grind.** The quiet work no one sees: early starts, small wins, holding on when it would be easier to let go.
+3. **The Turn.** The day you stop looking back and choose what comes next. Carry the lessons. Leave the weight.
+4. **The Comeback.** Not a return to who you were. A first step into who you are becoming.
+
+**Shoes for the long way back** (About page, closing)
+> A comeback is rarely one big moment. It is a thousand small ones: getting up, showing up, starting again. We wanted to make something that stays with you through all of them.
+> So every EvlveX pair carries the monogram on its side: a small mark for a big decision. Not to say you have arrived. To say you never gave up.
+
+**Stories page:** "Two models, two chapters, one story. Wear the one that matches where you are right now, and keep going."
+
+**Footer:** "Keep going." · "Every comeback starts with one more step."
+
 ### Product photography
-The site currently uses graded crops of two phone photos ([docs/brand/shoe-images.md](../brand/shoe-images.md)). For launch, shoot each model on a seamless background at 3000 px or more: a side profile, a three-quarter view, the monogram, the suede toe and the sole.
+The site currently uses crops of four colour campaign photos ([docs/brand/shoe-images.md](../brand/shoe-images.md)). For launch, shoot each model at 3000 px or more: a side profile, a three-quarter view, the monogram, the suede toe and the sole.
 
 ## 7. Every pair's own chapter
 Beyond the model story, **every individual pair** carries its own short chapter, recorded when it leaves the atelier and shown on its certificate page ([qr-certificates.md](qr-certificates.md)):
@@ -147,15 +175,16 @@ The same details are handwritten on a **workshop card** placed in the box ([oper
 **Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), five scenes: *COMEBACK* (both shoes, the main concept) → *The Silent Grind* → "Hold on through the weight" (monogram) → *A Fresh Start* → "Take the first step" (laces and suede). Each scene uses the brand text above.
 
 **Home brand statement**
-> **Falling behind is not the end.** Sometimes, it is where the comeback begins. EvlveX tells one story in two chapters: *The Silent Grind*, for the battles no one sees, and *A Fresh Start*, for the first step into what comes next. Every pair is numbered and registered to the person writing their own comeback.
+> **Falling behind is not the end.** Sometimes, it is where the comeback begins. EvlveX tells one story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next. Every pair is numbered and registered to the person writing their own comeback.
 
-**"Every pair, its own chapter" (multicolumn)**
-- **Numbered.** Each pair carries its place in the chapter, from No. 0001 onward.
-- **Signed by its artisan.** The hands that finished it, and the day they did.
-- **Registered to you.** Scan the tag inside and your name is written into its story.
+**Home manifesto:** "The COMEBACK code" (see §6, COMEBACK literature).
 
-**Newsletter / footer**
-> **Receive each new chapter first.** One letter when a new story is told. Nothing else.
+**Footer** (`sections/evlvex-footer.liquid`)
+- Statement: **Keep going.** Every comeback starts with one more step.
+- Newsletter: **New chapters, first.** Placeholder "Your email"; note "One letter per chapter. Nothing else." It is the only newsletter on the site.
+- Columns: *Shop* (The Collection, The Silent Grind, A Fresh Start) · *COMEBACK* (Our story, The chapters, Authenticity) · *Help* (Shipping, Returns & exchanges, Care guide, Contact us) · *Get in touch* (Support: support@evlvex.in, Instagram: @evlvex, "We answer within one working day.", social icons).
+- Full-width EVLVEX wordmark.
+- Bottom bar: "© 2026 EvlveX" · "Made in India" · "evlvex.in is the only official EvlveX store." · policy links · country and currency · payment icons.
 
 **Authenticity "How it works":** *Made and numbered* → *Signed and recorded* → *Registered to you*
 

@@ -43,18 +43,23 @@ Home
 - **Announcement bar** (Black): copy in [brand-and-content.md §8](brand-and-content.md).
 - **Header** (White): logo centred, menu centred below it, search / account / cart icons on the right. Sticky when scrolling up.
 - **Main menu:** Shop (The Collection, The Silent Grind, A Fresh Start), The Chapters (stories), About, Authenticity. *(Store data: the store currently shows Shopify's default menu.)*
-- **Footer** (Black footer): "Join the Maison: receive each new chapter first" newsletter, menus (Shop, Stories, Maison, Client Care), social icons, payment icons, signature line *Every pair has a story.*
+- **Footer** (Black footer, `sections/evlvex-footer.liquid` + `assets/section-evlvex-footer.css`; Dawn's `footer.liquid` is kept unused as a fallback). Top to bottom:
+  - statement "Keep going." and the newsletter (bare underline field with a round arrow button)
+  - four columns: Shop, COMEBACK and Help link columns, plus Get in touch. Link columns take a menu when one is chosen, otherwise their own links, and they are accordions on mobile. Get in touch has labelled support email and Instagram lines and the social icons.
+  - full-width wordmark
+  - one-line legal bar: © year EvlveX, Made in India, a trust line, policy links, country and currency, greyscale payment icons
+  - Each element appears once.
 
 ## 4. Page specifications
 
 | Page | Template | Purpose | Sections (in order) | Content needed | Mobile |
 |---|---|---|---|---|---|
-| **Home** | `index.json` | Brand first impression, route to stories and products | 1. **COMEBACK film**: full-screen 3D carousel, five scenes (COMEBACK → The Silent Grind → detail → A Fresh Start → detail) · 2. Brand statement "Falling behind is not the end." · 3. Featured collection "Two chapters, one comeback" · 4. Featured story · 5. "The Chapters": story cards · 6. Image-with-text "The Mark" (monogram) · 7. Multicolumn "Every pair, its own chapter" + link to Authenticity · 8. Newsletter | shoe photography ([shoe-images.md](../brand/shoe-images.md)) | film stacks the shoe above the copy; product grid 2 columns |
+| **Home** | `index.json` | Brand first impression, route to stories and products | 1. **COMEBACK film**: full-screen 3D carousel, five scenes (COMEBACK → The Silent Grind → detail → A Fresh Start → detail) · 2. Brand statement "Falling behind is not the end." · 3. Featured collection "Two chapters, one comeback" · 4. Rich text "The COMEBACK code" manifesto (black) · 5. Featured story · 6. "The Chapters": story cards · 7. Image-with-text "The Mark" (monogram). The newsletter is in the footer. The certificate programme is explained on the Authenticity page only. | shoe photography ([shoe-images.md](../brand/shoe-images.md)) | film stacks the shoe above the copy; product grid 2 columns |
 | **Collection** | `collection.json` | Browse | banner (story plate of the lead model), collection description written as a short story intro, product grid with filters (type, colorway, size) | collection image + description | 2 columns, filter drawer |
 | **Product** | `product.json` | Convert through story | media gallery · eyebrow "CHAPTER 0X", title, price, size buttons, add to cart, one-line story excerpt under the price · **"The Story" section** (story plate + story body + signature detail + "Read the full story") · **Story carousel** (the product's own slides from `evlvex.story_slides`; hidden when there are none) · collapsible tabs: Materials & Craft, Size & Fit, Care, Shipping & Returns, Your Pair's Certificate · "You may also admire" | 5–8 product images + 1–2 story plates, size chart, materials text, linked story | gallery swipes, sticky add-to-cart area under gallery |
 | **The Stories** (index) | `page.stories.json` | Read before you buy | intro "COMEBACK · One story, two chapters" · grid of all active story entries, newest chapter first | — (pulls from story metaobjects) | 1 column |
 | **Story** | `metaobject/evlvex_story.json` | Long-form story per model | Black opener: chapter eyebrow, title (bold uppercase), setting line, full-bleed plate · story body (Light grey, reading width) · plate gallery · signature detail (image-with-text) · the model's products ("Wear the story") · next / previous chapter | from the story entry | stacked, reading width 100% minus 24 px gutters |
-| **About** | `page.about.json` | The story behind the house | image banner "Built for the comeback" · rich text "One story, two chapters" · image-with-text ×2: *The Silent Grind*, *A Fresh Start* | detail photography | stacked |
+| **About** | `page.about.json` | The story behind the house | image banner "Built for the comeback" · rich text "One story, two chapters" · multicolumn "Four steps of a comeback" (The Fall, The Grind, The Turn, The Comeback) · image-with-text ×2: *The Silent Grind*, *A Fresh Start* · rich text "Shoes for the long way back" (black) | detail photography | stacked |
 | **Care** | `page.care.json` | Aftercare (linked from certificate) | intro "Keep your comeback going" + collapsible care steps: before first wear, smooth panels, suede, midsoles & laces, storage, repairs | — | stacked |
 | **Authenticity** | `page.authenticity.json` | Explain the QR program; manual serial lookup | intro, "How it works" 3 steps, **serial lookup form** | packaging imagery (family D) | full-width input |
 | **Certificate** | `metaobject/evlvex_certificate.json` | Thank-you, the pair's story, proof of authenticity | see [qr-certificates.md §2](qr-certificates.md) | populated automatically per pair | single column; thank-you and seal fit one phone screen above the fold |
@@ -90,7 +95,7 @@ Home
 
 ## 6. Changes by version
 
-v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4 (15 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white. v1.4 row: Colour photography, policies & contact.
+v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4 and v1.5 (15 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white. v1.4 row: Colour photography, policies & contact. v1.5 row: Footer & COMEBACK literature.
 
 | Area | Files |
 |---|---|
@@ -110,6 +115,7 @@ v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4 (15 Nov 2026) are implemented as listed.
 | Shared | `snippets/evlvex-chapter-label.liquid`, `snippets/evlvex-story-plate.liquid`, `assets/evlvex-story.css` |
 | Black & white (v1.3) | color schemes, fonts (Archivo) and pill radii in `config/settings_data.json`; `assets/evlvex-luxury.css` (tokens, bold uppercase headings, pill buttons, no gold); `assets/evlvex-comeback-film.css`, `assets/evlvex-story.css`, `assets/evlvex-story-carousel.css`, `assets/section-certificate.css`; gold removed from `sections/main-404.liquid`, `templates/gift_card.liquid`, `assets/evlvex-monogram.svg`, `tools/qr-certificates/src/qr.js`; `evx-eyebrow--gold` renamed `evx-eyebrow--strong`; `layout/theme.liquid` no longer loads a heading italic; images regraded by `tools/build-shoe-images.js`, `assets/sample-court-noir.jpg` made greyscale |
 | Colour photography, policies & contact (v1.4) | campaign photos in `docs/brand/campaign/`, cropped in true colour by `tools/build-shoe-images.js` into `assets/evx-*.jpg`; new sizes in `sections/evlvex-comeback-film.liquid` and `snippets/evlvex-demo-image.liquid`; Fresh Start film scenes set to the dark tone (`templates/index.json`); film backdrop no longer desaturated (`assets/evlvex-comeback-film.css`); store policies for Admin in `docs/policies/`; 7-day returns, free shipping and prepaid copy in `templates/product.json`, `templates/cart.json`, `sections/header-group.json`; Instagram link (`config/settings_data.json`) and support@evlvex.in on `templates/page.contact.json`, `templates/page.json` and a footer *Contact* column (`sections/footer-group.json`) |
+| Footer & COMEBACK literature (v1.5) | new `sections/evlvex-footer.liquid` and `assets/section-evlvex-footer.css`; `sections/footer-group.json` switched to it; home manifesto added and the "Every pair, its own chapter" and newsletter sections removed (`templates/index.json`); "Four steps of a comeback" and "Shoes for the long way back" on `templates/page.about.json`; one line added to `templates/page.stories.json` |
 | Copy | `templates/index.json`, `product.json`, `page.about.json`, `page.care.json`, `page.authenticity.json`, `collection.json`, `sections/header-group.json` (mega menu), `sections/footer-group.json`, `sections/main-404.liquid`, brand text in `config/settings_data.json` |
 
 Menus, collections, products and story entries are store data, created during store setup ([deployment.md §5](deployment.md)).
