@@ -1,69 +1,12 @@
-// Build EvlveX imagery from the brand's own shoe photos (black = The Silent Grind, cream = A Fresh Start).
-// Grades both chapters to neutral black & white (Silent Grind: dark, Fresh Start: light), vignettes the cluttered
-// backgrounds into the brand palette (black / white), and cuts full, card (4:5), wide and detail crops. Usage: node build-shoes.js <imagesDir> <assetsDir> <nm>
+// Build EvlveX shoe imagery from the campaign photos in docs/brand/campaign/ (see docs/brand/shoe-images.md).
+// Photos are used in true colour: this script only crops them (and, for the 4:5 cards and the wide hero, places a
+// crop on a matching dark studio canvas). Crops leave out the "Thank you" cards' small print and the corner marks.
+// Usage: node tools/build-shoe-images.js <campaignDir> <assetsDir> <node_modules dir that contains jimp>
 const path = require('path');
-const [, , imagesDir, assets, nm] = process.argv;
+const [, , srcDir, assets, nm] = process.argv;
 const Jimp = require(path.join(nm, 'jimp'));
 
-const NOIR = [17, 17, 17];
-const WHITE = [255, 255, 255];
-
-// Desaturate, tone and vignette toward a brand colour.
-function grade(img, { sat, bright, contrast, tint, edge, strength, inner }) {
-  img.color([{ apply: 'desaturate', params: [sat] }]);
-  if (bright) img.brightness(bright);
-  if (contrast) img.contrast(contrast);
-  const { width: w, height: h, data } = img.bitmap;
-  for (let y = 0; y < h; y++) {
-    for (let x = 0; x < w; x++) {
-      const i = (y * w + x) * 4;
-      // tint
-      data[i] = Math.min(255, data[i] * tint[0]);
-      data[i + 1] = Math.min(255, data[i + 1] * tint[1]);
-      data[i + 2] = Math.min(255, data[i + 2] * tint[2]);
-      // elliptical vignette
-      const dx = (x - w / 2) / (w / 2), dy = (y - h / 2) / (h / 2);
-      const d = Math.sqrt(dx * dx + dy * dy);
-      const t = Math.min(1, Math.max(0, (d - inner) / (1.25 - inner))) * strength;
-      const k = t * t * (3 - 2 * t);
-      for (let c = 0; c < 3; c++) data[i + c] = Math.round(data[i + c] * (1 - k) + edge[c] * k);
-    }
-  }
-  return img;
-}
-
-// Fresh Start: fully monochrome, wash cool colours (blue wall, green floor) and dark background toward
-// white, then a soft white vignette.
-function gradeLight(img, inner = 0.5, topFade = 0) {
-  const { width: w, height: h, data } = img.bitmap;
-  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-    const i = (y * w + x) * 4;
-    let r = data[i], g = data[i + 1], b = data[i + 2];
-    const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2, d = max - min;
-    let hue = 0;
-    if (d > 0) hue = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
-    hue = (hue * 60 + 360) % 360;
-    const ss = (e0, e1, v) => { const t = Math.min(1, Math.max(0, (v - e0) / (e1 - e0))); return t * t * (3 - 2 * t); };
-    // smooth weight for cool colours (greens, cyans, blues) so the mask has no hard edges
-    const cool = ss(6, 34, d) * ss(60, 105, hue) * (1 - ss(265, 300, hue));
-    const grey = (r + g + b) / 3;
-    const sat = 0; // monochrome
-    r = grey + (r - grey) * sat; g = grey + (g - grey) * sat; b = grey + (b - grey) * sat;
-    const lift = 0.7 * cool; r += (WHITE[0] - r) * lift; g += (WHITE[1] - g) * lift; b += (WHITE[2] - b) * lift;
-    // airy, neutral tone curve
-    r = r * 1.02 + 8; g = g * 1.02 + 8; b = b * 1.02 + 8;
-    const dx = (x - w / 2) / (w / 2), dy = (y - h / 2) / (h / 2);
-    const t = Math.min(1, Math.max(0, (Math.sqrt(dx * dx + dy * dy) - inner) / (1.25 - inner)));
-    let k = t * t * (3 - 2 * t);
-    if (topFade) { const [full, end] = topFade; const f = y <= full ? 1 : Math.max(0, 1 - (y - full) / (end - full)); k = Math.max(k, 0.95 * f * f * (3 - 2 * f)); }
-    data[i] = Math.min(255, Math.round(r * (1 - k) + WHITE[0] * k));
-    data[i + 1] = Math.min(255, Math.round(g * (1 - k) + WHITE[1] * k));
-    data[i + 2] = Math.min(255, Math.round(b * (1 - k) + WHITE[2] * k));
-  }
-  return img;
-}
-
-// Place a photo on a canvas of the brand colour, feathering the photo's edges into it.
+// Place a photo on a canvas of one colour, feathering the photo's edges into it.
 function onCanvas(photo, W, H, color, feather) {
   const canvas = new Jimp(W, H, Jimp.rgbaToInt(...color, 255));
   const p = photo.clone().scaleToFit(W, H);
@@ -78,33 +21,44 @@ function onCanvas(photo, W, H, color, feather) {
   return canvas;
 }
 
-const save = (img, name, q = 86) => img.quality(q).writeAsync(path.join(assets, name)).then(() => console.log('✔', name, img.bitmap.width + 'x' + img.bitmap.height));
+// Average colour of a photo's top band (the studio backdrop; lower edges can hold props), so a canvas matches it.
+function edgeColour(img, band = 24) {
+  const { width: w, height: h, data } = img.bitmap;
+  const sum = [0, 0, 0];
+  let n = 0;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    if (y >= band) continue;
+    const i = (y * w + x) * 4;
+    sum[0] += data[i]; sum[1] += data[i + 1]; sum[2] += data[i + 2]; n++;
+  }
+  return sum.map((v) => Math.round(v / n));
+}
+
+const crop = (img, x, y, w, h) => img.clone().crop(x, y, w, h);
+const save = (img, name, q = 88) => img.quality(q).writeAsync(path.join(assets, name)).then(() => console.log('✔', name, img.bitmap.width + 'x' + img.bitmap.height));
 
 (async () => {
-  const sgRaw = await Jimp.read(path.join(imagesDir, '6.jpg')); // black — The Silent Grind (1024x768)
-  const fsRaw = await Jimp.read(path.join(imagesDir, '5.jpg')); // cream — A Fresh Start (768x1024)
-
-  const sgGrade = { sat: 100, bright: -0.08, contrast: 0.18, tint: [1, 1, 1], edge: NOIR, strength: 1, inner: 0.55 };
-  const fsGrade = { sat: 100, bright: 0.06, contrast: -0.04, tint: [1, 1, 1], edge: WHITE, strength: 1, inner: 0.5 };
+  const read = (f) => Jimp.read(path.join(srcDir, f));
+  const grindPair = await read('silent-grind-pair.jpg'); // two Silent Grind shoes, dark grey studio
+  const freshStand = await read('fresh-start-stand.jpg'); // A Fresh Start on an acrylic stand
+  const collage = await read('collage-unboxing.jpg'); // 7 panels (3 columns), unboxing scenes
+  const triptych = await read('triptych-satin.jpg'); // 3 panels on grey satin
 
   // The Silent Grind
-  const sgFull = grade(sgRaw.clone(), sgGrade);
+  const sgFull = crop(grindPair, 70, 105, 960, 720); // both floating shoes; leaves out the corner mark
   await save(sgFull.clone(), 'evx-sg-full.jpg');
-  await save(onCanvas(sgFull, 1024, 1280, NOIR, 90), 'evx-sg-card.jpg');
-  await save(grade(sgRaw.clone().crop(367, 158, 480, 480), { ...sgGrade, inner: 0.45 }), 'evx-sg-monogram.jpg');
-  await save(grade(sgRaw.clone().crop(0, 300, 600, 375), { ...sgGrade, inner: 0.5 }), 'evx-sg-sole.jpg');
+  await save(onCanvas(sgFull, 1024, 1280, edgeColour(sgFull), 120), 'evx-sg-card.jpg');
+  await save(crop(collage, 403, 450, 397, 445), 'evx-sg-monogram.jpg'); // close-up with feathers
+  await save(crop(triptych, 802, 130, 392, 490), 'evx-sg-sole.jpg'); // in the navy box; card left out
 
   // A Fresh Start
-  const fsFull = gradeLight(fsRaw.clone(), 0.5, [195, 228]);
+  const fsFull = crop(freshStand, 150, 40, 950, 530); // shoe on the stand; card text and corner mark left out
   await save(fsFull.clone(), 'evx-fs-full.jpg');
-  await save(onCanvas(fsFull, 1366, 1024, WHITE, 140), 'evx-fs-wide.jpg');
-  await save(gradeLight(fsRaw.clone().crop(0, 64, 768, 960), 0.5, [131, 164]), 'evx-fs-card.jpg');
-  await save(gradeLight(fsRaw.clone().crop(220, 270, 400, 400), 0.45), 'evx-fs-monogram.jpg');
-  await save(gradeLight(fsRaw.clone().crop(150, 330, 400, 500), 0.45), 'evx-fs-laces.jpg');
+  await save(onCanvas(fsFull, 1366, 1024, edgeColour(fsFull), 140), 'evx-fs-wide.jpg');
+  await save(onCanvas(fsFull, 1024, 1280, edgeColour(fsFull), 120), 'evx-fs-card.jpg');
+  await save(crop(collage, 805, 0, 389, 295), 'evx-fs-monogram.jpg'); // in the black box
+  await save(crop(triptych, 0, 100, 397, 460), 'evx-fs-laces.jpg'); // in the cream box on feathers
 
-  // COMEBACK — both chapters side by side (dark | light)
-  const pair = new Jimp(1600, 1000, Jimp.rgbaToInt(...NOIR, 255));
-  pair.composite(onCanvas(sgFull, 800, 1000, NOIR, 80), 0, 0);
-  pair.composite(onCanvas(fsFull, 800, 1000, WHITE, 80), 800, 0);
-  await save(pair, 'evx-comeback-pair.jpg');
+  // COMEBACK: both shoes together
+  await save(crop(collage, 0, 0, 399, 445), 'evx-comeback-pair.jpg'); // both pairs with their boxes
 })().catch((e) => { console.error(e); process.exit(1); });

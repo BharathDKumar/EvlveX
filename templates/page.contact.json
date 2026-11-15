@@ -68,7 +68,7 @@
           "type": "column",
           "settings": {
             "title": "Client care",
-            "text": "<p>Answers within one working day, in English.</p>",
+            "text": "<p>Write to <a href=\"mailto:support@evlvex.in\" title=\"Email EvlveX client care\">support@evlvex.in</a>. We answer within one working day.</p>",
             "link_label": "",
             "link": ""
           }
@@ -81,11 +81,21 @@
             "link_label": "Authenticity",
             "link": "shopify://pages/authenticity"
           }
+        },
+        "column-4": {
+          "type": "column",
+          "settings": {
+            "title": "Instagram",
+            "text": "<p>New chapters, first: <a href=\"https://www.instagram.com/evlvex\" title=\"EvlveX on Instagram\" target=\"_blank\">@evlvex</a></p>",
+            "link_label": "Follow @evlvex",
+            "link": "https://www.instagram.com/evlvex"
+          }
         }
       },
       "block_order": [
         "column-1",
         "column-2",
+        "column-4",
         "column-3"
       ],
       "settings": {
@@ -95,7 +105,7 @@
         "image_ratio": "adapt",
         "button_label": "",
         "button_link": "",
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "column_alignment": "center",
         "background_style": "none",
         "color_scheme": "scheme-1",

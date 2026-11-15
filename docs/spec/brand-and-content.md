@@ -66,12 +66,12 @@ Every piece of product copy answers three questions, in this order:
 
 ## 5. Photography & imagery
 
-Current imagery is made from two phone photos of the real shoes (`docs/brand/shoes/`; the same files are in the theme as `assets/sample-court-ivory.jpg` = A Fresh Start and `assets/sample-court-noir.jpg` = The Silent Grind, used on the Authenticity page). They were shot on boxes and walls, so the theme uses **graded crops** ([shoe-images.md](../brand/shoe-images.md)). They are stand-ins until studio photography exists.
+Current imagery is cropped from four colour studio photos of both models on dark backdrops (`docs/brand/campaign/`, [shoe-images.md](../brand/shoe-images.md)). The earlier phone photos are in `docs/brand/shoes/`; one of them is still in the theme as `assets/sample-court-noir.jpg`, used on the Authenticity page.
 
 **Art direction (all images):**
 - **Only EvlveX shoes.** No stock photography of other footwear or clothing anywhere.
-- **Grade by chapter:** both chapters are graded **black and white**. *The Silent Grind* is dark (Black background, hard light on the white monogram and cupsole); *A Fresh Start* is light (White background, soft daylight).
-- Neutral black and white only, with no color casts.
+- **The site is black and white; shoe photography is true colour.** The shoes are the only colour on the page: the black leather and white monogram of *The Silent Grind*, the cream leather, sand suede and caramel sole of *A Fresh Start*. Never grade them to monochrome.
+- Dark studio backdrops (charcoal, black, grey satin), with props kept minimal: boxes, white or black feathers, a plain thank-you card. No legible small print in the frame.
 - People appear as hands, feet, silhouettes or from behind. The shoe is the subject.
 - No visible third-party logos, signage or brands.
 - Every image should feel like a still from the COMEBACK film.
@@ -142,7 +142,7 @@ The same details are handwritten on a **workshop card** placed in the box ([oper
 
 ## 8. Site copy (editable in the theme editor)
 
-**Announcement bar:** "Complimentary shipping · Every pair numbered, certified and told" · "COMEBACK · The Silent Grind & A Fresh Start"
+**Announcement bar:** "Free shipping across India · Every pair numbered, certified and told" · "COMEBACK · The Silent Grind & A Fresh Start"
 
 **Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), five scenes: *COMEBACK* (both shoes, the main concept) → *The Silent Grind* → "Hold on through the weight" (monogram) → *A Fresh Start* → "Take the first step" (laces and suede). Each scene uses the brand text above.
 

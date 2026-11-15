@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | v1.3 — Black & white revision (supersedes v1.2) |
+| **Status** | v1.4 — Colour photography, policies & contact (supersedes v1.3) |
 | **Date** | 13 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
@@ -58,12 +58,12 @@ The website must:
 | 1 | ~~Original logo files~~ **Done 12 Nov 2026:** in `docs/brand/logos/`, traced to SVG in the theme | Brand | — |
 | 2 | Create the two products with size variants, prices, materials and care text; confirm the materials copy in the product tabs ("smooth upper with suede overlays, padded collar, stitched cupsole") | Brand | products, product tabs, removing sample prices |
 | 3 | ~~Approve the model stories~~ **Done 13 Nov 2026:** COMEBACK, The Silent Grind, A Fresh Start (brand text, used word for word) | Brand / copy | — |
-| 4 | Studio photography of both models at 3000 px or more on seamless backgrounds. The site uses graded phone photos until then ([shoe-images.md](brand/shoe-images.md)) | Brand / photographer | every page, COMEBACK film |
-| 5 | Confirm brand claims still shown on the site: "every pair numbered, certified", "signed by its artisan", "registered to you" (certificate programme) and "complimentary shipping", "14-day returns" | Brand | launch |
+| 4 | Studio photography of both models at 3000 px or more. The site uses crops of the 1195 px campaign photos until then ([shoe-images.md](brand/shoe-images.md)) | Brand / photographer | every page, COMEBACK film |
+| 5 | Confirm brand claims still shown on the site: "every pair numbered, certified", "signed by its artisan", "registered to you" (certificate programme). **Shipping and returns decided 15 Nov 2026:** free shipping across India, prepaid only, 7-day returns and size exchange ([docs/policies/](policies/README.md)) | Brand | launch |
 | 6 | Written consent from each artisan to be named on certificates (only if artisans are named) | Atelier / legal | `artisan` field |
 | 7 | Workshop card design and print run | Brand / production | workshop cards |
 | 8 | ~~Confirm exact domain~~ **Done:** `evlvex.in` is live. Set `PUBLIC_DOMAIN=evlvex.in` before printing tags | Brand | QR tags |
-| 9 | Privacy-policy wording, e.g. *"Each EvlveX pair carries a certificate page showing the owner's name. Contact us to remove or change the owner's name."* | Brand / legal | launch |
+| 9 | Store policies are written ([docs/policies/](policies/README.md)): paste them into Admin → Settings → Policies and fill in the business details (legal name, address, GSTIN, phone, Grievance Officer, court city). Have a lawyer or CA review them | Brand / legal | launch |
 | 10 | Tag supplier and material (satin label vs sticker) | Production | first batch |
 | 11 | Main and footer menus (Shop, The Chapters, About, Care, Authenticity, Contact) | Store owner | navigation |
 | 12 | Before launch: turn off Theme settings → EvlveX → *Show demo photography* once real images are uploaded | Store owner | launch |
@@ -74,7 +74,8 @@ The website must:
 | v1.0 | 11 Nov 2026 | First specification: luxury story-led store on Dawn, QR certificates |
 | v1.1 | 12 Nov 2026 | Story layer: story metaobject, story pages, product story, home featured story, story-aware cart and certificate |
 | v1.2 | 13 Nov 2026 | COMEBACK: the brand's real story and two models replace the five invented models; original logos; COMEBACK film (3D carousel) on the home page; editorial story carousel (home and per product); only the brand's own shoe photography, no Dawn placeholders; every page customised (cart, search, collections, journal, contact, password page, gift card, footer); template validation added to the release workflow |
-| **v1.3** | **15 Nov 2026** | **Black & white:** the whole site moves to black, white and neutral greys (no gold, ivory or sand); bold uppercase Archivo headings and Archivo body replace Cormorant / Jost; pill buttons; shoe imagery and QR tags regraded to black and white |
+| v1.3 | 15 Nov 2026 | Black & white: the whole site moves to black, white and neutral greys (no gold, ivory or sand); bold uppercase Archivo headings and Archivo body replace Cormorant / Jost; pill buttons; shoe imagery and QR tags regraded to black and white |
+| **v1.4** | **15 Nov 2026** | **Colour photography, policies & contact:** shoe imagery replaced by true-colour crops of four campaign photos (the site stays black and white); store policies for India (returns, shipping, privacy, terms, contact) ready to paste into Shopify; 7-day returns, free shipping and prepaid-only copy; Instagram @evlvex and support@evlvex.in on the contact page and in the footer |
 
 Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
 

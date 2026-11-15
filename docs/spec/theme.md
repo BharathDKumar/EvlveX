@@ -58,7 +58,7 @@ Home
 | **Care** | `page.care.json` | Aftercare (linked from certificate) | intro "Keep your comeback going" + collapsible care steps: before first wear, smooth panels, suede, midsoles & laces, storage, repairs | — | stacked |
 | **Authenticity** | `page.authenticity.json` | Explain the QR program; manual serial lookup | intro, "How it works" 3 steps, **serial lookup form** | packaging imagery (family D) | full-width input |
 | **Certificate** | `metaobject/evlvex_certificate.json` | Thank-you, the pair's story, proof of authenticity | see [qr-certificates.md §2](qr-certificates.md) | populated automatically per pair | single column; thank-you and seal fit one phone screen above the fold |
-| **Cart** | `cart.json` | Review | line items (story title in italic under each product name) · subtotal and checkout · "The EvlveX promise" (shipping, certificate, 14-day returns) · "You may also admire" | — | stacked |
+| **Cart** | `cart.json` | Review | line items (story title in italic under each product name) · subtotal and checkout · "The EvlveX promise" (free shipping across India, certificate, 7-day returns and size exchange) · "You may also admire" | — | stacked |
 | **Search** | `search.json` | Find | results grid (portrait cards) with filters · "Perhaps you were looking for" | — | 2 columns |
 | **All collections** | `list-collections.json` | Browse families | intro "The Collection" · collection cards · "The Stories" cards | collection images | 2 columns |
 | **The Journal** (blog) | `blog.json` | Brand content | intro "Notes from the Maison" · article grid · newsletter | article images | 1 column |
@@ -90,7 +90,7 @@ Home
 
 ## 6. Changes by version
 
-v1.1, v1.2 (13 Nov 2026) and v1.3 (15 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white.
+v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4 (15 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white. v1.4 row: Colour photography, policies & contact.
 
 | Area | Files |
 |---|---|
@@ -109,6 +109,7 @@ v1.1, v1.2 (13 Nov 2026) and v1.3 (15 Nov 2026) are implemented as listed. v1.2 
 | Tooling | `tools/validate-templates.js` (template values against schemas), `tools/build-shoe-images.js` (graded shoe crops) |
 | Shared | `snippets/evlvex-chapter-label.liquid`, `snippets/evlvex-story-plate.liquid`, `assets/evlvex-story.css` |
 | Black & white (v1.3) | color schemes, fonts (Archivo) and pill radii in `config/settings_data.json`; `assets/evlvex-luxury.css` (tokens, bold uppercase headings, pill buttons, no gold); `assets/evlvex-comeback-film.css`, `assets/evlvex-story.css`, `assets/evlvex-story-carousel.css`, `assets/section-certificate.css`; gold removed from `sections/main-404.liquid`, `templates/gift_card.liquid`, `assets/evlvex-monogram.svg`, `tools/qr-certificates/src/qr.js`; `evx-eyebrow--gold` renamed `evx-eyebrow--strong`; `layout/theme.liquid` no longer loads a heading italic; images regraded by `tools/build-shoe-images.js`, `assets/sample-court-noir.jpg` made greyscale |
+| Colour photography, policies & contact (v1.4) | campaign photos in `docs/brand/campaign/`, cropped in true colour by `tools/build-shoe-images.js` into `assets/evx-*.jpg`; new sizes in `sections/evlvex-comeback-film.liquid` and `snippets/evlvex-demo-image.liquid`; Fresh Start film scenes set to the dark tone (`templates/index.json`); film backdrop no longer desaturated (`assets/evlvex-comeback-film.css`); store policies for Admin in `docs/policies/`; 7-day returns, free shipping and prepaid copy in `templates/product.json`, `templates/cart.json`, `sections/header-group.json`; Instagram link (`config/settings_data.json`) and support@evlvex.in on `templates/page.contact.json`, `templates/page.json` and a footer *Contact* column (`sections/footer-group.json`) |
 | Copy | `templates/index.json`, `product.json`, `page.about.json`, `page.care.json`, `page.authenticity.json`, `collection.json`, `sections/header-group.json` (mega menu), `sections/footer-group.json`, `sections/main-404.liquid`, brand text in `config/settings_data.json` |
 
 Menus, collections, products and story entries are store data, created during store setup ([deployment.md §5](deployment.md)).

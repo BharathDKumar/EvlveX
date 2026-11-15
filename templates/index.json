@@ -298,7 +298,7 @@
           "settings": {
             "shoe": "fresh-start",
             "shot": "full",
-            "tone": "light",
+            "tone": "dark",
             "camera": "pull",
             "focus_x": 50,
             "focus_y": 50,
@@ -316,7 +316,7 @@
           "settings": {
             "shoe": "fresh-start",
             "shot": "texture",
-            "tone": "light",
+            "tone": "dark",
             "camera": "pan-right",
             "focus_x": 50,
             "focus_y": 40,

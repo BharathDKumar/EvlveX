@@ -98,12 +98,12 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(48px) saturate(0.7);
+  filter: blur(48px) saturate(1.15);
   transform: scale(1.15);
 }
 
 .evx-film__scene--dark .evx-film__backdrop-img {
-  opacity: 0.28;
+  opacity: 0.4;
 }
 
 .evx-film__scene--light .evx-film__backdrop-img {
