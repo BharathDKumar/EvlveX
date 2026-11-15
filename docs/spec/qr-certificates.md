@@ -141,7 +141,7 @@ One entry per slide. Unlike the model story, slides belong to a single product. 
 |---|---|---|---|---|
 | Image | `image` | File (images only) | yes | desktop image; landscape or 4:5, to match the section setting |
 | Mobile image | `mobile_image` | File (images only) | no | used on screens under 750 px wide |
-| Eyebrow | `eyebrow` | Single line text | no | small gold label, e.g. *The Sole* |
+| Eyebrow | `eyebrow` | Single line text | no | small uppercase label, e.g. *The Sole* |
 | Heading | `heading` | Single line text | no | e.g. *A Caramel Baseline* |
 | Story | `story` | Multi-line text | no | two or three sentences; line breaks are kept |
 | Alt text | `alt_text` | Single line text | no | describes the photograph. If empty, the file's own alt text is used, then the heading. |

@@ -212,7 +212,7 @@ evlvex-story-carousel {
   margin: 0;
   font-family: var(--font-body-family);
   font-size: 1.2rem;
-  letter-spacing: var(--evx-tracking-wide, 0.22em);
+  letter-spacing: var(--evx-tracking-wide, 0.08em);
   font-variant-numeric: tabular-nums;
   color: rgba(var(--color-foreground), 0.75);
 }
@@ -267,7 +267,7 @@ evlvex-story-carousel {
 .evx-carousel__dot[aria-current='true'] .evx-carousel__dot-line {
   width: 3.2rem;
   height: 2px;
-  background: rgb(var(--evx-gold));
+  background: rgb(var(--color-foreground));
 }
 
 .evx-carousel__buttons {
@@ -369,6 +369,6 @@ evlvex-story-carousel {
   margin: 2.4rem 0;
   padding: 1.6rem 2rem;
   font-size: 1.3rem;
-  background: rgba(var(--evx-gold), 0.12);
+  background: rgba(var(--color-foreground), 0.06);
   color: rgb(var(--color-foreground));
 }

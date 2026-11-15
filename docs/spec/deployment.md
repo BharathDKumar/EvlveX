@@ -57,5 +57,5 @@ The CLI runs on a packing-station computer, not on Shopify.
 - [ ] Theme editor: the home **COMEBACK film** already shows the two shoes. Upload studio images per scene when they exist. The header already draws the original logo (monogram + wordmark); upload a logo image only if you want to replace it.
 - [ ] Print workshop cards ([operations.md §2](operations.md))
 - [ ] **Before launch:** upload studio photography of both models on products, collections and in the theme editor (the COMEBACK film scenes take an uploaded image too). Then turn off Theme settings → **EvlveX → Show demo photography** ([docs/brand/shoe-images.md](../brand/shoe-images.md)).
-- [ ] Checkout and customer accounts are hosted by Shopify. Brand them in Admin → Settings → **Checkout → Customize** (logo: `docs/brand/logos/`; colors Ivory `#F5F0E6`, Noir `#0E0E0E`, Sand-gold `#B89B6A`; fonts Cormorant / Jost). Customer account pages use the same branding.
+- [ ] Checkout and customer accounts are hosted by Shopify. Brand them in Admin → Settings → **Checkout → Customize** (logo: `docs/brand/logos/`; colors White `#FFFFFF`, Black `#111111`; font Archivo). Customer account pages use the same branding.
 - [ ] Policies: add the certificate privacy wording ([open items](../SPEC.md#open-items))

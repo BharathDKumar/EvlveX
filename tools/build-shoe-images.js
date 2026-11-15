@@ -1,12 +1,12 @@
 // Build EvlveX imagery from the brand's own shoe photos (black = The Silent Grind, cream = A Fresh Start).
-// Grades each chapter (Silent Grind: dark, Fresh Start: light sand), vignettes the cluttered backgrounds into the
-// brand palette, and cuts full, card (4:5), wide and detail crops. Usage: node build-shoes.js <imagesDir> <assetsDir> <nm>
+// Grades both chapters to neutral black & white (Silent Grind: dark, Fresh Start: light), vignettes the cluttered
+// backgrounds into the brand palette (black / white), and cuts full, card (4:5), wide and detail crops. Usage: node build-shoes.js <imagesDir> <assetsDir> <nm>
 const path = require('path');
 const [, , imagesDir, assets, nm] = process.argv;
 const Jimp = require(path.join(nm, 'jimp'));
 
-const NOIR = [14, 14, 14];
-const IVORY = [245, 240, 230];
+const NOIR = [17, 17, 17];
+const WHITE = [255, 255, 255];
 
 // Desaturate, tone and vignette toward a brand colour.
 function grade(img, { sat, bright, contrast, tint, edge, strength, inner }) {
@@ -32,8 +32,8 @@ function grade(img, { sat, bright, contrast, tint, edge, strength, inner }) {
   return img;
 }
 
-// Fresh Start: keep warm (sand / cream / caramel) tones, wash cool colours (blue wall, green floor) and
-// dark background toward Ivory, then a soft Ivory vignette.
+// Fresh Start: fully monochrome, wash cool colours (blue wall, green floor) and dark background toward
+// white, then a soft white vignette.
 function gradeLight(img, inner = 0.5, topFade = 0) {
   const { width: w, height: h, data } = img.bitmap;
   for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
@@ -47,18 +47,18 @@ function gradeLight(img, inner = 0.5, topFade = 0) {
     // smooth weight for cool colours (greens, cyans, blues) so the mask has no hard edges
     const cool = ss(6, 34, d) * ss(60, 105, hue) * (1 - ss(265, 300, hue));
     const grey = (r + g + b) / 3;
-    const sat = 0.55 * (1 - cool); // keep 55% saturation of warm tones
+    const sat = 0; // monochrome
     r = grey + (r - grey) * sat; g = grey + (g - grey) * sat; b = grey + (b - grey) * sat;
-    const lift = 0.7 * cool; r += (IVORY[0] - r) * lift; g += (IVORY[1] - g) * lift; b += (IVORY[2] - b) * lift;
-    // warm, airy tone curve
-    r = r * 1.03 + 10; g = g * 1.0 + 8; b = b * 0.94 + 6;
+    const lift = 0.7 * cool; r += (WHITE[0] - r) * lift; g += (WHITE[1] - g) * lift; b += (WHITE[2] - b) * lift;
+    // airy, neutral tone curve
+    r = r * 1.02 + 8; g = g * 1.02 + 8; b = b * 1.02 + 8;
     const dx = (x - w / 2) / (w / 2), dy = (y - h / 2) / (h / 2);
     const t = Math.min(1, Math.max(0, (Math.sqrt(dx * dx + dy * dy) - inner) / (1.25 - inner)));
     let k = t * t * (3 - 2 * t);
     if (topFade) { const [full, end] = topFade; const f = y <= full ? 1 : Math.max(0, 1 - (y - full) / (end - full)); k = Math.max(k, 0.95 * f * f * (3 - 2 * f)); }
-    data[i] = Math.min(255, Math.round(r * (1 - k) + IVORY[0] * k));
-    data[i + 1] = Math.min(255, Math.round(g * (1 - k) + IVORY[1] * k));
-    data[i + 2] = Math.min(255, Math.round(b * (1 - k) + IVORY[2] * k));
+    data[i] = Math.min(255, Math.round(r * (1 - k) + WHITE[0] * k));
+    data[i + 1] = Math.min(255, Math.round(g * (1 - k) + WHITE[1] * k));
+    data[i + 2] = Math.min(255, Math.round(b * (1 - k) + WHITE[2] * k));
   }
   return img;
 }
@@ -84,8 +84,8 @@ const save = (img, name, q = 86) => img.quality(q).writeAsync(path.join(assets, 
   const sgRaw = await Jimp.read(path.join(imagesDir, '6.jpg')); // black — The Silent Grind (1024x768)
   const fsRaw = await Jimp.read(path.join(imagesDir, '5.jpg')); // cream — A Fresh Start (768x1024)
 
-  const sgGrade = { sat: 70, bright: -0.08, contrast: 0.18, tint: [1, 1, 1.02], edge: NOIR, strength: 1, inner: 0.55 };
-  const fsGrade = { sat: 75, bright: 0.06, contrast: -0.04, tint: [1.04, 1.0, 0.93], edge: IVORY, strength: 1, inner: 0.5 };
+  const sgGrade = { sat: 100, bright: -0.08, contrast: 0.18, tint: [1, 1, 1], edge: NOIR, strength: 1, inner: 0.55 };
+  const fsGrade = { sat: 100, bright: 0.06, contrast: -0.04, tint: [1, 1, 1], edge: WHITE, strength: 1, inner: 0.5 };
 
   // The Silent Grind
   const sgFull = grade(sgRaw.clone(), sgGrade);
@@ -97,7 +97,7 @@ const save = (img, name, q = 86) => img.quality(q).writeAsync(path.join(assets, 
   // A Fresh Start
   const fsFull = gradeLight(fsRaw.clone(), 0.5, [195, 228]);
   await save(fsFull.clone(), 'evx-fs-full.jpg');
-  await save(onCanvas(fsFull, 1366, 1024, IVORY, 140), 'evx-fs-wide.jpg');
+  await save(onCanvas(fsFull, 1366, 1024, WHITE, 140), 'evx-fs-wide.jpg');
   await save(gradeLight(fsRaw.clone().crop(0, 64, 768, 960), 0.5, [131, 164]), 'evx-fs-card.jpg');
   await save(gradeLight(fsRaw.clone().crop(220, 270, 400, 400), 0.45), 'evx-fs-monogram.jpg');
   await save(gradeLight(fsRaw.clone().crop(150, 330, 400, 500), 0.45), 'evx-fs-laces.jpg');
@@ -105,6 +105,6 @@ const save = (img, name, q = 86) => img.quality(q).writeAsync(path.join(assets, 
   // COMEBACK — both chapters side by side (dark | light)
   const pair = new Jimp(1600, 1000, Jimp.rgbaToInt(...NOIR, 255));
   pair.composite(onCanvas(sgFull, 800, 1000, NOIR, 80), 0, 0);
-  pair.composite(onCanvas(fsFull, 800, 1000, IVORY, 80), 800, 0);
+  pair.composite(onCanvas(fsFull, 800, 1000, WHITE, 80), 800, 0);
   await save(pair, 'evx-comeback-pair.jpg');
 })().catch((e) => { console.error(e); process.exit(1); });

@@ -8,36 +8,38 @@
 .evx-story-title {
   margin: 0;
   font-family: var(--font-heading-family);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: 0;
+  font-weight: var(--font-heading-weight);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
 
 .evx-story-setting {
-  margin: 1rem 0 0;
-  font-family: var(--font-heading-family);
-  font-size: 2rem;
-  font-style: italic;
+  margin: 1.2rem 0 0;
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   line-height: 1.4;
-  color: rgba(var(--color-foreground), 0.75);
+  color: rgba(var(--color-foreground), 0.6);
 }
 
 .evx-rule {
   display: block;
   width: 4.8rem;
-  height: 1px;
+  height: 2px;
   margin: 2.8rem 0;
-  background: rgb(var(--evx-gold));
+  background: rgb(var(--color-foreground));
 }
 
 .evx-story-body {
   max-width: 62ch;
-  font-family: var(--font-heading-family);
-  font-size: 2rem;
-  line-height: 1.6;
-  letter-spacing: 0.005em;
-  color: rgb(var(--color-foreground));
+  font-family: var(--font-body-family);
+  font-size: 1.7rem;
+  line-height: 1.7;
+  letter-spacing: 0;
+  color: rgba(var(--color-foreground), 0.85);
 }
 
 .evx-story-body p {
@@ -50,7 +52,7 @@
 
 @media screen and (min-width: 750px) {
   .evx-story-body {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -73,10 +75,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(ellipse at 50% 35%, rgba(var(--evx-gold), 0.18), transparent 65%),
-    rgb(var(--evx-noir));
-  color: rgb(var(--evx-gold));
+  background: rgb(var(--evx-noir));
+  color: rgb(var(--evx-white));
 }
 
 .evx-plate__placeholder {
@@ -92,9 +92,10 @@
   max-width: 24ch;
   font-family: var(--font-heading-family);
   font-size: 2rem;
-  font-style: italic;
-  line-height: 1.3;
-  color: rgba(var(--evx-ivory), 0.85);
+  font-weight: var(--font-heading-weight);
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: rgba(var(--evx-white), 0.9);
 }
 
 /* ---------- Stories grid (sections/evlvex-stories-grid.liquid) ---------- */
@@ -180,7 +181,7 @@
 }
 
 .evx-story-card__plate .evx-plate__image {
-  transition: transform 1400ms var(--evx-ease);
+  transition: transform 900ms var(--evx-ease);
 }
 
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
@@ -195,31 +196,34 @@
 
 .evx-story-card__eyebrow {
   margin-bottom: 1rem;
-  color: rgb(var(--evx-gold));
+  color: rgba(var(--color-foreground), 0.6);
 }
 
 .evx-story-card__title {
   margin: 0;
   font-family: var(--font-heading-family);
-  font-size: calc(var(--font-heading-scale) * 2.6rem);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: calc(var(--font-heading-scale) * 2.2rem);
+  font-weight: var(--font-heading-weight);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
 }
 
 .evx-story-card__link:hover .evx-story-card__title {
   text-decoration: underline;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 2px;
   text-underline-offset: 0.4rem;
-  text-decoration-color: rgba(var(--evx-gold), 0.8);
+  text-decoration-color: rgb(var(--color-foreground));
 }
 
 .evx-story-card__setting {
-  margin: 0.6rem 0 0;
-  font-family: var(--font-heading-family);
-  font-size: 1.7rem;
-  font-style: italic;
-  color: rgba(var(--color-foreground), 0.7);
+  margin: 0.8rem 0 0;
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
 }
 
 .evx-story-card__excerpt {
@@ -280,7 +284,8 @@
 }
 
 .evx-featured__product-link {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
   letter-spacing: var(--evx-tracking-wide);
   text-transform: uppercase;
   color: rgb(var(--color-foreground));
@@ -289,7 +294,7 @@
 .evx-signature {
   margin-top: 3.2rem;
   padding-top: 2.4rem;
-  border-top: 1px solid rgba(var(--evx-gold), 0.4);
+  border-top: 1px solid rgba(var(--color-foreground), 0.15);
 }
 
 .evx-signature__text {
@@ -317,7 +322,7 @@
 .evx-story__mark {
   display: block;
   margin: 0 auto 2.8rem;
-  color: rgb(var(--evx-gold));
+  color: rgb(var(--color-foreground));
 }
 
 .evx-story__hero-plate {
@@ -339,19 +344,23 @@
 
 .evx-story-body--long p:first-child::first-letter {
   float: left;
-  margin: 0.08em 0.12em 0 0;
+  margin: 0.06em 0.1em 0 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
   font-size: 3.6em;
   line-height: 0.8;
-  color: rgb(var(--evx-gold));
+  color: rgb(var(--color-foreground));
 }
 
 .evx-story__signoff {
   margin: 4.8rem 0 0;
   text-align: center;
-  font-family: var(--font-heading-family);
-  font-size: 1.8rem;
-  font-style: italic;
-  color: rgb(var(--evx-gold));
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
 }
 
 .evx-story__signature,
@@ -362,9 +371,11 @@
 .evx-signature__lead {
   margin: 0;
   font-family: var(--font-heading-family);
-  font-size: calc(var(--font-heading-scale) * 2.6rem);
-  font-style: italic;
-  line-height: 1.4;
+  font-size: calc(var(--font-heading-scale) * 2.4rem);
+  font-weight: var(--font-heading-weight);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .evx-story__gallery {
@@ -414,21 +425,22 @@
 
 .evx-story__nav-link .evx-eyebrow {
   margin: 0;
-  color: rgb(var(--evx-gold));
+  color: rgba(var(--color-foreground), 0.6);
 }
 
 .evx-story__nav-title {
   font-family: var(--font-heading-family);
-  font-size: calc(var(--font-heading-scale) * 2.2rem);
-  font-style: italic;
-  line-height: 1.25;
+  font-size: calc(var(--font-heading-scale) * 2rem);
+  font-weight: var(--font-heading-weight);
+  text-transform: uppercase;
+  line-height: 1.05;
 }
 
 .evx-story__nav-link:hover .evx-story__nav-title {
   text-decoration: underline;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 2px;
   text-underline-offset: 0.4rem;
-  text-decoration-color: rgba(var(--evx-gold), 0.8);
+  text-decoration-color: rgb(var(--color-foreground));
 }
 
 @media screen and (max-width: 749px) {

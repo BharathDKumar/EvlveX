@@ -13,8 +13,8 @@ evlvex-comeback-film {
   display: block;
   position: relative;
   overflow: hidden;
-  background: rgb(14, 14, 14);
-  color: rgb(245, 240, 230);
+  background: rgb(17, 17, 17);
+  color: rgb(255, 255, 255);
   --evx-film-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
@@ -73,17 +73,17 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 
 /* Tones */
 .evx-film__scene--dark {
-  background: radial-gradient(ellipse at 62% 45%, rgb(34, 32, 29) 0%, rgb(14, 14, 14) 62%);
-  color: rgb(245, 240, 230);
-  --film-accent: 184, 155, 106;
-  --film-muted: 245, 240, 230;
+  background: radial-gradient(ellipse at 62% 45%, rgb(38, 38, 38) 0%, rgb(17, 17, 17) 62%);
+  color: rgb(255, 255, 255);
+  --film-accent: 255, 255, 255;
+  --film-muted: 255, 255, 255;
 }
 
 .evx-film__scene--light {
-  background: radial-gradient(ellipse at 62% 45%, rgb(252, 249, 243) 0%, rgb(236, 228, 214) 70%);
-  color: rgb(14, 14, 14);
-  --film-accent: 150, 120, 72;
-  --film-muted: 14, 14, 14;
+  background: radial-gradient(ellipse at 62% 45%, rgb(255, 255, 255) 0%, rgb(237, 237, 237) 70%);
+  color: rgb(17, 17, 17);
+  --film-accent: 17, 17, 17;
+  --film-muted: 17, 17, 17;
 }
 
 /* Blurred backdrop of the same shot: depth and colour behind the frame */
@@ -121,7 +121,7 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 }
 
 .evx-film__scene--light::after {
-  background: linear-gradient(to bottom, rgba(236, 228, 214, 0.6), transparent 18%, transparent 78%, rgba(236, 228, 214, 0.7));
+  background: linear-gradient(to bottom, rgba(237, 237, 237, 0.6), transparent 18%, transparent 78%, rgba(237, 237, 237, 0.7));
 }
 
 /* ---------- Visual: frame(s) in 3D ---------- */
@@ -151,7 +151,7 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 }
 
 .evx-film__scene--light .evx-film__frame {
-  box-shadow: 0 50px 90px -45px rgba(80, 60, 30, 0.45);
+  box-shadow: 0 50px 90px -45px rgba(0, 0, 0, 0.3);
 }
 
 .evx-film__scene--pair .evx-film__frame {
@@ -208,25 +208,25 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 .evx-film__eyebrow {
   margin: 0 0 1.4rem;
   font-family: var(--font-body-family);
-  font-size: 1.1rem;
-  letter-spacing: 0.32em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(var(--film-accent));
+  color: rgba(var(--film-accent), 0.75);
 }
 
 .evx-film__heading {
   margin: 0;
-  font-family: var(--font-body-family);
-  font-weight: 400;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 0.92;
   color: inherit;
 }
 
 .evx-film__heading--display {
   font-size: clamp(4rem, 11.5vw, 7.2rem);
-  letter-spacing: 0.12em;
-  margin-right: -0.12em;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
@@ -237,17 +237,17 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 }
 
 .evx-film__heading--title {
-  font-size: clamp(3rem, 4.6vw, 6.4rem);
-  letter-spacing: 0.1em;
+  font-size: clamp(3.2rem, 5vw, 7.2rem);
+  letter-spacing: -0.02em;
 }
 
 .evx-film__text {
   margin: 2rem 0 0;
   max-width: 44ch;
-  font-family: var(--font-heading-family);
-  font-size: 1.9rem;
-  line-height: 1.55;
-  color: rgba(var(--film-muted), 0.82);
+  font-family: var(--font-body-family);
+  font-size: 1.7rem;
+  line-height: 1.6;
+  color: rgba(var(--film-muted), 0.8);
 }
 
 .evx-film__cta {
@@ -256,8 +256,9 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
   gap: 1.4rem;
   margin-top: 2.8rem;
   font-family: var(--font-body-family);
-  font-size: 1.2rem;
-  letter-spacing: 0.24em;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
   color: inherit;
@@ -287,12 +288,12 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
   align-items: flex-end;
   gap: 2.4rem;
   padding: 0 2rem 2.4rem;
-  color: rgb(245, 240, 230);
+  color: rgb(255, 255, 255);
   transition: color 0.8s var(--evx-film-ease);
 }
 
 evlvex-comeback-film.is-light .evx-film__chrome {
-  color: rgb(14, 14, 14);
+  color: rgb(17, 17, 17);
 }
 
 .evx-film__timeline {
@@ -343,7 +344,7 @@ evlvex-comeback-film.is-light .evx-film__chrome {
   inset: 0;
   transform: scaleX(0);
   transform-origin: left center;
-  background: rgb(184, 155, 106);
+  background: currentColor;
 }
 
 .evx-film__chapter.is-done .evx-film__fill {
@@ -368,8 +369,9 @@ evlvex-comeback-film.is-paused .evx-film__img {
   white-space: nowrap;
   text-overflow: ellipsis;
   font-family: var(--font-body-family);
-  font-size: 1rem;
-  letter-spacing: 0.22em;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   opacity: 0.55;
   transition: opacity 0.4s;
@@ -391,7 +393,8 @@ evlvex-comeback-film.is-paused .evx-film__img {
   margin: 0 1.2rem 0 0;
   font-family: var(--font-body-family);
   font-size: 1.2rem;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
 }
 

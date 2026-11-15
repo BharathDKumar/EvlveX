@@ -18,7 +18,7 @@ Command details are in [qr-tooling.md](qr-tooling.md); the certificate fields ar
 > Only print after the public domain is live ([deployment.md §1](deployment.md)).
 
 ## 2. Write the workshop card (atelier)
-When a pair is finished, the artisan fills in a **workshop card** (printed card, Ivory stock, signature line *Every pair has a story.*) and places it in the box:
+When a pair is finished, the artisan fills in a **workshop card** (printed card, white stock with black print, signature line *Every pair has a story.*) and places it in the box:
 - Serial (copied from the box sticker)
 - Model and colorway
 - Finished by (first name and initial, if the artisan has consented to be named)

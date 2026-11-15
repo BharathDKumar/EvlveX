@@ -15,7 +15,7 @@ try {
   // Older/newer qrcode layout: fall back to not protecting alignment patterns.
 }
 
-export const COLORS = { ink: '#0E0E0E', gold: '#B89B6A', paper: '#FFFFFF', guide: '#BBBBBB' };
+export const COLORS = { ink: '#111111', accent: '#111111', paper: '#FFFFFF', guide: '#BBBBBB' };
 
 export const TAG = {
   width: 30, // mm
@@ -117,11 +117,11 @@ export function tagSvg(serial, url) {
   <rect width="${TAG.width}" height="${TAG.height}" fill="${COLORS.paper}"/>
   <path d="${modules}" fill="${COLORS.ink}" shape-rendering="crispEdges"/>
   <g transform="translate(${fmt(lx)} ${fmt(ly)}) scale(${fmt(s)})">
-    <circle cx="${ring.cx}" cy="${ring.cy}" r="${ring.r}" fill="none" stroke="${COLORS.gold}" stroke-width="${ring.stroke}"/>
-    <g fill="${COLORS.gold}">${bars}</g>
+    <circle cx="${ring.cx}" cy="${ring.cy}" r="${ring.r}" fill="none" stroke="${COLORS.accent}" stroke-width="${ring.stroke}"/>
+    <g fill="${COLORS.accent}">${bars}</g>
   </g>
   <text x="${TAG.width / 2}" y="${TAG.serialBaseline}" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="${TAG.serialSize}" letter-spacing="0.35" fill="${COLORS.ink}">${serial}</text>
-  <text x="${TAG.width / 2}" y="${TAG.wordmarkBaseline}" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="${TAG.wordmarkSize}" letter-spacing="0.42" fill="${COLORS.gold}">EVLVEX · CERTIFIED</text>
+  <text x="${TAG.width / 2}" y="${TAG.wordmarkBaseline}" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="${TAG.wordmarkSize}" letter-spacing="0.42" fill="${COLORS.accent}">EVLVEX · CERTIFIED</text>
 </svg>
 `;
 }
@@ -154,9 +154,9 @@ export function drawTagPdf(doc, xMm, yMm, serial, url) {
   const lx = ox + m.logo.cx * unit - logoSize / 2;
   const ly = oy + m.logo.cy * unit - logoSize / 2;
   const ring = MONOGRAM.ring;
-  doc.save().lineWidth(ring.stroke * s).strokeColor(COLORS.gold)
+  doc.save().lineWidth(ring.stroke * s).strokeColor(COLORS.accent)
     .circle(lx + ring.cx * s, ly + ring.cy * s, ring.r * s).stroke().restore();
-  doc.save().fillColor(COLORS.gold);
+  doc.save().fillColor(COLORS.accent);
   for (const [bx, by, bw, bh] of MONOGRAM.bars) doc.rect(lx + bx * s, ly + by * s, bw * s, bh * s);
   doc.fill().restore();
 
@@ -167,7 +167,7 @@ export function drawTagPdf(doc, xMm, yMm, serial, url) {
       width: TAG.width * MM, align: 'center', characterSpacing: 0.35 * MM, lineBreak: false,
     });
   const wordPt = TAG.wordmarkSize * MM;
-  doc.font('Helvetica').fontSize(wordPt).fillColor(COLORS.gold)
+  doc.font('Helvetica').fontSize(wordPt).fillColor(COLORS.accent)
     .text('EVLVEX · CERTIFIED', x, y + TAG.wordmarkBaseline * MM - wordPt * 0.8, {
       width: TAG.width * MM, align: 'center', characterSpacing: 0.42 * MM, lineBreak: false,
     });

@@ -6,63 +6,63 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#F5F0E6",
+          "background": "#FFFFFF",
           "background_gradient": "",
-          "text": "#0E0E0E",
-          "button": "#0E0E0E",
-          "button_label": "#F5F0E6",
-          "secondary_button_label": "#0E0E0E",
-          "shadow": "#0E0E0E"
+          "text": "#111111",
+          "button": "#111111",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#111111",
+          "shadow": "#111111"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#FBFAF7",
+          "background": "#F5F5F5",
           "background_gradient": "",
-          "text": "#0E0E0E",
-          "button": "#0E0E0E",
-          "button_label": "#FBFAF7",
-          "secondary_button_label": "#0E0E0E",
-          "shadow": "#0E0E0E"
+          "text": "#111111",
+          "button": "#111111",
+          "button_label": "#F5F5F5",
+          "secondary_button_label": "#111111",
+          "shadow": "#111111"
         }
       },
       "scheme-3": {
         "settings": {
-          "background": "#0E0E0E",
+          "background": "#111111",
           "background_gradient": "",
-          "text": "#F5F0E6",
-          "button": "#B89B6A",
-          "button_label": "#0E0E0E",
-          "secondary_button_label": "#F5F0E6",
-          "shadow": "#0E0E0E"
+          "text": "#FFFFFF",
+          "button": "#FFFFFF",
+          "button_label": "#111111",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#111111"
         }
       },
       "scheme-4": {
         "settings": {
-          "background": "#CDBA98",
+          "background": "#E5E5E5",
           "background_gradient": "",
-          "text": "#0E0E0E",
-          "button": "#0E0E0E",
-          "button_label": "#CDBA98",
-          "secondary_button_label": "#0E0E0E",
-          "shadow": "#0E0E0E"
+          "text": "#111111",
+          "button": "#111111",
+          "button_label": "#E5E5E5",
+          "secondary_button_label": "#111111",
+          "shadow": "#111111"
         }
       },
       "scheme-5": {
         "settings": {
-          "background": "#0E0E0E",
+          "background": "#111111",
           "background_gradient": "",
-          "text": "#F5F0E6",
-          "button": "#F5F0E6",
-          "button_label": "#0E0E0E",
-          "secondary_button_label": "#F5F0E6",
-          "shadow": "#0E0E0E"
+          "text": "#FFFFFF",
+          "button": "#FFFFFF",
+          "button_label": "#111111",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#111111"
         }
       }
     },
-    "type_header_font": "cormorant_n4",
-    "heading_scale": 130,
-    "type_body_font": "jost_n4",
+    "type_header_font": "archivo_n8",
+    "heading_scale": 120,
+    "type_body_font": "archivo_n4",
     "body_scale": 100,
     "page_width": 1400,
     "spacing_sections": 0,
@@ -72,28 +72,28 @@
     "animations_hover_elements": "none",
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
-    "buttons_radius": 0,
+    "buttons_radius": 40,
     "buttons_shadow_opacity": 0,
     "buttons_shadow_horizontal_offset": 0,
     "buttons_shadow_vertical_offset": 4,
     "buttons_shadow_blur": 5,
     "variant_pills_border_thickness": 1,
     "variant_pills_border_opacity": 35,
-    "variant_pills_radius": 0,
+    "variant_pills_radius": 40,
     "variant_pills_shadow_opacity": 0,
     "variant_pills_shadow_horizontal_offset": 0,
     "variant_pills_shadow_vertical_offset": 4,
     "variant_pills_shadow_blur": 5,
     "inputs_border_thickness": 1,
     "inputs_border_opacity": 35,
-    "inputs_radius": 0,
+    "inputs_radius": 4,
     "inputs_shadow_opacity": 0,
     "inputs_shadow_horizontal_offset": 0,
     "inputs_shadow_vertical_offset": 4,
     "inputs_shadow_blur": 5,
     "card_style": "standard",
     "card_image_padding": 0,
-    "card_text_alignment": "center",
+    "card_text_alignment": "left",
     "card_color_scheme": "scheme-2",
     "card_border_thickness": 0,
     "card_border_opacity": 10,
@@ -104,7 +104,7 @@
     "card_shadow_blur": 5,
     "collection_card_style": "standard",
     "collection_card_image_padding": 0,
-    "collection_card_text_alignment": "center",
+    "collection_card_text_alignment": "left",
     "collection_card_color_scheme": "scheme-2",
     "collection_card_border_thickness": 0,
     "collection_card_border_opacity": 10,
@@ -152,7 +152,7 @@
     "drawer_shadow_vertical_offset": 4,
     "drawer_shadow_blur": 5,
     "badge_position": "top left",
-    "badge_corner_radius": 0,
+    "badge_corner_radius": 40,
     "sale_badge_color_scheme": "scheme-4",
     "sold_out_badge_color_scheme": "scheme-3",
     "brand_headline": "Every pair has a story.",

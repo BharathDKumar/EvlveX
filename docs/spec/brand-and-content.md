@@ -7,42 +7,43 @@ Part of the [EvlveX specification](../SPEC.md). **Audience:** brand, copywriters
 ## 1. Logo
 - **Monogram:** a heavy ring enclosing two mirrored "E"s back to back, worn on the outer side of every pair: embroidered in white on The Silent Grind, embossed in sand on A Fresh Start.
 - **Wordmark:** `EVLVEX` in a custom stencil-cut logotype: the Es are three bars, each V is split, and the X has a broken arm.
-- **Signature line:** *Every pair has a story.* Set in Cormorant italic beneath the wordmark on packaging, workshop cards and the certificate page.
+- **Signature line:** *Every pair has a story.* Set in Archivo, bold and uppercase, beneath the wordmark on packaging, workshop cards and the certificate page.
 - **Master artwork** (final, supplied 12 Nov 2026): `docs/brand/logos/`. It holds the original monogram and wordmark PNGs in black and white on transparent backgrounds, plus `evlvex-monogram.svg` and `evlvex-wordmark.svg`, vectors traced from them for print and partners.
 - **Files in theme:**
-  - `assets/evlvex-monogram.svg`: standalone file in Sand-gold, used for the favicon and downloads
+  - `assets/evlvex-monogram.svg`: standalone file in Black, used for the favicon and downloads
   - `snippets/evlvex-monogram.liquid`: inline SVG monogram that takes its color from the surrounding text color (`currentColor`)
   - `snippets/evlvex-wordmark.liquid`: inline SVG wordmark (`currentColor`), sized by CSS height
   - `snippets/evlvex-logo.liquid`: header lockup (monogram + wordmark), used when no logo image is uploaded in Theme settings
 - **Usage rules:**
   - Clear space around the monogram ≥ ½ of its diameter.
   - Minimum size: 16 px on screen, 6 mm in print.
-  - On light backgrounds use Noir or Sand-gold; on dark backgrounds use Ivory or Sand-gold.
+  - On light backgrounds use Black; on dark backgrounds use White. No other colors.
   - Never stretch, outline, add shadows, or place on busy photography.
 
 ## 2. Color palette
-The house palette is taken from the two COMEBACK models: Noir from The Silent Grind, Ivory and Sand from A Fresh Start. The **website and packaging always use the house palette**.
+The house palette is **black and white**, with neutral greys only. It follows premium sportswear sites: high contrast, no accent color, and the shoes provide the interest. The **website and packaging always use the house palette**.
 
-| Name | Hex | Source | Use |
-|---|---|---|---|
-| Noir | `#0E0E0E` | black leather | text, dark sections, footer |
-| Ivory | `#F5F0E6` | cream leather | main page background |
-| Bone | `#FBFAF7` | midsole | cards, alternate sections, story body background |
-| Sand | `#CDBA98` | suede & laces | soft feature blocks |
-| Sand-gold | `#B89B6A` | logo embroidery | accents, hairlines, seal, chapter numbers, buttons on Noir |
-| Caramel | `#B4734A` | sole stripe | rare highlight only (e.g. "New chapter" badge) |
+| Name | Hex | Use |
+|---|---|---|
+| Black | `#111111` | text, buttons, dark sections (hero, announcement bar, footer) |
+| White | `#FFFFFF` | main page background; text and buttons on Black |
+| Light grey | `#F5F5F5` | product cards, alternate sections |
+| Grey | `#E5E5E5` | feature blocks, newsletter, sale badge |
+| Mid grey | `#757575` | muted text (eyebrows, captions); hairlines are the text color at 15% |
+
+There is **no accent color**: links, rules, underlines, the seal and chapter numbers use the text color, so they are black on light sections and white on dark ones.
 
 The Shopify color-scheme mapping is in [theme.md §1](theme.md).
 
 ## 3. Typography
 | Role | Font (Shopify font library) | Notes |
 |---|---|---|
-| Headings, story titles | **Cormorant** (`cormorant_n4`, italic `cormorant_i4`) | Elegant high-contrast serif; heading scale 130%. Italic for story titles, pull quotes and signatures |
-| Body / UI | **Jost** (`jost_n4`) | Clean geometric sans that echoes the monogram |
-| Story body text | Cormorant 20–22 px, line-height 1.6, max 62 characters per line | Long-form reading on story pages only |
-| Navigation, buttons, eyebrows | Jost, uppercase, letter-spacing 0.2em, 12–13 px | e.g. eyebrow "CHAPTER 01 · THE SILENT GRIND" |
+| Headings, story titles | **Archivo ExtraBold** (`archivo_n8`) | Bold, uppercase, tight (letter-spacing −0.01em, line-height about 1.0); heading scale 120% |
+| Body / UI | **Archivo** (`archivo_n4`, bold 700) | One family for the whole site |
+| Story body text | Archivo 17–18 px, line-height 1.7, max 62 characters per line | Long-form reading on story pages |
+| Navigation, buttons, eyebrows | Archivo bold, uppercase, letter-spacing 0.04–0.08em, 12–14 px | e.g. eyebrow "CHAPTER 01 · THE SILENT GRIND" |
 
-Fallbacks if a font is unavailable in the store's font picker: Playfair Display / Montserrat.
+No italics anywhere. Buttons, size chips and badges are pills (fully rounded). Fallback if Archivo is unavailable in the store's font picker: Montserrat (`montserrat_n8` / `montserrat_n4`).
 
 ## 4. Tone of voice
 **Resilient, quiet and direct.** COMEBACK speaks to people who have been knocked down and kept going. We write with calm conviction, not hype: short sentences, plain words, one idea per line. No exclamation marks, no "SALE!!!", no emoji, no superlatives ("best", "ultimate", "iconic"). Use the brand's own story text word for word where it fits (§6).
@@ -69,8 +70,8 @@ Current imagery is made from two phone photos of the real shoes (`docs/brand/sho
 
 **Art direction (all images):**
 - **Only EvlveX shoes.** No stock photography of other footwear or clothing anywhere.
-- **Grade by chapter:** *The Silent Grind* is dark and monochrome (Noir, hard light on the white monogram and cupsole); *A Fresh Start* is light and airy (Ivory, soft daylight on cream and sand).
-- Colors held close to the house palette: ivory, sand, stone, deep shadow. Avoid saturated blues and greens.
+- **Grade by chapter:** both chapters are graded **black and white**. *The Silent Grind* is dark (Black background, hard light on the white monogram and cupsole); *A Fresh Start* is light (White background, soft daylight).
+- Neutral black and white only, with no color casts.
 - People appear as hands, feet, silhouettes or from behind. The shoe is the subject.
 - No visible third-party logos, signage or brands.
 - Every image should feel like a still from the COMEBACK film.
@@ -79,7 +80,7 @@ Current imagery is made from two phone photos of the real shoes (`docs/brand/sho
 
 | Family | What | Where it's used | Ratio |
 |---|---|---|---|
-| **A. Product still life** | per colorway, seamless ivory or stone backdrop | product gallery, collection cards | 4:5 |
+| **A. Product still life** | per colorway, seamless white or light-grey backdrop | product gallery, collection cards | 4:5 |
 | **B. Chapter frames** | 3–5 cinematic frames per model in its chapter's grade (§6): the shoe in darkness for The Silent Grind, in first light for A Fresh Start | COMEBACK film, story pages, product "The Story" section, certificate | 16:9 and 4:5 crops |
 | **C. Details & material** | the monogram (white and embossed), suede texture, laces, cupsole, the workshop card | home "The Mark", About, Care, film detail scenes | 1:1, 3:2 and 4:5 |
 | **D. Certificate & packaging** | the box, the QR tag under the tongue, the handwritten workshop card, a phone showing the certificate | Authenticity page, product "Certificate" tab | 4:5 |
@@ -117,13 +118,13 @@ EvlveX tells **one story**, COMEBACK, in **chapters**. Each model carries one ch
 > THE SILENT GRIND represents the chapters lived in the dark: the struggles, setbacks, and battles that aren't always seen. It is about holding on through the weight of those moments and finding the strength to rise from them.
 
 **Excerpt:** *The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.*
-**Imagery:** dark and monochrome. Noir backgrounds, hard light on the white monogram and cupsole.
+**Imagery:** dark and monochrome. Black backgrounds, hard light on the white monogram and cupsole.
 
 ### Chapter 02: A Fresh Start
 > A FRESH START represents the moment after the struggle, when you stop looking back and choose what comes next. It is about carrying the lessons forward, leaving the weight behind, and taking the first step into a new chapter.
 
 **Excerpt:** *The moment after the struggle, when you stop looking back and choose what comes next.*
-**Imagery:** light and airy. Ivory backgrounds, soft daylight, the sand suede and embossed monogram.
+**Imagery:** light and airy, in black and white. White backgrounds, soft daylight, the suede and embossed monogram.
 
 ### Product photography
 The site currently uses graded crops of two phone photos ([docs/brand/shoe-images.md](../brand/shoe-images.md)). For launch, shoot each model on a seamless background at 3000 px or more: a side profile, a three-quarter view, the monogram, the suede toe and the sole.
