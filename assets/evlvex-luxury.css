@@ -175,6 +175,29 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
   margin-top: 0.4rem;
 }
 
+/* Mobile menu: account link (snippets/header-drawer.liquid) */
+.menu-drawer__account {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.2rem 0 1.6rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+}
+
+.menu-drawer__account .svg-wrapper,
+.menu-drawer__account svg {
+  width: 2rem;
+  height: 2rem;
+}
+
 /* ---------- Buttons ---------- */
 .button,
 .shopify-challenge__button,

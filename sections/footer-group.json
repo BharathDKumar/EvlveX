@@ -16,14 +16,14 @@
           "type": "column",
           "settings": {
             "heading": "COMEBACK",
-            "links": "<p><a href=\"/pages/the-maison\" title=\"Our story\">Our story</a></p><p><a href=\"/pages/the-stories\" title=\"The chapters\">The chapters</a></p><p><a href=\"/pages/authenticity\" title=\"Authenticity\">Authenticity</a></p>"
+            "links": "<p><a href=\"/pages/about\" title=\"Our story\">Our story</a></p><p><a href=\"/pages/the-stories\" title=\"Stories\">Stories</a></p><p><a href=\"/pages/authenticity\" title=\"Authenticity\">Authenticity</a></p>"
           }
         },
         "help": {
           "type": "column",
           "settings": {
             "heading": "Help",
-            "links": "<p><a href=\"/policies/shipping-policy\" title=\"Shipping\">Shipping</a></p><p><a href=\"/policies/refund-policy\" title=\"Returns and exchanges\">Returns &amp; exchanges</a></p><p><a href=\"/pages/care\" title=\"Care guide\">Care guide</a></p><p><a href=\"/pages/contact\" title=\"Contact us\">Contact us</a></p>"
+            "links": "<p><a href=\"/pages/track-your-order\" title=\"Track your order\">Track your order</a></p><p><a href=\"/pages/shipping-returns\" title=\"Shipping and returns\">Shipping &amp; returns</a></p><p><a href=\"/pages/size-guide\" title=\"Size guide\">Size guide</a></p><p><a href=\"/pages/faq\" title=\"FAQ\">FAQ</a></p><p><a href=\"/pages/care\" title=\"Care guide\">Care guide</a></p><p><a href=\"/pages/contact\" title=\"Contact us\">Contact us</a></p>"
           }
         },
         "contact": {
@@ -48,10 +48,9 @@
         "statement": "Keep going.",
         "statement_text": "Every comeback starts with one more step.",
         "newsletter_enable": true,
-        "newsletter_heading": "New chapters, first",
+        "newsletter_heading": "Get early access",
         "newsletter_placeholder": "Your email",
-        "newsletter_note": "One letter per chapter. Nothing else.",
-        "show_wordmark": true,
+        "newsletter_note": "New releases and restocks. No spam.",
         "copyright_name": "EvlveX",
         "origin": "Made in India",
         "trust_line": "evlvex.in is the only official EvlveX store.",

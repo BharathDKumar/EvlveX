@@ -126,7 +126,7 @@
           "type": "button",
           "settings": {
             "button_label": "About EvlveX",
-            "button_link": "shopify://pages/the-maison",
+            "button_link": "/pages/about",
             "button_style_secondary": true
           }
         }

@@ -281,29 +281,11 @@
   opacity: 0.7;
 }
 
-/* ---------- 3. Wordmark ---------- */
-.evx-footer__wordmark {
-  display: block;
-  margin: 7.2rem 0 4rem;
-  color: rgba(var(--color-foreground), 0.92);
-}
-
-.evx-footer__wordmark .evlvex-wordmark {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-@media screen and (max-width: 749px) {
-  .evx-footer__wordmark {
-    margin: 4.8rem 0 3.2rem;
-  }
-}
-
-/* ---------- 4. Bottom bar ---------- */
+/* ---------- 3. Bottom bar ---------- */
 .evx-footer__bottom {
   display: grid;
   gap: 1.6rem;
+  margin-top: 6.4rem;
   padding-top: 2.4rem;
   border-top: 1px solid var(--evx-footer-line);
   font-size: 1.2rem;

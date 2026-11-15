@@ -22,7 +22,7 @@
     "suggest": {
       "type": "featured-collection",
       "settings": {
-        "title": "Perhaps you were looking for",
+        "title": "Popular products",
         "heading_size": "h1",
         "description": "",
         "show_description": false,

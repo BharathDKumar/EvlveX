@@ -43,21 +43,35 @@ The CLI runs on a packing-station computer, not on Shopify.
 
 ## 5. One-time store setup checklist
 - [ ] Create metaobject and metafield definitions: `npm run setup` ([qr-certificates.md §5](qr-certificates.md))
-- [ ] Create pages, choosing each page's **template** in the page editor:
-  - *The Stories* (handle `the-stories`) → `page.stories`
-  - *About* (handle `the-maison`) → `page.about`
-  - *Care* → `page.care`
-  - *Authenticity* → `page.authenticity`
+- [ ] **Create the pages.** Until a page exists, its links (footer, menus, buttons) show the 404 page. Go to Online Store → **Pages → Add page**, type the **Title** exactly as below, leave the content empty, choose the **Template** on the right, and save. Shopify makes the handle from the title; check it under *Search engine listing*.
+
+  | Title | Handle | Template |
+  |---|---|---|
+  | About | `about` | `page.about` |
+  | The Stories | `the-stories` | `page.stories` |
+  | Care | `care` | `page.care` |
+  | Authenticity | `authenticity` | `page.authenticity` |
+  | Contact | `contact` | `page.contact` |
+  | FAQ | `faq` | `page.faq` |
+  | Size guide | `size-guide` | `page.size-guide` |
+  | Track your order | `track-your-order` | `page.track-order` |
+  | Shipping & returns | `shipping-returns` | `page.shipping-returns` |
 - [ ] Do not create pages with the handles `stories` or `authentic`
 - [ ] Create story entries for **The Silent Grind** and **A Fresh Start** (text in [brand-and-content.md §6](brand-and-content.md)) and upload their chapter frames
 - [ ] Create collections: The Collection (all); optionally one per chapter (The Silent Grind, A Fresh Start)
 - [ ] Create the **EvlveX Story Slide** metaobject and the **Story slides** product metafield (`evlvex.story_slides`) by hand, following [qr-certificates.md §5.4](qr-certificates.md). `npm run setup` does not create them.
-- [ ] Create the products **The Silent Grind** (Noir) and **A Fresh Start** (Cream & Sand) with size variants and prices, and set each product's **Story** metafield. Optionally add its **Story slides** too ([operations.md §7](operations.md)). Then point the COMEBACK film's "Shop" links at the product pages (theme editor → Home → EvlveX COMEBACK film).
-- [ ] Menus: *Main menu* (Shop, The Chapters, About, Authenticity); *Footer* (The Chapters, Care, Contact). The policies are listed automatically under the footer. The store currently shows Shopify's default *Home · Catalog · Contact*.
+- [ ] Create the products **The Silent Grind** (Noir, handle `the-silent-grind`) and **A Fresh Start** (Cream & Sand, handle `a-fresh-start`; the footer links to these handles) with size variants (UK 5–11, matching the size guide) and prices, and set each product's **Story** metafield. Optionally add its **Story slides** too ([operations.md §7](operations.md)). Then point the COMEBACK film's "Shop" links at the product pages (theme editor → Home → EvlveX COMEBACK film).
+- [ ] Menus: *Main menu* (Shop → /collections/all, Stories, About, Authenticity). The footer columns already carry their own links (theme editor → Footer); choose a menu in a column only if you want to manage it in Admin. The policies are listed automatically in the footer's bottom bar. The store currently shows Shopify's default *Home · Catalog · Contact*.
 - [ ] Theme editor: the home **COMEBACK film** already shows the two shoes. Upload studio images per scene when they exist. The header already draws the original logo (monogram + wordmark); upload a logo image only if you want to replace it.
 - [ ] Print workshop cards ([operations.md §2](operations.md))
 - [ ] **Before launch:** upload studio photography of both models on products, collections and in the theme editor (the COMEBACK film scenes take an uploaded image too). Then turn off Theme settings → **EvlveX → Show demo photography** ([docs/brand/shoe-images.md](../brand/shoe-images.md)).
-- [ ] Checkout and customer accounts are hosted by Shopify. Brand them in Admin → Settings → **Checkout → Customize** (logo: `docs/brand/logos/`; colors White `#FFFFFF`, Black `#111111`; font Archivo). Customer account pages use the same branding.
+- [ ] **Login, account and checkout pages** are hosted by Shopify (new customer accounts), so the theme can't change their layout. It only styles the account popup in the header and the mobile-menu *Log in* link. Brand the hosted pages in Admin → Settings → **Checkout and accounts → Customize** → *Branding*:
+  - **Logo:** `docs/brand/logos/evlvex-wordmark-black.png` (and the white version for dark headers if offered); **favicon:** `docs/brand/logos/evlvex-monogram-black.png`
+  - **Colors:** background `#FFFFFF`, text `#111111`, accent and primary buttons `#111111`, button text `#FFFFFF`
+  - **Corner radius:** buttons fully rounded (pill); fields small
+  - **Font:** Archivo for headings and body if listed, otherwise the closest clean sans
+  - **Optional banner / main image** on the login page: `assets/evx-sg-full.jpg`
+  Customer account pages (orders, profile) use the same branding.
 - [ ] **Policies:** paste the five texts from [docs/policies/](../policies/README.md) into Admin → Settings → Policies, and replace every `[FILL IN: …]` placeholder. The footer and checkout then link to them.
 - [ ] Admin → Settings → Store details: contact email **support@evlvex.in**, plus the legal business name and address. Settings → Notifications: sender email support@evlvex.in.
 - [ ] Admin → Settings → Payments: keep Cash on Delivery **off** (the policies say prepaid only).

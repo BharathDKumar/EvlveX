@@ -16,7 +16,7 @@
         "b1": {
           "type": "caption",
           "settings": {
-            "caption": "The House of EvlveX",
+            "caption": "Collections",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -31,7 +31,7 @@
         "b3": {
           "type": "text",
           "settings": {
-            "text": "<p>Five models, each born from a story, each made by hand. Choose a family to begin.</p>"
+            "text": "<p>Two models, one story. Choose your chapter.</p>"
           }
         }
       },

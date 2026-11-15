@@ -1,6 +1,6 @@
 {%- comment -%}
   EvlveX footer. Replaces Dawn's footer in sections/footer-group.json (sections/footer.liquid stays as a fallback).
-  Order: statement + newsletter · link columns (accordions on mobile) and contact · full-width wordmark · legal bar.
+  Order: statement + newsletter · link columns (accordions on mobile) and contact · legal bar.
   Each thing appears once: one newsletter, one set of social icons, one brand line. Spec: docs/spec/theme.md §3.
 {%- endcomment -%}
 {{ 'section-evlvex-footer.css' | asset_url | stylesheet_tag }}
@@ -149,12 +149,6 @@
       </div>
     {%- endif -%}
 
-    {%- if section.settings.show_wordmark -%}
-      <a href="{{ routes.root_url }}" class="evx-footer__wordmark" aria-label="{{ shop.name | escape }}">
-        {%- render 'evlvex-wordmark' -%}
-      </a>
-    {%- endif -%}
-
     <div class="evx-footer__bottom">
       <p class="evx-footer__legal">
         <span>&copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright_name | default: 'EvlveX' }}</span>
@@ -263,11 +257,9 @@
     { "type": "text", "id": "statement_text", "label": "Line under the statement", "default": "Sometimes, it is where the comeback begins." },
     { "type": "header", "content": "Newsletter" },
     { "type": "checkbox", "id": "newsletter_enable", "label": "Show newsletter", "default": true },
-    { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "New chapters, first" },
+    { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "Get early access" },
     { "type": "text", "id": "newsletter_placeholder", "label": "Field placeholder", "default": "Your email" },
-    { "type": "text", "id": "newsletter_note", "label": "Note", "default": "One letter per chapter. Nothing else." },
-    { "type": "header", "content": "Brand" },
-    { "type": "checkbox", "id": "show_wordmark", "label": "Show full-width wordmark", "default": true },
+    { "type": "text", "id": "newsletter_note", "label": "Note", "default": "New releases and restocks. No spam." },
     { "type": "header", "content": "Bottom bar" },
     { "type": "text", "id": "copyright_name", "label": "Copyright name", "default": "EvlveX" },
     { "type": "text", "id": "origin", "label": "Origin", "default": "Made in India" },
