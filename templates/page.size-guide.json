@@ -1,0 +1,234 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "caption",
+          "settings": {
+            "caption": "Help",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "b2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Size guide",
+            "heading_size": "h0"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Find your size in a minute. All EvlveX sizes are UK/India.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 96,
+        "padding_bottom": 16
+      }
+    },
+    "chart": {
+      "type": "evlvex-size-guide",
+      "blocks": {
+        "s1": {
+          "type": "size",
+          "settings": {
+            "uk": "UK 5",
+            "eu": "39",
+            "us": "6",
+            "cm": "23.7 cm"
+          }
+        },
+        "s2": {
+          "type": "size",
+          "settings": {
+            "uk": "UK 6",
+            "eu": "40",
+            "us": "7",
+            "cm": "24.5 cm"
+          }
+        },
+        "s3": {
+          "type": "size",
+          "settings": {
+            "uk": "UK 7",
+            "eu": "41",
+            "us": "8",
+            "cm": "25.4 cm"
+          }
+        },
+        "s4": {
+          "type": "size",
+          "settings": {
+            "uk": "UK 8",
+            "eu": "42",
+            "us": "9",
+            "cm": "26.2 cm"
+          }
+        },
+        "s5": {
+          "type": "size",
+          "settings": {
+            "uk": "UK 9",
+            "eu": "43",
+            "us": "10",
+            "cm": "27.1 cm"
+          }
+        },
+        "s6": {
+          "type": "size",
+          "settings": {
+            "uk": "UK 10",
+            "eu": "44",
+            "us": "11",
+            "cm": "27.9 cm"
+          }
+        },
+        "s7": {
+          "type": "size",
+          "settings": {
+            "uk": "UK 11",
+            "eu": "45",
+            "us": "12",
+            "cm": "28.8 cm"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "s7"
+      ],
+      "settings": {
+        "heading": "Size chart",
+        "heading_size": "h2",
+        "intro": "",
+        "label_uk": "UK / India",
+        "label_eu": "EU",
+        "label_us": "US",
+        "label_cm": "Foot length",
+        "note": "<p><strong>Between sizes?</strong> Choose the larger size. Not sure? You can exchange your size free within 7 days of delivery.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 52
+      }
+    },
+    "measure": {
+      "type": "multicolumn",
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "title": "1. Stand on paper",
+            "text": "<p>Place a sheet of paper on a hard floor against a wall. Stand on it with your heel touching the wall, wearing the socks you usually wear.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "title": "2. Mark your longest toe",
+            "text": "<p>Ask someone to mark the tip of your longest toe, or mark it yourself keeping the pencil straight up.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "column",
+          "settings": {
+            "title": "3. Measure and compare",
+            "text": "<p>Measure from the wall to the mark in centimetres. Measure both feet and use the longer one, then find it in the chart above.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "title": "How to measure your foot",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "help": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Need help choosing?",
+            "heading_size": "h2"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tell us your usual size in another brand and we’ll suggest yours. Write to <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a>.</p>"
+          }
+        },
+        "b3": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop the collection",
+            "button_link": "/collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "FAQ",
+            "button_link_2": "/pages/faq",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 72,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "chart",
+    "measure",
+    "help"
+  ]
+}

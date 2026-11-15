@@ -1,0 +1,215 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "caption",
+          "settings": {
+            "caption": "Help",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "b2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Shipping & returns",
+            "heading_size": "h0"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Free shipping across India and 7 days to return or exchange your size. Here is everything in short.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 96,
+        "padding_bottom": 16
+      }
+    },
+    "summary": {
+      "type": "multicolumn",
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "title": "Free shipping",
+            "text": "<p>On every order across India. Prepaid orders only: UPI, cards, net banking and wallets.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "title": "Fast dispatch",
+            "text": "<p>Packed and dispatched within 1–2 working days. Delivered in 3–7 working days.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "column",
+          "settings": {
+            "title": "7-day returns & exchanges",
+            "text": "<p>Unworn, in the original box with the certificate tag and workshop card. Pickup is free.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c4": {
+          "type": "column",
+          "settings": {
+            "title": "Refunds in 5–7 days",
+            "text": "<p>To your original payment method, after the pair passes inspection.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    },
+    "how": {
+      "type": "collapsible-content",
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "1. Write to us within 7 days",
+            "icon": "chat_bubble",
+            "row_content": "<p>Email <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> with your order number, and tell us if you want a refund or another size.</p>",
+            "page": ""
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "2. Pack the pair",
+            "icon": "box",
+            "row_content": "<p>Put the unworn pair back in its numbered box with the dust bag, certificate tag and workshop card.</p>",
+            "page": ""
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "3. Hand it to the courier",
+            "icon": "truck",
+            "row_content": "<p>We schedule a free pickup from your address. Once it reaches us we inspect it within 2 working days and send your refund or new size.</p>",
+            "page": ""
+          }
+        },
+        "q4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Damaged, defective or wrong item?",
+            "icon": "question_mark",
+            "row_content": "<p>Tell us within 48 hours of delivery with photos. We collect it free and replace it or refund you in full.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "How to return or exchange",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    },
+    "policies": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "heading",
+          "settings": {
+            "heading": "The full policies",
+            "heading_size": "h2"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Read the complete terms for delivery, cancellations, returns and refunds.</p>"
+          }
+        },
+        "b3": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shipping policy",
+            "button_link": "/policies/shipping-policy",
+            "button_style_secondary": true,
+            "button_label_2": "Refund policy",
+            "button_link_2": "/policies/refund-policy",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": false,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "summary",
+    "how",
+    "policies"
+  ]
+}

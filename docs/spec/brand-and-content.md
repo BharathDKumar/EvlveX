@@ -181,16 +181,15 @@ The same details are handwritten on a **workshop card** placed in the box ([oper
 
 **Footer** (`sections/evlvex-footer.liquid`)
 - Statement: **Keep going.** Every comeback starts with one more step.
-- Newsletter: **New chapters, first.** Placeholder "Your email"; note "One letter per chapter. Nothing else." It is the only newsletter on the site.
-- Columns: *Shop* (The Collection, The Silent Grind, A Fresh Start) · *COMEBACK* (Our story, The chapters, Authenticity) · *Help* (Shipping, Returns & exchanges, Care guide, Contact us) · *Get in touch* (Support: support@evlvex.in, Instagram: @evlvex, "We answer within one working day.", social icons).
-- Full-width EVLVEX wordmark.
+- Newsletter: **Get early access.** Placeholder "Your email"; note "New releases and restocks. No spam." It is the only newsletter on the site.
+- Columns: *Shop* (The Collection, The Silent Grind, A Fresh Start) · *COMEBACK* (Our story, Stories, Authenticity) · *Help* (Track your order, Shipping & returns, Size guide, FAQ, Care guide, Contact us) · *Get in touch* (Support: support@evlvex.in, Instagram: @evlvex, "We answer within one working day.", social icons).
 - Bottom bar: "© 2026 EvlveX" · "Made in India" · "evlvex.in is the only official EvlveX store." · policy links · country and currency · payment icons.
 
 **Authenticity "How it works":** *Made and numbered* → *Signed and recorded* → *Registered to you*
 
 **Care intro:** "Keep your comeback going."
 
-**404:** "This page has no story yet." · "Return to the Maison" · "Scanned a tag? Verify your serial"
+**System pages use standard e-commerce wording**, not story language: 404 ("Page not found", "Continue shopping"), Contact ("Contact us", "Send us a message"), FAQ, Size guide, Track your order, Shipping & returns, "You may also like", "Popular products", "Journal". The brand voice stays in the story content: home film and manifesto, About, Stories, certificates.
 
 **About page:** "Built for the comeback" · "One story, two chapters" · *The Silent Grind* · *A Fresh Start*
 

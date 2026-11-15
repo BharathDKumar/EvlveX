@@ -29,11 +29,18 @@ Home
 │   └── Product: The Silent Grind (Noir), A Fresh Start (Cream & Sand)
 ├── The Stories (index)                /pages/the-stories
 │   └── Story (one per model)          /pages/stories/<story-handle>
-├── About ("Built for the comeback")   /pages/the-maison
+├── About ("Built for the comeback")   /pages/about
 ├── Care                               /pages/care
 ├── Authenticity                       /pages/authenticity
 │   └── Certificate (one per pair)     /pages/authentic/<serial>
+├── Contact                            /pages/contact
+├── Help: FAQ                          /pages/faq
+│   ├── Size guide                     /pages/size-guide
+│   ├── Track your order               /pages/track-your-order
+│   └── Shipping & returns             /pages/shipping-returns
+├── Policies (Shopify)                 /policies/…
 ├── Cart → Shopify checkout
+├── Account (Shopify-hosted login; popup in the header)
 └── 404
 ```
 
@@ -66,12 +73,16 @@ Home
 | **Cart** | `cart.json` | Review | line items (story title in italic under each product name) · subtotal and checkout · "The EvlveX promise" (free shipping across India, certificate, 7-day returns and size exchange) · "You may also admire" | — | stacked |
 | **Search** | `search.json` | Find | results grid (portrait cards) with filters · "Perhaps you were looking for" | — | 2 columns |
 | **All collections** | `list-collections.json` | Browse families | intro "The Collection" · collection cards · "The Stories" cards | collection images | 2 columns |
-| **The Journal** (blog) | `blog.json` | Brand content | intro "Notes from the Maison" · article grid · newsletter | article images | 1 column |
+| **The Journal** (blog) | `blog.json` | Brand content | intro "Journal" · article grid (the newsletter is in the footer) | article images | 1 column |
 | **Article** | `article.json` | Read | featured image, title, content, share · "More from the Journal" · newsletter | article image | stacked |
-| **Page** (generic) | `page.json` | Shipping, privacy and other text pages | page content · "Client care" strip (Contact, Care guide) | — | stacked |
-| **Contact** | `page.contact.json` | Write to the Maison | atelier banner · page content · atelier / client care / certificate details · contact form | atelier image | stacked |
+| **Page** (generic) | `page.json` | Shipping, privacy and other text pages | page content · "Need help?" strip (Contact us, FAQ) | — | stacked |
+| **Contact** | `page.contact.json` | Contact us | banner "Contact us" · page content · Order help / Customer support / Instagram / Authenticity columns · "Send us a message" form | shoe image | stacked |
+| **FAQ** | `page.faq.json` | Quick answers | intro · collapsible groups: Orders & payment, Shipping & delivery, Returns & exchanges, Sizing & care, Authenticity · "Still need help?" | — | stacked |
+| **Size guide** | `page.size-guide.json` | Choose a size | intro · `evlvex-size-guide` table (UK/India, EU, US, foot length; one block per row) · "How to measure your foot" · help | — | table scrolls sideways |
+| **Track your order** | `page.track-order.json` | Delivery status | intro · 3 steps (confirmed, dispatched, delivered) · "Where is my tracking link?" · My account / Contact us | — | stacked |
+| **Shipping & returns** | `page.shipping-returns.json` | Summary of the policies | intro · 4-point summary · "How to return or exchange" · buttons to the Shipping and Refund policies | — | stacked |
 | **Gift card** | `gift_card.liquid` | Show a gift card | EvlveX card (white monogram + wordmark on Black) unless a logo is uploaded | — | — |
-| **404** | `404.json` | Recovery | message, "Return to the Maison", link to Authenticity | — | — |
+| **404** | `404.json` | Recovery | "Error 404" · "Page not found" · Continue shopping / Go to homepage · product search · quick links (Shop all, Size guide, FAQ, Track your order, Contact us) · "Scanned a QR tag? Verify your pair." | — | — |
 
 ## 5. Implementation rules
 - **Story data:** product page, cart line, certificate and home "Featured story" read the story through `product.metafields.evlvex.story.value` (definition in [qr-certificates.md §5](qr-certificates.md)). If a product has no story, hide the section and the excerpt line; never render empty headings.
@@ -95,7 +106,7 @@ Home
 
 ## 6. Changes by version
 
-v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4 and v1.5 (15 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white. v1.4 row: Colour photography, policies & contact. v1.5 row: Footer & COMEBACK literature.
+v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4, v1.5 and v1.6 (15 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white. v1.4 row: Colour photography, policies & contact. v1.5 row: Footer & COMEBACK literature. v1.6 row: Standard pages.
 
 | Area | Files |
 |---|---|
@@ -116,6 +127,7 @@ v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4 and v1.5 (15 Nov 2026) are implemented a
 | Black & white (v1.3) | color schemes, fonts (Archivo) and pill radii in `config/settings_data.json`; `assets/evlvex-luxury.css` (tokens, bold uppercase headings, pill buttons, no gold); `assets/evlvex-comeback-film.css`, `assets/evlvex-story.css`, `assets/evlvex-story-carousel.css`, `assets/section-certificate.css`; gold removed from `sections/main-404.liquid`, `templates/gift_card.liquid`, `assets/evlvex-monogram.svg`, `tools/qr-certificates/src/qr.js`; `evx-eyebrow--gold` renamed `evx-eyebrow--strong`; `layout/theme.liquid` no longer loads a heading italic; images regraded by `tools/build-shoe-images.js`, `assets/sample-court-noir.jpg` made greyscale |
 | Colour photography, policies & contact (v1.4) | campaign photos in `docs/brand/campaign/`, cropped in true colour by `tools/build-shoe-images.js` into `assets/evx-*.jpg`; new sizes in `sections/evlvex-comeback-film.liquid` and `snippets/evlvex-demo-image.liquid`; Fresh Start film scenes set to the dark tone (`templates/index.json`); film backdrop no longer desaturated (`assets/evlvex-comeback-film.css`); store policies for Admin in `docs/policies/`; 7-day returns, free shipping and prepaid copy in `templates/product.json`, `templates/cart.json`, `sections/header-group.json`; Instagram link (`config/settings_data.json`) and support@evlvex.in on `templates/page.contact.json`, `templates/page.json` and a footer *Contact* column (`sections/footer-group.json`) |
 | Footer & COMEBACK literature (v1.5) | new `sections/evlvex-footer.liquid` and `assets/section-evlvex-footer.css`; `sections/footer-group.json` switched to it; home manifesto added and the "Every pair, its own chapter" and newsletter sections removed (`templates/index.json`); "Four steps of a comeback" and "Shoes for the long way back" on `templates/page.about.json`; one line added to `templates/page.stories.json` |
+| Standard pages (v1.6) | new `templates/page.{faq,size-guide,track-order,shipping-returns}.json` and `sections/evlvex-size-guide.liquid`; plain 404 (`sections/main-404.liquid`, `templates/404.json`); standard wording in `page.contact.json`, `page.json`, `page.care.json`, `cart.json`, `product.json` (plus a Size & fit tab), `search.json`, `list-collections.json`, `blog.json`, `article.json` (duplicate newsletters removed); About now at `/pages/about`; footer wordmark removed and Help column extended (`sections/evlvex-footer.liquid`, `sections/footer-group.json`); account popup colours fixed in `sections/header.liquid`; *Log in* link in `snippets/header-drawer.liquid` |
 | Copy | `templates/index.json`, `product.json`, `page.about.json`, `page.care.json`, `page.authenticity.json`, `collection.json`, `sections/header-group.json` (mega menu), `sections/footer-group.json`, `sections/main-404.liquid`, brand text in `config/settings_data.json` |
 
 Menus, collections, products and story entries are store data, created during store setup ([deployment.md §5](deployment.md)).

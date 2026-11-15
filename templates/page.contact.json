@@ -10,7 +10,7 @@
     "form": {
       "type": "contact-form",
       "settings": {
-        "heading": "Send a letter",
+        "heading": "Send us a message",
         "heading_size": "h2",
         "color_scheme": "scheme-2",
         "padding_top": 72,
@@ -23,14 +23,14 @@
         "caption": {
           "type": "text",
           "settings": {
-            "text": "Client care",
+            "text": "Customer support",
             "text_style": "caption-with-letter-spacing"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Write to the Maison",
+            "heading": "Contact us",
             "heading_size": "h0"
           }
         }
@@ -58,16 +58,16 @@
         "column-1": {
           "type": "column",
           "settings": {
-            "title": "The atelier",
-            "text": "<p>Visits by appointment, Monday to Saturday.</p>",
-            "link_label": "",
-            "link": ""
+            "title": "Order help",
+            "text": "<p>Track a delivery, check sizes or read quick answers.</p>",
+            "link_label": "Track your order",
+            "link": "/pages/track-your-order"
           }
         },
         "column-2": {
           "type": "column",
           "settings": {
-            "title": "Client care",
+            "title": "Customer support",
             "text": "<p>Write to <a href=\"mailto:support@evlvex.in\" title=\"Email EvlveX client care\">support@evlvex.in</a>. We answer within one working day.</p>",
             "link_label": "",
             "link": ""
@@ -76,7 +76,7 @@
         "column-3": {
           "type": "column",
           "settings": {
-            "title": "Your certificate",
+            "title": "Authenticity",
             "text": "<p>Changes to the name on a certificate are made on request.</p>",
             "link_label": "Authenticity",
             "link": "shopify://pages/authenticity"
@@ -86,7 +86,7 @@
           "type": "column",
           "settings": {
             "title": "Instagram",
-            "text": "<p>New chapters, first: <a href=\"https://www.instagram.com/evlvex\" title=\"EvlveX on Instagram\" target=\"_blank\">@evlvex</a></p>",
+            "text": "<p>News and new releases: <a href=\"https://www.instagram.com/evlvex\" title=\"EvlveX on Instagram\" target=\"_blank\">@evlvex</a></p>",
             "link_label": "Follow @evlvex",
             "link": "https://www.instagram.com/evlvex"
           }

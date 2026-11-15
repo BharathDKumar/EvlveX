@@ -1,45 +1,137 @@
 <style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
-  }
-
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
-    }
+  .template-404 {
+    padding-top: 7.2rem;
+    padding-bottom: 8rem;
   }
 
   .template-404__mark {
     color: rgb(var(--color-foreground));
-    margin-bottom: 2rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .template-404__code {
+    margin: 0 0 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(var(--color-foreground), 0.6);
+  }
+
+  .template-404__title {
+    margin: 0;
+  }
+
+  .template-404__text {
+    max-width: 48rem;
+    margin: 1.6rem auto 0;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  .template-404__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 3.2rem;
+  }
+
+  .template-404__search {
+    display: flex;
+    max-width: 48rem;
+    margin: 4rem auto 0;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.5);
+  }
+
+  .template-404__search input {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 4.8rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  .template-404__search input:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .template-404__search button {
+    padding: 0 0.4rem;
+    border: 0;
+    background: none;
+    color: rgb(var(--color-foreground));
+    cursor: pointer;
+  }
+
+  .template-404__search .svg-wrapper,
+  .template-404__search svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .template-404__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem 2.4rem;
+    margin: 3.2rem 0 0;
+  }
+
+  .template-404__links p {
+    margin: 0;
+  }
+
+  .template-404__links a {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: rgb(var(--color-foreground));
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+    text-decoration-thickness: 1px;
   }
 
   .template-404__serial {
-    margin-top: 3.2rem;
+    margin-top: 4rem;
     font-size: 1.4rem;
-    color: rgba(var(--color-foreground), 0.75);
+    color: rgba(var(--color-foreground), 0.65);
   }
 </style>
 
-<div class="template-404 page-width page-margin center">
-  {%- render 'evlvex-monogram', size: 56, class: 'template-404__mark' -%}
-  <p class="caption-with-letter-spacing">
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {%- if section.settings.heading != blank -%}
-      {{ section.settings.heading | escape }}
-    {%- else -%}
-      {{ 'templates.404.title' | t }}
-    {%- endif -%}
-  </h1>
-  <a href="{{ section.settings.button_link | default: routes.root_url }}" class="button">
-    {%- if section.settings.button_label != blank -%}
-      {{ section.settings.button_label | escape }}
-    {%- else -%}
-      {{ 'general.continue_shopping' | t }}
-    {%- endif -%}
-  </a>
+<div class="template-404 page-width center">
+  {%- render 'evlvex-monogram', size: 48, class: 'template-404__mark' -%}
+  <p class="template-404__code">Error 404</p>
+  <h1 class="template-404__title h1">{{ section.settings.heading | default: 'Page not found' | escape }}</h1>
+  {%- if section.settings.text != blank -%}
+    <p class="template-404__text">{{ section.settings.text | escape }}</p>
+  {%- endif -%}
+
+  <div class="template-404__actions">
+    <a href="{{ routes.all_products_collection_url }}" class="button">
+      {{- section.settings.button_label | default: 'Continue shopping' | escape -}}
+    </a>
+    <a href="{{ routes.root_url }}" class="button button--secondary">Go to homepage</a>
+  </div>
+
+  <form action="{{ routes.search_url }}" method="get" role="search" class="template-404__search">
+    <label class="visually-hidden" for="Search404">{{ 'general.search.search' | t }}</label>
+    <input id="Search404" type="search" name="q" placeholder="Search products" autocomplete="off">
+    <input type="hidden" name="options[prefix]" value="last">
+    <button type="submit" aria-label="{{ 'general.search.search' | t }}">
+      <span class="svg-wrapper">{{- 'icon-search.svg' | inline_asset_content -}}</span>
+    </button>
+  </form>
+
+  {%- if section.settings.links != blank -%}
+    <nav class="template-404__links" aria-label="Helpful links">{{ section.settings.links }}</nav>
+  {%- endif -%}
+
   <p class="template-404__serial">
     {{ 'evlvex.not_found.serial_html' | t: url: '/pages/authenticity' }}
   </p>
@@ -55,19 +147,26 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "This page has no story yet."
+      "default": "Page not found"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "The page you're looking for doesn't exist or may have moved."
     },
     {
       "type": "text",
       "id": "button_label",
       "label": "Button label",
-      "default": "Return to the Maison"
+      "default": "Continue shopping"
     },
     {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link",
-      "info": "Defaults to the home page."
+      "type": "richtext",
+      "id": "links",
+      "label": "Quick links",
+      "info": "One link per paragraph.",
+      "default": "<p><a href=\"/collections/all\">Shop all</a></p><p><a href=\"/pages/size-guide\">Size guide</a></p><p><a href=\"/pages/faq\">FAQ</a></p><p><a href=\"/pages/track-your-order\">Track your order</a></p><p><a href=\"/pages/contact\">Contact us</a></p>"
     }
   ]
 }

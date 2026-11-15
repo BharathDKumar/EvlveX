@@ -1,0 +1,379 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "caption",
+          "settings": {
+            "caption": "Help",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "b2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Frequently asked questions",
+            "heading_size": "h0"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Quick answers about orders, delivery, returns, sizing and authenticity. Can’t find yours? We’re happy to help.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 96,
+        "padding_bottom": 32
+      }
+    },
+    "orders": {
+      "type": "collapsible-content",
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I pay?",
+            "icon": "lock",
+            "row_content": "<p>We accept prepaid orders through our secure checkout: UPI, debit and credit cards, net banking and wallets.</p>",
+            "page": ""
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you offer Cash on Delivery?",
+            "icon": "price_tag",
+            "row_content": "<p>No. All orders are prepaid. This keeps delivery fast and lets us insure every pair until it reaches you.</p>",
+            "page": ""
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I know my order went through?",
+            "icon": "check_mark",
+            "row_content": "<p>You receive an order confirmation email straight after checkout. If it isn’t in your inbox, check your spam folder or write to <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a>.</p>",
+            "page": ""
+          }
+        },
+        "q4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I cancel or change my order?",
+            "icon": "clipboard",
+            "row_content": "<p>Yes, free of charge until it is dispatched. Email <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> with your order number. After dispatch, you can return the pair once it arrives.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Orders & payment",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "shipping": {
+      "type": "collapsible-content",
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How much does shipping cost?",
+            "icon": "truck",
+            "row_content": "<p>Shipping is free on every order across India.</p>",
+            "page": ""
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long does delivery take?",
+            "icon": "stopwatch",
+            "row_content": "<p>We dispatch within 1–2 working days. Delivery usually takes 3–7 working days after dispatch, depending on your pin code. Remote areas can take a little longer.</p>",
+            "page": ""
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I track my order?",
+            "icon": "map_pin",
+            "row_content": "<p>When your order ships, we email you (and send an SMS where available) with the courier name and a tracking link. See <a href=\"/pages/track-your-order\" title=\"Track your order\">Track your order</a>.</p>",
+            "page": ""
+          }
+        },
+        "q4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you ship outside India?",
+            "icon": "plane",
+            "row_content": "<p>Not yet. We currently ship to addresses in India only.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Shipping & delivery",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "returns": {
+      "type": "collapsible-content",
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is your return policy?",
+            "icon": "return",
+            "row_content": "<p>You can return a pair or exchange it for another size within 7 days of delivery. It must be unworn, in its original box, with the certificate tag and workshop card.</p>",
+            "page": ""
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I start a return or exchange?",
+            "icon": "box",
+            "row_content": "<p>Email <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> with your order number and tell us whether you want a refund or another size. We arrange a free pickup from your address.</p>",
+            "page": ""
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "When will I get my refund?",
+            "icon": "price_tag",
+            "row_content": "<p>Within 5–7 working days after the pair reaches us and passes inspection, to your original payment method.</p>",
+            "page": ""
+          }
+        },
+        "q4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "My pair arrived damaged or wrong. What now?",
+            "icon": "question_mark",
+            "row_content": "<p>Tell us within 48 hours of delivery with photos of the pair and the box. We collect it free and replace it or refund you in full.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Returns & exchanges",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "sizing": {
+      "type": "collapsible-content",
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What size should I order?",
+            "icon": "ruler",
+            "row_content": "<p>Our sizes are UK/India. If you are between sizes, choose the larger. See the <a href=\"/pages/size-guide\" title=\"Size guide\">size guide</a> for EU, US and foot-length conversions.</p>",
+            "page": ""
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What if the size doesn’t fit?",
+            "icon": "shoe",
+            "row_content": "<p>Exchange it for another size within 7 days of delivery. Pickup is free.</p>",
+            "page": ""
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I care for my pair?",
+            "icon": "leather",
+            "row_content": "<p>Brush suede dry, wipe leather with a damp cloth and let pairs dry away from direct heat. Full instructions are in our <a href=\"/pages/care\" title=\"Care guide\">care guide</a>.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Sizing & care",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "authenticity": {
+      "type": "collapsible-content",
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is the QR tag inside my shoe?",
+            "icon": "star",
+            "row_content": "<p>Every EvlveX pair has a numbered QR tag. Scan it to open the pair’s certificate page, which confirms it is genuine.</p>",
+            "page": ""
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I check a pair is genuine?",
+            "icon": "check_mark",
+            "row_content": "<p>Scan the tag, or enter its serial number on our <a href=\"/pages/authenticity\" title=\"Authenticity\">Authenticity</a> page. evlvex.in is the only official EvlveX store.</p>",
+            "page": ""
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I change or hide the name on my certificate?",
+            "icon": "eye",
+            "row_content": "<p>Yes. Write to <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> and we will change it, show initials only or remove it.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Authenticity",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 72
+      }
+    },
+    "help": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Still need help?",
+            "heading_size": "h2"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Write to <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> or message us on Instagram, <a href=\"https://www.instagram.com/evlvex\" title=\"EvlveX on Instagram\">@evlvex</a>. We answer within one working day.</p>"
+          }
+        },
+        "b3": {
+          "type": "button",
+          "settings": {
+            "button_label": "Contact us",
+            "button_link": "/pages/contact",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": false,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "orders",
+    "shipping",
+    "returns",
+    "sizing",
+    "authenticity",
+    "help"
+  ]
+}

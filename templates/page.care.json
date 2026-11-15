@@ -6,7 +6,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "Client care",
+            "caption": "Care guide",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }

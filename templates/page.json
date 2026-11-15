@@ -13,7 +13,7 @@
         "b1": {
           "type": "caption",
           "settings": {
-            "caption": "Client care",
+            "caption": "Customer support",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -21,24 +21,24 @@
         "b2": {
           "type": "heading",
           "settings": {
-            "heading": "A question about your pair?",
+            "heading": "Need help?",
             "heading_size": "h2"
           }
         },
         "b3": {
           "type": "text",
           "settings": {
-            "text": "<p>Write to <a href=\"mailto:support@evlvex.in\" title=\"Email EvlveX client care\">support@evlvex.in</a> and an atelier advisor will answer within one working day. Or message us on Instagram, <a href=\"https://www.instagram.com/evlvex\" title=\"EvlveX on Instagram\" target=\"_blank\">@evlvex</a>.</p>"
+            "text": "<p>Write to <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> and our team will answer within one working day. Or message us on Instagram, <a href=\"https://www.instagram.com/evlvex\" title=\"EvlveX on Instagram\" target=\"_blank\">@evlvex</a>.</p>"
           }
         },
         "b4": {
           "type": "button",
           "settings": {
-            "button_label": "Contact the Maison",
+            "button_label": "Contact us",
             "button_link": "shopify://pages/contact",
             "button_style_secondary": true,
-            "button_label_2": "Care guide",
-            "button_link_2": "shopify://pages/care",
+            "button_label_2": "FAQ",
+            "button_link_2": "/pages/faq",
             "button_style_secondary_2": true
           }
         }

@@ -548,7 +548,7 @@
       "image_alt": "EvlveX Court 01 with the embroidered monogram"
     },
     "not_found": {
-      "serial_html": "Scanned a tag that didn&#39;t open? <a href=\"{{ url }}\" class=\"link underlined-link\">Verify your serial</a>."
+      "serial_html": "Scanned a QR tag? <a href=\"{{ url }}\" class=\"link underlined-link\">Verify your pair</a>."
     }
   }
 }

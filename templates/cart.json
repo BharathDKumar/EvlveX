@@ -86,7 +86,7 @@
     "admire": {
       "type": "featured-collection",
       "settings": {
-        "title": "You may also admire",
+        "title": "You may also like",
         "heading_size": "h1",
         "description": "",
         "show_description": false,

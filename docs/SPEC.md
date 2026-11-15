@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | v1.5 — Footer & COMEBACK literature (supersedes v1.4) |
+| **Status** | v1.6 — Standard pages (supersedes v1.5) |
 | **Date** | 13 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
@@ -76,7 +76,8 @@ The website must:
 | v1.2 | 13 Nov 2026 | COMEBACK: the brand's real story and two models replace the five invented models; original logos; COMEBACK film (3D carousel) on the home page; editorial story carousel (home and per product); only the brand's own shoe photography, no Dawn placeholders; every page customised (cart, search, collections, journal, contact, password page, gift card, footer); template validation added to the release workflow |
 | v1.3 | 15 Nov 2026 | Black & white: the whole site moves to black, white and neutral greys (no gold, ivory or sand); bold uppercase Archivo headings and Archivo body replace Cormorant / Jost; pill buttons; shoe imagery and QR tags regraded to black and white |
 | v1.4 | 15 Nov 2026 | Colour photography, policies & contact: shoe imagery replaced by true-colour crops of four campaign photos (the site stays black and white); store policies for India (returns, shipping, privacy, terms, contact) ready to paste into Shopify; 7-day returns, free shipping and prepaid-only copy; Instagram @evlvex and support@evlvex.in on the contact page and in the footer |
-| **v1.5** | **15 Nov 2026** | **Footer & COMEBACK literature:** a new premium footer (statement, one newsletter, sparse link columns, labelled contact, full-width wordmark, one-line legal bar, no repeated elements); "never give up" literature (home manifesto, four steps of a comeback and a closing essay on About); the "Every pair, its own chapter" block and the duplicate newsletter removed from home |
+| v1.5 | 15 Nov 2026 | Footer & COMEBACK literature: a new premium footer (statement, one newsletter, sparse link columns, labelled contact, full-width wordmark, one-line legal bar, no repeated elements); "never give up" literature (home manifesto, four steps of a comeback and a closing essay on About); the "Every pair, its own chapter" block and the duplicate newsletter removed from home |
+| **v1.6** | **15 Nov 2026** | **Standard pages:** FAQ, Size guide, Track your order and Shipping & returns templates; a plain 404 with search and quick links; standard e-commerce wording on system pages; About moved to `/pages/about`; footer wordmark removed; account popup fixed to a white card with black pill buttons, and *Log in* added to the mobile menu; Admin checklist for creating every page and branding the hosted login |
 
 Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
 

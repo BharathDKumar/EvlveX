@@ -1,0 +1,195 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "caption",
+          "settings": {
+            "caption": "Help",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "b2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Track your order",
+            "heading_size": "h0"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every order is tracked from our door to yours. Here is what happens after you check out.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 96,
+        "padding_bottom": 16
+      }
+    },
+    "steps": {
+      "type": "multicolumn",
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "title": "1. Order confirmed",
+            "text": "<p>You receive an order confirmation email with your order number straight after checkout.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "title": "2. Dispatched",
+            "text": "<p>Within 1–2 working days we pack and dispatch your pair, and email you (plus an SMS where available) the courier name and a tracking link.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "column",
+          "settings": {
+            "title": "3. Delivered",
+            "text": "<p>Delivery usually takes 3–7 working days after dispatch. Your parcel is insured until it reaches you.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    },
+    "find": {
+      "type": "collapsible-content",
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "In your dispatch email",
+            "icon": "truck",
+            "row_content": "<p>Open the “Your order is on the way” email and tap <strong>Track your order</strong>. It opens the courier’s tracking page.</p>",
+            "page": ""
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "In your account",
+            "icon": "lock",
+            "row_content": "<p>Log in with the email you used at checkout. Your orders and their status are under <a href=\"/account\" title=\"My account\">My account</a>.</p>",
+            "page": ""
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "My order seems delayed",
+            "icon": "stopwatch",
+            "row_content": "<p>Tracking can take up to 24 hours to update after dispatch. If nothing has changed for 3 working days, write to <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> with your order number and we’ll check with the courier.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Where is my tracking link?",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 72
+      }
+    },
+    "help": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Questions about an order?",
+            "heading_size": "h2"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Write to <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> with your order number. We answer within one working day.</p>"
+          }
+        },
+        "b3": {
+          "type": "button",
+          "settings": {
+            "button_label": "My account",
+            "button_link": "/account",
+            "button_style_secondary": false,
+            "button_label_2": "Contact us",
+            "button_link_2": "/pages/contact",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": false,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "steps",
+    "find",
+    "help"
+  ]
+}

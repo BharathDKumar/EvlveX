@@ -146,6 +146,17 @@
             </ul>
           </nav>
           <div class="menu-drawer__utility-links">
+            {%- comment -%} EvlveX: account link in the mobile menu (new customer accounts are hosted by Shopify) {%- endcomment -%}
+            {%- if shop.customer_accounts_enabled -%}
+              <a
+                href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                class="menu-drawer__account link focus-inset"
+                rel="nofollow"
+              >
+                <span class="svg-wrapper">{{- 'icon-account.svg' | inline_asset_content -}}</span>
+                {%- if customer -%}My account{%- else -%}{{ 'customer.log_in' | t }}{%- endif -%}
+              </a>
+            {%- endif -%}
             {%- if show_country_selector or show_language_selector -%}
               <div class="menu-drawer__localization header-localization">
                 {%- if show_country_selector -%}

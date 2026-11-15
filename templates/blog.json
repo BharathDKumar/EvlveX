@@ -26,14 +26,14 @@
         "b2": {
           "type": "heading",
           "settings": {
-            "heading": "Notes from the Maison",
+            "heading": "Journal",
             "heading_size": "h1"
           }
         },
         "b3": {
           "type": "text",
           "settings": {
-            "text": "<p>Leathers, lasts and the people who shape them. Letters from the bench, written slowly.</p>"
+            "text": "<p>News, stories and care tips from EvlveX.</p>"
           }
         }
       },
@@ -50,44 +50,10 @@
         "padding_top": 80,
         "padding_bottom": 0
       }
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Receive each new chapter first",
-            "heading_size": "h1"
-          }
-        },
-        "paragraph": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>One letter when a new story is told. Nothing else.</p>"
-          }
-        },
-        "email_form": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "heading",
-        "paragraph",
-        "email_form"
-      ],
-      "settings": {
-        "color_scheme": "scheme-4",
-        "full_width": true,
-        "padding_top": 80,
-        "padding_bottom": 88
-      }
     }
   },
   "order": [
     "intro",
-    "main",
-    "newsletter"
+    "main"
   ]
 }

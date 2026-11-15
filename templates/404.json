@@ -1,1 +1,14 @@
-{"sections":{"main":{"type":"main-404","settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "heading": "Page not found",
+        "text": "The page you're looking for doesn't exist or may have moved.",
+        "button_label": "Continue shopping",
+        "links": "<p><a href=\"/collections/all\" title=\"Shop all\">Shop all</a></p><p><a href=\"/pages/size-guide\" title=\"Size guide\">Size guide</a></p><p><a href=\"/pages/faq\" title=\"FAQ\">FAQ</a></p><p><a href=\"/pages/track-your-order\" title=\"Track your order\">Track your order</a></p><p><a href=\"/pages/contact\" title=\"Contact us\">Contact us</a></p>"
+      }
+    }
+  },
+  "order": ["main"]
+}
