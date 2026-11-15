@@ -29,11 +29,24 @@
           "type": "text",
           "settings": {
             "heading": "Stories",
-            "subtext": "<p><em>Every pair has a story.</em></p><p><a href=\"/pages/the-stories\" title=\"The Stories\">Read the stories</a></p><p><a href=\"/pages/authenticity\" title=\"Authenticity\">Verify your pair</a></p>"
+            "subtext": "<p>Every pair has a story.</p><p><a href=\"/pages/the-stories\" title=\"The Stories\">Read the stories</a></p><p><a href=\"/pages/authenticity\" title=\"Authenticity\">Verify your pair</a></p>"
+          }
+        },
+        "contact": {
+          "type": "text",
+          "settings": {
+            "heading": "Contact",
+            "subtext": "<p><a href=\"mailto:support@evlvex.in\" title=\"Email EvlveX client care\">support@evlvex.in</a></p><p>Instagram <a href=\"https://www.instagram.com/evlvex\" title=\"EvlveX on Instagram\" target=\"_blank\">@evlvex</a></p><p>Answers within one working day.</p>"
           }
         }
       },
-      "block_order": ["brand", "shop", "stories", "client-care"],
+      "block_order": [
+        "brand",
+        "shop",
+        "stories",
+        "client-care",
+        "contact"
+      ],
       "settings": {
         "color_scheme": "scheme-5",
         "newsletter_enable": true,
@@ -50,5 +63,7 @@
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

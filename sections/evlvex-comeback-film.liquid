@@ -48,21 +48,21 @@
               assign prefix = 'evx-fs-'
               case s.shot
                 when 'monogram'
-                  assign shot = 'monogram|400|400'
+                  assign shot = 'monogram|389|295'
                 when 'texture'
-                  assign shot = 'laces|400|500'
+                  assign shot = 'laces|397|460'
                 else
-                  assign shot = 'full|768|1024'
+                  assign shot = 'full|950|530'
               endcase
             else
               assign prefix = 'evx-sg-'
               case s.shot
                 when 'monogram'
-                  assign shot = 'monogram|480|480'
+                  assign shot = 'monogram|397|445'
                 when 'texture'
-                  assign shot = 'sole|600|375'
+                  assign shot = 'sole|392|490'
                 else
-                  assign shot = 'full|1024|768'
+                  assign shot = 'full|960|720'
               endcase
           endcase
           assign shot_parts = shot | split: '|'
@@ -88,7 +88,7 @@
             {%- if s.image != blank -%}
               {{ s.image | image_url: width: 600 | image_tag: loading: loading, alt: '', class: 'evx-film__backdrop-img' }}
             {%- elsif s.shoe == 'both' -%}
-              <img src="{{ 'evx-comeback-pair.jpg' | asset_url }}" alt="" loading="{{ loading }}" width="1600" height="1000" class="evx-film__backdrop-img">
+              <img src="{{ 'evx-comeback-pair.jpg' | asset_url }}" alt="" loading="{{ loading }}" width="399" height="445" class="evx-film__backdrop-img">
             {%- else -%}
               <img src="{{ asset_src }}" alt="" loading="{{ loading }}" width="{{ shot_parts[1] }}" height="{{ shot_parts[2] }}" class="evx-film__backdrop-img">
             {%- endif -%}
@@ -114,12 +114,12 @@
             {%- elsif s.shoe == 'both' -%}
               <figure class="evx-film__frame evx-film__frame--left" style="--frame-ratio: 1.3333;">
                 <div class="evx-film__camera">
-                  <img src="{{ 'evx-sg-full.jpg' | asset_url }}" alt="The Silent Grind, black" loading="{{ loading }}" fetchpriority="{{ priority }}" width="1024" height="768" class="evx-film__img">
+                  <img src="{{ 'evx-sg-full.jpg' | asset_url }}" alt="The Silent Grind, black" loading="{{ loading }}" fetchpriority="{{ priority }}" width="960" height="720" class="evx-film__img">
                 </div>
               </figure>
-              <figure class="evx-film__frame evx-film__frame--right" style="--frame-ratio: 0.75;">
+              <figure class="evx-film__frame evx-film__frame--right" style="--frame-ratio: 1.7925;">
                 <div class="evx-film__camera">
-                  <img src="{{ 'evx-fs-full.jpg' | asset_url }}" alt="A Fresh Start, cream" loading="{{ loading }}" width="768" height="1024" class="evx-film__img">
+                  <img src="{{ 'evx-fs-full.jpg' | asset_url }}" alt="A Fresh Start, cream and sand" loading="{{ loading }}" width="950" height="530" class="evx-film__img">
                 </div>
               </figure>
             {%- else -%}

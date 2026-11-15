@@ -53,9 +53,11 @@ The CLI runs on a packing-station computer, not on Shopify.
 - [ ] Create collections: The Collection (all); optionally one per chapter (The Silent Grind, A Fresh Start)
 - [ ] Create the **EvlveX Story Slide** metaobject and the **Story slides** product metafield (`evlvex.story_slides`) by hand, following [qr-certificates.md §5.4](qr-certificates.md). `npm run setup` does not create them.
 - [ ] Create the products **The Silent Grind** (Noir) and **A Fresh Start** (Cream & Sand) with size variants and prices, and set each product's **Story** metafield. Optionally add its **Story slides** too ([operations.md §7](operations.md)). Then point the COMEBACK film's "Shop" links at the product pages (theme editor → Home → EvlveX COMEBACK film).
-- [ ] Menus: *Main menu* (Shop, The Chapters, About, Authenticity); *Footer* (The Chapters, Care, Shipping & Returns, Privacy, Contact). The store currently shows Shopify's default *Home · Catalog · Contact*.
+- [ ] Menus: *Main menu* (Shop, The Chapters, About, Authenticity); *Footer* (The Chapters, Care, Contact). The policies are listed automatically under the footer. The store currently shows Shopify's default *Home · Catalog · Contact*.
 - [ ] Theme editor: the home **COMEBACK film** already shows the two shoes. Upload studio images per scene when they exist. The header already draws the original logo (monogram + wordmark); upload a logo image only if you want to replace it.
 - [ ] Print workshop cards ([operations.md §2](operations.md))
 - [ ] **Before launch:** upload studio photography of both models on products, collections and in the theme editor (the COMEBACK film scenes take an uploaded image too). Then turn off Theme settings → **EvlveX → Show demo photography** ([docs/brand/shoe-images.md](../brand/shoe-images.md)).
 - [ ] Checkout and customer accounts are hosted by Shopify. Brand them in Admin → Settings → **Checkout → Customize** (logo: `docs/brand/logos/`; colors White `#FFFFFF`, Black `#111111`; font Archivo). Customer account pages use the same branding.
-- [ ] Policies: add the certificate privacy wording ([open items](../SPEC.md#open-items))
+- [ ] **Policies:** paste the five texts from [docs/policies/](../policies/README.md) into Admin → Settings → Policies, and replace every `[FILL IN: …]` placeholder. The footer and checkout then link to them.
+- [ ] Admin → Settings → Store details: contact email **support@evlvex.in**, plus the legal business name and address. Settings → Notifications: sender email support@evlvex.in.
+- [ ] Admin → Settings → Payments: keep Cash on Delivery **off** (the policies say prepaid only).
