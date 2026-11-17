@@ -31,7 +31,7 @@
   }
   .evx-size-guide__table {
     width: 100%;
-    min-width: 48rem;
+    min-width: 64rem;
     border-collapse: collapse;
     font-size: 1.5rem;
     font-variant-numeric: tabular-nums;
@@ -78,18 +78,22 @@
           <thead>
             <tr>
               <th scope="col">{{ section.settings.label_uk | escape }}</th>
-              <th scope="col">{{ section.settings.label_eu | escape }}</th>
-              <th scope="col">{{ section.settings.label_us | escape }}</th>
-              <th scope="col">{{ section.settings.label_cm | escape }}</th>
+              {%- if section.settings.label_us != blank -%}<th scope="col">{{ section.settings.label_us | escape }}</th>{%- endif -%}
+              {%- if section.settings.label_us_w != blank -%}<th scope="col">{{ section.settings.label_us_w | escape }}</th>{%- endif -%}
+              {%- if section.settings.label_eu != blank -%}<th scope="col">{{ section.settings.label_eu | escape }}</th>{%- endif -%}
+              {%- if section.settings.label_cm != blank -%}<th scope="col">{{ section.settings.label_cm | escape }}</th>{%- endif -%}
+              {%- if section.settings.label_in != blank -%}<th scope="col">{{ section.settings.label_in | escape }}</th>{%- endif -%}
             </tr>
           </thead>
           <tbody>
             {%- for block in section.blocks -%}
               <tr {{ block.shopify_attributes }}>
                 <th scope="row">{{ block.settings.uk | escape }}</th>
-                <td>{{ block.settings.eu | escape }}</td>
-                <td>{{ block.settings.us | escape }}</td>
-                <td>{{ block.settings.cm | escape }}</td>
+                {%- if section.settings.label_us != blank -%}<td>{{ block.settings.us | escape }}</td>{%- endif -%}
+                {%- if section.settings.label_us_w != blank -%}<td>{{ block.settings.us_w | escape }}</td>{%- endif -%}
+                {%- if section.settings.label_eu != blank -%}<td>{{ block.settings.eu | escape }}</td>{%- endif -%}
+                {%- if section.settings.label_cm != blank -%}<td>{{ block.settings.cm | escape }}</td>{%- endif -%}
+                {%- if section.settings.label_in != blank -%}<td>{{ block.settings.inch | escape }}</td>{%- endif -%}
               </tr>
             {%- endfor -%}
           </tbody>
@@ -114,9 +118,11 @@
       "name": "Size row",
       "settings": [
         { "type": "text", "id": "uk", "label": "UK / India", "default": "UK 8" },
-        { "type": "text", "id": "eu", "label": "EU", "default": "42" },
-        { "type": "text", "id": "us", "label": "US", "default": "9" },
-        { "type": "text", "id": "cm", "label": "Foot length", "default": "26.2 cm" }
+        { "type": "text", "id": "us", "label": "Men's US", "default": "US 9" },
+        { "type": "text", "id": "us_w", "label": "Women's US", "default": "US 10" },
+        { "type": "text", "id": "eu", "label": "EU", "default": "EU 42" },
+        { "type": "text", "id": "cm", "label": "Foot length (cm)", "default": "26.0 cm" },
+        { "type": "text", "id": "inch", "label": "Foot length (in)", "default": "10.24 in" }
       ]
     }
   ],
@@ -134,10 +140,13 @@
       "default": "h1"
     },
     { "type": "richtext", "id": "intro", "label": "Intro" },
-    { "type": "text", "id": "label_uk", "label": "Column 1 label", "default": "UK / India" },
-    { "type": "text", "id": "label_eu", "label": "Column 2 label", "default": "EU" },
-    { "type": "text", "id": "label_us", "label": "Column 3 label", "default": "US" },
-    { "type": "text", "id": "label_cm", "label": "Column 4 label", "default": "Foot length" },
+    { "type": "header", "content": "Column labels", "info": "Leave a label empty to hide that column." },
+    { "type": "text", "id": "label_uk", "label": "UK / India", "default": "UK / India" },
+    { "type": "text", "id": "label_us", "label": "Men's US", "default": "Men's US" },
+    { "type": "text", "id": "label_us_w", "label": "Women's US", "default": "Women's US" },
+    { "type": "text", "id": "label_eu", "label": "EU", "default": "EU" },
+    { "type": "text", "id": "label_cm", "label": "Foot length (cm)", "default": "Foot length (cm)" },
+    { "type": "text", "id": "label_in", "label": "Foot length (in)", "default": "Foot length (in)" },
     { "type": "richtext", "id": "note", "label": "Note under the table" },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
     { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 40 },

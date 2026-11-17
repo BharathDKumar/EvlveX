@@ -63,7 +63,7 @@
           "settings": {
             "heading": "Size & fit",
             "icon": "ruler",
-            "content": "<p>EU sizing. True to size; if you are between sizes, we recommend the larger size.</p>",
+            "content": "<p>Unisex, UK/India sizing. Our shoes run true to standard Indian/UK sizing: select your normal UK size. Women: choose the UK size that is 2 below your Women's US size (Women's US 8 = UK 6).</p><p>Free size exchange within 7 days of delivery. <a href=\"/pages/size-guide\" title=\"Size guide\">Open the size guide</a></p>",
             "page": ""
           }
         },
@@ -93,15 +93,6 @@
             "content": "<p>Every pair is numbered, signed by the artisan who finished it, and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair. <a href=\"/pages/authenticity\" title=\"Authenticity\">How it works</a>.</p>",
             "page": ""
           }
-        },
-        "size-fit": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Size & fit",
-            "icon": "ruler",
-            "content": "<p>Sizes are UK/India. If you are between sizes, choose the larger. Free size exchange within 7 days of delivery.</p><p><a href=\"/pages/size-guide\" title=\"Size guide\">Open the size guide</a></p>",
-            "page": ""
-          }
         }
       },
       "block_order": [
@@ -116,7 +107,6 @@
         "tab_materials",
         "tab_fit",
         "tab_care",
-        "size-fit",
         "tab_shipping",
         "tab_certificate"
       ],

@@ -195,6 +195,6 @@ The same details are handwritten on a **workshop card** placed in the box ([oper
 
 **Stories index:** "COMEBACK" · "One story, two chapters"
 
-**Product tabs:** Materials & craft ("Smooth upper with suede overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole…"), Size & fit ("EU sizing. True to size…"), Care, Shipping & returns, Your pair's certificate.
+**Product tabs:** Materials & craft ("Smooth upper with suede overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole…"), Size & fit ("Unisex, UK/India sizing. Our shoes run true to standard Indian/UK sizing…", links to the size guide), Care, Shipping & returns, Your pair's certificate.
 
 **Certificate thank-you copy** is in [qr-certificates.md §3](qr-certificates.md).
