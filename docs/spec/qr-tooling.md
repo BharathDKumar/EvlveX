@@ -28,6 +28,7 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 | `npm run setup` | Creates (or checks and completes) the certificate and story definitions and the product story metafield |
 | `npm test` | Self-test: serial format, and that QR codes with the centre logo decode correctly |
 | `npm run generate -- --count 200 --batch NOV26` | Creates 200 new serials in Shopify and writes SVGs, a print PDF and a CSV to `out/NOV26/` |
+| `npm run generate -- --from stock/stock-2026-11.csv --batch NOV26` | **From a stock list:** one certificate per pair, created with its **product, size and pair number** (numbers continue per model). `tags.pdf` starts each model · colour · size on a new sheet with a heading ("The Silent Grind · Black · UK 10 — 14 tags · pair no. 1–14"); `manifest.csv` adds product, colour, size and pair number. List columns: `product` (exact Shopify title), `size` (UK), `count`, optional `color`, `artisan`, `finished`, `note`; CSV or text pasted from a spreadsheet. Add `--offline` for a proof |
 | `npm run generate -- --count 6 --batch TEST --offline` | Same, but **does not touch Shopify**. For checking print quality |
 | `npm run generate -- --count 3 --batch TEST --base-url https://w3wigc-de.myshopify.com` | Test tags that point at the myshopify domain. **Never print these for real pairs** |
 | `npm run generate -- --reprint EVX-7F3K9QMD` | Re-creates the tag artwork for an existing serial |

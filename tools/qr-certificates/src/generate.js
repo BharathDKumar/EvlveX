@@ -1,13 +1,16 @@
 // npm run generate -- --count 200 --batch NOV26 [--offline] [--base-url https://…]
 // npm run generate -- --reprint EVX-7F3K9QMD[,EVX-…]
+// npm run generate -- --from stock.csv --batch NOV26   one certificate per pair in a stock list (product, size, pair no.)
 //
 // Creates new serials as Active `evlvex_certificate` metaobjects in Shopify and writes
 // out/<batch>/{svg/*.svg, tags.pdf, manifest.csv}. See docs/spec/qr-tooling.md and docs/spec/operations.md §1.
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 import { certificateUrl, config, fail, publicBaseUrl, ROOT } from './config.js';
-import { assertNoUserErrors, getCertificate, gql } from './shopify.js';
+import { assertNoUserErrors, getCertificate, gql, listCertificateChapters, modelGroup } from './shopify.js';
+import { chapterFields, nextPairNumber } from './chapter.js';
+import { expandPairs, groupLabel, parseStockList } from './stocklist.js';
 import { newSerial, normaliseSerial, serialToHandle } from './serial.js';
 import { writeOutputs } from './output.js';
 
@@ -18,6 +21,7 @@ const { values: args } = parseArgs({
     offline: { type: 'boolean', default: false },
     'base-url': { type: 'string' },
     reprint: { type: 'string' },
+    from: { type: 'string' },
     help: { type: 'boolean', short: 'h', default: false },
   },
 });
@@ -27,7 +31,9 @@ if (args.help) {
   npm run generate -- --count 200 --batch NOV26          create serials in Shopify + print files
   npm run generate -- --count 6 --batch TEST --offline   artwork only, nothing created in Shopify
   npm run generate -- --count 3 --batch TEST --base-url https://w3wigc-de.myshopify.com   test tags
-  npm run generate -- --reprint EVX-7F3K9QMD,EVX-…       re-create artwork for existing serials`);
+  npm run generate -- --reprint EVX-7F3K9QMD,EVX-…       re-create artwork for existing serials
+  npm run generate -- --from stock.csv --batch NOV26     one certificate per pair in a stock list
+                                                         (columns: product, size, count [, color, artisan, finished, note])`);
   process.exit(0);
 }
 
@@ -39,6 +45,8 @@ if (isTestUrl) {
 
 if (args.reprint) {
   await reprint(args.reprint);
+} else if (args.from) {
+  await generateFromList(args.from);
 } else {
   await generate();
 }
@@ -105,7 +113,7 @@ async function assertDefinitionExists() {
 }
 
 /** Returns true when created with exactly the requested handle. */
-async function createCertificate(serial, handle, batch) {
+async function createCertificate(serial, handle, batch, extraFields = []) {
   const data = await gql(
     `mutation($metaobject: MetaobjectCreateInput!) {
       metaobjectCreate(metaobject: $metaobject) {
@@ -120,6 +128,7 @@ async function createCertificate(serial, handle, batch) {
         fields: [
           { key: 'serial', value: serial },
           { key: 'batch', value: batch },
+          ...extraFields,
         ],
         capabilities: { publishable: { status: 'ACTIVE' } },
       },
@@ -155,4 +164,100 @@ async function reprint(list) {
   const outDir = path.join(ROOT, 'out', batch);
   await writeOutputs(outDir, items, { batch, note: 'REPRINT' });
   console.log(`✔ Reprint of ${items.length} tag(s) written to ${outDir}`);
+}
+
+/** Resolve product titles (any status, drafts included) → { id, storyId } per title. */
+async function resolveProducts(titles) {
+  const out = new Map();
+  for (const title of titles) {
+    const data = await gql(
+      `query($q: String!) {
+        products(first: 10, query: $q) {
+          nodes { id title status story: metafield(namespace: "evlvex", key: "story") { value } }
+        }
+      }`,
+      { q: `title:"${title.replace(/"/g, '')}"` }
+    );
+    const match = data.products.nodes.filter((p) => p.title.trim().toLowerCase() === title.trim().toLowerCase());
+    if (match.length !== 1) {
+      fail(`Product "${title}" ${match.length ? 'matches several products' : 'was not found'} in Shopify. Use the exact product title.`);
+    }
+    out.set(title, { id: match[0].id, storyId: match[0].story?.value || null });
+  }
+  return out;
+}
+
+async function generateFromList(file) {
+  const batch = (args.batch || '').trim();
+  if (!/^[A-Za-z0-9_-]{1,32}$/.test(batch)) fail('--batch is required: letters, digits, - or _ (e.g. NOV26).');
+  const listPath = path.resolve(file);
+  if (!existsSync(listPath)) fail(`Stock list not found: ${listPath}`);
+
+  const { rows, errors } = parseStockList(readFileSync(listPath, 'utf8'));
+  if (errors.length) fail(`The stock list has problems:\n  ${errors.join('\n  ')}`);
+  for (const row of rows) {
+    const { errors: chapterErrors } = chapterFields({ artisan: row.artisan, finished: row.finished, note: row.note });
+    if (chapterErrors.length) fail(`Line ${row.line}: ${chapterErrors.join(' ')}`);
+  }
+  const pairs = expandPairs(rows);
+
+  const outDir = path.join(ROOT, 'out', batch);
+  if (existsSync(path.join(outDir, 'manifest.csv'))) fail(`Batch "${batch}" already exists at ${outDir}. Choose a new batch name.`);
+
+  // Pair numbers continue per model: after the highest existing number of the same model (story, or product).
+  const titles = [...new Set(pairs.map((p) => p.product))];
+  const products = args.offline ? new Map(titles.map((t) => [t, { id: null, storyId: null }])) : await resolveProducts(titles);
+  if (!args.offline) await assertDefinitionExists();
+  const existing = args.offline ? [] : await listCertificateChapters();
+  const next = new Map();
+  for (const [title, p] of products) {
+    const group = modelGroup(p.id, p.storyId) || title;
+    if (!next.has(group)) next.set(group, nextPairNumber(existing, group, null));
+    p.group = group;
+  }
+
+  const summary = rows.map((r) => `  ${groupLabel(r).padEnd(36)} ${String(r.count).padStart(4)}`).join('\n');
+  console.log(`${args.offline ? 'Generating (offline)' : 'Creating'} ${pairs.length} certificates for batch ${batch}:\n${summary}`);
+
+  const items = [];
+  const seen = new Set();
+  let failure;
+  try {
+    for (const pair of pairs) {
+      const product = products.get(pair.product);
+      const pairNumber = next.get(product.group);
+      const { fields: chapter } = chapterFields({ artisan: pair.artisan, finished: pair.finished, note: pair.note });
+      const extra = [
+        ...(product.id ? [{ key: 'product', value: product.id }] : []),
+        { key: 'size', value: pair.size },
+        { key: 'pair_number', value: String(pairNumber) },
+        ...chapter,
+      ];
+      for (;;) {
+        const serial = newSerial();
+        if (seen.has(serial)) continue;
+        seen.add(serial);
+        const handle = serialToHandle(serial);
+        if (!args.offline && !(await createCertificate(serial, handle, batch, extra))) continue;
+        items.push({
+          serial, handle, url: certificateUrl(baseUrl, handle),
+          product: pair.product, color: pair.color || '', size: pair.size, pairNumber, group: groupLabel(pair),
+        });
+        break;
+      }
+      next.set(product.group, pairNumber + 1);
+      if (items.length % 10 === 0 || items.length === pairs.length) process.stdout.write(`  ${items.length}/${pairs.length}\r`);
+    }
+  } catch (error) {
+    failure = error;
+  }
+
+  if (items.length) {
+    await writeOutputs(outDir, items, { batch, note: args.offline ? 'OFFLINE PROOF — not registered' : isTestUrl ? 'TEST' : '' });
+  }
+  console.log(`\n✔ ${items.length} tag(s) written to ${outDir}`);
+  console.log('  • tags.pdf      → print at 100% scale; each model and size starts on a new sheet');
+  console.log('  • manifest.csv  → serial, product, colour, size and pair number of every tag');
+  if (args.offline) console.log('\n  Offline mode: nothing was created in Shopify. Scanning these tags will show a 404 page.');
+  if (failure) fail(`Stopped after ${items.length} of ${pairs.length}: ${failure.message}\n  The files above contain only the certificates that were created in Shopify.`);
 }
