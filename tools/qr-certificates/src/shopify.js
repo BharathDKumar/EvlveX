@@ -48,14 +48,25 @@ export async function gql(query, variables = {}, { retries = 5 } = {}) {
   const url = `https://${config.store}/admin/api/${config.apiVersion}/graphql.json`;
 
   for (let attempt = 0; ; attempt++) {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Access-Token': token,
-      },
-      body: JSON.stringify({ query, variables }),
-    });
+    let res;
+    try {
+      res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Access-Token': token,
+        },
+        body: JSON.stringify({ query, variables }),
+      });
+    } catch (error) {
+      // Dropped connection: wait and retry. A create that reached Shopify before the drop is caught by the
+      // caller (its handle is then taken), and `generate` reports such leftovers.
+      if (attempt < retries) {
+        await sleep(1000 * 2 ** attempt);
+        continue;
+      }
+      throw error;
+    }
 
     if ((res.status === 429 || res.status >= 500) && attempt < retries) {
       await sleep(1000 * 2 ** attempt);
