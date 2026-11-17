@@ -14,7 +14,7 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 
 | Variable | Example | Meaning |
 |---|---|---|
-| `SHOPIFY_STORE` | `evlvex.myshopify.com` | store's myshopify domain (API only) |
+| `SHOPIFY_STORE` | `w3wigc-de.myshopify.com` | store's myshopify domain (API only) |
 | `SHOPIFY_ADMIN_TOKEN` | `shpat_…` | Admin API access token. **Keep secret; never commit** |
 | `SHOPIFY_API_VERSION` | `2026-10` | Admin API version |
 | `PUBLIC_DOMAIN` | `evlvex.com` | domain encoded in every QR ([deployment.md §1](deployment.md)) |
@@ -28,7 +28,7 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 | `npm test` | Self-test: serial format, and that QR codes with the centre logo decode correctly |
 | `npm run generate -- --count 200 --batch NOV26` | Creates 200 new serials in Shopify and writes SVGs, a print PDF and a CSV to `out/NOV26/` |
 | `npm run generate -- --count 6 --batch TEST --offline` | Same, but **does not touch Shopify**. For checking print quality |
-| `npm run generate -- --count 3 --batch TEST --base-url https://evlvex.myshopify.com` | Test tags that point at the myshopify domain. **Never print these for real pairs** |
+| `npm run generate -- --count 3 --batch TEST --base-url https://w3wigc-de.myshopify.com` | Test tags that point at the myshopify domain. **Never print these for real pairs** |
 | `npm run generate -- --reprint EVX-7F3K9QMD` | Re-creates the tag artwork for an existing serial |
 | `npm run assign -- --serial EVX-… --order 1001 [--size 42] [--message "…"] [--name "…"] [--line 2] [--artisan "…"] [--finished YYYY-MM-DD] [--note "…"] [--pair-number 42] [--force]` | Links a serial to an order and records the pair's chapter (see §3) |
 | `npm run assign -- --serial EVX-… --clear` | Un-assigns a pair (returns / exchanges); keeps the pair's chapter fields |
