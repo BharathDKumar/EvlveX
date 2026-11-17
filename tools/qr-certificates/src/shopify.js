@@ -9,15 +9,24 @@ let cachedToken = null;
 async function accessToken() {
   if (config.token && !config.token.includes('xxxx')) return config.token;
   if (cachedToken) return cachedToken;
-  const res = await fetch(`https://${config.store}/admin/oauth/access_token`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'client_credentials',
-      client_id: config.clientId,
-      client_secret: config.clientSecret,
-    }),
-  });
+  let res;
+  for (let attempt = 0; ; attempt++) {
+    res = await fetch(`https://${config.store}/admin/oauth/access_token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: config.clientId,
+        client_secret: config.clientSecret,
+      }),
+    });
+    // Shopify's token endpoint sometimes answers 429/5xx for a moment: wait and try again.
+    if ((res.status === 429 || res.status >= 500) && attempt < 5) {
+      await sleep(1000 * 2 ** attempt);
+      continue;
+    }
+    break;
+  }
   const text = await res.text();
   let body = null;
   try {
