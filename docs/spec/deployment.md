@@ -24,7 +24,7 @@ The live theme **EvlveX/main** is connected to GitHub (`BharathDKumar/EvlveX`, b
 
 1. **Lint:** `shopify theme check`. Expect no errors; 9 warnings in stock Dawn files are known.
 2. **Validate templates:** `node tools/validate-templates.js`, which must print *Templates OK*. Shopify rejects a template file with any invalid setting value without failing the push. The store then silently keeps the old file ([theme.md §5](theme.md)).
-3. **Preview** risky changes before they go live: `shopify theme dev --store evlvex.myshopify.com` (hot reload at http://127.0.0.1:9292), or push to a separate branch connected to an unpublished theme.
+3. **Preview** risky changes before they go live: `shopify theme dev --store w3wigc-de.myshopify.com` (hot reload at http://127.0.0.1:9292), or push to a separate branch connected to an unpublished theme.
 4. **Deploy:** push to `main`.
 5. **Verify on evlvex.in:** reload the changed page and check that its sections are the new ones. If a template didn't change, open Admin → Online Store → Themes; a sync error on **EvlveX/main** names the rejected file.
 - **Rollback:** `git revert` the commit and push. Shopify also keeps earlier theme versions in the theme library.
@@ -42,8 +42,10 @@ The CLI runs on a packing-station computer, not on Shopify.
 4. Set `PUBLIC_DOMAIN=evlvex.in` and generate and print tags ([operations.md §1](operations.md)).
 
 ## 5. One-time store setup checklist
+The store's internal address is **w3wigc-de.myshopify.com** (Admin and API); the public domain is evlvex.in. Store data can be changed with the Admin API through the *EvlveX setup* app in the Dev Dashboard: its client ID and secret go in  (git-ignored) and are exchanged for a 24-hour token. Rotate the secret when a job is finished.
+
 - [ ] Create metaobject and metafield definitions: `npm run setup` ([qr-certificates.md §5](qr-certificates.md))
-- [ ] **Create the pages.** Until a page exists, its links (footer, menus, buttons) show the 404 page. Go to Online Store → **Pages → Add page**, type the **Title** exactly as below, leave the content empty, choose the **Template** on the right, and save. Shopify makes the handle from the title; check it under *Search engine listing*.
+- [x] **Create the pages.** *Done 17 Nov 2026 through the Admin API: all nine exist with their templates.* Until a page exists, its links (footer, menus, buttons) show the 404 page. Go to Online Store → **Pages → Add page**, type the **Title** exactly as below, leave the content empty, choose the **Template** on the right, and save. Shopify makes the handle from the title; check it under *Search engine listing*.
 
   | Title | Handle | Template |
   |---|---|---|
@@ -60,8 +62,9 @@ The CLI runs on a packing-station computer, not on Shopify.
 - [ ] Create story entries for **The Silent Grind** and **A Fresh Start** (text in [brand-and-content.md §6](brand-and-content.md)) and upload their chapter frames
 - [ ] Create collections: The Collection (all); optionally one per chapter (The Silent Grind, A Fresh Start)
 - [ ] Create the **EvlveX Story Slide** metaobject and the **Story slides** product metafield (`evlvex.story_slides`) by hand, following [qr-certificates.md §5.4](qr-certificates.md). `npm run setup` does not create them.
-- [ ] Create the products **The Silent Grind** (Noir, handle `the-silent-grind`) and **A Fresh Start** (Cream & Sand, handle `a-fresh-start`; the footer links to these handles) with size variants (UK 6–10, model CB-01, matching the size guide) and prices, and set each product's **Story** metafield. Optionally add its **Story slides** too ([operations.md §7](operations.md)). Then point the COMEBACK film's "Shop" links at the product pages (theme editor → Home → EvlveX COMEBACK film).
-- [ ] Menus: *Main menu* (Shop → /collections/all, Stories, About, Authenticity). The footer columns already carry their own links (theme editor → Footer); choose a menu in a column only if you want to manage it in Admin. The policies are listed automatically in the footer's bottom bar. The store currently shows Shopify's default *Home · Catalog · Contact*.
+- [x] Products, *done 17 Nov 2026*: **The Silent Grind** (handle `the-silent-grind`, **draft**; set it to Active when ready) and **A Fresh Start** (`a-fresh-start`, live), ₹3,435, model CB-01, sizes UK 6–10 with the November stock (118 pairs each). Still to do: set each product's **Story** metafield once the story entries exist, optionally its **Story slides** ([operations.md §7](operations.md)), and point the COMEBACK film's "Shop" links at the product pages (theme editor → Home → EvlveX COMEBACK film).
+- [x] Menus: *Main menu* (Shop → /collections/all, Stories, About, Authenticity, Contact), *done 17 Nov 2026*. The footer columns already carry their own links (theme editor → Footer). The policies are listed automatically in the footer's bottom bar.
+- [x] QR certificates, *done 17 Nov 2026*: definitions created (`npm run setup`) and 236 certificates for the November stock (batches NOV26 + NOV26-2, print set `out/NOV26-PRINT`).
 - [ ] Theme editor: the home **COMEBACK film** already shows the two shoes. Upload studio images per scene when they exist. The header already draws the original logo (monogram + wordmark); upload a logo image only if you want to replace it.
 - [ ] Print workshop cards ([operations.md §2](operations.md))
 - [ ] **Before launch:** upload studio photography of both models on products, collections and in the theme editor (the COMEBACK film scenes take an uploaded image too). Then turn off Theme settings → **EvlveX → Show demo photography** ([docs/brand/shoe-images.md](../brand/shoe-images.md)).

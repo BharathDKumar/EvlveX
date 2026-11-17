@@ -26,7 +26,7 @@ if (args.help) {
   console.log(`Usage:
   npm run generate -- --count 200 --batch NOV26          create serials in Shopify + print files
   npm run generate -- --count 6 --batch TEST --offline   artwork only, nothing created in Shopify
-  npm run generate -- --count 3 --batch TEST --base-url https://evlvex.myshopify.com   test tags
+  npm run generate -- --count 3 --batch TEST --base-url https://w3wigc-de.myshopify.com   test tags
   npm run generate -- --reprint EVX-7F3K9QMD,EVX-…       re-create artwork for existing serials`);
   process.exit(0);
 }
