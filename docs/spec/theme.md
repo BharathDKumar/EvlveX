@@ -78,7 +78,7 @@ Home
 | **Page** (generic) | `page.json` | Shipping, privacy and other text pages | page content · "Need help?" strip (Contact us, FAQ) | — | stacked |
 | **Contact** | `page.contact.json` | Contact us | banner "Contact us" · page content · Order help / Customer support / Instagram / Authenticity columns · "Send us a message" form | shoe image | stacked |
 | **FAQ** | `page.faq.json` | Quick answers | intro · collapsible groups: Orders & payment, Shipping & delivery, Returns & exchanges, Sizing & care, Authenticity · "Still need help?" | — | stacked |
-| **Size guide** | `page.size-guide.json` | Choose a size | intro · `evlvex-size-guide` table (UK/India, EU, US, foot length; one block per row) · "How to measure your foot" · help | — | table scrolls sideways |
+| **Size guide** | `page.size-guide.json` | Choose a size | intro · `evlvex-size-guide` table for model CB-01, unisex, UK 6–10 (UK/India, Men's US, Women's US, EU, foot length in cm and inches; one block per row; empty column label hides a column) · fit advice for men and women · "How to measure your foot" · help | — | table scrolls sideways |
 | **Track your order** | `page.track-order.json` | Delivery status | intro · 3 steps (confirmed, dispatched, delivered) · "Where is my tracking link?" · My account / Contact us | — | stacked |
 | **Shipping & returns** | `page.shipping-returns.json` | Summary of the policies | intro · 4-point summary · "How to return or exchange" · buttons to the Shipping and Refund policies | — | stacked |
 | **Gift card** | `gift_card.liquid` | Show a gift card | EvlveX card (white monogram + wordmark on Black) unless a logo is uploaded | — | — |

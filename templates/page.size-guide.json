@@ -21,7 +21,7 @@
         "b3": {
           "type": "text",
           "settings": {
-            "text": "<p>Find your size in a minute. All EvlveX sizes are UK/India.</p>"
+            "text": "<p>Model CB-01, unisex. Sizes are UK/India, from UK 6 to UK 10.</p>"
           }
         }
       },
@@ -45,64 +45,56 @@
         "s1": {
           "type": "size",
           "settings": {
-            "uk": "UK 5",
-            "eu": "39",
-            "us": "6",
-            "cm": "23.7 cm"
+            "uk": "UK 6",
+            "us": "US 7",
+            "us_w": "US 8",
+            "eu": "EU 40",
+            "cm": "24.5 cm",
+            "inch": "9.65 in"
           }
         },
         "s2": {
           "type": "size",
           "settings": {
-            "uk": "UK 6",
-            "eu": "40",
-            "us": "7",
-            "cm": "24.5 cm"
+            "uk": "UK 7",
+            "us": "US 8",
+            "us_w": "US 9",
+            "eu": "EU 41",
+            "cm": "25.5 cm",
+            "inch": "10.04 in"
           }
         },
         "s3": {
           "type": "size",
           "settings": {
-            "uk": "UK 7",
-            "eu": "41",
-            "us": "8",
-            "cm": "25.4 cm"
+            "uk": "UK 8",
+            "us": "US 9",
+            "us_w": "US 10",
+            "eu": "EU 42",
+            "cm": "26.0 cm",
+            "inch": "10.24 in"
           }
         },
         "s4": {
           "type": "size",
           "settings": {
-            "uk": "UK 8",
-            "eu": "42",
-            "us": "9",
-            "cm": "26.2 cm"
+            "uk": "UK 9",
+            "us": "US 10",
+            "us_w": "US 11",
+            "eu": "EU 43",
+            "cm": "27.0 cm",
+            "inch": "10.63 in"
           }
         },
         "s5": {
           "type": "size",
           "settings": {
-            "uk": "UK 9",
-            "eu": "43",
-            "us": "10",
-            "cm": "27.1 cm"
-          }
-        },
-        "s6": {
-          "type": "size",
-          "settings": {
             "uk": "UK 10",
-            "eu": "44",
-            "us": "11",
-            "cm": "27.9 cm"
-          }
-        },
-        "s7": {
-          "type": "size",
-          "settings": {
-            "uk": "UK 11",
-            "eu": "45",
-            "us": "12",
-            "cm": "28.8 cm"
+            "us": "US 11",
+            "us_w": "US 12",
+            "eu": "EU 44",
+            "cm": "28.0 cm",
+            "inch": "11.02 in"
           }
         }
       },
@@ -111,9 +103,7 @@
         "s2",
         "s3",
         "s4",
-        "s5",
-        "s6",
-        "s7"
+        "s5"
       ],
       "settings": {
         "heading": "Size chart",
@@ -121,12 +111,14 @@
         "intro": "",
         "label_uk": "UK / India",
         "label_eu": "EU",
-        "label_us": "US",
-        "label_cm": "Foot length",
-        "note": "<p><strong>Between sizes?</strong> Choose the larger size. Not sure? You can exchange your size free within 7 days of delivery.</p>",
+        "label_us": "Men's US",
+        "label_cm": "Foot length (cm)",
+        "note": "<p><strong>Men:</strong> our shoes run true to standard Indian/UK footwear sizing. Select your normal UK size.</p><p><strong>Women:</strong> Women's US sizing is 2 full sizes higher than UK sizing (or 1 size higher than Men's US). For example, a Women's US 8 is UK 6.</p><p>Not sure? You can exchange your size free within 7 days of delivery.</p>",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 52
+        "padding_bottom": 52,
+        "label_us_w": "Women's US",
+        "label_in": "Foot length (in)"
       }
     },
     "measure": {
@@ -136,7 +128,7 @@
           "type": "column",
           "settings": {
             "title": "1. Stand on paper",
-            "text": "<p>Place a sheet of paper on a hard floor against a wall. Stand on it with your heel touching the wall, wearing the socks you usually wear.</p>",
+            "text": "<p>Place a piece of paper on a hard floor and stand on it with your heel lightly touching a flat wall.</p>",
             "link_label": "",
             "link": ""
           }
@@ -145,7 +137,7 @@
           "type": "column",
           "settings": {
             "title": "2. Mark your longest toe",
-            "text": "<p>Ask someone to mark the tip of your longest toe, or mark it yourself keeping the pencil straight up.</p>",
+            "text": "<p>Mark the tip of your longest toe on the paper, keeping the pencil straight up.</p>",
             "link_label": "",
             "link": ""
           }
@@ -154,7 +146,7 @@
           "type": "column",
           "settings": {
             "title": "3. Measure and compare",
-            "text": "<p>Measure from the wall to the mark in centimetres. Measure both feet and use the longer one, then find it in the chart above.</p>",
+            "text": "<p>Measure from the wall to the mark in centimetres, and match it to the Foot length column. Measure both feet and use the longer one.</p>",
             "link_label": "",
             "link": ""
           }

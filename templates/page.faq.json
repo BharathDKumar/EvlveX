@@ -230,7 +230,7 @@
           "settings": {
             "heading": "What size should I order?",
             "icon": "ruler",
-            "row_content": "<p>Our sizes are UK/India. If you are between sizes, choose the larger. See the <a href=\"/pages/size-guide\" title=\"Size guide\">size guide</a> for EU, US and foot-length conversions.</p>",
+            "row_content": "<p>Our shoes run true to standard Indian/UK sizing: select your normal UK size. Women: choose the UK size that is 2 below your Women's US size (Women's US 8 = UK 6). See the <a href=\"/pages/size-guide\" title=\"Size guide\">size guide</a> for EU, US and foot-length conversions.</p>",
             "page": ""
           }
         },
