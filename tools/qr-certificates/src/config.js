@@ -13,6 +13,10 @@ const env = process.env;
 export const config = {
   store: (env.SHOPIFY_STORE || '').trim(),
   token: (env.SHOPIFY_ADMIN_TOKEN || '').trim(),
+  // Alternative to a fixed token: the app's client ID and secret (Dev Dashboard apps). A short-lived token is
+  // fetched automatically with the client-credentials grant (src/shopify.js).
+  clientId: (env.SHOPIFY_CLIENT_ID || '').trim(),
+  clientSecret: (env.SHOPIFY_CLIENT_SECRET || '').trim(),
   apiVersion: (env.SHOPIFY_API_VERSION || '2026-10').trim(),
   publicDomain: (env.PUBLIC_DOMAIN || '').trim().replace(/^https?:\/\//, '').replace(/\/+$/, ''),
   type: (env.METAOBJECT_TYPE || 'evlvex_certificate').trim(),
@@ -25,7 +29,9 @@ export const config = {
 export function requireApi() {
   const missing = [];
   if (!config.store) missing.push('SHOPIFY_STORE');
-  if (!config.token || config.token.includes('xxxx')) missing.push('SHOPIFY_ADMIN_TOKEN');
+  const hasToken = config.token && !config.token.includes('xxxx');
+  const hasClient = config.clientId && config.clientSecret && !config.clientSecret.includes('xxxx');
+  if (!hasToken && !hasClient) missing.push('SHOPIFY_ADMIN_TOKEN (or SHOPIFY_CLIENT_ID + SHOPIFY_CLIENT_SECRET)');
   if (missing.length) {
     fail(`Missing ${missing.join(', ')} in ${envPath}. Copy .env.example to .env and fill it in.`);
   }
