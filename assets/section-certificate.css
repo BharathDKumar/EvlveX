@@ -287,6 +287,19 @@
   white-space: nowrap;
 }
 
+/* Unsold pair: "Not purchased yet" badge under the heading */
+.certificate__badge {
+  display: inline-block;
+  margin: 1.6rem 0 0;
+  padding: 0.6rem 1.6rem;
+  border: 1px solid rgb(var(--color-foreground));
+  border-radius: 999px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .certificate__status {
   display: inline-flex;
   align-items: center;

@@ -88,6 +88,7 @@
       <h1 id="CertificateHeading-{{ section.id }}" class="certificate__heading certificate__reveal" style="--reveal-delay: 350ms;">
         <span class="certificate__name">{{ 'evlvex.certificate.genuine_heading' | t }}</span>
       </h1>
+      <p class="certificate__badge certificate__reveal" style="--reveal-delay: 450ms;">{{ 'evlvex.certificate.not_purchased' | t }}</p>
       <div class="certificate__message rte certificate__reveal" style="--reveal-delay: 550ms;">
         {{ section.settings.unassigned_message }}
       </div>
@@ -178,7 +179,7 @@
         <dt>{{ 'evlvex.certificate.serial' | t }}</dt>
         <dd class="certificate__serial">{{ serial | escape }}</dd>
       </div>
-      {%- if is_assigned and size != blank -%}
+      {%- if size != blank -%}
         <div class="certificate__detail">
           <dt>{{ 'evlvex.certificate.size' | t }}</dt>
           <dd>{{ size | escape }}</dd>

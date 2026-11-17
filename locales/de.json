@@ -537,7 +537,8 @@
       "acquired": "Acquired",
       "status": "Status",
       "status_registered": "Genuine · Registered",
-      "status_awaiting": "Genuine · Awaiting its owner",
+      "status_awaiting": "Genuine · Not purchased yet",
+      "not_purchased": "Not purchased yet",
       "footnote": "Issued by {{ shop }}. Each serial is unique and belongs to a single pair."
     },
     "authenticity": {
