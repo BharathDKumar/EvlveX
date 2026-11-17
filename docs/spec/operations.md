@@ -7,13 +7,13 @@ Command details are in [qr-tooling.md](qr-tooling.md); the certificate fields ar
 ---
 
 ## 1. Generate and print a batch (production)
-1. Run `npm run generate -- --count 200 --batch NOV26` in `tools/qr-certificates/`.
+1. Put the stock list in `tools/qr-certificates/stock/` (one row per model, colour and size, with a count; see [qr-tooling.md §2](qr-tooling.md)) and run `npm run generate -- --from stock/<file>.csv --batch NOV26` in `tools/qr-certificates/`. Each pair gets a certificate with its product, size and pair number, and the PDF has one sheet per model and size. (Without a list: `npm run generate -- --count 200 --batch NOV26` makes blank serials; product and size are then filled in at packing.)
 2. Open `out/NOV26/tags.pdf` and print it:
    - **Tag size:** 30 × 40 mm (QR 22 mm square, serial underneath, monogram in the QR centre).
    - **Material:** printed satin or woven label sewn under the tongue or insole, **plus** a matching sticker on the shoe box.
    - Print a test sheet first and scan 3 tags with an iPhone and an Android phone.
 3. Keep `out/NOV26/manifest.csv` as the record of which serials exist.
-4. Attach one tag per **pair** (the box sticker and the shoe label carry the **same** serial).
+4. Attach one tag per **pair** (the box sticker and the shoe label carry the **same** serial): print `tags.pdf` twice, once on label material and once on sticker paper, and work sheet by sheet so each stack of boxes of one model and size gets its own sheet.
 
 > Only print after the public domain is live ([deployment.md §1](deployment.md)).
 

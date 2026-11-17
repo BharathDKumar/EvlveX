@@ -12,6 +12,7 @@
     "generate": "node src/generate.js",
     "assign": "node src/assign.js",
     "lookup": "node src/lookup.js",
+    "merge": "node src/merge.js",
     "test": "node --test \"test/*.test.js\""
   },
   "dependencies": {

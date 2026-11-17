@@ -15,7 +15,7 @@ Full details are in the spec: [qr-tooling.md](../../docs/spec/qr-tooling.md) (co
    - `write_products` (needed to create the `evlvex.story` product metafield definition)
 
    Install the app on the store and copy its Admin API access token.
-3. `copy .env.example .env`, then fill in `SHOPIFY_STORE`, `SHOPIFY_ADMIN_TOKEN` and `PUBLIC_DOMAIN`.
+3. `copy .env.example .env`, then fill in `SHOPIFY_STORE`, the app's `SHOPIFY_CLIENT_ID` and `SHOPIFY_CLIENT_SECRET` (or a fixed `SHOPIFY_ADMIN_TOKEN`) and `PUBLIC_DOMAIN`.
    **`PUBLIC_DOMAIN` must be the store's final primary domain before you print anything.**
 4. `npm run setup`: creates, or checks and completes:
    - the *EvlveX Certificate* metaobject definition, with pages at `/pages/authentic/<serial>`

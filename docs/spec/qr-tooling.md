@@ -9,15 +9,16 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 ## 1. Setup (one time)
 1. Install Node.js 20.12+ and run `npm install` in `tools/qr-certificates/`.
 2. Create an app for the store in the Shopify Dev Dashboard (or Admin → Settings → Apps → Develop apps, if offered). Install it on the store with these Admin API scopes: `read_metaobjects`, `write_metaobjects`, `read_metaobject_definitions`, `write_metaobject_definitions`, `read_orders`, `read_products`, `write_products` (for the `evlvex.story` product metafield definition).
-3. Copy `.env.example` to `.env` and fill it in (table below).
+3. Copy `.env.example` to `.env` and fill it in (table below). With a Dev Dashboard app, enter its **client ID and secret**; the tool fetches a short-lived access token itself on every run, so nobody handles tokens. EvlveX uses the *EvlveX setup* app for this; add the scopes above to it (Versions → new version → Release → approve in the store).
 4. Run `npm run setup` once. It creates the `evlvex_certificate` and `evlvex_story` metaobject definitions and the `evlvex.story` product metafield definition. If they already exist, it checks them and adds any missing fields.
 
 | Variable | Example | Meaning |
 |---|---|---|
 | `SHOPIFY_STORE` | `w3wigc-de.myshopify.com` | store's myshopify domain (API only) |
-| `SHOPIFY_ADMIN_TOKEN` | `shpat_…` | Admin API access token. **Keep secret; never commit** |
+| `SHOPIFY_CLIENT_ID` / `SHOPIFY_CLIENT_SECRET` | `0a0a…` / `shpss_…` | the app's credentials; a token is fetched with the client-credentials grant. **Keep secret; never commit** |
+| `SHOPIFY_ADMIN_TOKEN` | `shpat_…` | alternative: a fixed Admin API access token. Leave empty when using the client ID and secret |
 | `SHOPIFY_API_VERSION` | `2026-10` | Admin API version |
-| `PUBLIC_DOMAIN` | `evlvex.com` | domain encoded in every QR ([deployment.md §1](deployment.md)) |
+| `PUBLIC_DOMAIN` | `evlvex.in` | domain encoded in every QR ([deployment.md §1](deployment.md)) |
 | `METAOBJECT_TYPE` | `evlvex_certificate` | must match [qr-certificates.md §5.1](qr-certificates.md) |
 | `URL_PREFIX` | `authentic` | must match the metaobject's Online Store URL handle |
 
@@ -27,6 +28,8 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 | `npm run setup` | Creates (or checks and completes) the certificate and story definitions and the product story metafield |
 | `npm test` | Self-test: serial format, and that QR codes with the centre logo decode correctly |
 | `npm run generate -- --count 200 --batch NOV26` | Creates 200 new serials in Shopify and writes SVGs, a print PDF and a CSV to `out/NOV26/` |
+| `npm run generate -- --from stock/stock-2026-11.csv --batch NOV26` | **From a stock list:** one certificate per pair, created with its **product, size and pair number** (numbers continue per model). `tags.pdf` starts each model · colour · size on a new sheet with a heading ("The Silent Grind · Black · UK 10 — 14 tags · pair no. 1–14"); `manifest.csv` adds product, colour, size and pair number. List columns: `product` (exact Shopify title), `size` (UK), `count`, optional `color`, `artisan`, `finished`, `note`; CSV or text pasted from a spreadsheet. Add `--offline` for a proof |
+| `npm run merge -- --batches NOV26,NOV26-2 --out NOV26-PRINT` | Combines batches into one print set (one sheet per model and size, pair-number order). Use it when a run was interrupted and finished as a second batch; creates nothing in Shopify |
 | `npm run generate -- --count 6 --batch TEST --offline` | Same, but **does not touch Shopify**. For checking print quality |
 | `npm run generate -- --count 3 --batch TEST --base-url https://w3wigc-de.myshopify.com` | Test tags that point at the myshopify domain. **Never print these for real pairs** |
 | `npm run generate -- --reprint EVX-7F3K9QMD` | Re-creates the tag artwork for an existing serial |
