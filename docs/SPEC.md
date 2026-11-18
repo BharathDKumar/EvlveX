@@ -19,6 +19,7 @@ This file is the entry point. The detail lives in separate files, one per area.
 | [qr-tooling.md](spec/qr-tooling.md) | **Tooling code:** CLI setup, commands, `assign` behaviour, outputs, tooling code changes | developers, ops |
 | [operations.md](spec/operations.md) | Runbook: printing tags, workshop cards, assigning pairs, corrections, publishing stories | production, packing, brand |
 | [deployment.md](spec/deployment.md) | **Deployment:** domain, GitHub-connected theme workflow, template validation, tooling install, release order, store setup checklist | developers, store owner |
+| [marketing/comeback-ads.md](marketing/comeback-ads.md) | Ready-to-paste Google Ads and Meta ad copy for the limited-edition COMEBACK series (every line checked against the platform limits), keywords, audiences, tracking links | marketing, store owner |
 | [brand/](brand/) | Brand files: original logos (`logos/`), shoe photos and the imagery made from them ([shoe-images.md](brand/shoe-images.md)) | everyone |
 
 ---
