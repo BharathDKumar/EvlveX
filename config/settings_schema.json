@@ -1476,6 +1476,24 @@
         "label": "Show demo photography",
         "default": true,
         "info": "Shows sample footwear photographs wherever no image has been chosen: sections, products, collections, articles and story plates. Turn off before launch; empty spots then show the EvlveX monogram panel."
+      },
+      {
+        "type": "header",
+        "content": "Limited edition"
+      },
+      {
+        "type": "text",
+        "id": "evx_limited_tag",
+        "label": "Product tag",
+        "default": "Limited edition",
+        "info": "Products with this tag show the badge on product cards and the limited-edition block on the product page. Remove the tag from a product that is restocked."
+      },
+      {
+        "type": "text",
+        "id": "evx_limited_badge",
+        "label": "Badge on product cards",
+        "default": "Limited edition",
+        "info": "Leave empty to hide the badge. Sold out and Sale badges take its place when they apply."
       }
     ]
   }

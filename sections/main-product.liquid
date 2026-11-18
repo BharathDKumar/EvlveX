@@ -129,6 +129,8 @@
                       {%- endif -%}
                     </p>
                   {%- endif -%}
+                {%- when 'evlvex_limited' -%}
+                  {%- render 'evlvex-limited', product: product, block: block -%}
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
@@ -818,6 +820,29 @@
           "label": "Link to the story section",
           "info": "Excerpt only. Leave empty to hide.",
           "default": "Read the story"
+        }
+      ]
+    },
+    {
+      "type": "evlvex_limited",
+      "name": "EvlveX limited edition",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shows only on products with the tag set in Theme settings → EvlveX → Limited edition."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Limited edition · COMEBACK series"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Once it's gone, it's gone. These pairs will not be made again."
         }
       ]
     },

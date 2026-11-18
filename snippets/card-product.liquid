@@ -158,6 +158,8 @@
                 >
                   {{- 'products.product.on_sale' | t -}}
                 </span>
+              {%- else -%}
+                {%- render 'evlvex-limited-badge', product: card_product -%}
               {%- endif -%}
             </div>
           </div>
@@ -582,6 +584,8 @@
               >
                 {{- 'products.product.on_sale' | t -}}
               </span>
+            {%- else -%}
+              {%- render 'evlvex-limited-badge', product: card_product -%}
             {%- endif -%}
           </div>
         </div>
