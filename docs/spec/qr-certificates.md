@@ -66,7 +66,7 @@ Template: `templates/metaobject/evlvex_certificate.json`.
 - **Artisan names** are shown publicly: first name and initial only, and only with the artisan's written consent. Without consent, leave `artisan` empty.
 - `order_number` and `batch` are **never** rendered in the HTML.
 - Certificate pages carry `<meta name="robots" content="noindex,nofollow">`, so they never appear in Google. (Story pages, by contrast, **are** indexable.)
-- Serials are random. There is no index page listing certificates.
+- Serials are random. There is no index page listing certificates. **However** (found 18 Nov 2026), Shopify's public sitemap (`/sitemap_metaobject_pages_1.xml`) lists every certificate URL, and Shopify offers no way to hide metaobject entries from it (`seo.hidden` works only for products, pages, collections and articles). So anyone can list every certificate, and with it every owner's name. No certificate had an owner on 18 Nov 2026. This must be decided before the first pair is assigned ([open items](../SPEC.md#open-items), item 13).
 - To remove a name (e.g. on request), clear `buyer_name`. The page falls back to the *Unassigned* state.
 
 ## 5. Data models
