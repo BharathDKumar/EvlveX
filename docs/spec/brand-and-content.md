@@ -109,6 +109,8 @@ EvlveX tells **one story**, COMEBACK, in **chapters**. Each model carries one ch
 | 01 | **The Silent Grind** | low-top sneaker | Noir: black upper, black suede toe and collar, white cupsole | *The Silent Grind* | monogram embroidered in white |
 | 02 | **A Fresh Start** | low-top sneaker | Cream and Sand: cream upper, sand suede overlays, caramel sole stripe | *A Fresh Start* | monogram embossed in sand |
 
+**Limited edition** (confirmed by the brand, 18 Nov 2026): COMEBACK is a limited-edition series. These two models in these colorways are **not restocked** once sold out, so the site may say "Once it is gone, it is gone" and "Once the series sells out, it won't return". New colorways or a new series later are allowed. If these exact models are ever remade, remove those lines first, since a false "limited edition" claim is misleading advertising.
+
 ### COMEBACK: main concept
 > COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new. It is a reminder that falling behind is not the end; sometimes, it is where the comeback begins.
 
