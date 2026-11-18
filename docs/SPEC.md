@@ -48,10 +48,24 @@ The website must:
 
 ---
 
-## Current state (13 Nov 2026)
-- **Live:** https://evlvex.in serves the theme **EvlveX/main**. That theme is connected to the GitHub repository and updates automatically from the `main` branch, usually within a minute ([deployment.md §2](spec/deployment.md)).
-- **Storefront:** open, with no password page. Home, cart, search, collections list, blog and contact show the COMEBACK design.
-- **Store data not created yet:** no products, collections (other than *all*), pages, menus (the default *Home · Catalog · Contact* is shown), metaobject definitions or entries. Until they exist, the theme shows the graded shoe photography and sample product cards (*The Silent Grind — Noir*, *A Fresh Start — Sand*, sample price).
+## Current state (19 Nov 2026)
+- **Live theme:** https://evlvex.in serves the theme **EvlveX/main**. That theme is connected to the GitHub repository and updates automatically from the `main` branch, usually within a minute ([deployment.md §2](spec/deployment.md)).
+- **Storefront: paused before launch** (decided 19 Nov 2026). The password page *"The COMEBACK is coming"* collects emails for a waiting list. The password is switched on in Admin (Online Store → Preferences → Password protection); the API cannot toggle it.
+- **Store data:**
+  - **Products:** both are Active with limited-edition SEO and tags.
+  - **Pages and menu:** all nine pages and the main menu exist.
+  - **The Collection:** exists at `/collections/all` but is not published yet.
+  - **Certificates:** 236 created, none assigned.
+  - Remaining setup: [deployment.md §5](spec/deployment.md).
+- **Google Search Console:** the domain is added. Submit the sitemap and request indexing only at relaunch, because Google sees only the password page while it is on.
+
+### Relaunch checklist
+1. **Store setup:** publish The Collection; set the homepage title and description in Preferences ([deployment.md §5](spec/deployment.md)).
+2. **Certificate names:** decide open item 13 before the first sale.
+3. **Open the store:** Online Store → Preferences → Password protection → untick *Restrict access*.
+4. **Search Console:** submit `sitemap.xml` and request indexing for the home page, both products and `/collections/all`.
+5. **Waiting list:** email the sign-ups from Customers (filter *Email subscribers*) that the series is live.
+6. **Ads:** start them only after the store is open ([marketing/comeback-ads.md](marketing/comeback-ads.md)).
 
 ## Open items
 | # | Item | Owner | Needed for |
