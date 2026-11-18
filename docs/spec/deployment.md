@@ -78,3 +78,10 @@ The store's internal address is **w3wigc-de.myshopify.com** (Admin and API); the
 - [ ] **Policies:** paste the five texts from [docs/policies/](../policies/README.md) into Admin → Settings → Policies, and replace every `[FILL IN: …]` placeholder. The footer and checkout then link to them.
 - [ ] Admin → Settings → Store details: contact email **support@evlvex.in**, plus the legal business name and address. Settings → Notifications: sender email support@evlvex.in.
 - [ ] Admin → Settings → Payments: keep Cash on Delivery **off** (the policies say prepaid only).
+- [ ] **SEO** (the theme already outputs the meta tags, structured data and breadcrumbs, [theme.md §5](theme.md); these steps are store data):
+  - Online Store → **Preferences**: homepage title, for example *EvlveX — Premium Handcrafted Sneakers, Made in India* (under 60 characters), and a meta description of 120–155 characters that says what you sell. Turn off the password page if it is on.
+  - Each **product**: a title with plain words after the story name, for example *The Silent Grind — Black Suede Low-Top Sneaker*; **Vendor** = *EvlveX* (Google reads it as the brand); a description of 150 words or more (materials, fit, care); **alt text** on every photo; and *Edit website SEO* (title, description, URL handle). Set The Silent Grind to **Active**, since draft products are not indexed.
+  - Each **collection** and **page**: a short description and *Edit website SEO*.
+  - **Google Search Console** (search.google.com/search-console): add a *Domain* property for `evlvex.in` (verified through a DNS TXT record at the domain registrar) and submit `https://evlvex.in/sitemap.xml`. Then use *URL inspection → Request indexing* on the home page and both products. Do the same in **Bing Webmaster Tools** (it can import from Search Console).
+  - Install the **Google & YouTube** app (Shopify App Store) and connect Merchant Center so both products appear in free Google Shopping listings.
+  - **Google Business Profile**, only if there is a shop or studio address customers can visit.

@@ -459,26 +459,35 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 
+{%- liquid
+  # EvlveX SEO (docs/spec/theme.md §5): the brand's logo falls back to the monogram when no logo image
+  # is uploaded, only the social links that are filled in are listed, and "url" is the home page.
+  assign evx_home_url = request.origin | append: routes.root_url
+  if settings.logo != blank
+    assign evx_org_logo = settings.logo | image_url: width: 500 | prepend: 'https:'
+  else
+    assign evx_org_logo = 'evlvex-monogram.svg' | asset_url | prepend: 'https:'
+  endif
+  assign evx_social_links = settings.social_instagram_link | append: '|' | append: settings.social_facebook_link | append: '|' | append: settings.social_youtube_link | append: '|' | append: settings.social_tiktok_link | append: '|' | append: settings.social_twitter_link | append: '|' | append: settings.social_pinterest_link | append: '|' | append: settings.social_snapchat_link | append: '|' | append: settings.social_tumblr_link | append: '|' | append: settings.social_vimeo_link | split: '|'
+-%}
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
-    {% if settings.logo %}
-      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-    {% endif %}
+    "url": {{ evx_home_url | json }},
+    "logo": {{ evx_org_logo | json }},
     "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
-    "url": {{ request.origin | append: page.url | json }}
+      {%- assign evx_link_count = 0 -%}
+      {%- for link in evx_social_links -%}
+        {%- assign evx_link = link | strip -%}
+        {%- if evx_link != blank -%}
+          {%- if evx_link_count > 0 -%},{%- endif -%}
+          {{- evx_link | json -}}
+          {%- assign evx_link_count = evx_link_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]
   }
 </script>
 
@@ -486,7 +495,7 @@
   {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "WebSite",
       "name": {{ shop.name | json }},
       "potentialAction": {
@@ -494,7 +503,7 @@
         "target": {{ potential_action_target | json }},
         "query-input": "required name=search_term_string"
       },
-      "url": {{ request.origin | append: page.url | json }}
+      "url": {{ evx_home_url | json }}
     }
   </script>
 {%- endif -%}

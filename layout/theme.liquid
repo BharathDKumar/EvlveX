@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#ffffff">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -56,6 +56,7 @@
     {% endif %}
 
     {% render 'meta-tags', title: evx_title, description: evx_description, image: evx_image %}
+    {% render 'evlvex-breadcrumbs-schema', is_story: evx_is_story, story_title: evx_title %}
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
