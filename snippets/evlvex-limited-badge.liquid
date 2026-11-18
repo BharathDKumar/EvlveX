@@ -1,0 +1,14 @@
+{%- doc -%}
+  EvlveX: "Limited edition" badge on product cards, for products with the tag set in
+  Theme settings → EvlveX → Limited edition. Rendered only when no Sold out / Sale badge applies.
+
+  @param {product} product - The card's product
+
+  @example
+  {% render 'evlvex-limited-badge', product: card_product %}
+{%- enddoc -%}
+{%- if settings.evx_limited_badge != blank and settings.evx_limited_tag != blank and product.tags contains settings.evx_limited_tag -%}
+  <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">
+    {{- settings.evx_limited_badge | escape -}}
+  </span>
+{%- endif -%}

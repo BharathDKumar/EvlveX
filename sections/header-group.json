@@ -15,8 +15,8 @@
         "announcement-bar-1": {
           "type": "announcement",
           "settings": {
-            "text": "COMEBACK · The Silent Grind & A Fresh Start",
-            "link": "shopify://pages/the-stories"
+            "text": "COMEBACK · Limited edition · Once it's gone, it's gone",
+            "link": "shopify://collections/all"
           }
         }
       },

@@ -19,6 +19,13 @@
           "type": "price",
           "settings": {}
         },
+        "limited": {
+          "type": "evlvex_limited",
+          "settings": {
+            "heading": "Limited edition · COMEBACK series",
+            "text": "Once it's gone, it's gone. These pairs will not be made again."
+          }
+        },
         "excerpt": {
           "type": "evlvex_story_line",
           "settings": {
@@ -99,6 +106,7 @@
         "chapter",
         "title",
         "price",
+        "limited",
         "excerpt",
         "variant_picker",
         "quantity_selector",

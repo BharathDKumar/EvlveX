@@ -87,6 +87,40 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
   color: rgb(var(--color-foreground));
 }
 
+/* Product page: limited-edition line under the price (main-product block "EvlveX limited edition") */
+.evx-limited {
+  margin: 1.6rem 0 0.4rem;
+  padding: 1.2rem 1.6rem;
+  max-width: 44rem;
+  border: 1px solid rgba(var(--color-foreground), 0.85);
+  border-radius: 0.4rem;
+}
+
+.evx-limited__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0;
+  font-family: var(--font-body-family);
+  color: rgb(var(--color-foreground));
+}
+
+.evx-limited__dot {
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: rgb(var(--color-foreground));
+}
+
+.evx-limited__text {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
 /* Cart: the model's story title under the product name */
 .evx-cart-story {
   margin: 0.4rem 0 0.8rem;

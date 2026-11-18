@@ -1,0 +1,23 @@
+{%- doc -%}
+  EvlveX: limited-edition line on the product page (main-product block "EvlveX limited edition").
+  Shows only for products with the tag set in Theme settings → EvlveX → Limited edition.
+
+  @param {product} product - The product
+  @param {object} block - The main-product block
+
+  @example
+  {% render 'evlvex-limited', product: product, block: block %}
+{%- enddoc -%}
+{%- if settings.evx_limited_tag != blank and product.tags contains settings.evx_limited_tag -%}
+  <div class="evx-limited" {{ block.shopify_attributes }}>
+    {%- if block.settings.heading != blank -%}
+      <p class="evx-limited__heading caption-with-letter-spacing">
+        <span class="evx-limited__dot" aria-hidden="true"></span>
+        {{- block.settings.heading | escape -}}
+      </p>
+    {%- endif -%}
+    {%- if block.settings.text != blank -%}
+      <p class="evx-limited__text">{{ block.settings.text | escape }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
