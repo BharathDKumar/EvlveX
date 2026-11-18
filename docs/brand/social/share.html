@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #0b0b0b; }
+  .card {
+    width: 1200px; height: 628px; overflow: hidden; position: relative;
+    background: #0b0b0b; color: #fff; font-family: 'Archivo', Arial, sans-serif;
+    display: grid; grid-template-rows: 196px 432px;
+  }
+  .top {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+  }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand img { filter: invert(1); }
+  .brand img.mark { height: 40px; }
+  .brand img.word { height: 22px; }
+  .line {
+    font-weight: 800; font-size: 40px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1;
+  }
+  .line .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #fff; vertical-align: middle; margin: 0 18px 6px; }
+  .sub { font-weight: 400; font-size: 20px; letter-spacing: 0.04em; color: rgba(255,255,255,0.72); }
+  .photos { display: grid; grid-template-columns: 1fr 1fr; }
+  .photo { position: relative; overflow: hidden; }
+  .photo img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .sg img { object-position: 50% 50%; }
+  /* A Fresh Start: 950×530 photo drawn at 840×469 so the whole shoe fits the 600×432 half; the card corner
+     (bottom right of the original) falls outside the visible window. */
+  .fs { background: #0b0b0b; }
+  .fs img { position: absolute; width: 800px; height: 447px; max-width: none; left: -128px; top: -10px; object-fit: fill; }
+  .photo::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 110px;
+    background: linear-gradient(to bottom, rgba(11,11,11,0), rgba(11,11,11,0.88)); }
+  .label { z-index: 1; }
+  .label {
+    position: absolute; left: 24px; bottom: 20px; font-weight: 600; font-size: 15px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.9); text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+  }
+  .divider { position: absolute; top: 196px; bottom: 0; left: 600px; width: 1px; background: rgba(255,255,255,0.14); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="top">
+      <div class="brand">
+        <img class="mark" src="../logos/evlvex-monogram.svg" alt="">
+        <img class="word" src="../logos/evlvex-wordmark.svg" alt="">
+      </div>
+      <div class="line">COMEBACK<span class="dot"></span>Limited edition</div>
+      <div class="sub">Once it's gone, it's gone.</div>
+    </div>
+    <div class="photos">
+      <div class="photo sg"><img src="../../../assets/evx-sg-full.jpg" alt=""><span class="label">The Silent Grind</span></div>
+      <div class="photo fs"><img src="../../../assets/evx-fs-full.jpg" alt=""><span class="label">A Fresh Start</span></div>
+    </div>
+    <div class="divider"></div>
+  </div>
+</body>
+</html>
