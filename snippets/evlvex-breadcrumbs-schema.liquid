@@ -1,0 +1,77 @@
+{%- doc -%}
+  EvlveX SEO: BreadcrumbList structured data, so search results show the page's place in the site
+  (e.g. "evlvex.in › The Collection › The Silent Grind") instead of a bare URL.
+  Output only on product, collection, article, page and story pages; never on certificate pages,
+  which are noindex (docs/spec/qr-certificates.md §4).
+
+  @param {boolean} is_story - True on an EvlveX story (metaobject) page
+  @param {string} [story_title] - The story page's title
+
+  @example
+  {% render 'evlvex-breadcrumbs-schema', is_story: evx_is_story, story_title: evx_title %}
+{%- enddoc -%}
+{%- liquid
+  assign crumb_names = ''
+  assign crumb_urls = ''
+  assign sep = '%%EVX%%'
+
+  case request.page_type
+    when 'product'
+      if collection
+        assign crumb_names = collection.title
+        assign crumb_urls = collection.url
+      endif
+      assign crumb_names = crumb_names | append: sep | append: product.title
+      assign crumb_urls = crumb_urls | append: sep | append: product.url
+    when 'collection'
+      assign crumb_names = collection.title
+      assign crumb_urls = collection.url
+    when 'article'
+      assign crumb_names = blog.title | append: sep | append: article.title
+      assign crumb_urls = blog.url | append: sep | append: article.url
+    when 'page'
+      assign crumb_names = page.title
+      assign crumb_urls = page.url
+    when 'metaobject'
+      if is_story
+        assign stories_page = pages['the-stories']
+        if stories_page != blank
+          assign crumb_names = stories_page.title
+          assign crumb_urls = stories_page.url
+        endif
+        assign crumb_names = crumb_names | append: sep | append: story_title
+        assign crumb_urls = crumb_urls | append: sep | append: request.path
+      endif
+  endcase
+
+  assign names = crumb_names | split: sep
+  assign urls = crumb_urls | split: sep
+-%}
+{%- if names.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": {{ shop.name | json }},
+          "item": {{ request.origin | append: routes.root_url | json }}
+        }
+        {%- assign position = 1 -%}
+        {%- for name in names -%}
+          {%- if name != blank -%}
+            {%- assign position = position | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ position }},
+              "name": {{ name | strip_html | strip | json }},
+              "item": {{ request.origin | append: urls[forloop.index0] | json }}
+            }
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}

@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| **Status** | v1.6 — Standard pages (supersedes v1.5) |
-| **Date** | 13 Nov 2026 |
+| **Status** | v1.7 — SEO (supersedes v1.6) |
+| **Date** | 18 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
 
@@ -77,7 +77,8 @@ The website must:
 | v1.3 | 15 Nov 2026 | Black & white: the whole site moves to black, white and neutral greys (no gold, ivory or sand); bold uppercase Archivo headings and Archivo body replace Cormorant / Jost; pill buttons; shoe imagery and QR tags regraded to black and white |
 | v1.4 | 15 Nov 2026 | Colour photography, policies & contact: shoe imagery replaced by true-colour crops of four campaign photos (the site stays black and white); store policies for India (returns, shipping, privacy, terms, contact) ready to paste into Shopify; 7-day returns, free shipping and prepaid-only copy; Instagram @evlvex and support@evlvex.in on the contact page and in the footer |
 | v1.5 | 15 Nov 2026 | Footer & COMEBACK literature: a new premium footer (statement, one newsletter, sparse link columns, labelled contact, full-width wordmark, one-line legal bar, no repeated elements); "never give up" literature (home manifesto, four steps of a comeback and a closing essay on About); the "Every pair, its own chapter" block and the duplicate newsletter removed from home |
-| **v1.6** | **15 Nov 2026** | **Standard pages:** FAQ, Size guide, Track your order and Shipping & returns templates; a plain 404 with search and quick links; standard e-commerce wording on system pages; About moved to `/pages/about`; footer wordmark removed; account popup fixed to a white card with black pill buttons, and *Log in* added to the mobile menu; Admin checklist for creating every page and branding the hosted login |
+| v1.6 | 15 Nov 2026 | Standard pages: FAQ, Size guide, Track your order and Shipping & returns templates; a plain 404 with search and quick links; standard e-commerce wording on system pages; About moved to `/pages/about`; footer wordmark removed; account popup fixed to a white card with black pill buttons, and *Log in* added to the mobile menu; Admin checklist for creating every page and branding the hosted login |
+| **v1.7** | **18 Nov 2026** | **SEO:** Organization structured data with the brand logo and only real social links; breadcrumbs in search results (product, collection, article, page, story); a default share image for links on WhatsApp, Instagram and other apps; product photos never without alt text; SEO steps for Admin, Search Console and Google Shopping in the store setup checklist ([deployment.md §5](spec/deployment.md)) |
 
 Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
 

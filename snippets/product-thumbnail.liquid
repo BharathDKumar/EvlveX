@@ -38,6 +38,9 @@
   if media.media_type == 'image'
     assign image_class = 'image-magnify-' | append: section.settings.image_zoom
   endif
+
+  # EvlveX SEO: every product photo gets alt text; the product title when none is set in Admin.
+  assign media_alt = media.alt | default: product.title
 -%}
 
 {%- capture sizes -%}
@@ -80,7 +83,8 @@
           class: image_class,
           loading: lazy,
           sizes: sizes,
-          widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
+          widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946',
+          alt: media_alt
       }}
     </div>
     <button

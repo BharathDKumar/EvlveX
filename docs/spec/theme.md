@@ -89,6 +89,11 @@ Home
 - **Stories index:** list entries from `shop.metaobjects.evlvex_story.values`, sorted by `chapter`, descending.
 - **Story pages are indexable:** meta title = story title + " — " + model name; meta description = excerpt; `og:image` = hero plate.
 - **Certificate pages are not indexable:** see the privacy rules in [qr-certificates.md §4](qr-certificates.md).
+- **Structured data and sharing (v1.7):**
+  - **Organization:** the header outputs it with the home URL, the uploaded logo or else `assets/evlvex-monogram.svg`, and only the social links that are filled in. The home page also gets *WebSite* with a search action.
+  - **Breadcrumbs:** `snippets/evlvex-breadcrumbs-schema.liquid` adds a *BreadcrumbList* on product, collection, article, page and story pages, never on certificates.
+  - **Share image:** pages without their own image use `assets/evx-fs-wide.jpg`, always over https.
+  - **Alt text:** product photos without alt text in Admin use the product title (gallery, zoom modal, product card).
 - **Serial lookup form** (Authenticity page): accept any case, with or without `EVX-`; normalise to the handle format and redirect to `/pages/authentic/<handle>`.
 - **Copy** lives in section settings so it can be edited in the theme editor; default values come from [brand-and-content.md §8](brand-and-content.md).
 - **Images:** use `image_url` with `width` and responsive `srcset`; every image needs alt text.
@@ -106,7 +111,7 @@ Home
 
 ## 6. Changes by version
 
-v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4, v1.5 and v1.6 (15 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white. v1.4 row: Colour photography, policies & contact. v1.5 row: Footer & COMEBACK literature. v1.6 row: Standard pages.
+v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4, v1.5 and v1.6 (15 Nov 2026) and v1.7 (18 Nov 2026) are implemented as listed. v1.2 rows: story carousel, logos, demo photography & every page, COMEBACK. v1.3 row: Black & white. v1.4 row: Colour photography, policies & contact. v1.5 row: Footer & COMEBACK literature. v1.6 row: Standard pages. v1.7 row: SEO.
 
 | Area | Files |
 |---|---|
@@ -128,6 +133,7 @@ v1.1, v1.2 (13 Nov 2026), v1.3 and v1.4, v1.5 and v1.6 (15 Nov 2026) are impleme
 | Colour photography, policies & contact (v1.4) | campaign photos in `docs/brand/campaign/`, cropped in true colour by `tools/build-shoe-images.js` into `assets/evx-*.jpg`; new sizes in `sections/evlvex-comeback-film.liquid` and `snippets/evlvex-demo-image.liquid`; Fresh Start film scenes set to the dark tone (`templates/index.json`); film backdrop no longer desaturated (`assets/evlvex-comeback-film.css`); store policies for Admin in `docs/policies/`; 7-day returns, free shipping and prepaid copy in `templates/product.json`, `templates/cart.json`, `sections/header-group.json`; Instagram link (`config/settings_data.json`) and support@evlvex.in on `templates/page.contact.json`, `templates/page.json` and a footer *Contact* column (`sections/footer-group.json`) |
 | Footer & COMEBACK literature (v1.5) | new `sections/evlvex-footer.liquid` and `assets/section-evlvex-footer.css`; `sections/footer-group.json` switched to it; home manifesto added and the "Every pair, its own chapter" and newsletter sections removed (`templates/index.json`); "Four steps of a comeback" and "Shoes for the long way back" on `templates/page.about.json`; one line added to `templates/page.stories.json` |
 | Standard pages (v1.6) | new `templates/page.{faq,size-guide,track-order,shipping-returns}.json` and `sections/evlvex-size-guide.liquid`; plain 404 (`sections/main-404.liquid`, `templates/404.json`); standard wording in `page.contact.json`, `page.json`, `page.care.json`, `cart.json`, `product.json` (plus a Size & fit tab), `search.json`, `list-collections.json`, `blog.json`, `article.json` (duplicate newsletters removed); About now at `/pages/about`; footer wordmark removed and Help column extended (`sections/evlvex-footer.liquid`, `sections/footer-group.json`); account popup colours fixed in `sections/header.liquid`; *Log in* link in `snippets/header-drawer.liquid` |
+| SEO (v1.7) | Organization / WebSite structured data in `sections/header.liquid`; new `snippets/evlvex-breadcrumbs-schema.liquid`, rendered from `layout/theme.liquid` (which also gets a `theme-color`); default share image and https in `snippets/meta-tags.liquid`; product title as fallback alt text in `snippets/{product-thumbnail,product-media,card-product}.liquid`; store SEO steps in [deployment.md §5](deployment.md) |
 | Copy | `templates/index.json`, `product.json`, `page.about.json`, `page.care.json`, `page.authenticity.json`, `collection.json`, `sections/header-group.json` (mega menu), `sections/footer-group.json`, `sections/main-404.liquid`, brand text in `config/settings_data.json` |
 
 Menus, collections, products and story entries are store data, created during store setup ([deployment.md §5](deployment.md)).

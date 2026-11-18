@@ -32,10 +32,20 @@
 <meta property="og:description" content="{{ og_description | escape }}">
 
 {%- if og_image -%}
-  <meta property="og:image" content="http:{{ og_image | image_url }}">
+  <meta property="og:image" content="https:{{ og_image | image_url }}">
   <meta property="og:image:secure_url" content="https:{{ og_image | image_url }}">
   <meta property="og:image:width" content="{{ og_image.width }}">
   <meta property="og:image:height" content="{{ og_image.height }}">
+  {%- if og_image.alt != blank -%}
+    <meta property="og:image:alt" content="{{ og_image.alt | escape }}">
+  {%- endif -%}
+{%- else -%}
+  {%- comment -%} EvlveX: pages without their own image (home, most pages) share a brand shoe photo, never a blank card. {%- endcomment -%}
+  <meta property="og:image" content="https:{{ 'evx-fs-wide.jpg' | asset_url }}">
+  <meta property="og:image:secure_url" content="https:{{ 'evx-fs-wide.jpg' | asset_url }}">
+  <meta property="og:image:width" content="1366">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="{{ shop.name | escape }} sneakers">
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
