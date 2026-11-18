@@ -67,6 +67,7 @@ The website must:
 | 10 | Tag supplier and material (satin label vs sticker) | Production | first batch |
 | 11 | Main and footer menus (Shop, The Chapters, About, Care, Authenticity, Contact) | Store owner | navigation |
 | 12 | Before launch: turn off Theme settings → EvlveX → *Show demo photography* once real images are uploaded | Store owner | launch |
+| 13 | **Certificate names are listed through the sitemap** ([qr-certificates.md §4](spec/qr-certificates.md)). Decide before the first pair is assigned: show only first name + last initial (theme change), or keep full names and say so in the privacy policy | Brand / developer | first assigned pair |
 
 ## Version history
 | Version | Date | What changed |
