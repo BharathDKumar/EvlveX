@@ -33,22 +33,20 @@ The card stays in the box and travels to the customer. The pair number is assign
 ## 3. Assign a pair at packing
 **Option A: CLI (recommended, ~20 s)**
 ```
-npm run assign -- --serial EVX-7F3K9QMD --order 1001 --size 42 \
-  --artisan "Marco R." --finished 2026-11-03 \
-  --note "The last pair cut from hide lot 12. The grain runs especially fine across the toe."
+npm run assign -- --serial EVX-7F3K9QMD --order 1001 --size "UK 8"
 ```
-The tool reads the customer's full name, the product and the order date from the order, gives the pair the next pair number for that model, and fills the certificate. It prints the live URL. Open it on your phone to double-check.
+Pick the tag whose model and size match the order line: each certificate already carries its product, size and pair number from the stock list. The tool reads the customer's full name and the order date from the order and fills the certificate. Add `--name "…"` and `--message "…"` for a gift. Do not use `--artisan` or `--finished`: the shoes are factory-made ([brand-and-content.md §7](brand-and-content.md)). It prints the live URL. Open it on your phone to double-check.
 
 **Option B: Shopify Admin (no computer setup needed)**
 1. Admin → **Content → Metaobjects → EvlveX Certificate**
 2. Search the serial (e.g. `EVX-7F3K9QMD`) and open it.
 3. Fill in **Buyer name** (full name as on the order), **Product**, **Size**, **Purchase date**, **Order number** and, if it's a gift, **Personal message**.
-4. From the workshop card, fill in **Artisan**, **Finished on** and **Pair note**. Set **Pair number** to the next number for that model (check the highest existing number by filtering on the product).
+4. Leave **Artisan** and **Finished on** empty. Check that **Product**, **Size** and **Pair number** match the tag (they come from the stock list).
 5. Save, then scan the tag to confirm.
 
 ## 4. Corrections
 - **Wrong name or typo:** edit the entry in Admin, or re-run `assign` with `--force`.
-- **Pair returned / exchanged:** run `npm run assign -- --serial EVX-… --clear`, or clear the buyer fields in Admin. The pair goes back to *Unassigned* and can be re-sold. Its pair number, artisan, date and note **stay**: they belong to the pair, not the owner.
+- **Pair returned / exchanged:** run `npm run assign -- --serial EVX-… --clear`, or clear the buyer fields in Admin. The pair goes back to *Unassigned* and can be re-sold. Its product, pair number and note **stay**: they belong to the pair, not the owner. `--clear` also empties **Size**, so put the tag's size back (Admin, or re-assign with `--size`) before the pair is re-sold.
 - **Gift purchase:** put the recipient's name in `buyer_name` (`--name`) and the giver's note in `personal_message` (`--message`).
 - **Name removal request:** clear `buyer_name`; the page shows the *Unassigned* state.
 
