@@ -50,14 +50,26 @@ No italics anywhere. Buttons, size chips and badges are pills (fully rounded). F
 
 Every piece of product copy answers three questions, in this order:
 1. **The chapter:** which part of the comeback is this shoe? (The Silent Grind / A Fresh Start)
-2. **The detail:** which part of the shoe carries it? (the monogram, the suede, the colour)
+2. **The detail:** which part of the shoe carries it? (the monogram, the overlays, the colour)
 3. **The invitation:** what moment in the owner's life is it made for?
 
 - ✅ "Falling behind is not the end. Sometimes, it is where the comeback begins."
 - ✅ "Black, with the monogram in white. For the battles no one sees."
-- ✅ "Every pair is numbered, signed by its artisan, and registered to its owner."
+- ✅ "Every pair is numbered, inspected before it leaves us, and registered to its owner."
 - ❌ "Our most iconic sneaker ever — grab yours before they're gone!!"
 - ❌ "Premium luxury quality materials for the modern man."
+
+**Positioning (owner, 20 Nov 2026):** *shoes with a story · original designs · limited edition · made in India · premium.* Every claim must be true, so the words are fixed:
+
+| Say | Don't say (and why) |
+|---|---|
+| premium sneakers, premium finish | luxury, "house of", couture, finest (not the brand's register) |
+| original EvlveX designs; each model has its own design and chapter | every pair uniquely designed, one of a kind (pairs of a model are identical; what is unique per pair is its number and certificate) |
+| limited edition; a limited, numbered run; "when this run sells out, it's gone" | not restocked, will not be made again, won't return, "once it's gone, it's gone" (COMEBACK may return in a new run if it succeeds) |
+| designed and made in India; every pair inspected before it leaves us | international standards, certified quality (no certificate or test yet: [open item 14](../SPEC.md#open-items)) |
+| numbered, QR certificate, registered to you | handmade, by hand, artisan, signed, workshop card, atelier (shoes are factory-made) |
+| smooth upper, textured overlays, padded collar, stitched cupsole | leather, suede (materials not confirmed yet: [open item 2](../SPEC.md#open-items)) |
+| dust bag, numbered box, insured delivery | shoe trees included (they are not) |
 
 **Rules for stories:**
 - **Anything stated as fact about the house, its shoes, materials or people must be true** ([open items](../SPEC.md#open-items)). The COMEBACK story is a concept, not a biography: do not invent founders, athletes or events.
@@ -66,11 +78,11 @@ Every piece of product copy answers three questions, in this order:
 
 ## 5. Photography & imagery
 
-Current imagery is cropped from four colour studio photos of both models on dark backdrops (`docs/brand/campaign/`, [shoe-images.md](../brand/shoe-images.md)). The earlier phone photos are in `docs/brand/shoes/`; one of them is still in the theme as `assets/sample-court-noir.jpg`, used on the Authenticity page.
+Current imagery is cropped from four colour studio photos of both models on dark backdrops (`docs/brand/campaign/`, [shoe-images.md](../brand/shoe-images.md)). The earlier phone photos are in `docs/brand/shoes/`; `assets/sample-court-noir.jpg` is no longer used on the Authenticity page (its fallback is now `evx-sg-full.jpg`).
 
 **Art direction (all images):**
 - **Only EvlveX shoes.** No stock photography of other footwear or clothing anywhere.
-- **The site is black and white; shoe photography is true colour.** The shoes are the only colour on the page: the black leather and white monogram of *The Silent Grind*, the cream leather, sand suede and caramel sole of *A Fresh Start*. Never grade them to monochrome.
+- **The site is black and white; shoe photography is true colour.** The shoes are the only colour on the page: the black upper and white monogram of *The Silent Grind*, the cream upper, sand overlays and caramel sole of *A Fresh Start*. Never grade them to monochrome.
 - Dark studio backdrops (charcoal, black, grey satin), with props kept minimal: boxes, white or black feathers, a plain thank-you card. No legible small print in the frame.
 - People appear as hands, feet, silhouettes or from behind. The shoe is the subject.
 - No visible third-party logos, signage or brands.
@@ -106,10 +118,10 @@ EvlveX tells **one story**, COMEBACK, in **chapters**. Each model carries one ch
 | Ch. | Model | Shoe | Colorway | Chapter (sub-concept) | Signature detail |
 |---|---|---|---|---|---|
 | — | **COMEBACK** | the collection | — | main concept | the EvlveX monogram on every pair |
-| 01 | **The Silent Grind** | low-top sneaker | Noir: black upper, black suede toe and collar, white cupsole | *The Silent Grind* | monogram embroidered in white |
-| 02 | **A Fresh Start** | low-top sneaker | Cream and Sand: cream upper, sand suede overlays, caramel sole stripe | *A Fresh Start* | monogram embossed in sand |
+| 01 | **The Silent Grind** | low-top sneaker | Noir: black upper, black textured toe and collar, white cupsole | *The Silent Grind* | monogram embroidered in white |
+| 02 | **A Fresh Start** | low-top sneaker | Cream and Sand: cream upper, sand textured overlays, caramel sole stripe | *A Fresh Start* | monogram embossed in sand |
 
-**Limited edition** (confirmed by the brand, 18 Nov 2026): COMEBACK is a limited-edition series. These two models in these colorways are **not restocked** once sold out, so the site may say "Once it is gone, it is gone" and "Once the series sells out, it won't return". New colorways or a new series later are allowed. If these exact models are ever remade, remove those lines first, since a false "limited edition" claim is misleading advertising.
+**Limited edition** (owner, 20 Nov 2026, replacing the 18 Nov "not restocked" decision): COMEBACK is a limited edition made in a **limited, numbered run**. No restock is planned, but the brand may make it again if it is a big success. So the site says "limited, numbered run" and "When this run sells out, it's gone" (true either way), and never "won't return", "will not be made again" or "once it's gone, it's gone". If COMEBACK is remade, it is announced as a new numbered run.
 
 ### COMEBACK: main concept
 > COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new. It is a reminder that falling behind is not the end; sometimes, it is where the comeback begins.
@@ -157,46 +169,46 @@ Supporting copy around the official story, written in the same voice. It is not 
 **Footer:** "Keep going." · "Every comeback starts with one more step."
 
 ### Product photography
-The site currently uses crops of four colour campaign photos ([docs/brand/shoe-images.md](../brand/shoe-images.md)). For launch, shoot each model at 3000 px or more: a side profile, a three-quarter view, the monogram, the suede toe and the sole.
+The site currently uses crops of four colour campaign photos ([docs/brand/shoe-images.md](../brand/shoe-images.md)). For launch, shoot each model at 3000 px or more: a side profile, a three-quarter view, the monogram, the textured toe and the sole.
 
 ## 7. Every pair's own chapter
-Beyond the model story, **every individual pair** carries its own short chapter, recorded when it leaves the atelier and shown on its certificate page ([qr-certificates.md](qr-certificates.md)):
+Beyond the model story, **every individual pair** carries its own short chapter, recorded when it is inspected and packed and shown on its certificate page ([qr-certificates.md](qr-certificates.md)):
 
-- **Pair number:** its place in the model's chapter, e.g. *Pair No. 0042 of The Silent Grind*.
-- **Artisan:** who finished it (first name and initial, with their consent), e.g. *Finished by Marco R.*
-- **Finished on:** the date it left the bench.
-- **Pair note:** an optional line from the workshop about this pair alone, e.g. *"The last pair cut from hide lot 12. The grain runs especially fine across the toe."*
+- **Pair number:** its place in the model's run, e.g. *Pair No. 0042 of The Silent Grind*.
+- **Pair note:** an optional true line about this pair alone, ≤ 200 characters.
 - **Owner:** the name of the person it now belongs to, and, for gifts, a personal message.
 
-The same details are handwritten on a **workshop card** placed in the box ([operations.md §2](operations.md)).
+The shoes are factory-made (owner, 20 Nov 2026), so the **artisan** and **finished on** fields stay empty and there is **no workshop card**. Never write "made by hand", "artisan", "signed" or "atelier".
 
 ## 8. Site copy (editable in the theme editor)
 
-**Announcement bar:** "Free shipping across India · Every pair numbered, certified and told" · "COMEBACK · The Silent Grind & A Fresh Start"
+**Announcement bar:** "COMEBACK · Limited edition · Numbered pairs" · "Original designs · Made in India" · "Free shipping across India · 7-day size exchange"
 
-**Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), five scenes: *COMEBACK* (both shoes, the main concept) → *The Silent Grind* → "Hold on through the weight" (monogram) → *A Fresh Start* → "Take the first step" (laces and suede). Each scene uses the brand text above.
+**Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), five scenes: *COMEBACK* ("EvlveX · The first collection", both shoes) → *The Silent Grind* (Chapter 01) → "Hold on through the weight" (monogram) → *A Fresh Start* (Chapter 02) → "Take the first step" (laces and overlays). Each scene uses the brand text above.
 
 **Home brand statement**
-> **Falling behind is not the end.** Sometimes, it is where the comeback begins. EvlveX tells one story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next. Every pair is numbered and registered to the person writing their own comeback.
+> **Falling behind is not the end.** Sometimes, it is where the comeback begins. EvlveX makes premium sneakers that tell one story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next. Every design is our own, made in India in a limited, numbered run, and every pair is inspected before it leaves us.
+
+**Home: "The EvlveX standard"** (after the featured products): *A story in every pair* · *Original designs* · *Limited edition* · *Made in India*.
 
 **Home manifesto:** "The COMEBACK code" (see §6, COMEBACK literature).
 
 **Footer** (`sections/evlvex-footer.liquid`)
 - Statement: **Keep going.** Every comeback starts with one more step.
-- Newsletter: **Get early access.** Placeholder "Your email"; note "New releases and restocks. No spam." It is the only newsletter on the site.
+- Newsletter: **Get early access.** Placeholder "Your email"; note "New releases and early access. No spam." It is the only newsletter on the site.
 - Columns: *Shop* (The Collection, The Silent Grind, A Fresh Start) · *COMEBACK* (Our story, Stories, Authenticity) · *Help* (Track your order, Shipping & returns, Size guide, FAQ, Care guide, Contact us) · *Get in touch* (Support: support@evlvex.in, Instagram: @evlvex, "We answer within one working day.", social icons).
 - Bottom bar: "© 2026 EvlveX" · "Made in India" · "evlvex.in is the only official EvlveX store." · policy links · country and currency · payment icons.
 
-**Authenticity "How it works":** *Made and numbered* → *Signed and recorded* → *Registered to you*
+**Authenticity "How it works":** *Made and numbered* → *Inspected and recorded* → *Registered to you*
 
 **Care intro:** "Keep your comeback going."
 
-**System pages use standard e-commerce wording**, not story language: 404 ("Page not found", "Continue shopping"), Contact ("Contact us", "Send us a message"), FAQ, Size guide, Track your order, Shipping & returns, "You may also like", "Popular products", "Journal". The brand voice stays in the story content: home film and manifesto, About, Stories, certificates.
+**System pages use standard e-commerce wording**, not story language: 404 ("Page not found", "Continue shopping"), Contact ("Contact us", "Send us a message"), FAQ, Size guide, Track your order, Shipping & returns, "Journal". Recommendation headings are "The other chapter" (product page, cart) and "The collection" (search). The brand voice stays in the story content: home film and manifesto, About, Stories, certificates.
 
 **About page:** "Built for the comeback" · "One story, two chapters" · *The Silent Grind* · *A Fresh Start*
 
 **Stories index:** "COMEBACK" · "One story, two chapters"
 
-**Product tabs:** Materials & craft ("Smooth upper with suede overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole…"), Size & fit ("Unisex, UK/India sizing. Our shoes run true to standard Indian/UK sizing…", links to the size guide), Care, Shipping & returns, Your pair's certificate.
+**Product tabs:** Design & make ("An original EvlveX design, model CB-01. Smooth upper with textured overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole… Designed and made in India. Every pair is inspected before it is packed."), Size & fit ("Unisex, UK/India sizing. Our shoes run true to standard Indian/UK sizing…", links to the size guide), Care, Shipping & returns, Your pair's certificate.
 
 **Certificate thank-you copy** is in [qr-certificates.md §3](qr-certificates.md).

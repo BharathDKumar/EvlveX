@@ -22,7 +22,7 @@ For "Return and refund policy", Shopify may first ask for return rules (return w
 |---|---|
 | `[FILL IN: legal entity name]` | all five |
 | `[FILL IN: type of entity, …]` | terms |
-| `[FILL IN: registered address]` | privacy, terms, contact information |
+| `[FILL IN: registered address]` | filled 20 Nov 2026 from the Shopify contact policy (Siddipet); change it if the registered address differs |
 | `[FILL IN: GSTIN]` | terms, contact information |
 | `[FILL IN: phone]` | privacy, terms, contact information |
 | `[FILL IN: Grievance Officer name]` | privacy, terms, contact information |
@@ -32,7 +32,7 @@ Check with: `grep -rn "FILL IN" docs/policies` (only this README should match on
 
 ## What the policies commit to
 These texts must match what the site says (`templates/product.json` "Shipping & returns" tab, `templates/cart.json` promise, `sections/header-group.json` announcement). If one changes, change the others too.
-- **Returns and exchanges:** 7 days from delivery, unworn, with the box, certificate tag and workshop card. Free pickup.
+- **Returns and exchanges:** 7 days from delivery, unworn, with the numbered box, dust bag and certificate tag. Free pickup.
 - **Refunds:** to the original payment method, 5–7 working days after inspection.
 - **Defective, damaged or wrong pairs:** report within 48 hours with photos; replaced or refunded in full.
 - **Cancellation:** free until dispatch.

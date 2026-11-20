@@ -8,21 +8,29 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Free shipping across India · Every pair numbered, certified and told",
-            "link": "shopify://pages/authenticity"
+            "text": "COMEBACK · Limited edition · Numbered pairs",
+            "link": "shopify://collections/all"
           }
         },
         "announcement-bar-1": {
           "type": "announcement",
           "settings": {
-            "text": "COMEBACK · Limited edition · Once it's gone, it's gone",
-            "link": "shopify://collections/all"
+            "text": "Original designs · Made in India",
+            "link": "shopify://pages/about"
+          }
+        },
+        "announcement-bar-2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free shipping across India · 7-day size exchange",
+            "link": "shopify://pages/shipping-returns"
           }
         }
       },
       "block_order": [
         "announcement-bar-0",
-        "announcement-bar-1"
+        "announcement-bar-1",
+        "announcement-bar-2"
       ],
       "settings": {
         "auto_rotate": true,

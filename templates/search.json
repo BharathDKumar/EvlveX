@@ -22,7 +22,7 @@
     "suggest": {
       "type": "featured-collection",
       "settings": {
-        "title": "Popular products",
+        "title": "The collection",
         "heading_size": "h1",
         "description": "",
         "show_description": false,

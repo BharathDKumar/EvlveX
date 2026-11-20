@@ -13,8 +13,8 @@
         "step-2": {
           "type": "step",
           "settings": {
-            "title": "Signed and recorded",
-            "text": "<p>When the pair is finished, its artisan writes a workshop card: the pair's number, the day, and one line about this pair alone.</p>"
+            "title": "Inspected and recorded",
+            "text": "<p>Before it is packed, every pair is inspected and its number is recorded against its certificate.</p>"
           }
         },
         "step-3": {
@@ -31,7 +31,7 @@
         "eyebrow": "Authenticity",
         "heading": "Every pair, its own chapter",
         "heading_size": "h1",
-        "text": "<p>Every EvlveX pair is numbered, signed by its artisan and registered to its owner. Scan its QR tag, or enter the serial below, to confirm it is genuine and read its story.</p>",
+        "text": "<p>Every EvlveX pair is numbered, inspected before it leaves us and registered to its owner. Scan its QR tag, or enter the serial below, to confirm it is genuine and read its story.</p>",
         "url_prefix": "authentic",
         "padding_top": 64,
         "padding_bottom": 80
