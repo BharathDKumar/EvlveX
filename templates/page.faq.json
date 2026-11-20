@@ -169,7 +169,7 @@
           "settings": {
             "heading": "What is your return policy?",
             "icon": "return",
-            "row_content": "<p>You can return a pair or exchange it for another size within 7 days of delivery. It must be unworn, in its original box, with the certificate tag and workshop card.</p>",
+            "row_content": "<p>You can return a pair or exchange it for another size within 7 days of delivery. It must be unworn, in its numbered box with the dust bag and certificate tag.</p>",
             "page": ""
           }
         },
@@ -248,7 +248,7 @@
           "settings": {
             "heading": "How do I care for my pair?",
             "icon": "leather",
-            "row_content": "<p>Brush suede dry, wipe leather with a damp cloth and let pairs dry away from direct heat. Full instructions are in our <a href=\"/pages/care\" title=\"Care guide\">care guide</a>.</p>",
+            "row_content": "<p>Wipe the smooth panels with a soft, dry cloth, brush the textured overlays gently in one direction, and let your pair dry away from direct heat. Full instructions are in our <a href=\"/pages/care\" title=\"Care guide\">care guide</a>.</p>",
             "page": ""
           }
         }
@@ -302,16 +302,36 @@
             "row_content": "<p>Yes. Write to <a href=\"mailto:support@evlvex.in\" title=\"Email customer support\">support@evlvex.in</a> and we will change it, show initials only or remove it.</p>",
             "page": ""
           }
+        },
+        "q4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Where are EvlveX shoes made?",
+            "icon": "map_pin",
+            "row_content": "<p>Every EvlveX model is an original design, made in India. Every pair is inspected before it is packed and leaves us with its numbered QR certificate.</p>",
+            "page": ""
+          }
+        },
+        "q5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Will COMEBACK be restocked?",
+            "icon": "star",
+            "row_content": "<p>COMEBACK is made in a limited, numbered run, and we have no restock planned. If we ever make it again, it will be a new numbered run, and newsletter subscribers will hear first.</p>",
+            "page": ""
+          }
         }
       },
       "block_order": [
         "q1",
         "q2",
-        "q3"
+        "q3",
+        "q4",
+        "q5"
       ],
       "settings": {
         "caption": "",
-        "heading": "Authenticity",
+        "heading": "About EvlveX & authenticity",
         "heading_size": "h2",
         "heading_alignment": "left",
         "layout": "none",

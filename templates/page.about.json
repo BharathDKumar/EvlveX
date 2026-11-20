@@ -48,7 +48,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>EvlveX began with one idea: falling behind is not the end; sometimes, it is where the comeback begins. COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.</p><p>Our first collection tells that story in two chapters, one for each model. Every pair carries the EvlveX monogram, a number of its own, and a certificate registered to the person who wears it.</p>"
+            "text": "<p>EvlveX began with one idea: falling behind is not the end; sometimes, it is where the comeback begins. COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.</p><p>Our first collection tells that story in two chapters, one for each model. Both are original EvlveX designs, made in India in a limited run. Every pair carries the EvlveX monogram, a number of its own, and a certificate registered to the person who wears it.</p>"
           }
         }
       },
@@ -71,7 +71,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "Sub-concept I",
+            "caption": "Chapter 01",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
@@ -117,7 +117,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "Sub-concept II",
+            "caption": "Chapter 02",
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }

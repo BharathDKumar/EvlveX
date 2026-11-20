@@ -26,7 +26,7 @@ The site's own shoe imagery comes from four colour studio photos of the COMEBACK
 | `evx-fs-laces.jpg` | 397×460 | triptych, left: in the cream box on feathers | film texture shot, lifestyle |
 | `evx-comeback-pair.jpg` | 399×445 | collage, top left: both pairs with their boxes | film backdrop, collection cards |
 
-**Social sharing image** (`docs/brand/social/evlvex-share-1200x628.png`, also `assets/evx-share.png`): 1200×628. The monogram, wordmark and *COMEBACK · Limited edition · Once it's gone, it's gone.* sit across the top, with `evx-sg-full.jpg` and `evx-fs-full.jpg` side by side below. Upload it in Admin → Online Store → Preferences → *Social sharing image*. The theme also uses it for pages without their own image (`snippets/meta-tags.liquid`). To rebuild it, edit `docs/brand/social/share.html` and screenshot it at 1200×628, for example with `msedge --headless=new --window-size=1200,628 --screenshot=out.png share.html`.
+**Social sharing image** (`docs/brand/social/evlvex-share-1200x628.png`, also `assets/evx-share.png`): 1200×628. The monogram, wordmark and *COMEBACK · Limited edition* and *Original designs · Made in India · Numbered pairs* sit across the top, with `evx-sg-full.jpg` and `evx-fs-full.jpg` side by side below. Upload it in Admin → Online Store → Preferences → *Social sharing image*. The theme also uses it for pages without their own image (`snippets/meta-tags.liquid`). To rebuild it, edit `docs/brand/social/share.html` and screenshot it at 1200×628, for example with `msedge --headless=new --window-size=1200,628 --screenshot=out.png share.html`.
 
 If a crop's size changes, update the sizes in `sections/evlvex-comeback-film.liquid` (shot list and the "both" frames) and `snippets/evlvex-demo-image.liquid`.
 

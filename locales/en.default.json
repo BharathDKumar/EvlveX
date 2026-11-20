@@ -546,7 +546,7 @@
       "placeholder": "EVX-XXXXXXXX",
       "submit": "Verify",
       "error": "Please enter the serial printed under the QR code, e.g. EVX-7F3K9QMD.",
-      "image_alt": "EvlveX Court 01 with the embroidered monogram"
+      "image_alt": "The Silent Grind with the embroidered white EvlveX monogram"
     },
     "not_found": {
       "serial_html": "Scanned a QR tag? <a href=\"{{ url }}\" class=\"link underlined-link\">Verify your pair</a>."

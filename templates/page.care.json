@@ -21,7 +21,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>A few minutes of care keeps the smooth panels clean and the suede rich for years. These are the rituals we follow.</p>"
+            "text": "<p>A few minutes of care keeps the smooth panels clean and the textured overlays rich for years. Here is how to look after your pair.</p>"
           }
         }
       },
@@ -47,7 +47,7 @@
           "settings": {
             "heading": "Before first wear",
             "icon": "shoe",
-            "row_content": "<p>Apply a suede protector spray to suede pairs and suede overlays from 20 cm away, and let it dry for 24 hours. Insert cedar shoe trees into leather pairs the evening you bring them home.</p>",
+            "row_content": "<p>Apply a water and stain protector spray to the textured overlays from 20 cm away, and let it dry for 24 hours. If you use shoe trees, put them in the evening you bring your pair home.</p>",
             "page": ""
           }
         },
@@ -56,16 +56,16 @@
           "settings": {
             "heading": "Smooth panels",
             "icon": "leather",
-            "row_content": "<p>For the smooth upper of The Silent Grind and A Fresh Start. Wipe with a soft, dry cloth after wear. Every few months, feed with a neutral cream and buff gently.</p>",
+            "row_content": "<p>For the smooth upper of The Silent Grind and A Fresh Start. Wipe with a soft, dry cloth after wear. Every few months, clean with a little neutral shoe cleaner and buff gently.</p>",
             "page": ""
           }
         },
         "suede": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Suede",
+            "heading": "Textured overlays",
             "icon": "star",
-            "row_content": "<p>For the suede toe, eyestay and collar of both models. Use a soft suede brush, always in one direction, to lift the nap. Lift marks with a suede eraser; never soak suede. A Fresh Start's sand suede benefits from a protector spray before first wear.</p>",
+            "row_content": "<p>For the textured toe, eyestay and collar of both models. Use a soft brush, always in one direction, to lift the nap. Lift marks with a gentle eraser; never soak the overlays. A Fresh Start's sand overlays benefit from a protector spray before first wear.</p>",
             "page": ""
           }
         },
@@ -83,7 +83,7 @@
           "settings": {
             "heading": "Storage",
             "icon": "box",
-            "row_content": "<p>Keep each pair in its dust bag with cedar shoe trees, away from direct sunlight and heat. Keep the workshop card with the box: it carries your pair's chapter.</p>",
+            "row_content": "<p>Keep each pair in its dust bag, away from direct sunlight and heat. Shoe trees help it keep its shape. Keep the box: its label carries your pair's number.</p>",
             "page": ""
           }
         },
@@ -92,7 +92,7 @@
           "settings": {
             "heading": "Repairs & questions",
             "icon": "chat_bubble",
-            "row_content": "<p>Write to us with your pair's serial (printed under the QR tag) and we will advise on care or repair.</p>",
+            "row_content": "<p>Write to us with your pair's serial (printed under the QR tag) and we will advise on care and next steps.</p>",
             "page": ""
           }
         }

@@ -21,7 +21,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Sometimes, it is where the comeback begins. EvlveX tells one story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next. Every pair is numbered and registered to the person writing their own comeback.</p>"
+            "text": "<p>Sometimes, it is where the comeback begins. EvlveX makes premium sneakers that tell one story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next. Every design is our own, made in India in a limited, numbered run, and every pair is inspected before it leaves us.</p>"
           }
         }
       },
@@ -165,7 +165,7 @@
             "focus_x": 50,
             "focus_y": 50,
             "chapter_label": "Comeback",
-            "eyebrow": "EvlveX · Chapter One",
+            "eyebrow": "EvlveX · The first collection",
             "heading": "COMEBACK",
             "heading_size": "display",
             "text": "COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.",
@@ -183,7 +183,7 @@
             "focus_x": 60,
             "focus_y": 50,
             "chapter_label": "The Silent Grind",
-            "eyebrow": "Sub-concept I",
+            "eyebrow": "Chapter 01",
             "heading": "The Silent Grind",
             "heading_size": "title",
             "text": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.",
@@ -217,7 +217,7 @@
             "focus_x": 50,
             "focus_y": 50,
             "chapter_label": "A Fresh Start",
-            "eyebrow": "Sub-concept II",
+            "eyebrow": "Chapter 02",
             "heading": "A Fresh Start",
             "heading_size": "title",
             "text": "The moment after the struggle, when you stop looking back and choose what comes next.",
@@ -308,12 +308,76 @@
         "padding_top": 100,
         "padding_bottom": 100
       }
+    },
+    "standard": {
+      "type": "multicolumn",
+      "blocks": {
+        "story": {
+          "type": "column",
+          "settings": {
+            "title": "A story in every pair",
+            "text": "<p>Each model carries one chapter of COMEBACK, and every pair is numbered and registered to its owner.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "design": {
+          "type": "column",
+          "settings": {
+            "title": "Original designs",
+            "text": "<p>Every EvlveX model is our own design, from the monogram on its side to the colour of its sole.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "limited": {
+          "type": "column",
+          "settings": {
+            "title": "Limited edition",
+            "text": "<p>Each model is made in a limited, numbered run. When a run sells out, it is gone.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "india": {
+          "type": "column",
+          "settings": {
+            "title": "Made in India",
+            "text": "<p>Designed and made in India, with every pair inspected before it is packed.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "story",
+        "design",
+        "limited",
+        "india"
+      ],
+      "settings": {
+        "title": "The EvlveX standard",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
     }
   },
   "order": [
     "film",
     "statement",
     "featured",
+    "standard",
     "manifesto",
     "featured-story",
     "stories",

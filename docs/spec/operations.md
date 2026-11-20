@@ -17,7 +17,10 @@ Command details are in [qr-tooling.md](qr-tooling.md); the certificate fields ar
 
 > Only print after the public domain is live ([deployment.md §1](deployment.md)).
 
-## 2. Write the workshop card (atelier)
+## 2. Workshop card: not used
+> **Dropped 20 Nov 2026.** EvlveX shoes are factory-made, so there is no workshop card and no artisan name. Leave the certificate fields `artisan` and `finished_on` empty. A `pair_note` may still be added at packing if it is true and specific. The original procedure is kept below for reference only.
+
+### Former procedure
 When a pair is finished, the artisan fills in a **workshop card** (printed card, white stock with black print, signature line *Every pair has a story.*) and places it in the box:
 - Serial (copied from the box sticker)
 - Model and colorway

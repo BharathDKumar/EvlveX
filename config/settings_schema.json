@@ -1486,7 +1486,7 @@
         "id": "evx_limited_tag",
         "label": "Product tag",
         "default": "Limited edition",
-        "info": "Products with this tag show the badge on product cards and the limited-edition block on the product page. Remove the tag from a product that is restocked."
+        "info": "Products with this tag show the badge on product cards and the limited-edition block on the product page. Remove the tag from a product that is no longer a limited run."
       },
       {
         "type": "text",

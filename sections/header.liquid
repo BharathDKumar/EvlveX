@@ -477,6 +477,9 @@
     "name": {{ shop.name | json }},
     "url": {{ evx_home_url | json }},
     "logo": {{ evx_org_logo | json }},
+    {%- if shop.description != blank %}
+    "description": {{ shop.description | strip_html | json }},
+    {%- endif %}
     "sameAs": [
       {%- assign evx_link_count = 0 -%}
       {%- for link in evx_social_links -%}

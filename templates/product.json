@@ -23,7 +23,7 @@
           "type": "evlvex_limited",
           "settings": {
             "heading": "Limited edition · COMEBACK series",
-            "text": "Once it's gone, it's gone. These pairs will not be made again."
+            "text": "Made in a limited, numbered run. When this run sells out, it's gone."
           }
         },
         "excerpt": {
@@ -59,9 +59,9 @@
         "tab_materials": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Materials & craft",
+            "heading": "Design & make",
             "icon": "leather",
-            "content": "<p>Smooth upper with suede overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole. The EvlveX monogram sits on the outer side: white on The Silent Grind, embossed on A Fresh Start.</p>",
+            "content": "<p>An original EvlveX design, model CB-01. Smooth upper with textured overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole. The EvlveX monogram sits on the outer side: embroidered in white on The Silent Grind, embossed on A Fresh Start.</p><p>Designed and made in India. Every pair is inspected before it is packed.</p>",
             "page": ""
           }
         },
@@ -79,7 +79,7 @@
           "settings": {
             "heading": "Care",
             "icon": "washing",
-            "content": "<p>Smooth panels: wipe with a soft, dry cloth. Suede: brush gently in one direction and protect before first wear. Cupsole: a damp cloth and mild soap. <a href=\"/pages/care\" title=\"Care guide\">Full care guide</a>.</p>",
+            "content": "<p>Smooth panels: wipe with a soft, dry cloth. Textured overlays: brush gently in one direction and protect before first wear. Cupsole: a damp cloth and mild soap. <a href=\"/pages/care\" title=\"Care guide\">Full care guide</a>.</p>",
             "page": ""
           }
         },
@@ -88,7 +88,7 @@
           "settings": {
             "heading": "Shipping & returns",
             "icon": "truck",
-            "content": "<p>Free shipping across India on every order. Prepaid orders only (UPI, cards, net banking, wallets); dispatch in 1–2 working days, delivery in 3–7 working days.</p><p>Return or exchange the size within 7 days of delivery, unworn, with the certificate tag and workshop card in the box. Free pickup. <a href=\"/policies/refund-policy\">Returns policy</a> · <a href=\"/policies/shipping-policy\">Shipping policy</a></p>",
+            "content": "<p>Free shipping across India on every order. Prepaid orders only (UPI, cards, net banking, wallets); dispatch in 1–2 working days, delivery usually in 3–7 working days.</p><p>Return or exchange the size within 7 days of delivery, unworn, in its numbered box with the dust bag and certificate tag. Free pickup. <a href=\"/policies/refund-policy\">Returns policy</a> · <a href=\"/policies/shipping-policy\">Shipping policy</a></p>",
             "page": ""
           }
         },
@@ -97,7 +97,7 @@
           "settings": {
             "heading": "Your pair's certificate",
             "icon": "check_mark",
-            "content": "<p>Every pair is numbered, signed by the artisan who finished it, and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair. <a href=\"/pages/authenticity\" title=\"Authenticity\">How it works</a>.</p>",
+            "content": "<p>Every pair is numbered and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair. <a href=\"/pages/authenticity\" title=\"Authenticity\">How it works</a>.</p>",
             "page": ""
           }
         }
@@ -173,7 +173,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "The other chapter",
         "heading_size": "h1",
         "products_to_show": 4,
         "columns_desktop": 4,

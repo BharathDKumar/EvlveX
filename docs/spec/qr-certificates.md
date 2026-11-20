@@ -12,18 +12,18 @@ Covers what the certificate does, the data it uses and the privacy rules. The CL
 1. **Owner:** *As the buyer, when I scan the tag in my shoe, I see a page thanking me by name, telling me the story of my pair and confirming it is genuine.*
 2. **Gift recipient:** *When I scan a pair given to me, I see my name and the giver's message.*
 3. **Resale buyer / curious person:** *When I scan or enter a serial, I can confirm the pair is a genuine EvlveX and read its story.*
-4. **Packing staff:** *When I pack an order, I link the pair's serial to the order, and copy its workshop card, in under 60 seconds.*
+4. **Packing staff:** *When I pack an order, I link the pair's serial to the order in under 60 seconds.*
 5. **Production:** *I can generate and print a batch of unique tags before the shoes are finished.*
 6. **Copywriter / brand:** *I can publish a new model story and link it to its products without a developer.*
 
 ### 1.2 How it works
 ```
-Production                 Atelier                Packing                      Customer
+Production                 Factory                Packing                      Customer
 ──────────                 ───────                ───────                      ────────
-generate batch  ──►  tag sewn/stuck  ──►  workshop card  ──►  assign serial  ──►  scan QR
-(serials created          in each pair      written (artisan,     to order               │
- in Shopify, QR                             date, pair note)      (name, product,        ▼
- PDF printed)                                                      size, date, card) /pages/authentic/<serial>
+generate batch  ──►  tag sewn/stuck  ──►  pair inspected ──►  assign serial  ──►  scan QR
+(serials created          in each pair      (pair note         to order               │
+ in Shopify, QR                             optional)            (name, product,        ▼
+ PDF printed)                                                      size, date)       /pages/authentic/<serial>
                                                                                    "Thank you, Priya Sharma"
                                                                                    + the story of this pair
 ```
@@ -51,19 +51,18 @@ Template: `templates/metaobject/evlvex_certificate.json`.
 ## 3. Thank-you copy (editable in the theme editor)
 > **Thank you, {Full Name}.**
 >
-> Every EvlveX begins as a story. This pair now carries yours. It was cut, stitched and finished by hand, and is registered in your name for as long as it walks with you. Take it somewhere worth remembering.
+> Every EvlveX begins as a story. This pair now carries yours. It is numbered, was inspected before it left us, and is registered in your name for as long as it walks with you. Take it somewhere worth remembering.
 >
 > *With gratitude,*
-> *The House of EvlveX*
+> *EvlveX*
 
 **"The Story of Your Pair" block** (renders only the lines whose fields are filled):
 > *Pair No. {pair_number} of {model}.*
-> *Finished by {artisan} on {finished_on}.*
 > *"{pair_note}"*
 
 ## 4. Privacy & security rules
 - The **full name** is shown publicly to anyone who scans the tag. The privacy policy must say so ([open items](../SPEC.md#open-items)).
-- **Artisan names** are shown publicly: first name and initial only, and only with the artisan's written consent. Without consent, leave `artisan` empty.
+- **No artisan names:** the shoes are factory-made (owner, 20 Nov 2026), so `artisan` and `finished_on` stay empty. The theme still supports them ("Finished by …" shows only when filled), but the brand rules forbid artisan claims ([brand-and-content.md §7](brand-and-content.md)).
 - `order_number` and `batch` are **never** rendered in the HTML.
 - Certificate pages carry `<meta name="robots" content="noindex,nofollow">`, so they never appear in Google. (Story pages, by contrast, **are** indexable.)
 - Serials are random. There is no index page listing certificates. **However** (found 18 Nov 2026), Shopify's public sitemap (`/sitemap_metaobject_pages_1.xml`) lists every certificate URL, and Shopify offers no way to hide metaobject entries from it (`seo.hidden` works only for products, pages, collections and articles). So anyone can list every certificate, and with it every owner's name. No certificate had an owner on 18 Nov 2026. This must be decided before the first pair is assigned ([open items](../SPEC.md#open-items), item 13).
