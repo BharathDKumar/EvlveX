@@ -702,3 +702,61 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
     max-width: 120rem;
   }
 }
+
+/* ---------- Back to top (home page only; button in layout/theme.liquid) ---------- */
+.evx-back-to-top {
+  position: fixed;
+  right: 1.6rem;
+  bottom: 1.6rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 1px solid rgba(var(--evx-white), 0.25);
+  border-radius: 50%;
+  background: rgb(var(--evx-noir));
+  color: rgb(var(--evx-white));
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.8rem);
+  transition: opacity 250ms var(--evx-ease), transform 250ms var(--evx-ease), visibility 0s linear 250ms,
+    background-color 200ms var(--evx-ease), color 200ms var(--evx-ease);
+}
+
+.evx-back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.evx-back-to-top:hover {
+  background: rgb(var(--evx-white));
+  color: rgb(var(--evx-noir));
+  border-color: rgb(var(--evx-noir));
+}
+
+.evx-back-to-top:focus-visible {
+  outline: 2px solid rgb(var(--evx-noir));
+  outline-offset: 3px;
+}
+
+@media screen and (min-width: 750px) {
+  .evx-back-to-top {
+    right: 2.4rem;
+    bottom: 2.4rem;
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evx-back-to-top {
+    transform: none;
+    transition: none;
+  }
+}

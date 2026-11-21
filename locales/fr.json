@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "Retour en haut",
     "password_page": {
       "login_form_heading": "Accéder à la boutique à l'aide d'un mot de passe :",
       "login_password_button": "Saisir avec un mot de passe",

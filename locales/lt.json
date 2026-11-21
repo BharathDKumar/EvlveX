@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "Grįžti į viršų",
     "password_page": {
       "login_form_heading": "Apsilankyti parduotuvėje naudojant slaptažodį:",
       "login_password_button": "Apsilankyti naudojant slaptažodį",

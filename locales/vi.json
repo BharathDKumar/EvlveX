@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "Quay lại đầu trang",
     "password_page": {
       "login_form_heading": "Vào cửa hàng bằng mật khẩu:",
       "login_password_button": "Vào bằng mật khẩu",

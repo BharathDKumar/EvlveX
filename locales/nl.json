@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "Terug naar boven",
     "password_page": {
       "login_form_heading": "Ga winkel binnen met wachtwoord:",
       "login_password_button": "Ga naar binnen met wachtwoord",

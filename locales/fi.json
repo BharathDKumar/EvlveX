@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "Takaisin ylös",
     "password_page": {
       "login_form_heading": "Siirry kauppaan käyttämällä salasanaa:",
       "login_password_button": "Siirry sisään käyttämällä salasanaa",
