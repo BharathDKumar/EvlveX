@@ -170,6 +170,39 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
   }
 }
 
+/* Sticky header (sections/header-group.json: always sticky, 'reduce-logo-size'): once the page scrolls past the
+   header it stays on screen but gets shorter, with less padding and a smaller logo. */
+.section-header .header,
+.section-header .evlvex-logo__mark,
+.section-header .evlvex-logo__word {
+  transition: padding 0.25s var(--evx-ease, ease), width 0.25s var(--evx-ease, ease), height 0.25s var(--evx-ease, ease);
+}
+
+.scrolled-past-header .header {
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.scrolled-past-header .evlvex-logo__mark {
+  width: 26px;
+  height: 26px;
+}
+
+.scrolled-past-header .evlvex-logo__word {
+  height: 1.4rem;
+}
+
+@media screen and (max-width: 749px) {
+  .scrolled-past-header .evlvex-logo__mark {
+    width: 22px;
+    height: 22px;
+  }
+
+  .scrolled-past-header .evlvex-logo__word {
+    height: 1.2rem;
+  }
+}
+
 /* ---------- Announcement bar ---------- */
 .announcement-bar__message {
   font-family: var(--font-body-family);
