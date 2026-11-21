@@ -1,8 +1,9 @@
 {%- comment -%}
   EvlveX — COMEBACK film: a full-screen, video-like 3D carousel for the home page.
-  Each scene is a block: one of the two COMEBACK models (The Silent Grind / A Fresh Start, or both) or an uploaded image,
-  a camera move that plays while the scene is on screen, and its own copy. Scenes turn in 3D, the shoe tilts with the
-  pointer, and a timeline at the bottom fills like a video scrubber.
+  Each scene is a block: one of the two COMEBACK models (The Silent Grind / A Fresh Start, or both), the EvlveX
+  monogram, or an uploaded image, a camera move that plays while the scene is on screen, and its own copy. Scenes turn
+  in 3D and the shoe tilts with the pointer. A click anywhere on a scene opens its link (story or product).
+  The timeline and buttons are off by default (section setting "Show timeline and buttons").
   Behaviour: assets/evlvex-comeback-film.js · Styles: assets/evlvex-comeback-film.css · Story: docs/spec/brand-and-content.md
 {%- endcomment -%}
 
@@ -22,7 +23,7 @@
 {%- if scene_total > 0 -%}
   <evlvex-comeback-film
     id="EvxFilm-{{ section.id }}"
-    class="evx-film evx-film--{{ section.settings.height }}"
+    class="evx-film evx-film--{{ section.settings.height }}{% if scene_total > 1 and section.settings.show_controls %} evx-film--controls{% endif %}"
     role="region"
     aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
     aria-label="{{ film_label | escape }}"
@@ -69,6 +70,15 @@
           assign asset_src = prefix | append: shot_parts[0] | append: '.jpg' | asset_url
           assign alt = s.alt | default: s.heading
 
+          assign is_mark = false
+          if s.shoe == 'monogram' and s.image == blank
+            assign is_mark = true
+          endif
+          assign has_link = false
+          if s.button_link != blank
+            assign has_link = true
+          endif
+
           if s.image != blank
             assign frame_ratio = s.image.aspect_ratio
           else
@@ -77,15 +87,20 @@
         -%}
         <article
           id="EvxFilmScene-{{ section.id }}-{{ forloop.index }}"
-          class="evx-film__scene evx-film__scene--{{ s.tone }} evx-film__scene--cam-{{ s.camera }}{% if s.shoe == 'both' and s.image == blank %} evx-film__scene--pair{% endif %}{% if forloop.first %} is-active{% endif %}"
+          class="evx-film__scene evx-film__scene--{{ s.tone }} evx-film__scene--cam-{{ s.camera }}{% if s.shoe == 'both' and s.image == blank %} evx-film__scene--pair{% endif %}{% if is_mark %} evx-film__scene--mark{% endif %}{% if has_link %} evx-film__scene--linked{% endif %}{% if forloop.first %} is-active{% endif %}"
           role="group"
           aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
           aria-label="{{ forloop.index }} {{ of_label }} {{ scene_total }}"
           style="--fx: {{ s.focus_x }}%; --fy: {{ s.focus_y }}%; --frame-ratio: {{ frame_ratio }};"
           {{ block.shopify_attributes }}
         >
+          {%- if has_link -%}
+            {%- comment -%} Whole-scene click target. Hidden from assistive tech and the tab order: the link in the copy is the accessible one. {%- endcomment -%}
+            <a class="evx-film__hit" href="{{ s.button_link }}" tabindex="-1" aria-hidden="true"></a>
+          {%- endif -%}
           <div class="evx-film__backdrop" aria-hidden="true">
-            {%- if s.image != blank -%}
+            {%- if is_mark -%}
+            {%- elsif s.image != blank -%}
               {{ s.image | image_url: width: 600 | image_tag: loading: loading, alt: '', class: 'evx-film__backdrop-img' }}
             {%- elsif s.shoe == 'both' -%}
               <img src="{{ 'evx-comeback-pair.jpg' | asset_url }}" alt="" loading="{{ loading }}" width="399" height="445" class="evx-film__backdrop-img">
@@ -95,7 +110,13 @@
           </div>
 
           <div class="evx-film__visual">
-            {%- if s.image != blank -%}
+            {%- if is_mark -%}
+              <figure class="evx-film__frame evx-film__frame--mark" style="--frame-ratio: 0.9931;">
+                <div class="evx-film__camera">
+                  {%- render 'evlvex-monogram', size: 400, class: 'evx-film__img evx-film__mark', title: 'EvlveX monogram' -%}
+                </div>
+              </figure>
+            {%- elsif s.image != blank -%}
               <figure class="evx-film__frame">
                 <div class="evx-film__camera">
                   {{
@@ -143,7 +164,15 @@
               {%- endif -%}
             {%- endif -%}
             {%- if s.text != blank -%}
-              <p class="evx-film__text">{{ s.text | escape }}</p>
+              <div class="evx-film__text">
+                {%- assign paragraphs = s.text | newline_to_br | split: '<br />' -%}
+                {%- for paragraph in paragraphs -%}
+                  {%- assign line = paragraph | strip -%}
+                  {%- if line != blank -%}
+                    <p>{{ line | escape }}</p>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
             {%- endif -%}
             {%- if s.button_label != blank and s.button_link != blank -%}
               <a class="evx-film__cta" href="{{ s.button_link }}">
@@ -156,7 +185,7 @@
       {%- endfor -%}
     </div>
 
-    {%- if scene_total > 1 -%}
+    {%- if scene_total > 1 and section.settings.show_controls -%}
       <div class="evx-film__chrome">
         <ol class="evx-film__timeline">
           {%- for block in section.blocks -%}
@@ -269,11 +298,17 @@
       "type": "range",
       "id": "speed",
       "min": 4,
-      "max": 12,
+      "max": 16,
       "step": 1,
       "unit": "s",
       "label": "Scene length",
-      "default": 7
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "Show timeline and buttons",
+      "default": false
     }
   ],
   "blocks": [
@@ -297,6 +332,10 @@
             {
               "value": "both",
               "label": "Both (COMEBACK)"
+            },
+            {
+              "value": "monogram",
+              "label": "EvlveX monogram (no shoe)"
             }
           ],
           "default": "silent-grind"
@@ -428,7 +467,8 @@
         {
           "type": "textarea",
           "id": "text",
-          "label": "Text"
+          "label": "Text",
+          "info": "Start a new line for a new paragraph."
         },
         {
           "type": "text",
@@ -438,7 +478,8 @@
         {
           "type": "url",
           "id": "button_link",
-          "label": "Link"
+          "label": "Link",
+          "info": "A click anywhere on the scene opens this link."
         }
       ]
     }

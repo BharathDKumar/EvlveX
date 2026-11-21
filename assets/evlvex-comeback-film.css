@@ -1,8 +1,9 @@
 /*
   EvlveX — COMEBACK film (sections/evlvex-comeback-film.liquid).
   Full-screen 3D carousel that plays like a film: scenes turn in 3D, each shot has a slow camera move,
-  the shoe tilts with the pointer (--rx / --ry from the script) and floats when idle, copy reveals in sequence,
-  and the timeline fills like a video scrubber. Everything that moves is disabled under prefers-reduced-motion.
+  the shoe tilts with the pointer (--rx / --ry from the script) and floats when idle, copy reveals in sequence.
+  The story copy leads: it gets the wider column and the image sits smaller beside it. A click anywhere on a linked
+  scene opens its link (.evx-film__hit). The timeline is optional (.evx-film--controls). Everything that moves is disabled under prefers-reduced-motion.
 */
 
 .evx-film-section {
@@ -18,22 +19,25 @@ evlvex-comeback-film {
   --evx-film-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
+/* Scenes share one grid cell, so the film is as tall as its longest scene and story copy is never clipped. */
 .evx-film__scenes {
   position: relative;
+  display: grid;
   /* Fill the first screen below the announcement bar and header (--evx-film-top is measured by the script). */
-  height: max(56rem, min(calc(100svh - var(--evx-film-top, 0px)), 96rem));
+  min-height: max(56rem, min(calc(100svh - var(--evx-film-top, 0px)), 96rem));
   perspective: 1800px;
   perspective-origin: 50% 45%;
 }
 
 .evx-film--large .evx-film__scenes {
-  height: max(56rem, min(82svh, 84rem));
+  min-height: max(56rem, min(82svh, 84rem));
 }
 
 /* ---------- Scenes & 3D turn ---------- */
 .evx-film__scene {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  grid-area: 1 / 1;
+  min-width: 0;
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
   opacity: 0;
@@ -86,6 +90,19 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
   --film-muted: 17, 17, 17;
 }
 
+/* Whole-scene link: sits above everything; the copy's link stays the accessible one */
+.evx-film__hit {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.evx-film__scene--linked:hover .evx-film__cta-line {
+  width: 8rem;
+}
+
 /* Blurred backdrop of the same shot: depth and colour behind the frame */
 .evx-film__backdrop {
   position: absolute;
@@ -132,7 +149,7 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
   align-items: center;
   justify-content: center;
   gap: 4vw;
-  padding: 9rem 2rem 2rem;
+  padding: 4rem 2rem 2rem;
   transform-style: preserve-3d;
   transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform 0.6s var(--evx-film-ease);
@@ -144,7 +161,7 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
   overflow: hidden;
   aspect-ratio: var(--frame-ratio, 1);
   /* Width-led sizing capped by the available height, so the photo keeps its ratio (never cropped) */
-  width: min(84vw, calc(min(46svh, 46rem) * var(--frame-ratio, 1)));
+  width: min(72vw, calc(min(30svh, 30rem) * var(--frame-ratio, 1)));
   height: auto;
   transform: translateZ(40px);
   box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.75);
@@ -156,6 +173,23 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 
 .evx-film__scene--pair .evx-film__frame {
   width: min(40vw, calc(min(36svh, 38rem) * var(--frame-ratio, 1)));
+}
+
+/* Monogram scene (no shoe): the brand mark alone, no photo frame */
+.evx-film__frame--mark {
+  overflow: visible;
+  box-shadow: none;
+  color: rgb(var(--film-accent));
+}
+
+.evx-film__frame--mark .evx-film__mark {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
+}
+
+.evx-film__scene--mark .evx-film__frame {
+  width: min(56vw, 26svh, 26rem);
 }
 
 .evx-film__frame--left {
@@ -183,8 +217,12 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 .evx-film__copy {
   position: relative;
   z-index: 2;
-  padding: 0 2rem 15rem;
-  max-width: 64rem;
+  padding: 0 2rem 5.6rem;
+  max-width: 72rem;
+}
+
+.evx-film--controls .evx-film__copy {
+  padding-bottom: 15rem;
 }
 
 .evx-film__copy > * {
@@ -242,12 +280,24 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 }
 
 .evx-film__text {
-  margin: 2rem 0 0;
-  max-width: 44ch;
+  margin: 2.4rem 0 0;
+  max-width: 54ch;
   font-family: var(--font-body-family);
-  font-size: 1.7rem;
-  line-height: 1.6;
-  color: rgba(var(--film-muted), 0.8);
+  font-size: 1.6rem;
+  line-height: 1.65;
+  color: rgba(var(--film-muted), 0.82);
+}
+
+.evx-film__text p {
+  margin: 0;
+}
+
+.evx-film__text p + p {
+  margin-top: 1.2rem;
+}
+
+.evx-film__text p:first-child {
+  color: rgb(var(--film-accent));
 }
 
 .evx-film__cta {
@@ -448,7 +498,7 @@ evlvex-comeback-film.is-user-paused .evx-film__toggle-play,
 /* ---------- Desktop: copy left, shoe right ---------- */
 @media screen and (min-width: 990px) {
   .evx-film__scene {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     grid-template-rows: minmax(0, 1fr);
     align-items: center;
   }
@@ -456,18 +506,30 @@ evlvex-comeback-film.is-user-paused .evx-film__toggle-play,
   .evx-film__visual {
     grid-column: 2;
     grid-row: 1;
-    padding: 8rem 6vw 12rem 0;
+    padding: 8rem 6vw 8rem 2vw;
   }
 
   .evx-film__copy {
     grid-column: 1;
     grid-row: 1;
-    padding: 0 0 6rem 6vw;
+    padding: 6rem 0 6rem 6vw;
     align-self: center;
   }
 
+  .evx-film--controls .evx-film__copy {
+    padding-bottom: 12rem;
+  }
+
+  .evx-film__text {
+    font-size: 1.8rem;
+  }
+
   .evx-film__frame {
-    width: min(50vw, calc(min(60svh, 64rem) * var(--frame-ratio, 1)));
+    width: min(34vw, calc(min(46svh, 48rem) * var(--frame-ratio, 1)));
+  }
+
+  .evx-film__scene--mark .evx-film__frame {
+    width: min(26vw, 40svh, 40rem);
   }
 
   /* Pair: size by width so each frame keeps its photo's ratio (black 4:3, cream 3:4) */
@@ -477,11 +539,11 @@ evlvex-comeback-film.is-user-paused .evx-film__toggle-play,
   }
 
   .evx-film__scene--pair .evx-film__frame--left {
-    width: min(27vw, 46rem);
+    width: min(22vw, 38rem);
   }
 
   .evx-film__scene--pair .evx-film__frame--right {
-    width: min(17vw, 30rem);
+    width: min(14vw, 24rem);
   }
 
   .evx-film__chrome {
@@ -500,11 +562,12 @@ evlvex-comeback-film.is-user-paused .evx-film__toggle-play,
   }
 
   .evx-film__text {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 
   .evx-film__visual {
     gap: 3vw;
+    padding-top: 3.2rem;
   }
 
   .evx-film__scene--pair .evx-film__frame {

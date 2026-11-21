@@ -639,3 +639,33 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
     animation-timing-function: var(--evx-ease);
   }
 }
+
+/* ---------- Featured collection with few products (sections/featured-collection.liquid) ---------- */
+/* One column per product, a narrower centred grid and a centred title, so 2 products never sit beside empty space. */
+.evx-collection--few .collection__title {
+  justify-content: center;
+  text-align: center;
+}
+
+.evx-collection--few .collection__title .title {
+  margin-inline: auto;
+}
+
+.evx-collection--few .product-grid {
+  justify-content: center;
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 750px) {
+  .evx-collection--few.evx-collection--1 .product-grid {
+    max-width: 48rem;
+  }
+
+  .evx-collection--few.evx-collection--2 .product-grid {
+    max-width: 92rem;
+  }
+
+  .evx-collection--few.evx-collection--3 .product-grid {
+    max-width: 120rem;
+  }
+}
