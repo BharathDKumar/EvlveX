@@ -432,5 +432,43 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {%- if template.name == 'index' -%}
+      {%- comment -%} Back to top: home page only; appears after one screen of scrolling. {%- endcomment -%}
+      <button
+        type="button"
+        class="evx-back-to-top"
+        aria-label="{{ 'general.back_to_top' | t }}"
+        title="{{ 'general.back_to_top' | t }}"
+        tabindex="-1"
+      >
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+          <path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/>
+        </svg>
+      </button>
+      <script>
+        (function () {
+          var btn = document.querySelector('.evx-back-to-top');
+          if (!btn) return;
+          var ticking = false;
+          function update() {
+            ticking = false;
+            var show = window.scrollY > window.innerHeight;
+            btn.classList.toggle('is-visible', show);
+            btn.tabIndex = show ? 0 : -1;
+          }
+          window.addEventListener('scroll', function () {
+            if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+          }, { passive: true });
+          update();
+          btn.addEventListener('click', function () {
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            var main = document.getElementById('MainContent');
+            if (main) main.focus({ preventScroll: true });
+          });
+        })();
+      </script>
+    {%- endif -%}
   </body>
 </html>

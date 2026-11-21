@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "Nazaj na vrh",
     "password_page": {
       "login_form_heading": "Vstopite v trgovino z geslom:",
       "login_password_button": "Vstop z geslom",

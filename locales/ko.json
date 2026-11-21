@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "맨 위로",
     "password_page": {
       "login_form_heading": "비밀번호를 사용하여 스토어 입장:",
       "login_password_button": "비밀번호를 사용하여 입장하십시오.",

@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "ページの先頭へ",
     "password_page": {
       "login_form_heading": "パスワードを入力してストアにアクセスする。",
       "login_password_button": "パスワードを入力してアクセスする",

@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "Обратно в началото",
     "password_page": {
       "login_form_heading": "Влизане в магазина с парола:",
       "login_password_button": "Влизане с парола",

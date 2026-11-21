@@ -1,5 +1,6 @@
 {
   "general": {
+    "back_to_top": "Späť nahor",
     "password_page": {
       "login_form_heading": "Prejdite do obchodu s použitím hesla:",
       "login_password_button": "Prejsť s použitím hesla",
