@@ -184,9 +184,9 @@ The shoes are factory-made (owner, 20 Nov 2026), so the **artisan** and **finish
 
 **Announcement bar:** "COMEBACK · Limited edition · Numbered pairs" · "Original designs · Made in India" · "Free shipping across India · 7-day size exchange"
 
-**Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), five scenes: *COMEBACK* ("EvlveX · The first collection", both shoes) → *The Silent Grind* (Chapter 01) → "Hold on through the weight" (monogram) → *A Fresh Start* (Chapter 02) → "Take the first step" (laces and overlays). Each scene uses the brand text above.
+**Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), three scenes: *COMEBACK* ("EvlveX · The first collection", the monogram alone, "Read the story" → the stories page) → *The Silent Grind* (Chapter 01, → its product) → *A Fresh Start* (Chapter 02, → its product). Each scene carries the brand text above word for word in three short paragraphs: the line or excerpt, the full chapter text, and the detail line ("Black, with the monogram in white. For the battles no one sees." / "Cream and sand, with the monogram embossed in sand. For the first step into what comes next."). Scene 1 also carries the brand statement below, which no longer has its own section.
 
-**Home brand statement**
+**Brand statement** (home film scene 1 since v1.9; also usable elsewhere)
 > **Falling behind is not the end.** Sometimes, it is where the comeback begins. EvlveX makes premium sneakers that tell one story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next. Every design is our own, made in India in a limited, numbered run, and every pair is inspected before it leaves us.
 
 **Home: "The EvlveX standard"** (after the featured products): *A story in every pair* · *Original designs* · *Limited edition* · *Made in India*.

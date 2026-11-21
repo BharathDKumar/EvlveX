@@ -76,8 +76,15 @@ if (!customElements.get('evlvex-comeback-film')) {
         const dx = event.clientX - this.swipeStart.x;
         const dy = event.clientY - this.swipeStart.y;
         this.swipeStart = null;
-        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) this.step(dx < 0 ? 1 : -1);
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+          // A swipe changes the scene; it must not also open the scene's link.
+          this.swipedAt = performance.now();
+          this.step(dx < 0 ? 1 : -1);
+        }
       }, { signal });
+      this.addEventListener('click', (event) => {
+        if (this.swipedAt && performance.now() - this.swipedAt < 500 && event.target.closest('a')) event.preventDefault();
+      }, { signal, capture: true });
 
       // Theme editor.
       document.addEventListener('shopify:block:select', (event) => {
