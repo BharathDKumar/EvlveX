@@ -44,7 +44,7 @@ Template: `templates/metaobject/evlvex_certificate.json`.
 
 | State | When | Page shows |
 |---|---|---|
-| **Assigned** | `buyer_name` is filled | Monogram seal · "Certificate of Authenticity" · **"Thank you, {buyer_name}"** · thank-you message (§3) · personal message (if any) · product image + name · **"The Story of Your Pair"**: pair number, artisan, finished on, pair note (each only if present) · model story excerpt + "Read the full story" (§5) · size · purchase date · serial · "Genuine EvlveX" seal · buttons: *Care for your pair*, *Discover the collection* |
+| **Assigned** | `buyer_name` is filled | Monogram seal · "Certificate of Authenticity" · **"Thank you, {buyer_name}"** · thank-you message (§3) · personal message (if any) · product image + name · **"The Story of Your Pair"**: pair number (only when the section setting *Show the pair number* is on; off since 25 Nov 2026), artisan, finished on, pair note (each only if present) · model story excerpt + "Read the full story" (§5) · size · purchase date · serial · "Genuine EvlveX" seal · buttons: *Care for your pair*, *Discover the collection* |
 | **Unassigned** | entry exists, no buyer yet | Monogram seal · "Genuine EvlveX" · "This pair is authentic. Its story is waiting for its owner." · product and pair chapter (if already recorded) · model story excerpt (if product is set) · serial · *Discover the collection* |
 | **Unknown serial** | no entry with that handle | Shopify 404 page (with the "Verify your serial" link) |
 
@@ -56,7 +56,7 @@ Template: `templates/metaobject/evlvex_certificate.json`.
 > *With gratitude,*
 > *EvlveX*
 
-**"The Story of Your Pair" block** (renders only the lines whose fields are filled):
+**"The Story of Your Pair" block** (renders only the lines whose fields are filled; the whole block is hidden when none are). The pair-number line also needs Theme editor → EvlveX certificate → *Show the pair number*, which is **off** (owner, 25 Nov 2026):
 > *Pair No. {pair_number} of {model}.*
 > *"{pair_note}"*
 
@@ -88,7 +88,7 @@ Created by `npm run setup` ([qr-tooling.md §1](qr-tooling.md)), or manually in 
 | Size | `size` | Single line text | Yes |
 | Purchase date | `purchase_date` | Date | Yes |
 | Personal message | `personal_message` | Multi-line text | Yes, if present (gift dedication) |
-| Pair number | `pair_number` | Integer | Yes, as `No. 0042` |
+| Pair number | `pair_number` | Integer | Only if *Show the pair number* is on (off since 25 Nov 2026), as `No. 0042` |
 | Artisan | `artisan` | Single line text | Yes, if present ("Finished by …") |
 | Finished on | `finished_on` | Date | Yes, if present |
 | Pair note | `pair_note` | Multi-line text (≤ 200 chars) | Yes, if present |

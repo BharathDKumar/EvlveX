@@ -25,6 +25,11 @@
   assign story = cert_product.metafields.evlvex.story.value
   assign model_name = story.model_name.value | default: cert_product.title
 
+  # The pair number stays in the certificate data; showing it is a section setting (off by default).
+  unless section.settings.show_pair_number
+    assign pair_number = blank
+  endunless
+
   if pair_number != blank
     if pair_number < 1000
       assign pair_label = pair_number | prepend: '000' | slice: -4, 4
@@ -286,6 +291,13 @@
       "label": "Pair chapter heading",
       "info": "Above the pair number, artisan, finished date and pair note. Each line only shows when it is filled in.",
       "default": "The Story of Your Pair"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pair_number",
+      "label": "Show the pair number",
+      "info": "Shows \"Pair No. 0042 of {model}\". The number stays saved on each certificate either way.",
+      "default": false
     },
     {
       "type": "checkbox",
