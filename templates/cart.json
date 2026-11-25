@@ -86,7 +86,7 @@
     "admire": {
       "type": "featured-collection",
       "settings": {
-        "title": "The other chapter",
+        "title": "The collection",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
