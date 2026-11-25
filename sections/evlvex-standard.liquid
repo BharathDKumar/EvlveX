@@ -1,0 +1,89 @@
+{%- comment -%}
+  EvlveX — Street Drop "The standard": boxed columns with big condensed numbers (01, 02, …), a title and a line of text.
+  Any column can be inverted to black. Styles: assets/evlvex-street.css.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="sd-sec sd-grid-bg">
+    {%- if section.settings.heading_solid != blank or section.settings.heading_outline != blank -%}
+      <div class="sd-head">
+        <h2 class="sd-head__title sd-huge">
+          {{- section.settings.heading_solid | escape }}
+          {% if section.settings.heading_outline != blank %}<span class="sd-o">{{ section.settings.heading_outline | escape }}</span>{% endif -%}
+        </h2>
+        {%- if section.settings.note != blank -%}
+          <p class="sd-k">{{ section.settings.note | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    <div class="sd-std">
+      {%- for block in section.blocks -%}
+        <div class="sd-std__col{% if block.settings.invert %} sd-std__col--invert{% endif %}" {{ block.shopify_attributes }}>
+          <span class="sd-std__num sd-huge" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <h3 class="sd-std__title sd-huge">{{ block.settings.title | escape }}</h3>
+          <p class="sd-std__text">{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX the standard",
+  "tag": "section",
+  "class": "section sd-standard-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_solid",
+      "label": "Heading: solid part",
+      "default": "The"
+    },
+    {
+      "type": "text",
+      "id": "heading_outline",
+      "label": "Heading: outlined part",
+      "default": "standard"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note beside the heading",
+      "default": "What every pair carries"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Original designs"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "invert",
+          "label": "Black column",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX the standard",
+      "blocks": [{ "type": "column" }, { "type": "column" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,186 @@
+{%- comment -%}
+  EvlveX — Street Drop authenticity teaser: heading, lead, numbered steps and a button, beside a hang-tag style
+  certificate that is clearly labelled as an example (it is not a real record). Styles: assets/evlvex-street.css.
+{%- endcomment -%}
+
+{%- assign steps = section.blocks | where: 'type', 'step' -%}
+
+<div class="sd-sec">
+  <div class="sd-auth">
+    <div>
+      {%- if section.settings.chip != blank -%}
+        <span class="sd-chip sd-chip--fill">{{ section.settings.chip | escape }}</span>
+      {%- endif -%}
+      <h2 class="sd-auth__title sd-huge">
+        {{- section.settings.heading_solid | escape -}}
+        {%- if section.settings.heading_outline != blank -%}
+          <br><span class="sd-o">{{ section.settings.heading_outline | escape }}</span>
+        {%- endif -%}
+      </h2>
+      {%- if section.settings.lead != blank -%}
+        <p class="sd-auth__lead">{{ section.settings.lead | escape }}</p>
+      {%- endif -%}
+      {%- if steps.size > 0 -%}
+        <ol class="sd-auth__steps">
+          {%- for block in steps -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="sd-auth__num sd-c" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <h3>{{ block.settings.title | escape }}</h3>
+              <p>{{ block.settings.text | escape }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a
+          class="sd-pill"
+          {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+        >
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_tag -%}
+      <div class="sd-tag-wrap">
+        <figure class="sd-tag" aria-label="{{ section.settings.tag_label | append: ': ' | append: section.settings.tag_kicker | escape }}" style="margin: 0;">
+          {%- if section.settings.tag_label != blank -%}
+            <span class="sd-chip sd-chip--fill sd-tag__example">{{ section.settings.tag_label | escape }}</span>
+          {%- endif -%}
+          {%- render 'evlvex-monogram', size: 64, class: 'sd-tag__mark' -%}
+          <p class="sd-k">{{ section.settings.tag_kicker | escape }}</p>
+          <p class="sd-tag__model sd-huge">{{ section.settings.tag_model | escape }}</p>
+          <dl class="sd-table">
+            <div><dt>Pair</dt><dd>{{ section.settings.tag_pair | escape }}</dd></div>
+            <div><dt>Chapter</dt><dd>{{ section.settings.tag_chapter | escape }}</dd></div>
+            <div><dt>Serial</dt><dd>{{ section.settings.tag_serial | escape }}</dd></div>
+            <div><dt>Registered to</dt><dd>{{ section.settings.tag_owner | escape }}</dd></div>
+          </dl>
+        </figure>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "EvlveX authenticity",
+  "tag": "section",
+  "class": "section sd-authenticity-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "chip",
+      "label": "Chip",
+      "default": "Authenticity"
+    },
+    {
+      "type": "text",
+      "id": "heading_solid",
+      "label": "Heading: solid part",
+      "default": "Registered"
+    },
+    {
+      "type": "text",
+      "id": "heading_outline",
+      "label": "Heading: outlined part",
+      "default": "to you"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "How it works"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Example certificate tag"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tag",
+      "label": "Show the example tag",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tag_label",
+      "label": "Label",
+      "info": "Keep a word like Example so it is not taken for a real certificate.",
+      "default": "Example"
+    },
+    {
+      "type": "text",
+      "id": "tag_kicker",
+      "label": "Small heading",
+      "default": "Certificate of authenticity"
+    },
+    {
+      "type": "text",
+      "id": "tag_model",
+      "label": "Model",
+      "default": "The Silent Grind"
+    },
+    {
+      "type": "text",
+      "id": "tag_pair",
+      "label": "Pair",
+      "default": "No. 0042"
+    },
+    {
+      "type": "text",
+      "id": "tag_chapter",
+      "label": "Chapter",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "tag_serial",
+      "label": "Serial",
+      "default": "EVX-7F3K9QMD"
+    },
+    {
+      "type": "text",
+      "id": "tag_owner",
+      "label": "Registered to",
+      "default": "Your name"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Made and numbered"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX authenticity",
+      "blocks": [{ "type": "step" }]
+    }
+  ]
+}
+{% endschema %}

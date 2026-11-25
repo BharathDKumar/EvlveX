@@ -1,0 +1,282 @@
+{%- comment -%}
+  EvlveX — Street Drop "The drop": product spec cards (photo, number, chapter chip, condensed title, spec table,
+  live price, Shop). With "Hide the product being viewed" on a product page, only the other model shows, as one wide
+  card ("The other chapter"). Styles: assets/evlvex-street.css. Spec: docs/spec/theme.md §4.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_id = 0
+  if section.settings.hide_current and product != blank
+    assign current_id = product.id
+  endif
+  assign visible = 0
+  for block in section.blocks
+    if block.settings.product == blank or block.settings.product.id != current_id
+      assign visible = visible | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if visible > 0 -%}
+  <div class="sd-sec{% if section.settings.grid_bg %} sd-grid-bg{% endif %}">
+    {%- if section.settings.heading_solid != blank or section.settings.heading_outline != blank -%}
+      <div class="sd-head">
+        <h2 class="sd-head__title sd-huge">
+          {{- section.settings.heading_solid | escape }}
+          {% if section.settings.heading_outline != blank %}<span class="sd-o">{{ section.settings.heading_outline | escape }}</span>{% endif -%}
+        </h2>
+        {%- if section.settings.note != blank -%}
+          <p class="sd-k">{{ section.settings.note | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="sd-drop{% if visible == 1 %} sd-drop--wide{% endif %}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign p = block.settings.product
+          assign skip = false
+          if p != blank and p.id == current_id
+            assign skip = true
+          endif
+          assign s = block.settings
+          assign price_text = ''
+          if p != blank
+            assign price_text = p.price | money_without_trailing_zeros
+            if p.price_varies
+              assign price_text = 'products.product.price.from_price_html' | t: price: price_text
+            endif
+          endif
+          assign title = p.title | default: s.title
+          assign url = p.url | default: '#'
+          case s.shoe
+            when 'silent-grind'
+              assign photo = 'evx-sg-full.jpg|960|720'
+            when 'fresh-start'
+              assign photo = 'evx-fs-wide.jpg|1366|1024'
+            else
+              assign photo = ''
+          endcase
+        -%}
+        {%- unless skip -%}
+        <article class="sd-item" {{ block.shopify_attributes }}>
+          <a class="sd-item__media" href="{{ url }}" tabindex="-1" aria-hidden="true">
+            {%- if s.image != blank -%}
+              {{
+                s.image
+                | image_url: width: 1600
+                | image_tag: widths: '450, 700, 1000, 1400, 1600', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy', alt: ''
+              }}
+            {%- elsif photo != '' -%}
+              {%- assign photo_parts = photo | split: '|' -%}
+              <img
+                src="{{ photo_parts[0] | asset_url }}"
+                alt=""
+                width="{{ photo_parts[1] }}"
+                height="{{ photo_parts[2] }}"
+                loading="lazy"
+              >
+            {%- elsif p.featured_media != blank -%}
+              {{
+                p.featured_media
+                | image_url: width: 1600
+                | image_tag: widths: '450, 700, 1000, 1400, 1600', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy', alt: ''
+              }}
+            {%- else -%}
+              {%- render 'evlvex-demo-image', kind: 'product', seed: forloop.index, alt: '' -%}
+            {%- endif -%}
+            {%- if s.number != blank -%}
+              <span class="sd-item__num sd-huge">{{ s.number | escape }}</span>
+            {%- endif -%}
+            {%- if s.chip != blank -%}
+              <span class="sd-chip">{{ s.chip | escape }}</span>
+            {%- endif -%}
+          </a>
+
+          <div class="sd-item__body">
+            {%- if visible == 1 and s.chip != blank -%}
+              <span class="sd-chip sd-chip--fill" style="margin-bottom: 2rem;">{{ s.chip | escape }}</span>
+            {%- endif -%}
+            <h3 class="sd-item__title sd-huge"><a href="{{ url }}">{{ title | escape }}</a></h3>
+            {%- if visible == 1 and s.lead != blank -%}
+              <p class="sd-item__lead">{{ s.lead | escape }}</p>
+            {%- endif -%}
+            <dl class="sd-table">
+              {%- if s.model != blank -%}<div><dt>{{ section.settings.label_model | escape }}</dt><dd>{{ s.model | escape }}</dd></div>{%- endif -%}
+              {%- if s.colourway != blank -%}<div><dt>{{ section.settings.label_colourway | escape }}</dt><dd>{{ s.colourway | escape }}</dd></div>{%- endif -%}
+              {%- if s.sizes != blank -%}<div><dt>{{ section.settings.label_sizes | escape }}</dt><dd>{{ s.sizes | escape }}</dd></div>{%- endif -%}
+              {%- if s.run != blank -%}<div><dt>{{ section.settings.label_run | escape }}</dt><dd>{{ s.run | escape }}</dd></div>{%- endif -%}
+            </dl>
+            <div class="sd-item__buy">
+              <span class="sd-item__price">{{ price_text }}</span>
+              <a class="sd-pill" href="{{ url }}">
+                {{- section.settings.button_label | escape -}}
+                <span class="visually-hidden">: {{ title | escape }}</span>
+              </a>
+            </div>
+          </div>
+        </article>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX the drop",
+  "tag": "section",
+  "class": "section sd-drop-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_solid",
+      "label": "Heading: solid part",
+      "default": "The drop"
+    },
+    {
+      "type": "text",
+      "id": "heading_outline",
+      "label": "Heading: outlined part"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note beside the heading",
+      "default": "02 models · Limited, numbered run"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_current",
+      "label": "Hide the product being viewed",
+      "info": "On a product page, shows only the other model(s). One remaining card is shown wide.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "grid_bg",
+      "label": "Grid background",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop"
+    },
+    {
+      "type": "header",
+      "content": "Table labels"
+    },
+    {
+      "type": "text",
+      "id": "label_model",
+      "label": "Model",
+      "default": "Model"
+    },
+    {
+      "type": "text",
+      "id": "label_colourway",
+      "label": "Colourway",
+      "default": "Colourway"
+    },
+    {
+      "type": "text",
+      "id": "label_sizes",
+      "label": "Sizes",
+      "default": "Sizes"
+    },
+    {
+      "type": "text",
+      "id": "label_run",
+      "label": "Run",
+      "default": "Run"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Product card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title if no product is chosen",
+          "default": "The Silent Grind"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "chip",
+          "label": "Chip",
+          "default": "Chapter 01"
+        },
+        {
+          "type": "text",
+          "id": "lead",
+          "label": "Line under the title",
+          "info": "Shown only when the card is wide (one card)."
+        },
+        {
+          "type": "select",
+          "id": "shoe",
+          "label": "Photo",
+          "info": "Campaign photo of a model, or the product's own first photo. An uploaded image wins.",
+          "options": [
+            { "value": "silent-grind", "label": "The Silent Grind campaign photo" },
+            { "value": "fresh-start", "label": "A Fresh Start campaign photo" },
+            { "value": "product", "label": "Product photo" }
+          ],
+          "default": "silent-grind"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "model",
+          "label": "Model",
+          "default": "CB-01"
+        },
+        {
+          "type": "text",
+          "id": "colourway",
+          "label": "Colourway",
+          "default": "Black / White"
+        },
+        {
+          "type": "text",
+          "id": "sizes",
+          "label": "Sizes",
+          "default": "UK 6–10"
+        },
+        {
+          "type": "text",
+          "id": "run",
+          "label": "Run",
+          "default": "Limited, numbered"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX the drop",
+      "blocks": [{ "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,31 +1,283 @@
 {
   "sections": {
-    "featured": {
-      "type": "featured-collection",
+    "hero": {
+      "type": "evlvex-drop-hero",
+      "blocks": {
+        "comeback": {
+          "type": "slide",
+          "settings": {
+            "word_solid": "Come",
+            "word_outline": "back",
+            "shoe": "monogram",
+            "alt": "The EvlveX monogram",
+            "rotate": -4,
+            "sticker": "Limited|numbered|run",
+            "tr_label": "The first collection",
+            "tr_value": "2 chapters",
+            "tr_sub": "1 story",
+            "bl_label": "EvlveX · COMEBACK",
+            "bl_value": "Falling behind is not the end",
+            "bl_sub": "Sometimes, it is where the comeback begins",
+            "button_label": "Read the story",
+            "button_link": "shopify://pages/the-stories"
+          }
+        },
+        "grind": {
+          "type": "slide",
+          "settings": {
+            "word_solid": "Gri",
+            "word_outline": "nd",
+            "shoe": "silent-grind",
+            "alt": "The Silent Grind: black low-top sneaker with the white EvlveX monogram",
+            "rotate": -6,
+            "sticker": "Chapter|01",
+            "tr_label": "Model",
+            "tr_value": "CB-01",
+            "tr_sub": "Black / White",
+            "bl_label": "Chapter 01",
+            "bl_value": "The Silent Grind",
+            "bl_sub": "For the battles no one sees",
+            "button_label": "Shop The Silent Grind",
+            "button_link": "shopify://products/the-silent-grind"
+          }
+        },
+        "fresh": {
+          "type": "slide",
+          "settings": {
+            "word_solid": "Fre",
+            "word_outline": "sh",
+            "shoe": "fresh-start",
+            "alt": "A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram",
+            "rotate": 5,
+            "sticker": "Chapter|02",
+            "tr_label": "Model",
+            "tr_value": "CB-01",
+            "tr_sub": "Cream / Sand",
+            "bl_label": "Chapter 02",
+            "bl_value": "A Fresh Start",
+            "bl_sub": "For the first step into what comes next",
+            "button_label": "Shop A Fresh Start",
+            "button_link": "shopify://products/a-fresh-start"
+          }
+        }
+      },
+      "block_order": [
+        "comeback",
+        "grind",
+        "fresh"
+      ],
       "settings": {
-        "title": "Two chapters, one comeback",
-        "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "link",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 80,
-        "padding_bottom": 80
+        "label": "COMEBACK",
+        "autoplay": true,
+        "speed": 8,
+        "tl_label": "Collection",
+        "tl_value": "COMEBACK",
+        "tl_sub": "2 chapters"
+      }
+    },
+    "tape": {
+      "type": "evlvex-tape",
+      "blocks": {
+        "comeback": {
+          "type": "item",
+          "settings": {
+            "text": "COMEBACK"
+          }
+        },
+        "limited": {
+          "type": "item",
+          "settings": {
+            "text": "Limited edition"
+          }
+        },
+        "numbered": {
+          "type": "item",
+          "settings": {
+            "text": "Numbered pairs"
+          }
+        },
+        "original": {
+          "type": "item",
+          "settings": {
+            "text": "Original designs"
+          }
+        },
+        "india": {
+          "type": "item",
+          "settings": {
+            "text": "Made in India"
+          }
+        }
+      },
+      "block_order": [
+        "comeback",
+        "limited",
+        "numbered",
+        "original",
+        "india"
+      ],
+      "settings": {
+        "tilt": true,
+        "speed": 40
+      }
+    },
+    "drop": {
+      "type": "evlvex-drop-grid",
+      "blocks": {
+        "silent-grind": {
+          "type": "card",
+          "settings": {
+            "product": "the-silent-grind",
+            "title": "The Silent Grind",
+            "number": "01",
+            "chip": "Chapter 01",
+            "lead": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.",
+            "shoe": "silent-grind",
+            "model": "CB-01",
+            "colourway": "Black / White",
+            "sizes": "UK 6–10",
+            "run": "Limited, numbered"
+          }
+        },
+        "fresh-start": {
+          "type": "card",
+          "settings": {
+            "product": "a-fresh-start",
+            "title": "A Fresh Start",
+            "number": "02",
+            "chip": "Chapter 02",
+            "lead": "The moment after the struggle, when you stop looking back and choose what comes next.",
+            "shoe": "fresh-start",
+            "model": "CB-01",
+            "colourway": "Cream / Sand",
+            "sizes": "UK 6–10",
+            "run": "Limited, numbered"
+          }
+        }
+      },
+      "block_order": [
+        "silent-grind",
+        "fresh-start"
+      ],
+      "settings": {
+        "heading_solid": "The drop",
+        "heading_outline": "",
+        "note": "02 models · Limited, numbered run",
+        "hide_current": false,
+        "grid_bg": false,
+        "button_label": "Shop",
+        "label_model": "Model",
+        "label_colourway": "Colourway",
+        "label_sizes": "Sizes",
+        "label_run": "Run"
+      }
+    },
+    "standard": {
+      "type": "evlvex-standard",
+      "blocks": {
+        "story": {
+          "type": "column",
+          "settings": {
+            "title": "A story in every pair",
+            "text": "Each model carries one chapter of COMEBACK, and every pair is numbered and registered to its owner.",
+            "invert": false
+          }
+        },
+        "design": {
+          "type": "column",
+          "settings": {
+            "title": "Original designs",
+            "text": "Every EvlveX model is our own design, from the monogram on its side to the colour of its sole.",
+            "invert": true
+          }
+        },
+        "limited": {
+          "type": "column",
+          "settings": {
+            "title": "Limited edition",
+            "text": "Each model is made in a limited, numbered run. When a run sells out, it is gone.",
+            "invert": false
+          }
+        },
+        "india": {
+          "type": "column",
+          "settings": {
+            "title": "Made in India",
+            "text": "Designed and made in India, with every pair inspected before it is packed.",
+            "invert": false
+          }
+        }
+      },
+      "block_order": [
+        "story",
+        "design",
+        "limited",
+        "india"
+      ],
+      "settings": {
+        "heading_solid": "The",
+        "heading_outline": "standard",
+        "note": "What every pair carries"
+      }
+    },
+    "manifesto": {
+      "type": "evlvex-manifesto",
+      "settings": {
+        "eyebrow": "The COMEBACK code",
+        "line_solid": "Knocked down.",
+        "line_outline": "Never out.",
+        "text_left": "<p>Every comeback starts the same way: on the ground.</p><p>A missed chance. A closed door. A season that took more than it gave.</p><p>Nobody claps for the early mornings. Nobody sees the second attempt, or the tenth.</p><p><strong>That is the silent grind. It is where the real work happens.</strong></p>",
+        "text_right": "<p>Then one day you stop looking back. You lace up. You take the first step.</p><p><strong>That is a fresh start. It is where the story turns.</strong></p><p>EvlveX is made for the road between the two: for everyone who fell behind and refused to stay there.</p>",
+        "closing": "Never give up on your comeback.",
+        "button_label": "Read the chapters",
+        "button_link": "shopify://pages/the-stories"
+      }
+    },
+    "authenticity": {
+      "type": "evlvex-authenticity",
+      "blocks": {
+        "made": {
+          "type": "step",
+          "settings": {
+            "title": "Made and numbered",
+            "text": "Each pair carries a numbered QR tag under the tongue, with a matching label on the box."
+          }
+        },
+        "inspected": {
+          "type": "step",
+          "settings": {
+            "title": "Inspected and recorded",
+            "text": "Before it is packed, every pair is inspected and its number is recorded against its certificate."
+          }
+        },
+        "registered": {
+          "type": "step",
+          "settings": {
+            "title": "Registered to you",
+            "text": "Scan the tag, or enter the serial on the Authenticity page. Your pair's certificate opens with your name and its story."
+          }
+        }
+      },
+      "block_order": [
+        "made",
+        "inspected",
+        "registered"
+      ],
+      "settings": {
+        "chip": "Authenticity",
+        "heading_solid": "Registered",
+        "heading_outline": "to you",
+        "lead": "Every pair is numbered and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair.",
+        "button_label": "How it works",
+        "button_link": "shopify://pages/authenticity",
+        "show_tag": true,
+        "tag_label": "Example",
+        "tag_kicker": "Certificate of authenticity",
+        "tag_model": "The Silent Grind",
+        "tag_pair": "No. 0042",
+        "tag_chapter": "01",
+        "tag_serial": "EVX-7F3K9QMD",
+        "tag_owner": "Your name"
       }
     },
     "featured-story": {
@@ -57,201 +309,15 @@
         "padding_top": 96,
         "padding_bottom": 96
       }
-    },
-    "film": {
-      "type": "evlvex-comeback-film",
-      "blocks": {
-        "comeback": {
-          "type": "scene",
-          "settings": {
-            "shoe": "monogram",
-            "shot": "full",
-            "tone": "light",
-            "camera": "push",
-            "focus_x": 50,
-            "focus_y": 50,
-            "chapter_label": "Comeback",
-            "eyebrow": "EvlveX · The first collection",
-            "heading": "COMEBACK",
-            "heading_size": "display",
-            "text": "Falling behind is not the end. Sometimes, it is where the comeback begins.\nCOMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.\nOne story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next.",
-            "button_label": "Read the story",
-            "button_link": "shopify://pages/the-stories",
-            "alt": "The EvlveX monogram"
-          }
-        },
-        "grind": {
-          "type": "scene",
-          "settings": {
-            "shoe": "silent-grind",
-            "shot": "full",
-            "tone": "light",
-            "camera": "push",
-            "focus_x": 60,
-            "focus_y": 50,
-            "chapter_label": "The Silent Grind",
-            "eyebrow": "Chapter 01",
-            "heading": "The Silent Grind",
-            "heading_size": "title",
-            "text": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.\nThe Silent Grind is about holding on through the weight of those moments and finding the strength to rise from them.\nBlack, with the monogram in white. For the battles no one sees.",
-            "button_label": "Shop The Silent Grind",
-            "button_link": "shopify://products/the-silent-grind"
-          }
-        },
-        "fresh": {
-          "type": "scene",
-          "settings": {
-            "shoe": "fresh-start",
-            "shot": "full",
-            "tone": "light",
-            "camera": "pull",
-            "focus_x": 50,
-            "focus_y": 50,
-            "chapter_label": "A Fresh Start",
-            "eyebrow": "Chapter 02",
-            "heading": "A Fresh Start",
-            "heading_size": "title",
-            "text": "The moment after the struggle, when you stop looking back and choose what comes next.\nA Fresh Start is about carrying the lessons forward, leaving the weight behind, and taking the first step into a new chapter.\nCream and sand, with the monogram embossed in sand. For the first step into what comes next.",
-            "button_label": "Shop A Fresh Start",
-            "button_link": "shopify://products/a-fresh-start"
-          }
-        }
-      },
-      "block_order": [
-        "comeback",
-        "grind",
-        "fresh"
-      ],
-      "settings": {
-        "label": "COMEBACK",
-        "height": "full",
-        "autoplay": true,
-        "speed": 10,
-        "show_controls": false,
-        "light_start": "#FAFAFC",
-        "light_end": "#DCDCE4"
-      }
-    },
-    "manifesto": {
-      "type": "rich-text",
-      "blocks": {
-        "caption": {
-          "type": "caption",
-          "settings": {
-            "caption": "The COMEBACK code",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "small"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Knocked down. Never out.",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Every comeback starts the same way: on the ground.</p><p>A missed chance. A closed door. A season that took more than it gave.</p><p>Nobody claps for the early mornings. Nobody sees the second attempt, or the tenth.</p><p>That is the silent grind. It is where the real work happens.</p><p>Then one day you stop looking back. You lace up. You take the first step.</p><p>That is a fresh start. It is where the story turns.</p><p>EvlveX is made for the road between the two: for everyone who fell behind and refused to stay there.</p><p><strong>Never give up on your comeback.</strong></p>"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Read the chapters",
-            "button_link": "/pages/the-stories",
-            "button_style_secondary": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "caption",
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "full_width": false,
-        "padding_top": 100,
-        "padding_bottom": 100
-      }
-    },
-    "standard": {
-      "type": "multicolumn",
-      "blocks": {
-        "story": {
-          "type": "column",
-          "settings": {
-            "title": "A story in every pair",
-            "text": "<p>Each model carries one chapter of COMEBACK, and every pair is numbered and registered to its owner.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "design": {
-          "type": "column",
-          "settings": {
-            "title": "Original designs",
-            "text": "<p>Every EvlveX model is our own design, from the monogram on its side to the colour of its sole.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "limited": {
-          "type": "column",
-          "settings": {
-            "title": "Limited edition",
-            "text": "<p>Each model is made in a limited, numbered run. When a run sells out, it is gone.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "india": {
-          "type": "column",
-          "settings": {
-            "title": "Made in India",
-            "text": "<p>Designed and made in India, with every pair inspected before it is packed.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "story",
-        "design",
-        "limited",
-        "india"
-      ],
-      "settings": {
-        "title": "The EvlveX standard",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 4,
-        "column_alignment": "center",
-        "background_style": "none",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 72,
-        "padding_bottom": 72
-      }
     }
   },
   "order": [
-    "film",
-    "featured",
+    "hero",
+    "tape",
+    "drop",
     "standard",
     "manifesto",
+    "authenticity",
     "featured-story",
     "stories"
   ]
