@@ -44,6 +44,14 @@ for (const f of fs.readdirSync(path.join(root, 'templates')).filter((f) => f.end
     }
     for (const bid of sec.block_order || []) if (!(sec.blocks || {})[bid]) problems.push(`${f} ${id}: block_order has missing block ${bid}`);
   }
+  // Shopify rejects the whole template when a block id equals a section id (found 25 Nov 2026: a tape block
+  // called "story" next to a section called "story" kept the old product page live).
+  const sectionIds = new Set(Object.keys(t.sections));
+  for (const [sid, sec] of Object.entries(t.sections)) {
+    for (const bid of Object.keys(sec.blocks || {})) {
+      if (sectionIds.has(bid)) problems.push(`${f} ${sid}: block id "${bid}" equals a section id; rename the block`);
+    }
+  }
 }
 console.log(problems.length ? problems.join('\n') : 'Templates OK: every setting value matches its section schema.');
 process.exitCode = problems.length ? 1 : 0;

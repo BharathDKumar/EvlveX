@@ -96,6 +96,14 @@
             "content": "<p>Every pair is numbered and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair. <a href=\"/pages/authenticity\" title=\"Authenticity\">How it works</a>.</p>",
             "page": ""
           }
+        },
+        "assurance": {
+          "type": "evlvex_assurance",
+          "settings": {
+            "line_1": "7-day returns & size exchange",
+            "line_2": "Ships in 1–2 working days",
+            "line_3": "Certificate in your name"
+          }
         }
       },
       "block_order": [
@@ -107,6 +115,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "assurance",
         "tab_materials",
         "tab_fit",
         "tab_care",
@@ -127,60 +136,6 @@
         "enable_video_looping": false,
         "padding_top": 24,
         "padding_bottom": 48
-      }
-    },
-    "story": {
-      "type": "evlvex-product-story",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "caption": "The Story",
-        "show_signature_detail": true,
-        "signature_label": "The detail",
-        "button_label": "Read the full story",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "story-slides": {
-      "type": "evlvex-story-carousel",
-      "settings": {
-        "slide_source": "product",
-        "eyebrow": "",
-        "heading": "",
-        "layout": "image-left",
-        "desktop_ratio": "4-5",
-        "mobile_ratio": "4-5",
-        "text_alignment": "left",
-        "color_scheme": "scheme-1",
-        "autoplay": false,
-        "autoplay_speed": 7,
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
-    },
-    "disclosures": {
-      "type": "disclosures",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 0
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "The other chapter",
-        "heading_size": "h1",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 80,
-        "padding_bottom": 80
       }
     },
     "tape": {
@@ -214,14 +169,109 @@
         "tilt": true,
         "speed": 40
       }
+    },
+    "story": {
+      "type": "evlvex-pair-story",
+      "blocks": {
+        "story-silent-grind": {
+          "type": "story",
+          "settings": {
+            "product": "the-silent-grind",
+            "chip": "The story · Chapter 01",
+            "title_solid": "The Silent",
+            "title_outline": "Grind",
+            "lead": "The chapters lived in the dark: the struggles, setbacks, and battles that aren't always seen.",
+            "text": "It is about holding on through the weight of those moments and finding the strength to rise from them.",
+            "shoe": "silent-grind",
+            "button_label": "Read the full story",
+            "button_link": "shopify://pages/the-stories"
+          }
+        },
+        "story-fresh-start": {
+          "type": "story",
+          "settings": {
+            "product": "a-fresh-start",
+            "chip": "The story · Chapter 02",
+            "title_solid": "A Fresh",
+            "title_outline": "Start",
+            "lead": "The moment after the struggle, when you stop looking back and choose what comes next.",
+            "text": "It is about carrying the lessons forward, leaving the weight behind, and taking the first step into a new chapter.",
+            "shoe": "fresh-start",
+            "button_label": "Read the full story",
+            "button_link": "shopify://pages/the-stories"
+          }
+        }
+      },
+      "block_order": [
+        "story-silent-grind",
+        "story-fresh-start"
+      ],
+      "settings": {}
+    },
+    "other": {
+      "type": "evlvex-drop-grid",
+      "blocks": {
+        "other-silent-grind": {
+          "type": "card",
+          "settings": {
+            "product": "the-silent-grind",
+            "title": "The Silent Grind",
+            "number": "01",
+            "chip": "Chapter 01",
+            "lead": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.",
+            "shoe": "silent-grind",
+            "model": "",
+            "colourway": "Black / White",
+            "sizes": "UK 6–10",
+            "run": ""
+          }
+        },
+        "other-fresh-start": {
+          "type": "card",
+          "settings": {
+            "product": "a-fresh-start",
+            "title": "A Fresh Start",
+            "number": "02",
+            "chip": "Chapter 02",
+            "lead": "The moment after the struggle, when you stop looking back and choose what comes next.",
+            "shoe": "fresh-start",
+            "model": "",
+            "colourway": "Cream / Sand",
+            "sizes": "UK 6–10",
+            "run": ""
+          }
+        }
+      },
+      "block_order": [
+        "other-silent-grind",
+        "other-fresh-start"
+      ],
+      "settings": {
+        "heading_solid": "The other",
+        "heading_outline": "chapter",
+        "note": "Complete the story",
+        "hide_current": true,
+        "grid_bg": false,
+        "button_label": "Shop",
+        "label_model": "Model",
+        "label_colourway": "Colourway",
+        "label_sizes": "Sizes",
+        "label_run": "Run"
+      }
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
     "main",
     "tape",
     "story",
-    "story-slides",
-    "disclosures",
-    "related-products"
+    "other",
+    "disclosures"
   ]
 }
