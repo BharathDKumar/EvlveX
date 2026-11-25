@@ -66,7 +66,7 @@
           "settings": {
             "shoe": "monogram",
             "shot": "full",
-            "tone": "dark",
+            "tone": "light",
             "camera": "push",
             "focus_x": 50,
             "focus_y": 50,
@@ -85,7 +85,7 @@
           "settings": {
             "shoe": "silent-grind",
             "shot": "full",
-            "tone": "dark",
+            "tone": "light",
             "camera": "push",
             "focus_x": 60,
             "focus_y": 50,
@@ -103,7 +103,7 @@
           "settings": {
             "shoe": "fresh-start",
             "shot": "full",
-            "tone": "dark",
+            "tone": "light",
             "camera": "pull",
             "focus_x": 50,
             "focus_y": 50,
@@ -127,7 +127,9 @@
         "height": "full",
         "autoplay": true,
         "speed": 10,
-        "show_controls": false
+        "show_controls": false,
+        "light_start": "#FAFAFC",
+        "light_end": "#DCDCE4"
       }
     },
     "manifesto": {
