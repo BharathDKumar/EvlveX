@@ -22,8 +22,8 @@
         "limited": {
           "type": "evlvex_limited",
           "settings": {
-            "heading": "Limited edition · COMEBACK series ·",
-            "text": "Made in a limited, numbered run. When this run sells out, it's gone."
+            "heading": "Limited edition",
+            "text": "A numbered run. When it sells out, it's gone."
           }
         },
         "excerpt": {
@@ -51,10 +51,6 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": false
           }
-        },
-        "description": {
-          "type": "description",
-          "settings": {}
         },
         "tab_materials": {
           "type": "collapsible_tab",
@@ -100,6 +96,14 @@
             "content": "<p>Every pair is numbered and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair. <a href=\"/pages/authenticity\" title=\"Authenticity\">How it works</a>.</p>",
             "page": ""
           }
+        },
+        "assurance": {
+          "type": "evlvex_assurance",
+          "settings": {
+            "line_1": "7-day returns & size exchange",
+            "line_2": "Ships in 1–2 working days",
+            "line_3": "Certificate in your name"
+          }
         }
       },
       "block_order": [
@@ -111,7 +115,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
+        "assurance",
         "tab_materials",
         "tab_fit",
         "tab_care",
@@ -123,7 +127,7 @@
         "color_scheme": "scheme-1",
         "media_size": "large",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
+        "media_fit": "cover",
         "gallery_layout": "thumbnail_slider",
         "mobile_thumbnails": "hide",
         "media_position": "left",
@@ -187,10 +191,43 @@
         "padding_top": 80,
         "padding_bottom": 80
       }
+    },
+    "tape": {
+      "type": "evlvex-tape",
+      "blocks": {
+        "comeback": {
+          "type": "item",
+          "settings": {
+            "text": "COMEBACK"
+          }
+        },
+        "story": {
+          "type": "item",
+          "settings": {
+            "text": "Every pair has a story"
+          }
+        },
+        "make": {
+          "type": "item",
+          "settings": {
+            "text": "Make your comeback"
+          }
+        }
+      },
+      "block_order": [
+        "comeback",
+        "story",
+        "make"
+      ],
+      "settings": {
+        "tilt": true,
+        "speed": 40
+      }
     }
   },
   "order": [
     "main",
+    "tape",
     "story",
     "story-slides",
     "disclosures",

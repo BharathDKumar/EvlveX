@@ -1253,6 +1253,22 @@ h2,
   text-transform: uppercase;
 }
 
+/* Small labels that happen to be h2 elements (footer column titles, filter and sort labels, product count)
+   keep the regular face: they are labels, not titles. */
+.evx-footer__heading,
+.facets__heading,
+.facet-filters__label,
+.product-count__text,
+.mobile-facets__heading,
+h2.caption-large,
+h2.text-body {
+  font-family: var(--font-body-family);
+  font-stretch: 100%;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+}
+
 /* Sizes for Dawn's heading classes (page titles, section titles on standard pages) */
 .h0 {
   font-size: clamp(5.6rem, 7vw, 11rem);
