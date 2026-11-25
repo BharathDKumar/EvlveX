@@ -12,10 +12,10 @@
             "alt": "The EvlveX monogram",
             "rotate": -4,
             "sticker": "Limited|numbered|run",
-            "tr_label": "The first collection",
-            "tr_value": "2 chapters",
-            "tr_sub": "1 story",
-            "bl_label": "EvlveX · COMEBACK",
+            "tr_label": "Chapters",
+            "tr_value": "02",
+            "tr_sub": "One story",
+            "bl_label": "The story",
             "bl_value": "Falling behind is not the end",
             "bl_sub": "Sometimes, it is where the comeback begins",
             "button_label": "Read the story",
@@ -31,9 +31,9 @@
             "alt": "The Silent Grind: black low-top sneaker with the white EvlveX monogram",
             "rotate": -6,
             "sticker": "Chapter|01",
-            "tr_label": "Model",
-            "tr_value": "CB-01",
-            "tr_sub": "Black / White",
+            "tr_label": "Colourway",
+            "tr_value": "Black / White",
+            "tr_sub": "UK 6–10",
             "bl_label": "Chapter 01",
             "bl_value": "The Silent Grind",
             "bl_sub": "For the battles no one sees",
@@ -50,9 +50,9 @@
             "alt": "A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram",
             "rotate": 5,
             "sticker": "Chapter|02",
-            "tr_label": "Model",
-            "tr_value": "CB-01",
-            "tr_sub": "Cream / Sand",
+            "tr_label": "Colourway",
+            "tr_value": "Cream / Sand",
+            "tr_sub": "UK 6–10",
             "bl_label": "Chapter 02",
             "bl_value": "A Fresh Start",
             "bl_sub": "For the first step into what comes next",
@@ -72,7 +72,7 @@
         "speed": 8,
         "tl_label": "Collection",
         "tl_value": "COMEBACK",
-        "tl_sub": "2 chapters"
+        "tl_sub": ""
       }
     },
     "tape": {
@@ -84,37 +84,23 @@
             "text": "COMEBACK"
           }
         },
-        "limited": {
+        "story": {
           "type": "item",
           "settings": {
-            "text": "Limited edition"
+            "text": "Every pair has a story"
           }
         },
-        "numbered": {
+        "make": {
           "type": "item",
           "settings": {
-            "text": "Numbered pairs"
-          }
-        },
-        "original": {
-          "type": "item",
-          "settings": {
-            "text": "Original designs"
-          }
-        },
-        "india": {
-          "type": "item",
-          "settings": {
-            "text": "Made in India"
+            "text": "Make your comeback"
           }
         }
       },
       "block_order": [
         "comeback",
-        "limited",
-        "numbered",
-        "original",
-        "india"
+        "story",
+        "make"
       ],
       "settings": {
         "tilt": true,
@@ -133,10 +119,10 @@
             "chip": "Chapter 01",
             "lead": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.",
             "shoe": "silent-grind",
-            "model": "CB-01",
+            "model": "",
             "colourway": "Black / White",
             "sizes": "UK 6–10",
-            "run": "Limited, numbered"
+            "run": ""
           }
         },
         "fresh-start": {
@@ -148,10 +134,10 @@
             "chip": "Chapter 02",
             "lead": "The moment after the struggle, when you stop looking back and choose what comes next.",
             "shoe": "fresh-start",
-            "model": "CB-01",
+            "model": "",
             "colourway": "Cream / Sand",
             "sizes": "UK 6–10",
-            "run": "Limited, numbered"
+            "run": ""
           }
         }
       },
@@ -162,7 +148,7 @@
       "settings": {
         "heading_solid": "The drop",
         "heading_outline": "",
-        "note": "02 models · Limited, numbered run",
+        "note": "Two chapters. One story.",
         "hide_current": false,
         "grid_bg": false,
         "button_label": "Shop",
@@ -179,7 +165,7 @@
           "type": "column",
           "settings": {
             "title": "A story in every pair",
-            "text": "Each model carries one chapter of COMEBACK, and every pair is numbered and registered to its owner.",
+            "text": "Each model carries one chapter of COMEBACK.",
             "invert": false
           }
         },
@@ -187,7 +173,7 @@
           "type": "column",
           "settings": {
             "title": "Original designs",
-            "text": "Every EvlveX model is our own design, from the monogram on its side to the colour of its sole.",
+            "text": "Our own design, from the monogram to the sole.",
             "invert": true
           }
         },
@@ -195,7 +181,7 @@
           "type": "column",
           "settings": {
             "title": "Limited edition",
-            "text": "Each model is made in a limited, numbered run. When a run sells out, it is gone.",
+            "text": "A limited, numbered run. When it sells out, it's gone.",
             "invert": false
           }
         },
@@ -203,7 +189,7 @@
           "type": "column",
           "settings": {
             "title": "Made in India",
-            "text": "Designed and made in India, with every pair inspected before it is packed.",
+            "text": "Designed and made here. Every pair inspected.",
             "invert": false
           }
         }
@@ -226,8 +212,8 @@
         "eyebrow": "The COMEBACK code",
         "line_solid": "Knocked down.",
         "line_outline": "Never out.",
-        "text_left": "<p>Every comeback starts the same way: on the ground.</p><p>A missed chance. A closed door. A season that took more than it gave.</p><p>Nobody claps for the early mornings. Nobody sees the second attempt, or the tenth.</p><p><strong>That is the silent grind. It is where the real work happens.</strong></p>",
-        "text_right": "<p>Then one day you stop looking back. You lace up. You take the first step.</p><p><strong>That is a fresh start. It is where the story turns.</strong></p><p>EvlveX is made for the road between the two: for everyone who fell behind and refused to stay there.</p>",
+        "text_left": "<p>Every comeback starts the same way: on the ground.</p><p><strong>That is the silent grind. It is where the real work happens.</strong></p>",
+        "text_right": "<p>Then one day you stop looking back. You take the first step.</p><p><strong>That is a fresh start. It is where the story turns.</strong></p>",
         "closing": "Never give up on your comeback.",
         "button_label": "Read the chapters",
         "button_link": "shopify://pages/the-stories"
@@ -240,21 +226,21 @@
           "type": "step",
           "settings": {
             "title": "Made and numbered",
-            "text": "Each pair carries a numbered QR tag under the tongue, with a matching label on the box."
+            "text": "A QR tag under the tongue, matched to its box."
           }
         },
         "inspected": {
           "type": "step",
           "settings": {
             "title": "Inspected and recorded",
-            "text": "Before it is packed, every pair is inspected and its number is recorded against its certificate."
+            "text": "Checked and logged before it ships."
           }
         },
         "registered": {
           "type": "step",
           "settings": {
             "title": "Registered to you",
-            "text": "Scan the tag, or enter the serial on the Authenticity page. Your pair's certificate opens with your name and its story."
+            "text": "Scan it. Your certificate opens with your name."
           }
         }
       },
@@ -267,7 +253,7 @@
         "chip": "Authenticity",
         "heading_solid": "Registered",
         "heading_outline": "to you",
-        "lead": "Every pair is numbered and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair.",
+        "lead": "Proof that your pair is genuine, and that it is yours.",
         "button_label": "How it works",
         "button_link": "shopify://pages/authenticity",
         "show_tag": true,
@@ -299,7 +285,7 @@
         "caption": "The Chapters",
         "heading": "The story behind each pair",
         "heading_size": "h1",
-        "text": "<p>The Silent Grind and A Fresh Start. Each model carries one chapter of COMEBACK.</p>",
+        "text": "",
         "show_all": false,
         "limit": 3,
         "columns_desktop": 3,

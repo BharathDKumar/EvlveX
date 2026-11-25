@@ -211,22 +211,24 @@ The shoes are factory-made (owner, 20 Nov 2026), so the **artisan** and **finish
 
 ## 8. Site copy (editable in the theme editor)
 
-**Announcement bar:** "COMEBACK · Limited edition · Numbered pairs" · "Original designs · Made in India" · "Free shipping across India · 7-day size exchange"
+**Announcement bar:** one message, "Free shipping across India · 7-day size exchange" (since v1.13; the brand facts live on the pages).
 
-**Home: Street Drop hero** (`sections/evlvex-drop-hero.liquid`, v1.12), three slides: *COME/BACK* (monogram card, sticker "Limited numbered run", "The first collection · 2 chapters · 1 story", "Falling behind is not the end. Sometimes, it is where the comeback begins", button "Read the story" → the stories page) → *GRI/ND* (The Silent Grind photo, sticker "Chapter 01", "Model CB-01 · Black / White", "For the battles no one sees", "Shop The Silent Grind") → *FRE/SH* (A Fresh Start photo, sticker "Chapter 02", "Model CB-01 · Cream / Sand", "For the first step into what comes next", "Shop A Fresh Start"). Top left on every slide: "Collection · COMEBACK · 2 chapters". The COMEBACK film section is no longer on the home page.
+**One idea, one place (v1.13):** on any page each fact is said once, where it does most work: limited and numbered run → the hero sticker and *The standard* (home), the limited box (product); original designs and made in India → *The standard*; free shipping → the announcement bar and the shipping tab; the certificate → the authenticity section (home) and the certificate tab (product). Brand texts from the owner stay word for word; supporting lines are short.
+
+**Home: Street Drop hero** (`sections/evlvex-drop-hero.liquid`, v1.12), three slides: *COME/BACK* (monogram card, sticker "Limited numbered run", "The first collection · 2 chapters · 1 story", "Falling behind is not the end. Sometimes, it is where the comeback begins", button "Read the story" → the stories page) → *GRI/ND* (The Silent Grind photo, sticker "Chapter 01", "Model CB-01 · Black / White", "For the battles no one sees", "Shop The Silent Grind") → *FRE/SH* (A Fresh Start photo, sticker "Chapter 02", "Model CB-01 · Cream / Sand", "For the first step into what comes next", "Shop A Fresh Start"). Top left on every slide: "Collection · COMEBACK · 2 chapters". The COMEBACK film section is no longer on the home page. Since v1.13: top left on every slide "Collection · COMEBACK"; slide 1 top right "Chapters · 02 · One story", bottom label "The story"; slides 2–3 top right "Colourway · Black / White (Cream / Sand) · UK 6–10".
 
 **Brand statement** (home film scene 1 since v1.9; also usable elsewhere)
 > **Falling behind is not the end.** Sometimes, it is where the comeback begins. EvlveX makes premium sneakers that tell one story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next. Every design is our own, made in India in a limited, numbered run, and every pair is inspected before it leaves us.
 
-**Home: ticker tape:** COMEBACK ✦ Limited edition ✦ Numbered pairs ✦ Original designs ✦ Made in India (home and product pages).
+**Ticker tape** (home and product): COMEBACK ✦ Every pair has a story ✦ Make your comeback (a mood line, not facts, since v1.13).
 
-**Home: "The drop"** spec cards: model CB-01, colourway (Black / White, Cream / Sand), sizes UK 6–10, run "Limited, numbered", live price. Note: "02 models · Limited, numbered run".
+**Home: "The drop"** spec cards: colourway and sizes (UK 6–10) with the live price; note "Two chapters. One story." (Model and Run rows removed in v1.13: both models are CB-01 and the run is stated in *The standard*).
 
-**Home: "The standard"** ("What every pair carries"): *A story in every pair* · *Original designs* · *Limited edition* · *Made in India* (same texts as before).
+**Home: "The standard"** ("What every pair carries"): *A story in every pair* (Each model carries one chapter of COMEBACK.) · *Original designs* (Our own design, from the monogram to the sole.) · *Limited edition* (A limited, numbered run. When it sells out, it's gone.) · *Made in India* (Designed and made here. Every pair inspected.)
 
-**Home: authenticity:** "Registered to you", the certificate wording from the product tab, three steps (Made and numbered · Inspected and recorded · Registered to you), a hang tag labelled **Example** (The Silent Grind, Pair No. 0042, serial EVX-7F3K9QMD, "Your name"); it must always carry the Example label.
+**Home: authenticity:** "Registered to you", "Proof that your pair is genuine, and that it is yours.", three steps (Made and numbered: A QR tag under the tongue, matched to its box. · Inspected and recorded: Checked and logged before it ships. · Registered to you: Scan it. Your certificate opens with your name.), a hang tag labelled **Example** (The Silent Grind, Pair No. 0042, serial EVX-7F3K9QMD, "Your name"); it must always carry the Example label.
 
-**Home manifesto:** "The COMEBACK code" (see §6, COMEBACK literature), as two giant lines "Knocked down." / "Never out." and the code in two columns, closing "Never give up on your comeback."
+**Home manifesto:** "Knocked down." / "Never out.", then four lines of the COMEBACK code (§6): "Every comeback starts the same way: on the ground." · "That is the silent grind. It is where the real work happens." · "Then one day you stop looking back. You take the first step." · "That is a fresh start. It is where the story turns."; closing "Never give up on your comeback."
 
 **Footer** (`sections/evlvex-footer.liquid`)
 - Statement: **Keep going.** Every comeback starts with one more step.
@@ -240,12 +242,12 @@ The shoes are factory-made (owner, 20 Nov 2026), so the **artisan** and **finish
 
 **System pages use standard e-commerce wording**, not story language: 404 ("Page not found", "Continue shopping"), Contact ("Contact us", "Send us a message"), FAQ, Size guide, Track your order, Shipping & returns, "Journal". Recommendation headings are "The other chapter" (product page, cart) and "The collection" (search). The brand voice stays in the story content: home film and manifesto, About, Stories, certificates.
 
-**About page:** "About EvlveX" (the name and belief, §6) · "One story, two chapters" · "Four steps of a comeback" · *The Silent Grind* · *A Fresh Start* · "Shoes for the long way back"
+**About page** (v1.13): opener *About EvlveX* (name and belief, §6) · "One story, two chapters" with the COMEBACK main concept (§6) · "Shoes for the long way back". The four steps and the two chapter blocks were removed: the chapters live on the Stories and product pages.
 
 **Stories index:** "COMEBACK" opener · Chapter 01 *The Silent Grind* · Chapter 02 *A Fresh Start* · "Read each chapter" (story entries)
 
 **Product tabs:** Design & make ("An original EvlveX design, model CB-01. Smooth upper with textured overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole… Designed and made in India. Every pair is inspected before it is packed."), Size & fit ("Unisex, UK/India sizing. Our shoes run true to standard Indian/UK sizing…", links to the size guide), Care, Shipping & returns, Your pair's certificate.
 
-**Product page (Street Drop, v1.12):** assurance chips "Free shipping across India" · "7-day returns & size exchange" · "Numbered, certificate in your name"; *The story of this pair* uses each model's official chapter text (§6); *The other chapter* shows the other model's spec card.
+**Product page:** chip "COMEBACK"; limited box "Limited edition" / "A numbered run. When it sells out, it's gone."; assurance chips "7-day returns & size exchange" · "Ships in 1–2 working days" · "Certificate in your name" (free shipping is in the announcement bar); *The story of this pair* = the model's official chapter text, two sentences (§6); *The other chapter* shows the other model's card.
 
 **Certificate thank-you copy** is in [qr-certificates.md §3](qr-certificates.md).

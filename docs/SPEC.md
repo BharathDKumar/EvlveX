@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | v1.12 — Street Drop (supersedes v1.11) |
+| **Status** | v1.13 — Simpler copy (supersedes v1.12) |
 | **Date** | 25 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
@@ -100,7 +100,8 @@ The website must:
 | v1.9 | 21 Nov 2026 | Home layout: COMEBACK film cut to three scenes (COMEBACK with the monogram only, The Silent Grind, A Fresh Start) of 10 s each, more story text and smaller images, a click anywhere on a scene opens the stories page or the product, timeline and buttons hidden; brand statement and "The Mark" removed; two featured products centred without gaps; logo and menu on one header row; the header stays on screen while scrolling and gets shorter |
 | v1.10 | 25 Nov 2026 | About & Story literature: the brand's new texts word for word: *About EvlveX* (the name comes from Evolution) and the Story page (COMEBACK, Chapter 01 The Silent Grind, Chapter 02 A Fresh Start). Both pages rebuilt as editorial pages with two new sections: a cinematic opener and an editorial chapter spread (full-bleed photo, detail photo, outlined chapter number, bold closing statement); each chapter always shows its own shoe |
 | v1.11 | 25 Nov 2026 | Light film & wordmark header: the header shows the EvlveX wordmark alone (no monogram); the home COMEBACK film moves from black to a soft light studio gradient (near-white to light cool grey, editable in the theme editor) with black copy |
-| **v1.12** | **25 Nov 2026** | **Street Drop:** home and product pages redesigned in a bold sneaker-drop style chosen from four design directions: a carousel hero (giant condensed word, tilted photo card, sticker, spec labels), a tilted ticker tape, spec-sheet product cards with live prices, a boxed "standard", a black manifesto, an authenticity teaser with an example hang tag, pill-shaped header menu; on the product page a condensed title, boxed sizes, assurance chips, the story of the pair and the other chapter. Condensed type is Archivo variable, self-hosted. (The earlier editorial-film branch was not merged.) |
+| v1.12 | 25 Nov 2026 | Street Drop: home and product pages redesigned in a bold sneaker-drop style chosen from four design directions: a carousel hero (giant condensed word, tilted photo card, sticker, spec labels), a tilted ticker tape, spec-sheet product cards with live prices, a boxed "standard", a black manifesto, an authenticity teaser with an example hang tag, pill-shaped header menu; on the product page a condensed title, boxed sizes, assurance chips, the story of the pair and the other chapter. Condensed type is Archivo variable, self-hosted. (The earlier editorial-film branch was not merged.) |
+| **v1.13** | **25 Nov 2026** | **Simpler copy:** every fact said once per page, in short lines: one announcement (free shipping · 7-day size exchange); the ticker tape becomes a mood line (COMEBACK ✦ Every pair has a story ✦ Make your comeback); shorter Standard, manifesto and authenticity texts; product cards show colourway and sizes only; product assurance chips no longer repeat free shipping; About keeps only the name, the belief, the main concept and the closing essay |
 
 Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
 

@@ -7,7 +7,7 @@
           "type": "evlvex_story_line",
           "settings": {
             "content": "chapter",
-            "fallback_text": "COMEBACK series",
+            "fallback_text": "COMEBACK",
             "link_label": ""
           }
         },
@@ -22,8 +22,8 @@
         "limited": {
           "type": "evlvex_limited",
           "settings": {
-            "heading": "Limited edition · COMEBACK series",
-            "text": "Made in a limited, numbered run. When this run sells out, it's gone."
+            "heading": "Limited edition",
+            "text": "A numbered run. When it sells out, it's gone."
           }
         },
         "excerpt": {
@@ -104,9 +104,9 @@
         "assurance": {
           "type": "evlvex_assurance",
           "settings": {
-            "line_1": "Free shipping across India",
-            "line_2": "7-day returns & size exchange",
-            "line_3": "Numbered, certificate in your name"
+            "line_1": "7-day returns & size exchange",
+            "line_2": "Ships in 1–2 working days",
+            "line_3": "Certificate in your name"
           }
         }
       },
@@ -152,37 +152,23 @@
             "text": "COMEBACK"
           }
         },
-        "limited": {
+        "story": {
           "type": "item",
           "settings": {
-            "text": "Limited edition"
+            "text": "Every pair has a story"
           }
         },
-        "numbered": {
+        "make": {
           "type": "item",
           "settings": {
-            "text": "Numbered pairs"
-          }
-        },
-        "original": {
-          "type": "item",
-          "settings": {
-            "text": "Original designs"
-          }
-        },
-        "india": {
-          "type": "item",
-          "settings": {
-            "text": "Made in India"
+            "text": "Make your comeback"
           }
         }
       },
       "block_order": [
         "comeback",
-        "limited",
-        "numbered",
-        "original",
-        "india"
+        "story",
+        "make"
       ],
       "settings": {
         "tilt": true,
@@ -200,7 +186,7 @@
             "title_solid": "The Silent",
             "title_outline": "Grind",
             "lead": "The chapters lived in the dark: the struggles, setbacks, and battles that aren't always seen.",
-            "text": "It is about holding on through the weight of those moments and finding the strength to rise from them. Black, with the monogram in white. For the battles no one sees.",
+            "text": "It is about holding on through the weight of those moments and finding the strength to rise from them.",
             "shoe": "silent-grind",
             "button_label": "Read the full story",
             "button_link": "/pages/the-stories#the-silent-grind"
@@ -214,7 +200,7 @@
             "title_solid": "A Fresh",
             "title_outline": "Start",
             "lead": "The moment after the struggle, when you stop looking back and choose what comes next.",
-            "text": "It is about carrying the lessons forward, leaving the weight behind, and taking the first step into a new chapter. Cream and sand, with the monogram embossed in sand.",
+            "text": "It is about carrying the lessons forward, leaving the weight behind, and taking the first step into a new chapter.",
             "shoe": "fresh-start",
             "button_label": "Read the full story",
             "button_link": "/pages/the-stories#a-fresh-start"
@@ -239,10 +225,10 @@
             "chip": "Chapter 01",
             "lead": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.",
             "shoe": "silent-grind",
-            "model": "CB-01",
+            "model": "",
             "colourway": "Black / White",
             "sizes": "UK 6–10",
-            "run": "Limited, numbered"
+            "run": ""
           }
         },
         "fresh-start": {
@@ -254,10 +240,10 @@
             "chip": "Chapter 02",
             "lead": "The moment after the struggle, when you stop looking back and choose what comes next.",
             "shoe": "fresh-start",
-            "model": "CB-01",
+            "model": "",
             "colourway": "Cream / Sand",
             "sizes": "UK 6–10",
-            "run": "Limited, numbered"
+            "run": ""
           }
         }
       },
