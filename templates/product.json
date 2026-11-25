@@ -96,14 +96,6 @@
             "content": "<p>Every pair is numbered and carries a QR tag under the tongue. When your order ships, its certificate is registered in your name: scan the tag to read the story of your pair. <a href=\"/pages/authenticity\" title=\"Authenticity\">How it works</a>.</p>",
             "page": ""
           }
-        },
-        "assurance": {
-          "type": "evlvex_assurance",
-          "settings": {
-            "line_1": "7-day returns & size exchange",
-            "line_2": "Ships in 1–2 working days",
-            "line_3": "Certificate in your name"
-          }
         }
       },
       "block_order": [
@@ -115,7 +107,6 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "assurance",
         "tab_materials",
         "tab_fit",
         "tab_care",
