@@ -131,6 +131,8 @@
                   {%- endif -%}
                 {%- when 'evlvex_limited' -%}
                   {%- render 'evlvex-limited', product: product, block: block -%}
+                {%- when 'evlvex_assurance' -%}
+                  {%- render 'evlvex-assurance', block: block -%}
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
@@ -843,6 +845,35 @@
           "id": "text",
           "label": "Text",
           "default": "Made in a limited, numbered run. When this run sells out, it's gone."
+        }
+      ]
+    },
+    {
+      "type": "evlvex_assurance",
+      "name": "EvlveX assurance",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Up to three short lines shown as chips. Only state what is true for every order."
+        },
+        {
+          "type": "text",
+          "id": "line_1",
+          "label": "Line 1",
+          "default": "Free shipping across India"
+        },
+        {
+          "type": "text",
+          "id": "line_2",
+          "label": "Line 2",
+          "default": "7-day returns & size exchange"
+        },
+        {
+          "type": "text",
+          "id": "line_3",
+          "label": "Line 3",
+          "default": "Numbered, certificate in your name"
         }
       ]
     },

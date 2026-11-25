@@ -1,0 +1,167 @@
+{%- comment -%}
+  EvlveX — Street Drop "The story of this pair" (product page): black grid band with a giant outlined word, a tilted
+  photo and the chapter text. One block per model; on a product page the block chosen for that product is shown
+  (otherwise the first). Styles: assets/evlvex-street.css. Spec: docs/spec/theme.md §4.
+{%- endcomment -%}
+
+{%- liquid
+  assign story = section.blocks.first
+  if product != blank
+    for block in section.blocks
+      if block.settings.product != blank and block.settings.product.id == product.id
+        assign story = block
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if story != blank -%}
+  {%- liquid
+    assign s = story.settings
+    case s.shoe
+      when 'fresh-start'
+        assign photo = 'evx-fs-wide.jpg|1366|1024'
+      else
+        assign photo = 'evx-sg-full.jpg|960|720'
+    endcase
+    assign photo_parts = photo | split: '|'
+    assign word = s.title_solid | append: ' ' | append: s.title_outline | strip
+  -%}
+  <div class="sd-sec sd-story sd-dark sd-grid-bg" id="EvlveXProductStory" {{ story.shopify_attributes }}>
+    <p class="sd-story__word sd-huge" aria-hidden="true">{{ word | escape }}</p>
+    <div class="sd-story__grid">
+      <div class="sd-story__img">
+        {%- if s.image != blank -%}
+          {{
+            s.image
+            | image_url: width: 1400
+            | image_tag: widths: '450, 700, 1000, 1400', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy', alt: word
+          }}
+        {%- else -%}
+          <img
+            src="{{ photo_parts[0] | asset_url }}"
+            alt="{{ word | escape }}"
+            width="{{ photo_parts[1] }}"
+            height="{{ photo_parts[2] }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+      <div class="sd-story__copy">
+        {%- if s.chip != blank -%}
+          <span class="sd-chip">{{ s.chip | escape }}</span>
+        {%- endif -%}
+        <h2 class="sd-story__title sd-huge">
+          {{- s.title_solid | escape -}}
+          {%- if s.title_outline != blank -%}
+            <br><span class="sd-o">{{ s.title_outline | escape }}</span>
+          {%- endif -%}
+        </h2>
+        {%- if s.lead != blank -%}
+          <p class="sd-story__lead">{{ s.lead | escape }}</p>
+        {%- endif -%}
+        {%- if s.text != blank -%}
+          <p class="sd-story__text">{{ s.text | escape }}</p>
+        {%- endif -%}
+        {%- if s.button_label != blank -%}
+          <a
+            class="sd-pill sd-pill--light"
+            {% if s.button_link != blank %}href="{{ s.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+          >
+            {{- s.button_label | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX story of this pair",
+  "tag": "section",
+  "class": "section sd-pair-story-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add one block per model and choose its product. A product page shows the block for that product."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Model story",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "chip",
+          "label": "Chip",
+          "default": "The story · Chapter 01"
+        },
+        {
+          "type": "text",
+          "id": "title_solid",
+          "label": "Title: solid part",
+          "default": "The Silent"
+        },
+        {
+          "type": "text",
+          "id": "title_outline",
+          "label": "Title: outlined part",
+          "default": "Grind"
+        },
+        {
+          "type": "textarea",
+          "id": "lead",
+          "label": "Lead"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "shoe",
+          "label": "Photo",
+          "info": "Used when no image is uploaded.",
+          "options": [
+            { "value": "silent-grind", "label": "The Silent Grind" },
+            { "value": "fresh-start", "label": "A Fresh Start" }
+          ],
+          "default": "silent-grind"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Read the full story"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX story of this pair",
+      "blocks": [{ "type": "story" }]
+    }
+  ]
+}
+{% endschema %}

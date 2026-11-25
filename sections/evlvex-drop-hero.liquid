@@ -1,0 +1,328 @@
+{%- comment -%}
+  EvlveX — Street Drop hero: a carousel of slides. Each slide has a giant condensed word (half solid, half outlined),
+  a tilted photo card with a round sticker, spec labels in the corners and a button. Slides change automatically,
+  by the dots, by swiping on phones or with the arrow keys; it pauses on hover and focus, and does not move for
+  visitors who prefer reduced motion. Behaviour: assets/evlvex-drop-hero.js · Styles: assets/evlvex-street.css.
+  Spec: docs/spec/theme.md §4.
+{%- endcomment -%}
+
+<script src="{{ 'evlvex-drop-hero.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign slide_total = section.blocks.size
+  assign of_label = 'general.slider.of' | t
+-%}
+
+{%- if slide_total > 0 -%}
+  <evlvex-drop-hero
+    class="sd-hero sd-grid-bg"
+    role="region"
+    aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
+    aria-label="{{ section.settings.label | default: 'COMEBACK' | escape }}"
+    data-autoplay="{{ section.settings.autoplay }}"
+    data-speed="{{ section.settings.speed }}"
+  >
+    <div class="sd-hero__slides">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign s = block.settings
+          assign loading = 'lazy'
+          assign priority = 'auto'
+          if forloop.first and section.index <= 2
+            assign loading = 'eager'
+            assign priority = 'high'
+          endif
+          case s.shoe
+            when 'fresh-start'
+              assign card_src = 'evx-fs-card.jpg'
+            else
+              assign card_src = 'evx-sg-card.jpg'
+          endcase
+          assign alt = s.alt | default: s.bl_value
+        -%}
+        <article
+          id="SdSlide-{{ section.id }}-{{ forloop.index }}"
+          class="sd-slide{% if forloop.first %} is-active{% endif %}"
+          role="group"
+          aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
+          aria-label="{{ forloop.index }} {{ of_label }} {{ slide_total }}"
+          style="--rot: {{ s.rotate }}deg;"
+          {% unless forloop.first %}
+            aria-hidden="true"
+          {% endunless %}
+          {{ block.shopify_attributes }}
+        >
+          <p class="sd-giant sd-huge" aria-hidden="true">
+            {{- s.word_solid | escape -}}
+            <span class="sd-o">{{ s.word_outline | escape }}</span>
+          </p>
+
+          <a
+            class="sd-card"
+            {% if s.button_link != blank %}href="{{ s.button_link }}"{% endif %}
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            <span class="sd-card__media">
+              {%- if s.image != blank -%}
+                {{
+                  s.image
+                  | image_url: width: 1200
+                  | image_tag:
+                    widths: '400, 600, 900, 1200',
+                    sizes: '(min-width: 750px) 30vw, 66vw',
+                    loading: loading,
+                    fetchpriority: priority,
+                    alt: alt
+                }}
+              {%- elsif s.shoe == 'monogram' -%}
+                <span class="sd-card__mark">{%- render 'evlvex-monogram', size: 400, title: 'EvlveX monogram' -%}</span>
+              {%- else -%}
+                <img
+                  src="{{ card_src | asset_url }}"
+                  alt="{{ alt | escape }}"
+                  width="1024"
+                  height="1280"
+                  loading="{{ loading }}"
+                  fetchpriority="{{ priority }}"
+                >
+              {%- endif -%}
+            </span>
+            {%- if s.sticker != blank -%}
+              <span class="sd-sticker">{{ s.sticker | escape | replace: '|', '<br>' }}</span>
+            {%- endif -%}
+          </a>
+
+          <div class="sd-spec sd-spec--tl">
+            {{ section.settings.tl_label | escape }}
+            <span class="sd-spec__value">{{ section.settings.tl_value | escape }}</span>
+            {{ section.settings.tl_sub | escape }}
+          </div>
+          <div class="sd-spec sd-spec--tr">
+            {{ s.tr_label | escape }}
+            <span class="sd-spec__value">{{ s.tr_value | escape }}</span>
+            {{ s.tr_sub | escape }}
+          </div>
+          <div class="sd-spec sd-spec--bl">
+            {{ s.bl_label | escape }}
+            {%- if forloop.first -%}
+              <h2 class="sd-spec__value">{{ s.bl_value | escape }}</h2>
+            {%- else -%}
+              <h3 class="sd-spec__value">{{ s.bl_value | escape }}</h3>
+            {%- endif -%}
+            {{ s.bl_sub | escape }}
+          </div>
+          {%- if s.button_label != blank -%}
+            <div class="sd-spec sd-spec--br">
+              <a
+                class="sd-pill"
+                {% if s.button_link != blank %}href="{{ s.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+                {% unless forloop.first %}
+                  tabindex="-1"
+                {% endunless %}
+              >
+                {{- s.button_label | escape -}}
+              </a>
+            </div>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if slide_total > 1 -%}
+      <div class="sd-hero__dots">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="sd-hero__dot"
+            data-sd-goto="{{ forloop.index0 }}"
+            aria-controls="SdSlide-{{ section.id }}-{{ forloop.index }}"
+            aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ of_label }} {{ slide_total }}"
+            {% if forloop.first %}
+              aria-current="true"
+            {% endif %}
+          ></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </evlvex-drop-hero>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX drop hero",
+  "tag": "section",
+  "class": "section sd-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Carousel name (screen readers)",
+      "default": "COMEBACK"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Change slides automatically",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "unit": "s",
+      "label": "Slide length",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Top left (every slide)"
+    },
+    {
+      "type": "text",
+      "id": "tl_label",
+      "label": "Label",
+      "default": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "tl_value",
+      "label": "Value",
+      "default": "COMEBACK"
+    },
+    {
+      "type": "text",
+      "id": "tl_sub",
+      "label": "Line below",
+      "default": "2 chapters"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "word_solid",
+          "label": "Big word: solid part",
+          "default": "Gri"
+        },
+        {
+          "type": "text",
+          "id": "word_outline",
+          "label": "Big word: outlined part",
+          "default": "nd"
+        },
+        {
+          "type": "select",
+          "id": "shoe",
+          "label": "Card",
+          "info": "Used when no image is uploaded.",
+          "options": [
+            { "value": "silent-grind", "label": "The Silent Grind photo" },
+            { "value": "fresh-start", "label": "A Fresh Start photo" },
+            { "value": "monogram", "label": "EvlveX monogram" }
+          ],
+          "default": "silent-grind"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "range",
+          "id": "rotate",
+          "min": -10,
+          "max": 10,
+          "step": 1,
+          "unit": "°",
+          "label": "Card tilt",
+          "default": -6
+        },
+        {
+          "type": "text",
+          "id": "sticker",
+          "label": "Sticker",
+          "info": "Use | for a new line, e.g. Chapter|01. Leave empty to hide.",
+          "default": "Chapter|01"
+        },
+        {
+          "type": "header",
+          "content": "Top right"
+        },
+        {
+          "type": "text",
+          "id": "tr_label",
+          "label": "Label",
+          "default": "Model"
+        },
+        {
+          "type": "text",
+          "id": "tr_value",
+          "label": "Value",
+          "default": "CB-01"
+        },
+        {
+          "type": "text",
+          "id": "tr_sub",
+          "label": "Line below",
+          "default": "Black / White"
+        },
+        {
+          "type": "header",
+          "content": "Bottom left"
+        },
+        {
+          "type": "text",
+          "id": "bl_label",
+          "label": "Label",
+          "default": "Chapter 01"
+        },
+        {
+          "type": "text",
+          "id": "bl_value",
+          "label": "Title",
+          "default": "The Silent Grind"
+        },
+        {
+          "type": "text",
+          "id": "bl_sub",
+          "label": "Line below",
+          "default": "For the battles no one sees"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Label",
+          "default": "Shop The Silent Grind"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX drop hero",
+      "blocks": [{ "type": "slide" }]
+    }
+  ]
+}
+{% endschema %}

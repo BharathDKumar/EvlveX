@@ -1,0 +1,98 @@
+{%- comment -%}
+  EvlveX — Street Drop manifesto: black grid band, two giant condensed lines (solid / outlined), the text in two
+  columns, and a closing line with a button. Styles: assets/evlvex-street.css.
+{%- endcomment -%}
+
+<div class="sd-sec sd-mani sd-dark sd-grid-bg">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="sd-k" style="opacity: 0.6;">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="sd-mani__lines sd-huge">
+    <span>{{ section.settings.line_solid | escape }}</span>
+    {%- if section.settings.line_outline != blank -%}
+      <span class="sd-o">{{ section.settings.line_outline | escape }}</span>
+    {%- endif -%}
+  </h2>
+  {%- if section.settings.text_left != blank or section.settings.text_right != blank -%}
+    <div class="sd-mani__body">
+      <div class="rte">{{ section.settings.text_left }}</div>
+      <div class="rte">{{ section.settings.text_right }}</div>
+    </div>
+  {%- endif -%}
+  {%- if section.settings.closing != blank or section.settings.button_label != blank -%}
+    <div class="sd-mani__end">
+      {%- if section.settings.closing != blank -%}
+        <p class="sd-huge">{{ section.settings.closing | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a
+          class="sd-pill sd-pill--light"
+          {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+        >
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "EvlveX manifesto",
+  "tag": "section",
+  "class": "section sd-manifesto-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The COMEBACK code"
+    },
+    {
+      "type": "text",
+      "id": "line_solid",
+      "label": "Line 1 (solid)",
+      "default": "Knocked down."
+    },
+    {
+      "type": "text",
+      "id": "line_outline",
+      "label": "Line 2 (outlined)",
+      "default": "Never out."
+    },
+    {
+      "type": "richtext",
+      "id": "text_left",
+      "label": "Text, left column",
+      "info": "Bold lines show in white."
+    },
+    {
+      "type": "richtext",
+      "id": "text_right",
+      "label": "Text, right column"
+    },
+    {
+      "type": "text",
+      "id": "closing",
+      "label": "Closing line",
+      "default": "Never give up on your comeback."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Read the chapters"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX manifesto"
+    }
+  ]
+}
+{% endschema %}

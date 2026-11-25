@@ -1,0 +1,85 @@
+{%- comment -%}
+  EvlveX — Street Drop ticker tape: a black band with words that scroll endlessly (✦ between them).
+  Pauses on hover; still for visitors who prefer reduced motion. Styles: assets/evlvex-street.css.
+{%- endcomment -%}
+
+{%- liquid
+  assign items = section.blocks | where: 'type', 'item'
+-%}
+
+{%- if items.size > 0 -%}
+  <div
+    class="sd-tape{% if section.settings.tilt %} sd-tape--tilt{% endif %}"
+    style="--sd-tape-speed: {{ section.settings.speed }}s;"
+  >
+    <div class="sd-tape__track">
+      {%- for copy in (1..2) -%}
+        <ul class="sd-tape__list" {% if copy == 2 %}aria-hidden="true"{% endif %}>
+          {%- for repeat in (1..3) -%}
+            {%- for block in items -%}
+              <li
+                class="sd-tape__item"
+                {% if copy == 1 and repeat == 1 %}{{ block.shopify_attributes }}{% endif %}
+                {% if repeat > 1 and copy == 1 %}aria-hidden="true"{% endif %}
+              >
+                {{- block.settings.text | escape -}}
+              </li>
+            {%- endfor -%}
+          {%- endfor -%}
+        </ul>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EvlveX ticker tape",
+  "tag": "section",
+  "class": "section sd-tape-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "tilt",
+      "label": "Tilt the tape",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "s",
+      "label": "Time for one loop",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Word",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "COMEBACK"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX ticker tape",
+      "blocks": [
+        { "type": "item", "settings": { "text": "COMEBACK" } },
+        { "type": "item", "settings": { "text": "Limited edition" } },
+        { "type": "item", "settings": { "text": "Numbered pairs" } },
+        { "type": "item", "settings": { "text": "Original designs" } },
+        { "type": "item", "settings": { "text": "Made in India" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
