@@ -70,6 +70,17 @@ evlvex-drop-hero *,
   color: inherit;
 }
 
+/* Dawn sets body text to 75 % black; Street Drop text is full black (or full white on black) */
+evlvex-drop-hero,
+.sd-sec:not(.sd-dark) {
+  color: rgb(var(--sd-ink));
+}
+
+evlvex-drop-hero :is(p, h2, h3),
+.sd-sec :is(p, li) {
+  color: inherit;
+}
+
 .sd-dark.sd-grid-bg {
   background-image:
     linear-gradient(rgba(var(--sd-paper), 0.07) 1px, transparent 1px),
@@ -293,7 +304,9 @@ evlvex-drop-hero {
   right: 0;
   top: 50%;
   margin: 0;
-  font-size: 31vw;
+  /* Fit the whole word: a condensed letter is about 0.53 em wide (0.56 leaves room), --len = letters (set in Liquid) */
+  font-size: min(31vw, calc(94vw / (var(--len, 5) * 0.56)));
+  color: rgb(var(--sd-ink));
   text-align: center;
   white-space: nowrap;
   transform: translate(6%, -58%);
@@ -463,7 +476,7 @@ evlvex-drop-hero {
   .sd-giant {
     grid-area: giant;
     margin: 3.2rem -2rem 0;
-    font-size: 30vw;
+    font-size: min(30vw, calc(96vw / (var(--len, 5) * 0.56)));
     transform: translateX(6%);
   }
 
