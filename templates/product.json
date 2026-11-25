@@ -186,19 +186,19 @@
     "tape": {
       "type": "evlvex-tape",
       "blocks": {
-        "comeback": {
+        "tape-comeback": {
           "type": "item",
           "settings": {
             "text": "COMEBACK"
           }
         },
-        "story": {
+        "tape-story": {
           "type": "item",
           "settings": {
             "text": "Every pair has a story"
           }
         },
-        "make": {
+        "tape-make": {
           "type": "item",
           "settings": {
             "text": "Make your comeback"
@@ -206,9 +206,9 @@
         }
       },
       "block_order": [
-        "comeback",
-        "story",
-        "make"
+        "tape-comeback",
+        "tape-story",
+        "tape-make"
       ],
       "settings": {
         "tilt": true,
