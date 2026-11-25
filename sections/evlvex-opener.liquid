@@ -1,0 +1,305 @@
+{%- comment -%}
+  EvlveX — "Opener": the cinematic first panel of a long-form brand page (About, Story).
+  Eyebrow, a very large bold heading, an optional dictionary-style definition, lead text, a bold statement,
+  an optional chapter index that jumps to sections further down, and the EvlveX monogram as a mark and a ghost watermark.
+  Black & white only (section color scheme). Styles: assets/evlvex-editorial.css. Spec: docs/spec/theme.md §4.
+{%- endcomment -%}
+
+{{ 'evlvex-editorial.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign reveal = ''
+  if settings.animations_reveal_on_scroll
+    assign reveal = ' scroll-trigger animate--slide-in'
+  endif
+  assign index_links = section.blocks | where: 'type', 'chapter_link'
+-%}
+
+<div class="evx-opener evx-opener--{{ section.settings.height }} evx-opener--{{ section.settings.alignment }} color-{{ section.settings.color_scheme }} gradient">
+  {%- if section.settings.show_watermark -%}
+    {%- render 'evlvex-monogram', size: 920, class: 'evx-opener__watermark' -%}
+  {%- endif -%}
+
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="evx-opener__inner">
+      {%- if section.settings.show_monogram -%}
+        <div class="evx-opener__mark-wrap{{ reveal }}" style="--animation-order: 0;">
+          {%- render 'evlvex-monogram', size: 52, class: 'evx-opener__mark' -%}
+        </div>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'eyebrow' -%}
+            <p class="evx-eyebrow evx-opener__eyebrow{{ reveal }}" style="--animation-order: {{ forloop.index }};" {{ block.shopify_attributes }}>
+              {{- block.settings.text | escape -}}
+            </p>
+          {%- when 'heading' -%}
+            {%- liquid
+              if section.index == 1
+                assign heading_tag = 'h1'
+              else
+                assign heading_tag = 'h2'
+              endif
+            -%}
+            <{{ heading_tag }}
+              class="evx-opener__heading{% if block.settings.size == 'large' %} evx-opener__heading--large{% endif %}{{ reveal }}"
+              style="--animation-order: {{ forloop.index }};"
+              {{ block.shopify_attributes }}
+            >
+              {{- block.settings.heading | escape -}}
+            </{{ heading_tag }}>
+          {%- when 'definition' -%}
+            <dl class="evx-def{{ reveal }}" style="--animation-order: {{ forloop.index }};" {{ block.shopify_attributes }}>
+              <dt class="evx-def__term">{{ block.settings.term | escape }}</dt>
+              <dd class="evx-def__meaning">{{ block.settings.meaning }}</dd>
+            </dl>
+          {%- when 'text' -%}
+            <div
+              class="evx-opener__text{% if block.settings.size == 'body' %} evx-opener__text--body{% endif %} rte{{ reveal }}"
+              style="--animation-order: {{ forloop.index }};"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.text }}
+            </div>
+          {%- when 'statement' -%}
+            <p
+              class="evx-statement{% if section.settings.alignment == 'center' %} evx-statement--center{% endif %}{{ reveal }}"
+              style="--animation-order: {{ forloop.index }};"
+              {{ block.shopify_attributes }}
+            >
+              {{- block.settings.text | escape -}}
+            </p>
+          {%- when 'button' -%}
+            {%- if block.settings.label != blank -%}
+              <div class="{{ reveal | strip }}" style="--animation-order: {{ forloop.index }};" {{ block.shopify_attributes }}>
+                <a
+                  {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+                  class="button{% if block.settings.secondary %} button--secondary{% else %} button--primary{% endif %}"
+                >
+                  {{- block.settings.label | escape -}}
+                </a>
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+
+      {%- if index_links.size > 0 -%}
+        <nav class="evx-opener__nav{{ reveal }}" style="--animation-order: {{ section.blocks.size | plus: 1 }};" aria-label="{{ section.settings.index_label | escape }}">
+          <ol class="evx-opener__index">
+            {%- for block in index_links -%}
+              <li {{ block.shopify_attributes }}>
+                <a class="evx-opener__index-link" href="#{{ block.settings.anchor | handleize }}">
+                  {%- if block.settings.number != blank -%}
+                    <span class="evx-opener__index-num">{{ block.settings.number | escape }}</span>
+                  {%- endif -%}
+                  <span>{{ block.settings.label | escape }}</span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ol>
+        </nav>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_scroll_cue and section.settings.height == 'full' -%}
+    <span class="evx-opener__cue" aria-hidden="true"></span>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "EvlveX opener",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "The first panel of a brand page: a large heading, lead text and a bold statement. Chapter links jump to EvlveX chapter sections lower on the page by their anchor."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "full", "label": "Full screen" },
+        { "value": "large", "label": "Large" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "auto", "label": "Fit content" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_monogram",
+      "label": "Show the monogram above the copy",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_watermark",
+      "label": "Show a large faint monogram behind the copy",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_cue",
+      "label": "Show scroll cue",
+      "info": "Only with Full screen height.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "index_label",
+      "label": "Chapter links: accessible label",
+      "default": "Chapters"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "EvlveX" }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "COMEBACK" },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            { "value": "display", "label": "Display (largest)" },
+            { "value": "large", "label": "Large" }
+          ],
+          "default": "display"
+        }
+      ]
+    },
+    {
+      "type": "definition",
+      "name": "Definition",
+      "settings": [
+        { "type": "text", "id": "term", "label": "Label", "default": "The name" },
+        {
+          "type": "inline_richtext",
+          "id": "meaning",
+          "label": "Meaning",
+          "default": "EvlveX is derived from the word <strong>Evolution</strong>."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tell the story here.</p>" },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            { "value": "lead", "label": "Lead (larger)" },
+            { "value": "body", "label": "Body" }
+          ],
+          "default": "lead"
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "name": "Statement",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Never give up. Make your comeback." }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shop the collection" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "checkbox", "id": "secondary", "label": "Outline style", "default": false }
+      ]
+    },
+    {
+      "type": "chapter_link",
+      "name": "Chapter link",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "label", "label": "Label", "default": "The Silent Grind" },
+        { "type": "text", "id": "anchor", "label": "Jump to anchor", "info": "The anchor of an EvlveX chapter section on this page, e.g. the-silent-grind.", "default": "the-silent-grind" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX opener",
+      "blocks": [
+        { "type": "eyebrow" },
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "statement" }
+      ]
+    }
+  ]
+}
+{% endschema %}

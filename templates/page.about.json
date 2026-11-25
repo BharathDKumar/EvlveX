@@ -1,38 +1,52 @@
 {
   "sections": {
-    "banner": {
-      "type": "image-banner",
+    "opener": {
+      "type": "evlvex-opener",
       "blocks": {
-        "caption": {
-          "type": "text",
+        "eyebrow": {
+          "type": "eyebrow",
           "settings": {
-            "text": "EvlveX",
-            "text_style": "caption-with-letter-spacing"
+            "text": "Our story"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Built for the comeback",
-            "heading_size": "h0"
+            "heading": "About EvlveX",
+            "size": "large"
+          }
+        },
+        "definition": {
+          "type": "definition",
+          "settings": {
+            "term": "The name",
+            "meaning": "EvlveX is derived from the word <strong>Evolution</strong> — the idea of constantly growing, changing and becoming a better version of yourself."
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We believe confidence comes from embracing who you are, owning your journey and having the courage to evolve in your own way. It’s not about being perfect or becoming someone else; it’s about discovering your potential and being comfortable in your own identity.</p><p>At EvlveX, we create footwear for individuals who believe in moving forward, expressing themselves and walking their own path with confidence.</p>",
+            "size": "lead"
           }
         }
       },
       "block_order": [
-        "caption",
-        "heading"
+        "eyebrow",
+        "heading",
+        "definition",
+        "text"
       ],
       "settings": {
-        "image_overlay_opacity": 30,
-        "image_height": "medium",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "height": "large",
+        "alignment": "center",
+        "show_monogram": true,
+        "show_watermark": true,
+        "show_scroll_cue": false,
+        "index_label": "Chapters",
+        "padding_top": 120,
+        "padding_bottom": 120
       }
     },
     "story": {
@@ -63,107 +77,6 @@
         "full_width": false,
         "padding_top": 96,
         "padding_bottom": 80
-      }
-    },
-    "atelier": {
-      "type": "image-with-text",
-      "blocks": {
-        "caption": {
-          "type": "caption",
-          "settings": {
-            "caption": "Chapter 01",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "small"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "The Silent Grind",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen. Holding on through the weight of those moments, and finding the strength to rise from them. In black, with the monogram in white.</p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "caption",
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-2",
-        "color_scheme": "scheme-2",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "workshop-card": {
-      "type": "image-with-text",
-      "blocks": {
-        "caption": {
-          "type": "caption",
-          "settings": {
-            "caption": "Chapter 02",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "small"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "A Fresh Start",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>The moment after the struggle, when you stop looking back and choose what comes next. Carry the lessons forward, leave the weight behind, and take the first step into a new chapter. In cream and sand, with the monogram embossed.</p>",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Discover the collection",
-            "button_link": "shopify://collections/all",
-            "button_style_secondary": true
-          }
-        }
-      },
-      "block_order": [
-        "caption",
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-1",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 0
       }
     },
     "steps": {
@@ -229,6 +142,54 @@
         "padding_bottom": 80
       }
     },
+    "chapter-1": {
+      "type": "evlvex-chapter",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "layout": "image-first",
+        "anchor": "the-silent-grind",
+        "top_rule": false,
+        "shoe": "silent-grind",
+        "alt": "The Silent Grind: black low-top sneaker with the white EvlveX monogram",
+        "show_inset": true,
+        "mobile_ratio": "4 / 5",
+        "number": "01",
+        "eyebrow": "Chapter 01",
+        "heading": "The Silent Grind",
+        "lead": "<p>The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.</p>",
+        "text": "<p>Holding on through the weight of those moments, and finding the strength to rise from them. In black, with the monogram in white.</p>",
+        "statement": "",
+        "button_label": "Shop The Silent Grind",
+        "button_link": "shopify://products/the-silent-grind",
+        "link_label": "Read the story",
+        "link": "/pages/the-stories#the-silent-grind",
+        "margin_top": 0
+      }
+    },
+    "chapter-2": {
+      "type": "evlvex-chapter",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "layout": "text-first",
+        "anchor": "a-fresh-start",
+        "top_rule": false,
+        "shoe": "fresh-start",
+        "alt": "A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram",
+        "show_inset": true,
+        "mobile_ratio": "4 / 5",
+        "number": "02",
+        "eyebrow": "Chapter 02",
+        "heading": "A Fresh Start",
+        "lead": "<p>The moment after the struggle, when you stop looking back and choose what comes next.</p>",
+        "text": "<p>Carry the lessons forward, leave the weight behind, and take the first step into a new chapter. In cream and sand, with the monogram embossed.</p>",
+        "statement": "",
+        "button_label": "Shop A Fresh Start",
+        "button_link": "shopify://products/a-fresh-start",
+        "link_label": "Read the story",
+        "link": "/pages/the-stories#a-fresh-start",
+        "margin_top": 0
+      }
+    },
     "never-give-up": {
       "type": "rich-text",
       "blocks": {
@@ -282,11 +243,11 @@
     }
   },
   "order": [
-    "banner",
+    "opener",
     "story",
     "steps",
-    "atelier",
-    "workshop-card",
+    "chapter-1",
+    "chapter-2",
     "never-give-up"
   ]
 }

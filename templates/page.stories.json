@@ -1,50 +1,123 @@
 {
   "sections": {
-    "intro": {
-      "type": "rich-text",
+    "opener": {
+      "type": "evlvex-opener",
       "blocks": {
-        "caption": {
-          "type": "caption",
+        "eyebrow": {
+          "type": "eyebrow",
           "settings": {
-            "caption": "COMEBACK",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "small"
+            "text": "The story"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "One story, two chapters",
-            "heading_size": "h0"
+            "heading": "COMEBACK",
+            "size": "display"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new. Each EvlveX model carries one chapter: The Silent Grind and A Fresh Start.</p><p>Two models, two chapters, one story. Wear the one that matches where you are right now, and keep going.</p>"
+            "text": "<p>A comeback is not about returning to who you were. It is about carrying what you’ve learned, stepping out of the shadows, and becoming someone stronger, wiser, and new.</p><p>Because sometimes, the hardest chapter is not the end of the story: it is where the comeback begins.</p>",
+            "size": "lead"
+          }
+        },
+        "statement": {
+          "type": "statement",
+          "settings": {
+            "text": "Never give up. Make your comeback."
+          }
+        },
+        "chapter-1": {
+          "type": "chapter_link",
+          "settings": {
+            "number": "01",
+            "label": "The Silent Grind",
+            "anchor": "the-silent-grind"
+          }
+        },
+        "chapter-2": {
+          "type": "chapter_link",
+          "settings": {
+            "number": "02",
+            "label": "A Fresh Start",
+            "anchor": "a-fresh-start"
           }
         }
       },
       "block_order": [
-        "caption",
+        "eyebrow",
         "heading",
-        "text"
+        "text",
+        "statement",
+        "chapter-1",
+        "chapter-2"
       ],
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": false,
+        "color_scheme": "scheme-3",
+        "height": "full",
+        "alignment": "center",
+        "show_monogram": true,
+        "show_watermark": true,
+        "show_scroll_cue": true,
+        "index_label": "Chapters",
         "padding_top": 96,
-        "padding_bottom": 24
+        "padding_bottom": 120
+      }
+    },
+    "chapter-1": {
+      "type": "evlvex-chapter",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "layout": "image-first",
+        "anchor": "the-silent-grind",
+        "top_rule": true,
+        "shoe": "silent-grind",
+        "alt": "The Silent Grind: black low-top sneaker with the white EvlveX monogram",
+        "show_inset": true,
+        "mobile_ratio": "4 / 5",
+        "number": "01",
+        "eyebrow": "Chapter 01",
+        "heading": "The Silent Grind",
+        "lead": "<p>For the chapters lived in the dark: the silent struggles, the setbacks, and the moments that test how much you have left to give.</p>",
+        "text": "<p>You stayed. You endured. You kept going. And when you’re ready, you step out of the shadows not as who you were, but as someone stronger. Also that is where CB01 — Comeback 01 begins — in the moment you realise that the darkness may have tested you, but it never defined you.</p>",
+        "statement": "Face the dark. Stand your ground. Make your comeback.",
+        "button_label": "Shop The Silent Grind",
+        "button_link": "shopify://products/the-silent-grind",
+        "link_label": "",
+        "margin_top": 0
+      }
+    },
+    "chapter-2": {
+      "type": "evlvex-chapter",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "layout": "text-first",
+        "anchor": "a-fresh-start",
+        "top_rule": false,
+        "shoe": "fresh-start",
+        "alt": "A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram",
+        "show_inset": true,
+        "mobile_ratio": "4 / 5",
+        "number": "02",
+        "eyebrow": "Chapter 02",
+        "heading": "A Fresh Start",
+        "lead": "<p>Sometimes, the bravest thing you can do is choose what comes next.</p>",
+        "text": "<p>After the loss, uncertainty, and chapters you never imagined closing, there comes a moment when you stop looking back and make space for something new.</p>",
+        "statement": "Let go. Step forward. Make your comeback.",
+        "button_label": "Shop A Fresh Start",
+        "button_link": "shopify://products/a-fresh-start",
+        "link_label": "",
+        "margin_top": 0
       }
     },
     "stories": {
       "type": "evlvex-stories-grid",
       "settings": {
-        "color_scheme": "scheme-1",
-        "caption": "",
-        "heading": "",
+        "color_scheme": "scheme-2",
+        "caption": "COMEBACK",
+        "heading": "Read each chapter",
         "heading_size": "h1",
         "show_all": true,
         "limit": 12,
@@ -52,13 +125,15 @@
         "swipe_on_mobile": false,
         "link_label": "",
         "link": "",
-        "padding_top": 40,
+        "padding_top": 96,
         "padding_bottom": 96
       }
     }
   },
   "order": [
-    "intro",
+    "opener",
+    "chapter-1",
+    "chapter-2",
     "stories"
   ]
 }

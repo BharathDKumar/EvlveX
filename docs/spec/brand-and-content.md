@@ -140,6 +140,34 @@ EvlveX tells **one story**, COMEBACK, in **chapters**. Each model carries one ch
 **Excerpt:** *The moment after the struggle, when you stop looking back and choose what comes next.*
 **Imagery:** light and airy, in black and white. White backgrounds, soft daylight, the suede and embossed monogram.
 
+### About EvlveX (brand text, 25 Nov 2026)
+Used word for word on the About page opener (the name, then the belief). Only change: *EVLVEX* is written *EvlveX* in body text.
+> EvlveX is derived from the word **Evolution** — the idea of constantly growing, changing and becoming a better version of yourself.
+>
+> We believe confidence comes from embracing who you are, owning your journey and having the courage to evolve in your own way. It's not about being perfect or becoming someone else; it's about discovering your potential and being comfortable in your own identity.
+>
+> At EvlveX, we create footwear for individuals who believe in moving forward, expressing themselves and walking their own path with confidence.
+
+### Story page (brand text, 25 Nov 2026)
+Used word for word on the Stories page (`/pages/the-stories`), headings in bold. Fixes only: chapter names as the products are called (*The Silent Grind*, *A Fresh Start*), "dark :" → "dark:", "story: It" → "story: it".
+
+**COMEBACK** (opener)
+> A comeback is not about returning to who you were. It is about carrying what you've learned, stepping out of the shadows, and becoming someone stronger, wiser, and new. Because sometimes, the hardest chapter is not the end of the story: it is where the comeback begins.
+>
+> **Never give up. Make your comeback.**
+
+**Chapter 01: The Silent Grind**
+> For the chapters lived in the dark: the silent struggles, the setbacks, and the moments that test how much you have left to give.
+>
+> You stayed. You endured. You kept going. And when you're ready, you step out of the shadows not as who you were, but as someone stronger. Also that is where CB01 — Comeback 01 begins — in the moment you realise that the darkness may have tested you, but it never defined you.
+>
+> **Face the dark. Stand your ground. Make your comeback.**
+
+**Chapter 02: A Fresh Start**
+> Sometimes, the bravest thing you can do is choose what comes next. After the loss, uncertainty, and chapters you never imagined closing, there comes a moment when you stop looking back and make space for something new.
+>
+> **Let go. Step forward. Make your comeback.**
+
 ### COMEBACK literature: "never give up"
 Supporting copy around the official story, written in the same voice. It is not a replacement for it. Use it where the site needs more than the story text; keep each line in one place only.
 
@@ -164,7 +192,7 @@ Supporting copy around the official story, written in the same voice. It is not 
 > A comeback is rarely one big moment. It is a thousand small ones: getting up, showing up, starting again. We wanted to make something that stays with you through all of them.
 > So every EvlveX pair carries the monogram on its side: a small mark for a big decision. Not to say you have arrived. To say you never gave up.
 
-**Stories page:** "Two models, two chapters, one story. Wear the one that matches where you are right now, and keep going."
+**Stories page:** the brand's Story page text above (25 Nov 2026) replaced the earlier line "Two models, two chapters, one story…".
 
 **Footer:** "Keep going." · "Every comeback starts with one more step."
 
@@ -205,9 +233,9 @@ The shoes are factory-made (owner, 20 Nov 2026), so the **artisan** and **finish
 
 **System pages use standard e-commerce wording**, not story language: 404 ("Page not found", "Continue shopping"), Contact ("Contact us", "Send us a message"), FAQ, Size guide, Track your order, Shipping & returns, "Journal". Recommendation headings are "The other chapter" (product page, cart) and "The collection" (search). The brand voice stays in the story content: home film and manifesto, About, Stories, certificates.
 
-**About page:** "Built for the comeback" · "One story, two chapters" · *The Silent Grind* · *A Fresh Start*
+**About page:** "About EvlveX" (the name and belief, §6) · "One story, two chapters" · "Four steps of a comeback" · *The Silent Grind* · *A Fresh Start* · "Shoes for the long way back"
 
-**Stories index:** "COMEBACK" · "One story, two chapters"
+**Stories index:** "COMEBACK" opener · Chapter 01 *The Silent Grind* · Chapter 02 *A Fresh Start* · "Read each chapter" (story entries)
 
 **Product tabs:** Design & make ("An original EvlveX design, model CB-01. Smooth upper with textured overlays at the toe, eyestay and collar, a padded collar and a stitched white cupsole… Designed and made in India. Every pair is inspected before it is packed."), Size & fit ("Unisex, UK/India sizing. Our shoes run true to standard Indian/UK sizing…", links to the size guide), Care, Shipping & returns, Your pair's certificate.
 

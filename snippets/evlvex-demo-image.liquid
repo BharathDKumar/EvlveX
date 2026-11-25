@@ -6,6 +6,7 @@
 
   @param {string} kind - 'hero', 'editorial', 'lifestyle', 'atelier', 'product', 'collection' or 'article'
   @param {string} [seed] - Number or text used to pick an image from the pool, so neighbouring cards differ
+  @param {string} [shoe] - 'silent-grind' or 'fresh-start': show only that model's crops from the pool
   @param {string} [sizes] - sizes attribute (default 100vw)
   @param {string} [loading] - 'lazy' (default) or 'eager'
   @param {string} [fetchpriority] - 'auto' (default) or 'high'
@@ -46,6 +47,28 @@
     endcase
 
     assign demo_items = demo_pool | split: ';'
+
+    # Pin one model: keep only that model's crops from the pool (unchanged if the pool has none of them).
+    case shoe
+      when 'silent-grind'
+        assign demo_prefix = 'evx-sg-'
+      when 'fresh-start'
+        assign demo_prefix = 'evx-fs-'
+      else
+        assign demo_prefix = ''
+    endcase
+    if demo_prefix != ''
+      assign demo_kept = ''
+      for demo_item in demo_items
+        if demo_item contains demo_prefix
+          assign demo_kept = demo_kept | append: ';' | append: demo_item
+        endif
+      endfor
+      if demo_kept != ''
+        assign demo_items = demo_kept | remove_first: ';' | split: ';'
+      endif
+    endif
+
     assign demo_seed = seed | plus: 0
     if demo_seed == 0 and seed != blank
       assign demo_seed = seed | size
