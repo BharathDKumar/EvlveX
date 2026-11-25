@@ -203,6 +203,25 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
   }
 }
 
+/* Header: wordmark alone (snippets/evlvex-logo.liquid, mark: false), a little larger than in the lockup */
+.evlvex-logo--word-only .evlvex-logo__word {
+  height: 2.4rem;
+}
+
+.scrolled-past-header .evlvex-logo--word-only .evlvex-logo__word {
+  height: 1.8rem;
+}
+
+@media screen and (max-width: 749px) {
+  .evlvex-logo--word-only .evlvex-logo__word {
+    height: 1.8rem;
+  }
+
+  .scrolled-past-header .evlvex-logo--word-only .evlvex-logo__word {
+    height: 1.5rem;
+  }
+}
+
 /* ---------- Announcement bar ---------- */
 .announcement-bar__message {
   font-family: var(--font-body-family);

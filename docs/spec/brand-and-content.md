@@ -13,7 +13,7 @@ Part of the [EvlveX specification](../SPEC.md). **Audience:** brand, copywriters
   - `assets/evlvex-monogram.svg`: standalone file in Black, used for the favicon and downloads
   - `snippets/evlvex-monogram.liquid`: inline SVG monogram that takes its color from the surrounding text color (`currentColor`)
   - `snippets/evlvex-wordmark.liquid`: inline SVG wordmark (`currentColor`), sized by CSS height
-  - `snippets/evlvex-logo.liquid`: header lockup (monogram + wordmark), used when no logo image is uploaded in Theme settings
+  - `snippets/evlvex-logo.liquid`: logo lockup (monogram + wordmark), used when no logo image is uploaded in Theme settings. The **header shows the wordmark alone** (`mark: false`, since 25 Nov 2026); the password page keeps the full lockup
 - **Usage rules:**
   - Clear space around the monogram ≥ ½ of its diameter.
   - Minimum size: 16 px on screen, 6 mm in print.
@@ -212,7 +212,7 @@ The shoes are factory-made (owner, 20 Nov 2026), so the **artisan** and **finish
 
 **Announcement bar:** "COMEBACK · Limited edition · Numbered pairs" · "Original designs · Made in India" · "Free shipping across India · 7-day size exchange"
 
-**Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), three scenes: *COMEBACK* ("EvlveX · The first collection", the monogram alone, "Read the story" → the stories page) → *The Silent Grind* (Chapter 01, → its product) → *A Fresh Start* (Chapter 02, → its product). Each scene carries the brand text above word for word in three short paragraphs: the line or excerpt, the full chapter text, and the detail line ("Black, with the monogram in white. For the battles no one sees." / "Cream and sand, with the monogram embossed in sand. For the first step into what comes next."). Scene 1 also carries the brand statement below, which no longer has its own section.
+**Home: COMEBACK film** (`sections/evlvex-comeback-film.liquid`), light since 25 Nov 2026: every scene uses the *Light* tone, a soft studio gradient from near-white (top left, `#FAFAFC`) to light cool grey (bottom right, `#DCDCE4`), set in the section's *Light scenes* settings, with black copy. Three scenes: *COMEBACK* ("EvlveX · The first collection", the monogram alone, "Read the story" → the stories page) → *The Silent Grind* (Chapter 01, → its product) → *A Fresh Start* (Chapter 02, → its product). Each scene carries the brand text above word for word in three short paragraphs: the line or excerpt, the full chapter text, and the detail line ("Black, with the monogram in white. For the battles no one sees." / "Cream and sand, with the monogram embossed in sand. For the first step into what comes next."). Scene 1 also carries the brand statement below, which no longer has its own section.
 
 **Brand statement** (home film scene 1 since v1.9; also usable elsewhere)
 > **Falling behind is not the end.** Sometimes, it is where the comeback begins. EvlveX makes premium sneakers that tell one story in two chapters: The Silent Grind, for the battles no one sees, and A Fresh Start, for the first step into what comes next. Every design is our own, made in India in a limited, numbered run, and every pair is inspected before it leaves us.

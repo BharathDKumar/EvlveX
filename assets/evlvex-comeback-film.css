@@ -17,6 +17,13 @@ evlvex-comeback-film {
   background: rgb(17, 17, 17);
   color: rgb(255, 255, 255);
   --evx-film-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: background-color 0.9s var(--evx-film-ease);
+}
+
+/* Light film: the gaps behind the 3D turn stay light (is-light is set server-side for the first scene, then by the script) */
+evlvex-comeback-film.is-light {
+  background: var(--film-light-b, rgb(220, 220, 228));
+  color: rgb(17, 17, 17);
 }
 
 /* Scenes share one grid cell, so the film is as tall as its longest scene and story copy is never clipped. */
@@ -83,8 +90,12 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
   --film-muted: 255, 255, 255;
 }
 
+/* Soft studio gradient: near-white top left to a light cool grey bottom right (colours: section settings),
+   with a faint glow behind the shoe */
 .evx-film__scene--light {
-  background: radial-gradient(ellipse at 62% 45%, rgb(255, 255, 255) 0%, rgb(237, 237, 237) 70%);
+  background:
+    radial-gradient(ellipse 55% 60% at 64% 46%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(120deg, var(--film-light-a, rgb(250, 250, 252)) 0%, var(--film-light-a, rgb(250, 250, 252)) 18%, var(--film-light-b, rgb(220, 220, 228)) 100%);
   color: rgb(17, 17, 17);
   --film-accent: 17, 17, 17;
   --film-muted: 17, 17, 17;
@@ -124,7 +135,8 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 }
 
 .evx-film__scene--light .evx-film__backdrop-img {
-  opacity: 0.35;
+  /* the campaign photos have dark studio backgrounds: keep only a hint so the page stays pale */
+  opacity: 0.1;
   mix-blend-mode: multiply;
 }
 
@@ -138,7 +150,7 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 }
 
 .evx-film__scene--light::after {
-  background: linear-gradient(to bottom, rgba(237, 237, 237, 0.6), transparent 18%, transparent 78%, rgba(237, 237, 237, 0.7));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), transparent 16%, transparent 84%, rgba(255, 255, 255, 0.25));
 }
 
 /* ---------- Visual: frame(s) in 3D ---------- */
@@ -168,7 +180,15 @@ evlvex-comeback-film[data-dir='back'] .evx-film__scene.is-leaving {
 }
 
 .evx-film__scene--light .evx-film__frame {
-  box-shadow: 0 50px 90px -45px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 50px 90px -40px rgba(40, 40, 60, 0.35);
+}
+
+.evx-film__scene--light .evx-film__frame--mark {
+  box-shadow: none;
+}
+
+.evx-film__scene--light .evx-film__frame--mark .evx-film__mark {
+  filter: drop-shadow(0 24px 40px rgba(40, 40, 60, 0.18));
 }
 
 .evx-film__scene--pair .evx-film__frame {

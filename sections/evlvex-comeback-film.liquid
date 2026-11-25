@@ -15,6 +15,9 @@
   assign of_label = 'general.slider.of' | t
   assign film_label = section.settings.label | default: 'COMEBACK'
   assign autoplay = false
+  assign first_tone = section.blocks.first.settings.tone
+  assign light_start = section.settings.light_start | default: '#FAFAFC'
+  assign light_end = section.settings.light_end | default: '#DCDCE4'
   if section.settings.autoplay and scene_total > 1
     assign autoplay = true
   endif
@@ -23,13 +26,13 @@
 {%- if scene_total > 0 -%}
   <evlvex-comeback-film
     id="EvxFilm-{{ section.id }}"
-    class="evx-film evx-film--{{ section.settings.height }}{% if scene_total > 1 and section.settings.show_controls %} evx-film--controls{% endif %}"
+    class="evx-film evx-film--{{ section.settings.height }}{% if scene_total > 1 and section.settings.show_controls %} evx-film--controls{% endif %}{% if first_tone == 'light' %} is-light{% endif %}"
     role="region"
     aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
     aria-label="{{ film_label | escape }}"
     data-autoplay="{{ autoplay }}"
     data-speed="{{ section.settings.speed }}"
-    style="--evx-film-duration: {{ section.settings.speed }}s;"
+    style="--evx-film-duration: {{ section.settings.speed }}s; --film-light-a: {{ light_start }}; --film-light-b: {{ light_end }};"
   >
     <div class="evx-film__scenes" aria-live="{% if autoplay %}off{% else %}polite{% endif %}">
       {%- for block in section.blocks -%}
@@ -309,6 +312,23 @@
       "id": "show_controls",
       "label": "Show timeline and buttons",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "Light scenes"
+    },
+    {
+      "type": "color",
+      "id": "light_start",
+      "label": "Background, top left",
+      "info": "Scenes with the Light tone use a soft gradient between these two colours.",
+      "default": "#FAFAFC"
+    },
+    {
+      "type": "color",
+      "id": "light_end",
+      "label": "Background, bottom right",
+      "default": "#DCDCE4"
     }
   ],
   "blocks": [
@@ -378,11 +398,11 @@
           "options": [
             {
               "value": "dark",
-              "label": "Dark (Noir)"
+              "label": "Dark (black)"
             },
             {
               "value": "light",
-              "label": "Light (Ivory)"
+              "label": "Light (soft gradient)"
             }
           ],
           "default": "dark"
