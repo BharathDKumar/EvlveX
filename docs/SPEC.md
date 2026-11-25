@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | v1.10 — About & Story literature (on branch, not live yet) |
+| **Status** | v1.10 — About & Story literature (supersedes v1.9) |
 | **Date** | 25 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
@@ -98,7 +98,7 @@ The website must:
 | v1.7 | 18 Nov 2026 | SEO: Organization structured data with the brand logo and only real social links; breadcrumbs in search results (product, collection, article, page, story); a default share image for links on WhatsApp, Instagram and other apps; product photos never without alt text; SEO steps for Admin, Search Console and Google Shopping in the store setup checklist ([deployment.md §5](spec/deployment.md)) |
 | v1.8 | 20 Nov 2026 | Premium copy revalidated: positioning *shoes with a story · original designs · limited edition · made in India · premium* added (home "The EvlveX standard", announcement bar, product "Design & make" tab, FAQ, About); every untrue or unconfirmed claim removed (handmade, artisan, signed, workshop card, house of, luxury, leather, suede, "won't return"); limited edition now "a limited, numbered run" (COMEBACK may return if it succeeds); SEO titles, descriptions and alt text for products, collection and all 9 pages; share image text; policy drafts corrected. Word rules: [brand-and-content.md §4](spec/brand-and-content.md) |
 | v1.9 | 21 Nov 2026 | Home layout: COMEBACK film cut to three scenes (COMEBACK with the monogram only, The Silent Grind, A Fresh Start) of 10 s each, more story text and smaller images, a click anywhere on a scene opens the stories page or the product, timeline and buttons hidden; brand statement and "The Mark" removed; two featured products centred without gaps; logo and menu on one header row; the header stays on screen while scrolling and gets shorter |
-| **v1.10** | **25 Nov 2026** | **About & Story literature** *(on branch `content/about-story-literature`, not live yet)*: the brand's new texts word for word: *About EvlveX* (the name comes from Evolution) and the Story page (COMEBACK, Chapter 01 The Silent Grind, Chapter 02 A Fresh Start). Both pages rebuilt as editorial pages with two new sections: a cinematic opener and an editorial chapter spread (full-bleed photo, detail photo, outlined chapter number, bold closing statement); each chapter always shows its own shoe |
+| **v1.10** | **25 Nov 2026** | **About & Story literature**: the brand's new texts word for word: *About EvlveX* (the name comes from Evolution) and the Story page (COMEBACK, Chapter 01 The Silent Grind, Chapter 02 A Fresh Start). Both pages rebuilt as editorial pages with two new sections: a cinematic opener and an editorial chapter spread (full-bleed photo, detail photo, outlined chapter number, bold closing statement); each chapter always shows its own shoe |
 
 Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
 
