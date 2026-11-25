@@ -39,6 +39,7 @@
               assign card_src = 'evx-sg-card.jpg'
           endcase
           assign alt = s.alt | default: s.bl_value
+          assign word_len = s.word_solid.size | plus: s.word_outline.size | at_least: 1
         -%}
         <article
           id="SdSlide-{{ section.id }}-{{ forloop.index }}"
@@ -46,7 +47,7 @@
           role="group"
           aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
           aria-label="{{ forloop.index }} {{ of_label }} {{ slide_total }}"
-          style="--rot: {{ s.rotate }}deg;"
+          style="--rot: {{ s.rotate }}deg; --len: {{ word_len }};"
           {% unless forloop.first %}
             aria-hidden="true"
           {% endunless %}
