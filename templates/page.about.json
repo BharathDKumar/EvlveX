@@ -62,7 +62,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>EvlveX began with one idea: falling behind is not the end; sometimes, it is where the comeback begins. COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.</p><p>Our first collection tells that story in two chapters, one for each model. Both are original EvlveX designs, made in India in a limited run. Every pair carries the EvlveX monogram, a number of its own, and a certificate registered to the person who wears it.</p>"
+            "text": "<p>COMEBACK is about what happens after life knocks you down: the strength to keep going, the courage to move forward, and the choice to become someone new.</p>"
           }
         }
       },
@@ -77,117 +77,6 @@
         "full_width": false,
         "padding_top": 96,
         "padding_bottom": 80
-      }
-    },
-    "steps": {
-      "type": "multicolumn",
-      "blocks": {
-        "fall": {
-          "type": "column",
-          "settings": {
-            "title": "01 The Fall",
-            "text": "<p>Life knocks you down. It happens to everyone. What matters is what you do next.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "grind": {
-          "type": "column",
-          "settings": {
-            "title": "02 The Grind",
-            "text": "<p>The quiet work no one sees: early starts, small wins, holding on when it would be easier to let go.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "turn": {
-          "type": "column",
-          "settings": {
-            "title": "03 The Turn",
-            "text": "<p>The day you stop looking back and choose what comes next. Carry the lessons. Leave the weight.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "comeback": {
-          "type": "column",
-          "settings": {
-            "title": "04 The Comeback",
-            "text": "<p>Not a return to who you were. A first step into who you are becoming.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "fall",
-        "grind",
-        "turn",
-        "comeback"
-      ],
-      "settings": {
-        "title": "Four steps of a comeback",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 4,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "chapter-1": {
-      "type": "evlvex-chapter",
-      "settings": {
-        "color_scheme": "scheme-3",
-        "layout": "image-first",
-        "anchor": "the-silent-grind",
-        "top_rule": false,
-        "shoe": "silent-grind",
-        "alt": "The Silent Grind: black low-top sneaker with the white EvlveX monogram",
-        "show_inset": true,
-        "mobile_ratio": "4 / 5",
-        "number": "01",
-        "eyebrow": "Chapter 01",
-        "heading": "The Silent Grind",
-        "lead": "<p>The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.</p>",
-        "text": "<p>Holding on through the weight of those moments, and finding the strength to rise from them. In black, with the monogram in white.</p>",
-        "statement": "",
-        "button_label": "Shop The Silent Grind",
-        "button_link": "shopify://products/the-silent-grind",
-        "link_label": "Read the story",
-        "link": "/pages/the-stories#the-silent-grind",
-        "margin_top": 0
-      }
-    },
-    "chapter-2": {
-      "type": "evlvex-chapter",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "layout": "text-first",
-        "anchor": "a-fresh-start",
-        "top_rule": false,
-        "shoe": "fresh-start",
-        "alt": "A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram",
-        "show_inset": true,
-        "mobile_ratio": "4 / 5",
-        "number": "02",
-        "eyebrow": "Chapter 02",
-        "heading": "A Fresh Start",
-        "lead": "<p>The moment after the struggle, when you stop looking back and choose what comes next.</p>",
-        "text": "<p>Carry the lessons forward, leave the weight behind, and take the first step into a new chapter. In cream and sand, with the monogram embossed.</p>",
-        "statement": "",
-        "button_label": "Shop A Fresh Start",
-        "button_link": "shopify://products/a-fresh-start",
-        "link_label": "Read the story",
-        "link": "/pages/the-stories#a-fresh-start",
-        "margin_top": 0
       }
     },
     "never-give-up": {
@@ -245,9 +134,6 @@
   "order": [
     "opener",
     "story",
-    "steps",
-    "chapter-1",
-    "chapter-2",
     "never-give-up"
   ]
 }

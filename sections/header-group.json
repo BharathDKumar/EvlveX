@@ -5,20 +5,6 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "COMEBACK · Limited edition · Numbered pairs",
-            "link": "shopify://collections/all"
-          }
-        },
-        "announcement-bar-1": {
-          "type": "announcement",
-          "settings": {
-            "text": "Original designs · Made in India",
-            "link": "shopify://pages/about"
-          }
-        },
         "announcement-bar-2": {
           "type": "announcement",
           "settings": {
@@ -28,8 +14,6 @@
         }
       },
       "block_order": [
-        "announcement-bar-0",
-        "announcement-bar-1",
         "announcement-bar-2"
       ],
       "settings": {
