@@ -128,8 +128,9 @@
         "autoplay": true,
         "speed": 10,
         "show_controls": false,
-        "light_start": "#FAFAFC",
-        "light_end": "#DCDCE4"
+        "light_start": "#FBFBFB",
+        "light_end": "#E6E6EA",
+        "style": "editorial"
       }
     },
     "manifesto": {

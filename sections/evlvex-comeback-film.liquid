@@ -15,9 +15,10 @@
   assign of_label = 'general.slider.of' | t
   assign film_label = section.settings.label | default: 'COMEBACK'
   assign autoplay = false
+  assign film_style = section.settings.style | default: 'editorial'
   assign first_tone = section.blocks.first.settings.tone
-  assign light_start = section.settings.light_start | default: '#FAFAFC'
-  assign light_end = section.settings.light_end | default: '#DCDCE4'
+  assign light_start = section.settings.light_start | default: '#FBFBFB'
+  assign light_end = section.settings.light_end | default: '#E6E6EA'
   if section.settings.autoplay and scene_total > 1
     assign autoplay = true
   endif
@@ -26,7 +27,7 @@
 {%- if scene_total > 0 -%}
   <evlvex-comeback-film
     id="EvxFilm-{{ section.id }}"
-    class="evx-film evx-film--{{ section.settings.height }}{% if scene_total > 1 and section.settings.show_controls %} evx-film--controls{% endif %}{% if first_tone == 'light' %} is-light{% endif %}"
+    class="evx-film evx-film--{{ section.settings.height }} evx-film--{{ film_style }}{% if scene_total > 1 and section.settings.show_controls %} evx-film--controls{% endif %}{% if first_tone == 'light' %} is-light{% endif %}"
     role="region"
     aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
     aria-label="{{ film_label | escape }}"
@@ -56,7 +57,11 @@
                 when 'texture'
                   assign shot = 'laces|397|460'
                 else
-                  assign shot = 'full|950|530'
+                  if film_style == 'editorial'
+                    assign shot = 'card|1024|1280'
+                  else
+                    assign shot = 'full|950|530'
+                  endif
               endcase
             else
               assign prefix = 'evx-sg-'
@@ -66,7 +71,11 @@
                 when 'texture'
                   assign shot = 'sole|392|490'
                 else
-                  assign shot = 'full|960|720'
+                  if film_style == 'editorial'
+                    assign shot = 'card|1024|1280'
+                  else
+                    assign shot = 'full|960|720'
+                  endif
               endcase
           endcase
           assign shot_parts = shot | split: '|'
@@ -184,6 +193,15 @@
               </a>
             {%- endif -%}
           </div>
+
+          {%- if film_style == 'editorial' and scene_total > 1 -%}
+            {%- comment -%} Scene counter with a line that fills while the scene plays (decorative; the scene's aria-label carries "1 of 3") {%- endcomment -%}
+            <p class="evx-film__count" aria-hidden="true">
+              <span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <span class="evx-film__count-bar"></span>
+              <span>{{ scene_total | prepend: '0' | slice: -2, 2 }}</span>
+            </p>
+          {%- endif -%}
         </article>
       {%- endfor -%}
     </div>
@@ -291,6 +309,22 @@
       "default": "full"
     },
     {
+      "type": "select",
+      "id": "style",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "editorial",
+          "label": "Editorial: photo fills one half"
+        },
+        {
+          "value": "framed",
+          "label": "Framed: photo floats in 3D"
+        }
+      ],
+      "default": "editorial"
+    },
+    {
       "type": "checkbox",
       "id": "autoplay",
       "label": "Play automatically",
@@ -322,13 +356,13 @@
       "id": "light_start",
       "label": "Background, top left",
       "info": "Scenes with the Light tone use a soft gradient between these two colours.",
-      "default": "#FAFAFC"
+      "default": "#FBFBFB"
     },
     {
       "type": "color",
       "id": "light_end",
       "label": "Background, bottom right",
-      "default": "#DCDCE4"
+      "default": "#E6E6EA"
     }
   ],
   "blocks": [

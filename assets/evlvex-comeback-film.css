@@ -700,3 +700,173 @@ evlvex-comeback-film.is-user-paused .evx-film__toggle-play,
     transform: scaleX(1);
   }
 }
+
+/* ==========================================================================
+   Editorial layout (section setting "Layout", default): the photo fills one half of the screen edge to edge,
+   the copy sits on the clean light half. No floating frame, blur or tilt; the camera move (slow push/pull)
+   stays on the photo. The monogram scene shows the white mark on a black half.
+   ========================================================================== */
+.evx-film--editorial .evx-film__backdrop,
+.evx-film--editorial .evx-film__scene::after {
+  display: none;
+}
+
+.evx-film--editorial .evx-film__scene--light {
+  background: linear-gradient(120deg, var(--film-light-a, rgb(251, 251, 251)) 0%, var(--film-light-b, rgb(230, 230, 234)) 100%);
+}
+
+.evx-film--editorial .evx-film__visual {
+  position: relative;
+  align-self: stretch;
+  min-height: 52svh;
+  padding: 0;
+  overflow: hidden;
+  transform: none;
+  transition: none;
+}
+
+.evx-film--editorial .evx-film__frame,
+.evx-film--editorial .evx-film__scene--pair .evx-film__frame,
+.evx-film--editorial .evx-film__scene--mark .evx-film__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  aspect-ratio: auto;
+  transform: none;
+  box-shadow: none;
+  animation: none;
+}
+
+.evx-film--editorial .evx-film__scene--pair .evx-film__frame--left {
+  right: 50%;
+  width: 50%;
+}
+
+.evx-film--editorial .evx-film__scene--pair .evx-film__frame--right {
+  left: 50%;
+  width: 50%;
+}
+
+/* Monogram scene: white mark centred on a black half */
+.evx-film--editorial .evx-film__scene--mark .evx-film__visual {
+  background: radial-gradient(ellipse at 50% 45%, rgb(38, 38, 38) 0%, rgb(17, 17, 17) 65%);
+}
+
+.evx-film--editorial .evx-film__frame--mark {
+  color: rgb(255, 255, 255);
+}
+
+.evx-film--editorial .evx-film__frame--mark .evx-film__camera {
+  inset: 50% auto auto 50%;
+  width: min(42%, 30rem);
+  height: auto;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.evx-film--editorial .evx-film__frame--mark .evx-film__mark {
+  filter: none;
+}
+
+/* Copy */
+.evx-film--editorial .evx-film__copy {
+  padding: 4rem 2rem 9rem;
+}
+
+.evx-film--editorial .evx-film__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.evx-film--editorial .evx-film__eyebrow::before {
+  content: '';
+  width: 2.4rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.evx-film--editorial .evx-film__heading--title {
+  font-size: clamp(4rem, 11vw, 5.6rem);
+  letter-spacing: -0.03em;
+}
+
+.evx-film--editorial .evx-film__text {
+  max-width: 46ch;
+}
+
+/* Scene counter: 01 ——— 03, the line fills while the scene plays */
+.evx-film__count {
+  position: absolute;
+  z-index: 3;
+  left: 2rem;
+  bottom: 3.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(var(--film-muted), 0.7);
+}
+
+.evx-film__count-bar {
+  position: relative;
+  overflow: hidden;
+  width: 8rem;
+  height: 1px;
+  background: rgba(var(--film-muted), 0.2);
+}
+
+.evx-film__count-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--film-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .evx-film__scene.is-active .evx-film__count-bar::after {
+    animation: evx-film-fill var(--evx-film-duration, 10s) linear both;
+  }
+
+  evlvex-comeback-film.is-paused .evx-film__count-bar::after {
+    animation-play-state: paused;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .evx-film--editorial .evx-film__scene {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .evx-film--editorial .evx-film__visual {
+    grid-column: 2;
+    min-height: 0;
+  }
+
+  .evx-film--editorial .evx-film__copy {
+    padding: 8rem 6vw 12rem 7vw;
+  }
+
+  .evx-film--editorial .evx-film__heading--display {
+    font-size: clamp(6.4rem, 6.4vw, 11rem);
+  }
+
+  .evx-film--editorial .evx-film__heading--title {
+    font-size: clamp(5.2rem, 5vw, 8.4rem);
+  }
+
+  .evx-film__count {
+    left: 7vw;
+    bottom: 4.8rem;
+  }
+}

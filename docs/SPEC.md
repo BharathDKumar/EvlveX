@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | v1.11 — Light film & wordmark header (supersedes v1.10) |
+| **Status** | v1.12 — Editorial film (supersedes v1.11) |
 | **Date** | 25 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
@@ -99,7 +99,8 @@ The website must:
 | v1.8 | 20 Nov 2026 | Premium copy revalidated: positioning *shoes with a story · original designs · limited edition · made in India · premium* added (home "The EvlveX standard", announcement bar, product "Design & make" tab, FAQ, About); every untrue or unconfirmed claim removed (handmade, artisan, signed, workshop card, house of, luxury, leather, suede, "won't return"); limited edition now "a limited, numbered run" (COMEBACK may return if it succeeds); SEO titles, descriptions and alt text for products, collection and all 9 pages; share image text; policy drafts corrected. Word rules: [brand-and-content.md §4](spec/brand-and-content.md) |
 | v1.9 | 21 Nov 2026 | Home layout: COMEBACK film cut to three scenes (COMEBACK with the monogram only, The Silent Grind, A Fresh Start) of 10 s each, more story text and smaller images, a click anywhere on a scene opens the stories page or the product, timeline and buttons hidden; brand statement and "The Mark" removed; two featured products centred without gaps; logo and menu on one header row; the header stays on screen while scrolling and gets shorter |
 | v1.10 | 25 Nov 2026 | About & Story literature: the brand's new texts word for word: *About EvlveX* (the name comes from Evolution) and the Story page (COMEBACK, Chapter 01 The Silent Grind, Chapter 02 A Fresh Start). Both pages rebuilt as editorial pages with two new sections: a cinematic opener and an editorial chapter spread (full-bleed photo, detail photo, outlined chapter number, bold closing statement); each chapter always shows its own shoe |
-| **v1.11** | **25 Nov 2026** | **Light film & wordmark header:** the header shows the EvlveX wordmark alone (no monogram); the home COMEBACK film moves from black to a soft light studio gradient (near-white to light cool grey, editable in the theme editor) with black copy |
+| v1.11 | 25 Nov 2026 | Light film & wordmark header: the header shows the EvlveX wordmark alone (no monogram); the home COMEBACK film moves from black to a soft light studio gradient (near-white to light cool grey, editable in the theme editor) with black copy |
+| **v1.12** | **25 Nov 2026** | **Editorial film:** the home film becomes an editorial split: the shoe photo fills the right half edge to edge, large black copy on the light left half, a scene counter whose line fills while the scene plays; the COMEBACK scene shows the white monogram on a black half. The floating framed layout stays available (section setting *Layout*) |
 
 Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
 
