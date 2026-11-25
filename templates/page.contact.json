@@ -17,41 +17,6 @@
         "padding_bottom": 88
       }
     },
-    "hero": {
-      "type": "image-banner",
-      "blocks": {
-        "caption": {
-          "type": "text",
-          "settings": {
-            "text": "Customer support",
-            "text_style": "caption-with-letter-spacing"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Contact us",
-            "heading_size": "h0"
-          }
-        }
-      },
-      "block_order": [
-        "caption",
-        "heading"
-      ],
-      "settings": {
-        "image_overlay_opacity": 30,
-        "image_height": "small",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
     "details": {
       "type": "multicolumn",
       "blocks": {
@@ -117,7 +82,6 @@
     }
   },
   "order": [
-    "hero",
     "main",
     "details",
     "form"

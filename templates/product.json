@@ -52,10 +52,6 @@
             "show_gift_card_recipient": false
           }
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "tab_materials": {
           "type": "collapsible_tab",
           "settings": {
@@ -120,7 +116,6 @@
         "quantity_selector",
         "buy_buttons",
         "assurance",
-        "description",
         "tab_materials",
         "tab_fit",
         "tab_care",
@@ -132,7 +127,7 @@
         "color_scheme": "scheme-1",
         "media_size": "large",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
+        "media_fit": "cover",
         "gallery_layout": "thumbnail_slider",
         "mobile_thumbnails": "hide",
         "media_position": "left",
@@ -189,7 +184,7 @@
             "text": "It is about holding on through the weight of those moments and finding the strength to rise from them.",
             "shoe": "silent-grind",
             "button_label": "Read the full story",
-            "button_link": "/pages/the-stories#the-silent-grind"
+            "button_link": "shopify://pages/the-stories"
           }
         },
         "fresh-start": {
@@ -203,7 +198,7 @@
             "text": "It is about carrying the lessons forward, leaving the weight behind, and taking the first step into a new chapter.",
             "shoe": "fresh-start",
             "button_label": "Read the full story",
-            "button_link": "/pages/the-stories#a-fresh-start"
+            "button_link": "shopify://pages/the-stories"
           }
         }
       },
