@@ -1,0 +1,522 @@
+/*
+  EvlveX — editorial sections for the long-form brand pages (About, Story).
+  sections/evlvex-opener.liquid  → .evx-opener
+  sections/evlvex-chapter.liquid → .evx-chapter
+  Colors come from the section's color scheme (black & white only); shoe photos are the only colour.
+  Spec: docs/spec/theme.md §4, copy in docs/spec/brand-and-content.md §6.
+*/
+
+/* ---------- Shared ---------- */
+.evx-statement {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(1.4rem, 1.2vw + 0.9rem, 1.8rem);
+  line-height: 1.35;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+}
+
+.evx-statement::before {
+  content: '';
+  flex: none;
+  width: 4.8rem;
+  height: 2px;
+  background: currentColor;
+}
+
+.evx-statement--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.evx-statement--center::after {
+  content: '';
+  flex: none;
+  width: 4.8rem;
+  height: 2px;
+  background: currentColor;
+}
+
+/* ---------- Opener ---------- */
+.evx-opener {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.evx-opener__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.8rem;
+  min-height: var(--evx-opener-height, auto);
+}
+
+.evx-opener--full .evx-opener__inner {
+  --evx-opener-height: max(56rem, 88svh);
+}
+
+.evx-opener--large .evx-opener__inner {
+  --evx-opener-height: max(48rem, 72svh);
+}
+
+.evx-opener--medium .evx-opener__inner {
+  --evx-opener-height: 44rem;
+}
+
+.evx-opener--center .evx-opener__inner {
+  align-items: center;
+  text-align: center;
+}
+
+.evx-opener--left .evx-opener__inner {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Large ghost monogram behind the copy */
+.evx-opener__watermark {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: -12vw;
+  width: min(78vw, 92rem);
+  height: auto;
+  transform: translateY(-50%);
+  color: rgb(var(--color-foreground));
+  opacity: 0.045;
+  pointer-events: none;
+}
+
+.evx-opener--center .evx-opener__watermark {
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.evx-opener__mark {
+  display: block;
+  color: rgb(var(--color-foreground));
+}
+
+.evx-opener__eyebrow {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.evx-opener__eyebrow::before,
+.evx-opener--center .evx-opener__eyebrow::after {
+  content: '';
+  width: 2.4rem;
+  height: 1px;
+  background: rgba(var(--color-foreground), 0.4);
+}
+
+.evx-opener__heading {
+  margin: 0;
+  font-size: clamp(3.6rem, 12vw, 16rem);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  overflow-wrap: normal;
+}
+
+.evx-opener__heading--large {
+  font-size: clamp(3.4rem, 8vw, 11rem);
+  line-height: 0.92;
+}
+
+.evx-opener__text {
+  max-width: 64rem;
+  font-size: clamp(1.7rem, 0.6vw + 1.45rem, 2.2rem);
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.82);
+}
+
+.evx-opener__text--body {
+  font-size: 1.7rem;
+  line-height: 1.75;
+}
+
+.evx-opener__text p {
+  margin: 0 0 1.4rem;
+}
+
+.evx-opener__text p:last-child {
+  margin-bottom: 0;
+}
+
+.evx-opener__text strong {
+  color: rgb(var(--color-foreground));
+}
+
+/* Definition (About: the name) */
+.evx-def {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 72rem;
+  margin: 0;
+  padding: 2.8rem 0;
+  border-top: 1px solid rgba(var(--color-foreground), 0.25);
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.25);
+}
+
+.evx-def__term {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1;
+  letter-spacing: var(--evx-tracking-wide);
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.evx-def__meaning {
+  margin: 0;
+  font-size: clamp(1.7rem, 0.8vw + 1.4rem, 2.4rem);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.82);
+}
+
+.evx-def__meaning strong,
+.evx-def__meaning em {
+  font-style: normal;
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
+}
+
+/* Chapter index (Story page) */
+.evx-opener__nav {
+  width: 100%;
+  max-width: 72rem;
+}
+
+.evx-opener__index {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  width: 100%;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(var(--color-foreground), 0.25);
+}
+
+.evx-opener__index-link {
+  display: flex;
+  align-items: baseline;
+  gap: 1.6rem;
+  padding: 2rem 0.4rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.25);
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  transition: opacity 300ms var(--evx-ease);
+}
+
+.evx-opener__index-num {
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+.evx-opener__index-link::after {
+  content: '↓';
+  margin-left: auto;
+  transition: transform 300ms var(--evx-ease);
+}
+
+.evx-opener__index-link:hover::after {
+  transform: translateY(0.4rem);
+}
+
+@media screen and (min-width: 750px) {
+  .evx-opener__index li + li .evx-opener__index-link {
+    border-left: 1px solid rgba(var(--color-foreground), 0.25);
+    padding-left: 2.4rem;
+  }
+}
+
+/* Phone: statements stack under a short line; the index and cue stay out of the copy's way */
+@media screen and (max-width: 749px) {
+  .evx-statement {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+    letter-spacing: 0.1em;
+  }
+  .evx-statement::before {
+    width: 3.2rem;
+  }
+  .evx-statement--center {
+    align-items: center;
+  }
+  .evx-statement--center::after {
+    display: none;
+  }
+  .evx-opener__cue {
+    display: none;
+  }
+  .evx-opener__index-link {
+    padding: 1.6rem 0.4rem;
+  }
+}
+
+/* Scroll cue */
+.evx-opener__cue {
+  position: absolute;
+  left: 50%;
+  bottom: 2.4rem;
+  width: 1px;
+  height: 5.6rem;
+  overflow: hidden;
+  background: rgba(var(--color-foreground), 0.2);
+  transform: translateX(-50%);
+}
+
+.evx-opener__cue::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--color-foreground));
+  transform: translateY(-100%);
+  animation: evx-cue 2.4s var(--evx-ease) infinite;
+}
+
+@keyframes evx-cue {
+  0% { transform: translateY(-100%); }
+  60% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+/* ---------- Chapter ---------- */
+.evx-chapter {
+  position: relative;
+}
+
+.evx-chapter--rule {
+  border-top: 1px solid rgba(var(--color-foreground), 0.14);
+}
+
+.evx-chapter__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.evx-chapter__media {
+  position: relative;
+}
+
+.evx-chapter__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--evx-chapter-ratio, 4 / 5);
+  background: rgba(var(--color-foreground), 0.06);
+}
+
+.evx-chapter__frame img,
+.evx-chapter__frame .evx-plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 2.4s var(--evx-ease);
+}
+
+/* Slow settle when the frame scrolls into view (Dawn's scroll-trigger toggles the offscreen class) */
+.evx-chapter__frame.scroll-trigger--offscreen img {
+  transform: scale(1.08);
+  transition: none;
+}
+
+.evx-chapter__frame::after {
+  /* soft vignette so the photo sits into the black & white page */
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 12rem rgba(0, 0, 0, 0.18);
+}
+
+.evx-chapter__inset {
+  position: absolute;
+  z-index: 1;
+  right: 1.6rem;
+  bottom: -4rem;
+  width: 38%;
+  max-width: 24rem;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 0.6rem solid rgb(var(--color-background));
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+}
+
+.evx-chapter__inset img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.evx-chapter__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6.4rem 1.6rem 5.6rem;
+}
+
+.evx-chapter--inset .evx-chapter__content {
+  padding-top: 8.8rem;
+}
+
+.evx-chapter__copy {
+  position: relative;
+  max-width: 56rem;
+}
+
+.evx-chapter__num {
+  display: block;
+  margin: 0 0 -0.12em -0.04em;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(9.6rem, 14vw, 20rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(var(--color-foreground), 0.32);
+  user-select: none;
+}
+
+.evx-chapter__eyebrow {
+  margin: 0 0 1.2rem;
+}
+
+.evx-chapter__heading {
+  margin: 0 0 3.2rem;
+  font-size: clamp(4rem, 5.2vw, 7.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+
+.evx-chapter__lead {
+  margin: 0 0 2.4rem;
+  font-size: clamp(1.9rem, 0.8vw + 1.6rem, 2.5rem);
+  line-height: 1.45;
+  font-weight: 500;
+  color: rgb(var(--color-foreground));
+}
+
+.evx-chapter__lead p,
+.evx-chapter__text p {
+  margin: 0 0 1.6rem;
+}
+
+.evx-chapter__lead p:last-child,
+.evx-chapter__text p:last-child {
+  margin-bottom: 0;
+}
+
+.evx-chapter__text {
+  font-size: 1.7rem;
+  line-height: 1.75;
+  color: rgba(var(--color-foreground), 0.78);
+}
+
+.evx-chapter__text strong {
+  color: rgb(var(--color-foreground));
+}
+
+.evx-chapter__statement {
+  margin-top: 4rem;
+  padding-top: 0;
+}
+
+.evx-chapter__statement::before {
+  width: 3.2rem;
+}
+
+.evx-chapter__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.6rem 2.8rem;
+  margin-top: 4rem;
+}
+
+.evx-chapter__link {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: var(--evx-tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  padding-bottom: 0.4rem;
+  transition: background-size 300ms var(--evx-ease);
+}
+
+.evx-chapter__link:hover {
+  background-size: 0 1px;
+  background-position: 100% 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .evx-chapter__content {
+    padding: 8rem 5rem;
+  }
+  .evx-chapter__inset {
+    right: 3.2rem;
+    bottom: -5.6rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .evx-chapter__grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  .evx-chapter--text-first .evx-chapter__media {
+    order: 2;
+  }
+  .evx-chapter__frame {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: min(92svh, 96rem);
+  }
+  .evx-chapter__inset {
+    bottom: 4.8rem;
+    right: 4.8rem;
+    width: 22rem;
+  }
+  .evx-chapter--text-first .evx-chapter__inset {
+    right: auto;
+    left: 4.8rem;
+  }
+  .evx-chapter__content,
+  .evx-chapter--inset .evx-chapter__content {
+    padding: 12rem clamp(5.6rem, 6vw, 10rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evx-opener__cue::after {
+    animation: none;
+    transform: none;
+  }
+  .evx-chapter__frame img {
+    transform: none;
+    transition: none;
+  }
+}

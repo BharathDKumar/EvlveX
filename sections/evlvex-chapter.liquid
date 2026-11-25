@@ -1,0 +1,295 @@
+{%- comment -%}
+  EvlveX — "Chapter": one chapter of a story told as an editorial spread.
+  Full-bleed photograph on one side (with an optional smaller inset photo), and on the other a large outlined
+  chapter number, eyebrow, bold heading, lead, story text, a bold closing statement and a link to the shoe.
+  Without uploaded images it shows the chosen model's own photography (snippets/evlvex-demo-image.liquid, `shoe`).
+  Styles: assets/evlvex-editorial.css. Spec: docs/spec/theme.md §4.
+{%- endcomment -%}
+
+{{ 'evlvex-editorial.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-margin {
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-margin {
+      margin-top: {{ section.settings.margin_top }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign reveal = ''
+  assign frame_trigger = ''
+  if settings.animations_reveal_on_scroll
+    assign reveal = ' scroll-trigger animate--slide-in'
+    assign frame_trigger = ' scroll-trigger'
+  endif
+
+  assign show_inset = false
+  if section.settings.show_inset
+    if section.settings.inset_image != blank or settings.evx_demo_images
+      assign show_inset = true
+    endif
+  endif
+
+  assign alt = section.settings.alt | default: section.settings.heading
+-%}
+
+<div
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="evx-chapter evx-chapter--{{ section.settings.layout }}{% if show_inset %} evx-chapter--inset{% endif %}{% if section.settings.top_rule %} evx-chapter--rule{% endif %} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-margin"
+  style="--evx-chapter-ratio: {{ section.settings.mobile_ratio }}; scroll-margin-top: 6rem;"
+>
+  <div class="evx-chapter__grid">
+    <div class="evx-chapter__media">
+      <div class="evx-chapter__frame{{ frame_trigger }}">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 2400
+            | image_tag:
+              widths: '450, 750, 1000, 1400, 1800, 2400',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              loading: 'lazy',
+              alt: alt
+          }}
+        {%- else -%}
+          {%- render 'evlvex-demo-image',
+            kind: 'product',
+            shoe: section.settings.shoe,
+            seed: section.id,
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            alt: alt
+          -%}
+        {%- endif -%}
+      </div>
+
+      {%- if show_inset -%}
+        <div class="evx-chapter__inset{{ reveal }}" style="--animation-order: 2;">
+          {%- if section.settings.inset_image != blank -%}
+            {{
+              section.settings.inset_image
+              | image_url: width: 800
+              | image_tag: widths: '300, 500, 800', sizes: '(min-width: 990px) 22rem, 38vw', loading: 'lazy', alt: ''
+            }}
+          {%- else -%}
+            {%- render 'evlvex-demo-image', kind: 'atelier', shoe: section.settings.shoe, seed: 1, sizes: '(min-width: 990px) 22rem, 38vw', alt: '' -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="evx-chapter__content">
+      <div class="evx-chapter__copy">
+        {%- if section.settings.number != blank -%}
+          <span class="evx-chapter__num{{ reveal }}" style="--animation-order: 0;" aria-hidden="true">
+            {{- section.settings.number | escape -}}
+          </span>
+        {%- endif -%}
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="evx-eyebrow evx-eyebrow--strong evx-chapter__eyebrow{{ reveal }}" style="--animation-order: 1;">
+            {{- section.settings.eyebrow | escape -}}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="evx-chapter__heading{{ reveal }}" style="--animation-order: 2;">
+            {{- section.settings.heading | escape -}}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.lead != blank -%}
+          <div class="evx-chapter__lead rte{{ reveal }}" style="--animation-order: 3;">{{ section.settings.lead }}</div>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="evx-chapter__text rte{{ reveal }}" style="--animation-order: 4;">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.statement != blank -%}
+          <p class="evx-statement evx-chapter__statement{{ reveal }}" style="--animation-order: 5;">
+            {{- section.settings.statement | escape -}}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank or section.settings.link_label != blank -%}
+          <div class="evx-chapter__actions{{ reveal }}" style="--animation-order: 6;">
+            {%- if section.settings.button_label != blank -%}
+              <a
+                {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+                class="button button--primary"
+              >
+                {{- section.settings.button_label | escape -}}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+              <a href="{{ section.settings.link }}" class="evx-chapter__link">{{ section.settings.link_label | escape }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "EvlveX chapter",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "One chapter as an editorial spread: photo on one side, the chapter's story on the other. Without an uploaded photo it shows the chosen model."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop layout",
+      "options": [
+        { "value": "image-first", "label": "Photo left, story right" },
+        { "value": "text-first", "label": "Story left, photo right" }
+      ],
+      "default": "image-first"
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor",
+      "info": "Lets links jump here, e.g. the-silent-grind → #the-silent-grind.",
+      "default": "the-silent-grind"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_rule",
+      "label": "Thin line above the section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Photography"
+    },
+    {
+      "type": "select",
+      "id": "shoe",
+      "label": "Model",
+      "info": "Used when no photo is uploaded.",
+      "options": [
+        { "value": "silent-grind", "label": "The Silent Grind" },
+        { "value": "fresh-start", "label": "A Fresh Start" }
+      ],
+      "default": "silent-grind"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo"
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Photo alt text",
+      "info": "Leave empty to use the heading."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inset",
+      "label": "Show a smaller detail photo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "inset_image",
+      "label": "Detail photo"
+    },
+    {
+      "type": "select",
+      "id": "mobile_ratio",
+      "label": "Photo shape on mobile",
+      "options": [
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 3", "label": "Landscape 4:3" }
+      ],
+      "default": "4 / 5"
+    },
+    {
+      "type": "header",
+      "content": "Story"
+    },
+    {
+      "type": "text",
+      "id": "number",
+      "label": "Chapter number",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Chapter 01"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Silent Grind"
+    },
+    {
+      "type": "richtext",
+      "id": "lead",
+      "label": "Lead",
+      "info": "Shown larger, before the story text."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Story text"
+    },
+    {
+      "type": "text",
+      "id": "statement",
+      "label": "Closing statement",
+      "info": "Bold, uppercase line after the story."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Second link label"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Second link"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Space above",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX chapter"
+    }
+  ]
+}
+{% endschema %}
