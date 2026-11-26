@@ -103,7 +103,7 @@
         "make"
       ],
       "settings": {
-        "tilt": true,
+        "tilt": false,
         "speed": 40
       }
     },
@@ -174,7 +174,7 @@
           "settings": {
             "title": "Original designs",
             "text": "Our own design, from the monogram to the sole.",
-            "invert": true
+            "invert": false
           }
         },
         "limited": {

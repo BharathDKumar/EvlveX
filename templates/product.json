@@ -97,12 +97,16 @@
             "page": ""
           }
         },
-        "assurance": {
-          "type": "evlvex_assurance",
+        "assurance-icons": {
+          "type": "icon-with-text",
           "settings": {
-            "line_1": "7-day returns & size exchange",
-            "line_2": "Ships in 1–2 working days",
-            "line_3": "Certificate in your name"
+            "layout": "vertical",
+            "icon_1": "return",
+            "heading_1": "7-day returns &amp; size exchange",
+            "icon_2": "truck",
+            "heading_2": "Ships in 1–2 working days",
+            "icon_3": "check_mark",
+            "heading_3": "Certificate in your name"
           }
         }
       },
@@ -115,7 +119,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "assurance",
+        "assurance-icons",
         "tab_materials",
         "tab_fit",
         "tab_care",
@@ -166,7 +170,7 @@
         "tape-make"
       ],
       "settings": {
-        "tilt": true,
+        "tilt": false,
         "speed": 40
       }
     },

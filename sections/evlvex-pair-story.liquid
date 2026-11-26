@@ -28,8 +28,7 @@
     assign photo_parts = photo | split: '|'
     assign word = s.title_solid | append: ' ' | append: s.title_outline | strip
   -%}
-  <div class="sd-sec sd-story sd-dark sd-grid-bg" id="EvlveXProductStory" {{ story.shopify_attributes }}>
-    <p class="sd-story__word sd-huge" aria-hidden="true">{{ word | escape }}</p>
+  <div class="sd-sec sd-story" id="EvlveXProductStory" {{ story.shopify_attributes }}>
     <div class="sd-story__grid">
       <div class="sd-story__img">
         {%- if s.image != blank -%}
@@ -66,7 +65,7 @@
         {%- endif -%}
         {%- if s.button_label != blank -%}
           <a
-            class="sd-pill sd-pill--light"
+            class="sd-pill"
             {% if s.button_link != blank %}href="{{ s.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
           >
             {{- s.button_label | escape -}}

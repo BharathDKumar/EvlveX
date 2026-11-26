@@ -85,17 +85,15 @@
             {%- else -%}
               {%- render 'evlvex-demo-image', kind: 'product', seed: forloop.index, alt: '' -%}
             {%- endif -%}
-            {%- if s.number != blank -%}
-              <span class="sd-item__num sd-huge">{{ s.number | escape }}</span>
-            {%- endif -%}
-            {%- if s.chip != blank -%}
-              <span class="sd-chip">{{ s.chip | escape }}</span>
-            {%- endif -%}
           </a>
 
           <div class="sd-item__body">
-            {%- if visible == 1 and s.chip != blank -%}
-              <span class="sd-chip sd-chip--fill" style="margin-bottom: 2rem;">{{ s.chip | escape }}</span>
+            {%- if s.number != blank or s.chip != blank -%}
+              <p class="sd-label">
+                {{- s.number | escape -}}
+                {%- if s.number != blank and s.chip != blank %} · {% endif -%}
+                {{- s.chip | escape -}}
+              </p>
             {%- endif -%}
             <h3 class="sd-item__title sd-huge"><a href="{{ url }}">{{ title | escape }}</a></h3>
             {%- if visible == 1 and s.lead != blank -%}
