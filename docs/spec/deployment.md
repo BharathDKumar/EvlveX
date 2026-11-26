@@ -36,9 +36,10 @@ The CLI runs on a packing-station computer, not on Shopify.
 - After any tooling update, run `npm test` and `npm run setup` (safe to repeat; it only adds what's missing).
 - **Automatic tag assignment** (`autopack`, [qr-tooling.md §5](qr-tooling.md)) runs on GitHub Actions, not on that computer: `.github/workflows/autopack.yml`, every 30 min. One-time setup:
   - [x] App scopes and setup, *done 27 Nov 2026*: the *EvlveX setup* app already has `write_orders`. `npm run setup` created the *Pack serials* order metafield. The order tag, metafield and certificate writes were tested on cancelled order #1002 and undone.
-  - [ ] Gmail account that sends the email: Google Account → **Security → 2-Step Verification** (turn on) → **App passwords** → create one named *EvlveX autopack*, and copy the 16 letters.
-  - [ ] GitHub → repo → **Settings → Secrets and variables → Actions → New repository secret**, six times: `SHOPIFY_STORE`, `SHOPIFY_CLIENT_ID`, `SHOPIFY_CLIENT_SECRET` (copy from `tools/qr-certificates/.env`), `SMTP_USER` (the Gmail address), `SMTP_PASS` (the app password), `MAIL_TO` (who gets the packing email).
+  - [ ] Zoho app password for support@evlvex.in: sign in at **accounts.zoho.in → Security → App Passwords → Generate New Password**, name it *EvlveX autopack*, and copy it. (If App Passwords is missing, turn on two-factor authentication there first. Zoho's **Forever Free** plan does not allow SMTP sending: check Zoho Mail → Settings → Subscription, and upgrade to Mail Lite or use another sender.)
+  - [ ] GitHub → repo → **Settings → Secrets and variables → Actions → New repository secret**, six times: `SHOPIFY_STORE`, `SHOPIFY_CLIENT_ID`, `SHOPIFY_CLIENT_SECRET` (copy from `tools/qr-certificates/.env`), `SMTP_USER` (`support@evlvex.in`), `SMTP_PASS` (the Zoho app password), `MAIL_TO` (who gets the packing email).
   - [ ] GitHub → **Actions → Autopack QR tags → Run workflow**, with *Dry run* ticked. The log should end with "Nothing to do." or a list of orders.
+  - [ ] Same screen: **Run workflow** with *Test email* ticked. A test email should arrive at `MAIL_TO`. If the run fails, its log says why (wrong password, or SMTP not allowed on the Zoho plan).
 
 ## 4. Release order
 1. Run `npm run setup` (definitions must exist before the theme templates can be selected).

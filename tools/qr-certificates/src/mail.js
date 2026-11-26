@@ -1,14 +1,15 @@
-// Staff email for `autopack` (docs/spec/qr-tooling.md §5). Uses any SMTP account; Gmail with an app password by default.
+// Staff email for `autopack` (docs/spec/qr-tooling.md §5). Uses any SMTP account; by default EvlveX's Zoho
+// mailbox (organisation account, India data centre: smtppro.zoho.in) with a Zoho app password.
 import nodemailer from 'nodemailer';
 import './config.js'; // loads .env before the settings below are read
 
 const env = process.env;
 
 export const mailConfig = {
-  host: (env.SMTP_HOST || 'smtp.gmail.com').trim(),
+  host: (env.SMTP_HOST || 'smtppro.zoho.in').trim(),
   port: Number.parseInt(env.SMTP_PORT || '465', 10),
   user: (env.SMTP_USER || '').trim(),
-  // Gmail shows app passwords in groups of four ("abcd efgh ijkl mnop"); spaces are not part of it.
+  // App passwords are often shown in groups of four ("abcd efgh ijkl"); the spaces are not part of them.
   pass: (env.SMTP_PASS || '').replace(/\s+/g, ''),
   to: (env.MAIL_TO || env.SMTP_USER || '').trim(),
 };

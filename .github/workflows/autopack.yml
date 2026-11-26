@@ -12,6 +12,10 @@ on:
         description: 'Dry run: show what would happen, change nothing'
         type: boolean
         default: false
+      test_mail:
+        description: 'Only send a test email (checks the Zoho / SMTP settings)'
+        type: boolean
+        default: false
 
 concurrency:
   group: autopack
@@ -33,8 +37,9 @@ jobs:
         working-directory: .
         env:
           SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+          TEST_MAIL: ${{ inputs.test_mail }}
         run: |
-          if [ -z "$SHOPIFY_STORE" ]; then
+          if [ -z "$SHOPIFY_STORE" ] && [ "$TEST_MAIL" != "true" ]; then
             echo "::notice::Secrets are not set yet (docs/spec/deployment.md §3), so autopack was skipped."
             echo "ready=false" >> "$GITHUB_OUTPUT"
           else
@@ -51,8 +56,11 @@ jobs:
       - if: steps.secrets.outputs.ready == 'true'
         run: npm ci --omit=dev
       - if: steps.secrets.outputs.ready == 'true'
-        run: npm run autopack -- ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: npm run autopack -- ${{ inputs.test_mail && '--test-mail' || (inputs.dry_run && '--dry-run' || '') }}
         env:
+          # EvlveX mail is on Zoho (organisation account, India). Override with repository variables if it moves.
+          SMTP_HOST: ${{ vars.SMTP_HOST || 'smtppro.zoho.in' }}
+          SMTP_PORT: ${{ vars.SMTP_PORT || '465' }}
           SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
           SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
           SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
