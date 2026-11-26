@@ -1,0 +1,61 @@
+# Gives every new order its QR tag and emails which serial to pack (docs/spec/qr-tooling.md §5).
+# Every 30 minutes: about 1,490 Actions minutes a month, inside GitHub Free's 2,000 for private repos.
+# Do not make it more frequent: every 15 minutes would use up the free minutes and GitHub would stop the job.
+name: Autopack QR tags
+
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: show what would happen, change nothing'
+        type: boolean
+        default: false
+
+concurrency:
+  group: autopack
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  autopack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: tools/qr-certificates
+    steps:
+      - name: Check secrets
+        id: secrets
+        working-directory: .
+        env:
+          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+        run: |
+          if [ -z "$SHOPIFY_STORE" ]; then
+            echo "::notice::Secrets are not set yet (docs/spec/deployment.md §3), so autopack was skipped."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.secrets.outputs.ready == 'true'
+        uses: actions/checkout@v4
+      - if: steps.secrets.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tools/qr-certificates/package-lock.json
+      - if: steps.secrets.outputs.ready == 'true'
+        run: npm ci --omit=dev
+      - if: steps.secrets.outputs.ready == 'true'
+        run: npm run autopack -- ${{ inputs.dry_run && '--dry-run' || '' }}
+        env:
+          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+          SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+          SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}

@@ -3,9 +3,10 @@
 //   1. `evlvex_certificate` metaobject definition  → /pages/<URL_PREFIX>/<serial>
 //   2. `evlvex_story` metaobject definition        → /pages/stories/<handle>
 //   3. `evlvex.story` product metafield            → links each product to its story
+//   4. `evlvex.pack_serials` order metafield       → serials to pack, written by `autopack`
 // Safe to re-run: existing definitions are checked, and missing fields are added.
 import { config, fail } from './config.js';
-import { certificateDefinition, diffDefinition, storyDefinition } from './definitions.js';
+import { PACK_SERIALS_DEFINITION, certificateDefinition, diffDefinition, storyDefinition } from './definitions.js';
 import { assertNoUserErrors, gql } from './shopify.js';
 
 await ensureMetaobjectDefinition(certificateDefinition({ type: config.type, urlPrefix: config.urlPrefix }));
@@ -13,6 +14,7 @@ const story = await ensureMetaobjectDefinition(
   storyDefinition({ type: config.storyType, urlPrefix: config.storyUrlPrefix })
 );
 await ensureProductStoryMetafield(story.id);
+await ensureOrderPackMetafield();
 
 console.log(`
 ✔ Setup complete.
@@ -121,4 +123,35 @@ async function ensureProductStoryMetafield(storyDefinitionId) {
   );
   assertNoUserErrors(created.metafieldDefinitionCreate, `Creating product metafield ${namespace}.${key}`);
   console.log(`✔ Created product metafield "${namespace}.${key}" (Story).`);
+}
+
+async function ensureOrderPackMetafield() {
+  const { namespace, key, type } = PACK_SERIALS_DEFINITION;
+  try {
+    const data = await gql(
+      `query($namespace: String!, $key: String!) {
+        metafieldDefinitions(first: 1, ownerType: ORDER, namespace: $namespace, key: $key) { nodes { id type { name } } }
+      }`,
+      { namespace, key }
+    );
+    const existing = data.metafieldDefinitions.nodes[0];
+    if (existing) {
+      if (existing.type.name !== type) {
+        fail(`Fix the order metafield ${namespace}.${key} in Admin → Settings → Custom data → Orders: type is ${existing.type.name}, expected ${type}`);
+      }
+      console.log(`✔ Order metafield "${namespace}.${key}" looks correct.`);
+      return;
+    }
+    const created = await gql(
+      `mutation($definition: MetafieldDefinitionInput!) {
+        metafieldDefinitionCreate(definition: $definition) { createdDefinition { id } userErrors { field message code } }
+      }`,
+      { definition: PACK_SERIALS_DEFINITION }
+    );
+    assertNoUserErrors(created.metafieldDefinitionCreate, `Creating order metafield ${namespace}.${key}`);
+    console.log(`✔ Created order metafield "${namespace}.${key}" (Pack serials).`);
+  } catch (error) {
+    // Needs the write_orders scope, which older installs of the app do not have yet.
+    console.warn(`⚠  Order metafield "${namespace}.${key}" not set up: ${error.message}\n   Add the read_orders + write_orders scopes to the app, then run npm run setup again.`);
+  }
 }

@@ -13,9 +13,11 @@
     "assign": "node src/assign.js",
     "lookup": "node src/lookup.js",
     "merge": "node src/merge.js",
+    "autopack": "node src/autopack.js",
     "test": "node --test \"test/*.test.js\""
   },
   "dependencies": {
+    "nodemailer": "^10.6.1",
     "pdfkit": "^0.15.0",
     "qrcode": "^1.5.4"
   },

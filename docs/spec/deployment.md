@@ -34,6 +34,11 @@ The CLI runs on a packing-station computer, not on Shopify.
 - Install and configure it per [qr-tooling.md §1](qr-tooling.md).
 - `.env` holds the Admin API token: keep it on that machine only, never commit it, and rotate it if the machine is replaced.
 - After any tooling update, run `npm test` and `npm run setup` (safe to repeat; it only adds what's missing).
+- **Automatic tag assignment** (`autopack`, [qr-tooling.md §5](qr-tooling.md)) runs on GitHub Actions, not on that computer: `.github/workflows/autopack.yml`, every 30 min. One-time setup:
+  - [x] App scopes and setup, *done 27 Nov 2026*: the *EvlveX setup* app already has `write_orders`. `npm run setup` created the *Pack serials* order metafield. The order tag, metafield and certificate writes were tested on cancelled order #1002 and undone.
+  - [ ] Gmail account that sends the email: Google Account → **Security → 2-Step Verification** (turn on) → **App passwords** → create one named *EvlveX autopack*, and copy the 16 letters.
+  - [ ] GitHub → repo → **Settings → Secrets and variables → Actions → New repository secret**, six times: `SHOPIFY_STORE`, `SHOPIFY_CLIENT_ID`, `SHOPIFY_CLIENT_SECRET` (copy from `tools/qr-certificates/.env`), `SMTP_USER` (the Gmail address), `SMTP_PASS` (the app password), `MAIL_TO` (who gets the packing email).
+  - [ ] GitHub → **Actions → Autopack QR tags → Run workflow**, with *Dry run* ticked. The log should end with "Nothing to do." or a list of orders.
 
 ## 4. Release order
 1. Run `npm run setup` (definitions must exist before the theme templates can be selected).
