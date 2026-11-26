@@ -1145,3 +1145,250 @@ evlvex-drop-hero :is(p, h2, h3) {
     transition: none;
   }
 }
+
+/* ==========================================================================
+   v1.15: compact product cards with a hover gallery, compact "other chapter",
+   product page gallery arrows, Shiprocket tracking form
+   ========================================================================== */
+
+/* The drop: normal shop-grid size (three per row on desktop, two on phones) */
+.sd-drop {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.4rem;
+}
+
+.sd-item__media {
+  aspect-ratio: 4 / 5;
+}
+
+.sd-item__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.45s var(--sd-ease), transform 1.2s var(--sd-ease);
+}
+
+.sd-item__slide.is-on {
+  opacity: 1;
+}
+
+.sd-item:hover .sd-item__media img {
+  transform: none;
+}
+
+.sd-item__dots {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 1.2rem;
+  display: flex;
+  gap: 0.5rem;
+  transform: translateX(-50%);
+}
+
+.sd-item__dots i {
+  width: 1.6rem;
+  height: 0.2rem;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background-color 0.3s var(--sd-ease);
+}
+
+.sd-item__dots i.is-on {
+  background: rgb(255, 255, 255);
+}
+
+.sd-item__body {
+  padding: 2rem 2rem 2.4rem;
+}
+
+.sd-item__title {
+  margin: 0.6rem 0 1.4rem;
+  font-size: 1.6rem;
+}
+
+.sd-item .sd-table > div {
+  padding: 0.8rem 0;
+  font-size: 1.3rem;
+}
+
+.sd-item__buy {
+  padding-top: 1.6rem;
+}
+
+.sd-item__price {
+  font-size: 1.6rem;
+}
+
+.sd-item .sd-pill {
+  min-height: 4rem;
+  padding: 0 2rem;
+  font-size: 1.1rem;
+}
+
+/* The other chapter: one compact card */
+.sd-drop--wide {
+  grid-template-columns: 1fr;
+  max-width: 84rem;
+}
+
+.sd-drop--wide .sd-item {
+  grid-template-columns: 1fr 1.2fr;
+}
+
+.sd-drop--wide .sd-item__media {
+  aspect-ratio: 4 / 5;
+  min-height: 0;
+}
+
+.sd-drop--wide .sd-item__body {
+  padding: 3.2rem;
+}
+
+.sd-drop--wide .sd-item__title {
+  font-size: 2.4rem;
+}
+
+/* Product page: arrows and counter on the main image (desktop) */
+.sd-gallery-nav {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  .sd-gallery-nav {
+    position: absolute;
+    z-index: 3;
+    right: 1.6rem;
+    bottom: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem;
+    border-radius: 4rem;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .sd-gallery-nav__btn {
+    width: 3.6rem;
+    height: 3.6rem;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: rgb(var(--sd-ink));
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+
+  .sd-gallery-nav__btn:hover {
+    background: rgb(var(--sd-sand));
+  }
+
+  .sd-gallery-nav__count {
+    min-width: 4.4rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  slider-component[id^='GalleryViewer'] {
+    position: relative;
+  }
+}
+
+/* Shiprocket tracking form (sections/evlvex-track.liquid) */
+.sd-track {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4rem;
+  background: rgb(var(--sd-sand));
+  text-align: center;
+}
+
+.sd-track__title {
+  margin: 0.8rem 0 1.2rem;
+  font-size: clamp(2.4rem, 2.6vw, 3.2rem);
+}
+
+.sd-track__form {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 2.4rem;
+}
+
+.sd-track__input {
+  flex: 1;
+  min-width: 0;
+  height: 4.8rem;
+  padding: 0 1.6rem;
+  border: 1px solid rgb(var(--sd-sand-line));
+  background: rgb(var(--sd-paper));
+  font: inherit;
+  font-size: 1.5rem;
+}
+
+.sd-track__note {
+  margin-top: 1.6rem;
+  font-size: 1.3rem;
+  color: var(--sd-muted) !important;
+}
+
+@media screen and (max-width: 989px) {
+  .sd-drop {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .sd-drop {
+    gap: 1.2rem;
+  }
+
+  .sd-item__body {
+    padding: 1.4rem 1.2rem 1.6rem;
+  }
+
+  .sd-item__title {
+    font-size: 1.3rem;
+  }
+
+  .sd-item .sd-table {
+    display: none;
+  }
+
+  .sd-item__buy {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .sd-item .sd-pill {
+    width: 100%;
+  }
+
+  .sd-drop--wide .sd-item {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sd-drop--wide .sd-item .sd-table {
+    display: none;
+  }
+
+  .sd-drop--wide .sd-item__lead {
+    display: none;
+  }
+
+  .sd-drop--wide .sd-item__title {
+    font-size: 1.6rem;
+  }
+
+  .sd-track {
+    padding: 2.8rem 2rem;
+  }
+
+  .sd-track__form {
+    flex-direction: column;
+  }
+}

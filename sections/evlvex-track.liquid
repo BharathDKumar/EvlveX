@@ -1,0 +1,100 @@
+{%- comment -%}
+  EvlveX — "Track your order": the customer types the tracking (AWB) number from the dispatch email or SMS and is
+  taken to the courier partner's public tracking page (Shiprocket by default: https://shiprocket.co/tracking/{number}).
+  The address pattern is a setting, so a branded Shiprocket tracking page can be used instead.
+  Styles: assets/evlvex-street.css (.sd-track).
+{%- endcomment -%}
+
+{%- assign pattern = section.settings.url_pattern | default: 'https://shiprocket.co/tracking/{number}' -%}
+
+<div class="sd-sec">
+  <div class="sd-track">
+    {%- if section.settings.label != blank -%}
+      <p class="sd-label">{{ section.settings.label | escape }}</p>
+    {%- endif -%}
+    <h2 class="sd-track__title sd-huge">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p class="sd-track__note" style="margin-top: 0;">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+    <form
+      class="sd-track__form"
+      action="#"
+      data-pattern="{{ pattern | escape }}"
+      onsubmit="event.preventDefault(); var n = this.elements.awb.value.trim(); if (n) { window.open(this.dataset.pattern.replace('{number}', encodeURIComponent(n)), '_blank', 'noopener'); }"
+    >
+      <label class="visually-hidden" for="SdTrack-{{ section.id }}">{{ section.settings.placeholder | escape }}</label>
+      <input
+        class="sd-track__input"
+        id="SdTrack-{{ section.id }}"
+        name="awb"
+        type="text"
+        inputmode="text"
+        autocomplete="off"
+        required
+        placeholder="{{ section.settings.placeholder | escape }}"
+      >
+      <button type="submit" class="sd-pill">{{ section.settings.button_label | escape }}</button>
+    </form>
+    {%- if section.settings.note != blank -%}
+      <p class="sd-track__note">{{ section.settings.note | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "EvlveX track order",
+  "tag": "section",
+  "class": "section sd-track-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Live tracking"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Track your pair"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Enter the tracking number from your dispatch email or SMS."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Field placeholder",
+      "default": "Tracking (AWB) number"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Track"
+    },
+    {
+      "type": "text",
+      "id": "url_pattern",
+      "label": "Tracking page address",
+      "info": "{number} is replaced by what the customer types. Shiprocket: https://shiprocket.co/tracking/{number}. A branded Shiprocket tracking page can be used instead.",
+      "default": "https://shiprocket.co/tracking/{number}"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note under the form",
+      "default": "Opens the courier's live tracking page in a new tab."
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX track order"
+    }
+  ]
+}
+{% endschema %}
