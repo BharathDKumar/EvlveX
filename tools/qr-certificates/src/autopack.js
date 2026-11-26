@@ -16,6 +16,7 @@ const { values: args } = parseArgs({
   options: {
     'dry-run': { type: 'boolean', default: false },
     'no-mail': { type: 'boolean', default: false },
+    'test-mail': { type: 'boolean', default: false },
     days: { type: 'string', default: '30' },
     help: { type: 'boolean', short: 'h', default: false },
   },
@@ -26,7 +27,22 @@ if (args.help) {
   npm run autopack                 reserve tags for new orders, name shipped ones, release cancelled ones
   npm run autopack -- --dry-run    show what would happen; change nothing, send no email
        [--days 30]                 how far back to look at orders (max 60 without read_all_orders)
-       [--no-mail]                 do not send the packing email`);
+       [--no-mail]                 do not send the packing email
+  npm run autopack -- --test-mail  only send a test email (checks the SMTP settings)`);
+  process.exit(0);
+}
+
+if (args['test-mail']) {
+  if (!mailEnabled()) fail('Set SMTP_USER, SMTP_PASS and MAIL_TO first (docs/spec/qr-tooling.md §1).');
+  try {
+    await sendMail({
+      subject: 'EvlveX autopack: test email',
+      text: 'This is a test from the EvlveX autopack job. Packing emails ("Pack #1001 → EVX-…") will arrive the same way.\n',
+    });
+  } catch (error) {
+    fail(`The test email was not sent via ${mailConfig.host}:${mailConfig.port}: ${error.message}\n  Check SMTP_USER, the app password and SMTP_HOST. Zoho's free plan does not allow SMTP sending.`);
+  }
+  console.log(`✔ Test email sent via ${mailConfig.host} to ${mailConfig.to.replace(/^(.).*(@.*)$/, '$1…$2')}.`);
   process.exit(0);
 }
 

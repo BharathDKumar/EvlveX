@@ -21,9 +21,9 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 | `PUBLIC_DOMAIN` | `evlvex.in` | domain encoded in every QR ([deployment.md §1](deployment.md)) |
 | `METAOBJECT_TYPE` | `evlvex_certificate` | must match [qr-certificates.md §5.1](qr-certificates.md) |
 | `URL_PREFIX` | `authentic` | must match the metaobject's Online Store URL handle |
-| `SMTP_USER` / `SMTP_PASS` | `…@gmail.com` / app password | account that sends the `autopack` packing email. For Gmail, use an **app password** (Google Account → Security → 2-Step Verification → App passwords), never the account password. Optional: without them, no email is sent |
+| `SMTP_USER` / `SMTP_PASS` | `support@evlvex.in` / app password | Zoho mailbox that sends the `autopack` packing email. Use a **Zoho app password** (accounts.zoho.in → Security → App Passwords), never the mailbox password. Zoho's free plan does not allow SMTP. Optional: without them, no email is sent |
 | `MAIL_TO` | `support@evlvex.in` | who receives the packing email (default: `SMTP_USER`) |
-| `SMTP_HOST` / `SMTP_PORT` | `smtp.gmail.com` / `465` | only for a mail provider other than Gmail |
+| `SMTP_HOST` / `SMTP_PORT` | `smtppro.zoho.in` / `465` | default: Zoho organisation account, India data centre. Change only if the mail moves (e.g. `smtppro.zoho.com`, or Gmail `smtp.gmail.com`); on GitHub set them as repository **variables** |
 
 ## 2. Commands
 | Command | What it does |
