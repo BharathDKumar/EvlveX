@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| **Status** | v1.13 — Simpler copy (supersedes v1.12) |
-| **Date** | 25 Nov 2026 |
+| **Status** | v1.14 — Refined look (supersedes v1.13) |
+| **Date** | 26 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
 
@@ -101,7 +101,8 @@ The website must:
 | v1.10 | 25 Nov 2026 | About & Story literature: the brand's new texts word for word: *About EvlveX* (the name comes from Evolution) and the Story page (COMEBACK, Chapter 01 The Silent Grind, Chapter 02 A Fresh Start). Both pages rebuilt as editorial pages with two new sections: a cinematic opener and an editorial chapter spread (full-bleed photo, detail photo, outlined chapter number, bold closing statement); each chapter always shows its own shoe |
 | v1.11 | 25 Nov 2026 | Light film & wordmark header: the header shows the EvlveX wordmark alone (no monogram); the home COMEBACK film moves from black to a soft light studio gradient (near-white to light cool grey, editable in the theme editor) with black copy |
 | v1.12 | 25 Nov 2026 | Street Drop: home and product pages redesigned in a bold sneaker-drop style chosen from four design directions: a carousel hero (giant condensed word, tilted photo card, sticker, spec labels), a tilted ticker tape, spec-sheet product cards with live prices, a boxed "standard", a black manifesto, an authenticity teaser with an example hang tag, pill-shaped header menu; on the product page a condensed title, boxed sizes, assurance chips, the story of the pair and the other chapter. Condensed type is Archivo variable, self-hosted. (The earlier editorial-film branch was not merged.) |
-| **v1.13** | **25 Nov 2026** | **Simpler copy:** every fact said once per page, in short lines: one announcement (free shipping · 7-day size exchange); the ticker tape becomes a mood line (COMEBACK ✦ Every pair has a story ✦ Make your comeback); shorter Standard, manifesto and authenticity texts; product cards show colourway and sizes only; product assurance chips no longer repeat free shipping; About keeps only the name, the belief, the main concept and the closing essay |
+| v1.13 | 25 Nov 2026 | Simpler copy: every fact said once per page, in short lines: one announcement (free shipping · 7-day size exchange); the ticker tape becomes a mood line (COMEBACK ✦ Every pair has a story ✦ Make your comeback); shorter Standard, manifesto and authenticity texts; product cards show colourway and sizes only; product assurance chips no longer repeat free shipping; About keeps only the name, the belief, the main concept and the closing essay |
+| **v1.14** | **26 Nov 2026** | **Refined look:** calm and professional: white and warm sand (#F3EEE6) surfaces, black for actions and dark bands (no other accent colour), sand hairlines instead of thick black frames, one font (Archivo) at a restrained scale, plain text menu, straight slim tape, no grid paper or stickers. The home hero keeps the giant half-outlined word behind the tilted card, on sand. Product page: assurance lines use Dawn's icon-with-text block (the custom block was refused by Shopify); the full product template is live for the first time. `tools/validate-templates.js` now also flags block ids that equal a section id |
 
 Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
 
