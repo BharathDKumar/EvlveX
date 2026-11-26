@@ -33,6 +33,16 @@ export const STORY_FIELDS = [
   { key: 'products', name: 'Products', type: 'list.product_reference', description: 'Every product (colorway) of this model.' },
 ];
 
+/** `evlvex.pack_serials` on orders: written by `autopack`, read by staff in Admin and on the packing slip. */
+export const PACK_SERIALS_DEFINITION = {
+  name: 'Pack serials',
+  namespace: 'evlvex',
+  key: 'pack_serials',
+  ownerType: 'ORDER',
+  type: 'multi_line_text_field',
+  description: 'The QR tag serial(s) to pack with this order. Filled in automatically by autopack. See docs/spec/qr-tooling.md §5.',
+};
+
 export function certificateDefinition({ type, urlPrefix }) {
   return {
     name: 'EvlveX Certificate',

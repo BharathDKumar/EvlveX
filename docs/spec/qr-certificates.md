@@ -12,20 +12,19 @@ Covers what the certificate does, the data it uses and the privacy rules. The CL
 1. **Owner:** *As the buyer, when I scan the tag in my shoe, I see a page thanking me by name, telling me the story of my pair and confirming it is genuine.*
 2. **Gift recipient:** *When I scan a pair given to me, I see my name and the giver's message.*
 3. **Resale buyer / curious person:** *When I scan or enter a serial, I can confirm the pair is a genuine EvlveX and read its story.*
-4. **Packing staff:** *When I pack an order, I link the pair's serial to the order in under 60 seconds.*
+4. **Packing staff:** *When an order comes in, I am emailed which serial to pack, so I take that box. The tag is linked to the order without my doing anything ([qr-tooling.md §5](qr-tooling.md)). By hand, it takes under 60 seconds.*
 5. **Production:** *I can generate and print a batch of unique tags before the shoes are finished.*
 6. **Copywriter / brand:** *I can publish a new model story and link it to its products without a developer.*
 
 ### 1.2 How it works
 ```
-Production                 Factory                Packing                      Customer
-──────────                 ───────                ───────                      ────────
-generate batch  ──►  tag sewn/stuck  ──►  pair inspected ──►  assign serial  ──►  scan QR
-(serials created          in each pair      (pair note         to order               │
- in Shopify, QR                             optional)            (name, product,        ▼
- PDF printed)                                                      size, date)       /pages/authentic/<serial>
-                                                                                   "Thank you, Priya Sharma"
-                                                                                   + the story of this pair
+Production               Factory            Order placed            Packing               Shipped                Customer
+──────────               ───────            ────────────            ───────               ───────                ────────
+generate from  ──►  tag sewn/stuck  ──►  autopack reserves  ──►  staff pack the  ──►  order fulfilled:  ──►  scan QR
+stock list          in each pair         a free tag of that      emailed serial        autopack adds the          │
+(product, size,     (box sticker =       model + size and                              buyer's name               ▼
+ pair no.; PDF)      same serial)        emails the serial                                                    /pages/authentic/<serial>
+                                                                                                             "Thank you, Priya Sharma"
 ```
 
 ### 1.3 Formats
@@ -45,7 +44,7 @@ Template: `templates/metaobject/evlvex_certificate.json`.
 | State | When | Page shows |
 |---|---|---|
 | **Assigned** | `buyer_name` is filled | Monogram seal · "Certificate of Authenticity" · **"Thank you, {buyer_name}"** · thank-you message (§3) · personal message (if any) · product image + name · **"The Story of Your Pair"**: pair number (only when the section setting *Show the pair number* is on; off since 25 Nov 2026), artisan, finished on, pair note (each only if present) · model story excerpt + "Read the full story" (§5) · size · purchase date · serial · "Genuine EvlveX" seal · buttons: *Care for your pair*, *Discover the collection* |
-| **Unassigned** | entry exists, no buyer yet | Monogram seal · "Genuine EvlveX" · "This pair is authentic. Its story is waiting for its owner." · product and pair chapter (if already recorded) · model story excerpt (if product is set) · serial · *Discover the collection* |
+| **Unassigned** | entry exists, no buyer yet (also while it is *reserved* for an order: `order_number` set, name added when the order is fulfilled) | Monogram seal · "Genuine EvlveX" · "This pair is authentic. Its story is waiting for its owner." · product and pair chapter (if already recorded) · model story excerpt (if product is set) · serial · *Discover the collection* |
 | **Unknown serial** | no entry with that handle | Shopify 404 page (with the "Verify your serial" link) |
 
 ## 3. Thank-you copy (editable in the theme editor)
@@ -98,6 +97,10 @@ Created by `npm run setup` ([qr-tooling.md §1](qr-tooling.md)), or manually in 
 Entries are created as **Active**, so a tag scanned before the pair is sold still shows a valid "genuine" page.
 
 `pair_number`, `artisan`, `finished_on` and `pair_note` belong to the **pair**, not the owner: un-assigning a pair keeps them.
+
+**Tag states** (from `autopack`, [qr-tooling.md §5](qr-tooling.md)): *free* = no `buyer_name` and no `order_number`; *reserved* = `order_number` only; *assigned* = `buyer_name` set.
+
+**Order metafield `evlvex.pack_serials`** (multi-line text, *Pack serials*): created by `npm run setup` and written by `autopack`. It holds one line per tag to pack, e.g. `EVX-7F3K9QMD · The Silent Grind · UK 8 · No. 0012`. Staff can see it in Admin; customers never do.
 
 ### 5.2 Story metaobject
 Each model story ([brand-and-content.md §6](brand-and-content.md)) is stored once and shared by the story page, the product page and every certificate of that model.

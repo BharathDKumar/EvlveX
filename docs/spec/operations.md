@@ -31,7 +31,16 @@ When a pair is finished, the artisan fills in a **workshop card** (printed card,
 The card stays in the box and travels to the customer. The pair number is assigned at packing (§3).
 
 ## 3. Assign a pair at packing
-**Option A: CLI (recommended, ~20 s)**
+**Automatic (default, since 27 Nov 2026)**
+1. About 30–45 min after an order, you get an email like **"Pack #1001 → EVX-7F3K9QMD"**. The same serial is on the order in Admin: in its tags and under **Metafields → Pack serials**.
+2. Take the box whose sticker shows **that serial** (it is already the right model and size) and pack it. In a hurry? Press **Run workflow** in GitHub → Actions → *Autopack QR tags*, or run `npm run autopack`.
+3. Mark the order **fulfilled** (Shiprocket does this when it ships). Within 30 min the buyer's name appears on the QR page. Until then the page only says the pair is genuine.
+4. If the email says **NO TAG** for an order, no free tag of that size is left. Pick any untagged box of that model and size, then use Option A or B below.
+5. If the order is cancelled before it ships, the tag is released automatically and goes back on the shelf.
+
+Packed a different box by mistake? Run `npm run assign -- --serial <the box you packed> --order 1001 --force`, then free the emailed serial with `npm run assign -- --serial <emailed serial> --clear` and put its size back ([§4](#4-corrections)).
+
+**Option A: CLI by hand (~20 s)**
 ```
 npm run assign -- --serial EVX-7F3K9QMD --order 1001 --size "UK 8"
 ```

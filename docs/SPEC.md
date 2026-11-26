@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| **Status** | v1.14 — Refined look (supersedes v1.13) |
-| **Date** | 26 Nov 2026 |
+| **Status** | v1.15 — Automatic tag assignment (supersedes v1.14) |
+| **Date** | 27 Nov 2026 |
 | **Platform** | Shopify (Dawn 16.1.1 theme, customised) + Node.js QR tooling |
 | **Audience** | EvlveX team, developers, operations / packing staff, photographers & copywriters |
 
@@ -16,7 +16,7 @@ This file is the entry point. The detail lives in separate files, one per area.
 | [brand-and-content.md](spec/brand-and-content.md) | Logo, palette, typography, tone of voice, imagery, the COMEBACK story and its chapters, each pair's chapter, site copy | brand, copy, photography |
 | [theme.md](spec/theme.md) | **Website code:** theme settings, site map, page and section specs, implementation rules, theme build changes | theme developers |
 | [qr-certificates.md](spec/qr-certificates.md) | Certificate feature: user stories, formats, page states, privacy, **data models** (certificate, story, story slide, product metafields) | developers, brand |
-| [qr-tooling.md](spec/qr-tooling.md) | **Tooling code:** CLI setup, commands, `assign` behaviour, outputs, tooling code changes | developers, ops |
+| [qr-tooling.md](spec/qr-tooling.md) | **Tooling code:** CLI setup, commands, `assign` behaviour, outputs, **automatic tag assignment (`autopack`)**, tooling code changes | developers, ops |
 | [operations.md](spec/operations.md) | Runbook: printing tags, assigning pairs, corrections, publishing stories | production, packing, brand |
 | [deployment.md](spec/deployment.md) | **Deployment:** domain, GitHub-connected theme workflow, template validation, tooling install, release order, store setup checklist | developers, store owner |
 | [marketing/comeback-ads.md](marketing/comeback-ads.md) | Ready-to-paste Google Ads and Meta ad copy for the limited-edition COMEBACK series (every line checked against the platform limits), keywords, audiences, tracking links | marketing, store owner |
@@ -102,8 +102,9 @@ The website must:
 | v1.11 | 25 Nov 2026 | Light film & wordmark header: the header shows the EvlveX wordmark alone (no monogram); the home COMEBACK film moves from black to a soft light studio gradient (near-white to light cool grey, editable in the theme editor) with black copy |
 | v1.12 | 25 Nov 2026 | Street Drop: home and product pages redesigned in a bold sneaker-drop style chosen from four design directions: a carousel hero (giant condensed word, tilted photo card, sticker, spec labels), a tilted ticker tape, spec-sheet product cards with live prices, a boxed "standard", a black manifesto, an authenticity teaser with an example hang tag, pill-shaped header menu; on the product page a condensed title, boxed sizes, assurance chips, the story of the pair and the other chapter. Condensed type is Archivo variable, self-hosted. (The earlier editorial-film branch was not merged.) |
 | v1.13 | 25 Nov 2026 | Simpler copy: every fact said once per page, in short lines: one announcement (free shipping · 7-day size exchange); the ticker tape becomes a mood line (COMEBACK ✦ Every pair has a story ✦ Make your comeback); shorter Standard, manifesto and authenticity texts; product cards show colourway and sizes only; product assurance chips no longer repeat free shipping; About keeps only the name, the belief, the main concept and the closing essay |
-| **v1.14** | **26 Nov 2026** | **Refined look:** calm and professional: white and warm sand (#F3EEE6) surfaces, black for actions and dark bands (no other accent colour), sand hairlines instead of thick black frames, one font (Archivo) at a restrained scale, plain text menu, straight slim tape, no grid paper or stickers. The home hero keeps the giant half-outlined word behind the tilted card, on sand. Product page: assurance lines use Dawn's icon-with-text block (the custom block was refused by Shopify); the full product template is live for the first time. `tools/validate-templates.js` now also flags block ids that equal a section id |
+| v1.14 | 26 Nov 2026 | Refined look: calm and professional: white and warm sand (#F3EEE6) surfaces, black for actions and dark bands (no other accent colour), sand hairlines instead of thick black frames, one font (Archivo) at a restrained scale, plain text menu, straight slim tape, no grid paper or stickers. The home hero keeps the giant half-outlined word behind the tilted card, on sand. Product page: assurance lines use Dawn's icon-with-text block (the custom block was refused by Shopify); the full product template is live for the first time. `tools/validate-templates.js` now also flags block ids that equal a section id |
+| **v1.15** | **27 Nov 2026** | **Automatic tag assignment:** the system picks the QR tag, not the packer. For each new order, `npm run autopack` (GitHub Actions, every 30 min, free) reserves a free tag of the same model and UK size and emails staff "Pack #1001 → EVX-…". The serial also goes on the order's tags and in its *Pack serials* metafield. The buyer's name goes on the certificate only once the order is **fulfilled**; a cancelled order releases its tag. `assign` stays as the manual fallback. Admin steps: [deployment.md §3](spec/deployment.md); behaviour: [qr-tooling.md §5](spec/qr-tooling.md) |
 
-Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §5](spec/qr-tooling.md).
+Files changed per version are listed where they belong: theme [theme.md §6](spec/theme.md), QR tooling [qr-tooling.md §6](spec/qr-tooling.md).
 
 Still to do: store setup ([deployment.md §5](spec/deployment.md)). That means creating the products, metaobject definitions and entries, pages, collections and menus, and running `npm run setup` on the packing computer.

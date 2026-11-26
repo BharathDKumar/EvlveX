@@ -7,14 +7,14 @@
 import { parseArgs } from 'node:util';
 import { certificateUrl, fail, publicBaseUrl } from './config.js';
 import { CLEAR_FIELDS, chapterFields, formatPairNumber, nextPairNumber } from './chapter.js';
+import { buyerName as orderBuyerName, findOrder } from './orders.js';
 import {
-  assertNoUserErrors,
   fieldMap,
   getCertificate,
   getProductStoryId,
-  gql,
   listCertificateChapters,
   modelGroup,
+  updateCertificate,
 } from './shopify.js';
 import { normaliseSerial, serialToHandle } from './serial.js';
 
@@ -84,6 +84,9 @@ if (current.buyer_name && !args.force) {
 
 const order = await findOrder(args.order);
 if (!order) fail(`Order ${args.order} not found. Note: without the read_all_orders scope, only the last 60 days are visible.`);
+if (current.order_number && current.order_number !== order.name && !args.force) {
+  fail(`${serial} is reserved for order ${current.order_number} (by autopack), not ${order.name}.\n  Pack the serial named in that order's email, or re-run with --force to move it.`);
+}
 
 const shoeLines = order.lineItems.nodes.filter((li) => li.product);
 if (!shoeLines.length) fail(`Order ${order.name} has no product line items.`);
@@ -99,9 +102,7 @@ const line = shoeLines[lineIndex];
 
 // Never fall back to displayName blindly: Shopify uses the email address when no name is set,
 // and the certificate page is public.
-const buyerName = [args.name, joinName(order.customer), order.shippingAddress?.name, order.billingAddress?.name, order.customer?.displayName]
-  .map((n) => (n || '').trim())
-  .find((n) => n && !n.includes('@'));
+const buyerName = orderBuyerName(order, args.name);
 if (!buyerName) fail(`Order ${order.name} has no customer name. Pass --name "Full Name".`);
 
 const sizeOption = line.variant?.selectedOptions?.find((o) => /size|taille|größe|talla|maat/i.test(o.name));
@@ -146,43 +147,5 @@ if (!artisan && !finishedOn) console.log('  (No workshop card details recorded. 
 console.log(`\n  ${certificateUrl(publicBaseUrl(), handle)}\n  Scan the tag to double-check before closing the box.`);
 
 async function update(id, fields) {
-  const data = await gql(
-    `mutation($id: ID!, $metaobject: MetaobjectUpdateInput!) {
-      metaobjectUpdate(id: $id, metaobject: $metaobject) {
-        metaobject { id }
-        userErrors { field message code }
-      }
-    }`,
-    { id, metaobject: { fields } }
-  );
-  assertNoUserErrors(data.metaobjectUpdate, `Updating ${serial}`);
-}
-
-async function findOrder(input) {
-  const name = String(input).trim().replace(/^#?/, '#');
-  const data = await gql(
-    `query($q: String!) {
-      orders(first: 1, query: $q) {
-        nodes {
-          id name createdAt
-          customer { displayName firstName lastName }
-          shippingAddress { name }
-          billingAddress { name }
-          lineItems(first: 50) {
-            nodes {
-              variantTitle
-              product { id title }
-              variant { selectedOptions { name value } }
-            }
-          }
-        }
-      }
-    }`,
-    { q: `name:${name}` }
-  );
-  return data.orders.nodes.find((o) => o.name === name) || null;
-}
-
-function joinName(c) {
-  return [c?.firstName, c?.lastName].filter(Boolean).join(' ');
+  await updateCertificate(id, fields, serial);
 }

@@ -15,7 +15,7 @@ if (!cert) fail(`${serial} was not found in Shopify.`);
 const f = fieldMap(cert);
 const rows = [
   ['Serial', f.serial],
-  ['Status', f.buyer_name ? 'Registered' : 'Waiting for its owner'],
+  ['Status', f.buyer_name ? 'Registered' : f.order_number ? `Reserved for order ${f.order_number} (name added when it ships)` : 'Waiting for its owner'],
   ['Buyer', f.buyer_name],
   ['Product', f.product],
   ['Size', f.size],

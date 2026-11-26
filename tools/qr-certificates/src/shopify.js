@@ -138,6 +138,14 @@ export async function getProductStoryId(productId) {
  * Returns [{ handle, group, pairNumber }].
  */
 export async function listCertificateChapters() {
+  return (await listCertificates()).map(({ handle, group, pairNumber }) => ({ handle, group, pairNumber }));
+}
+
+/**
+ * Every certificate with the fields needed to pick and track tags (src/pack.js).
+ * Returns [{ id, handle, serial, productId, productTitle, size, buyerName, orderNumber, pairNumber, group }].
+ */
+export async function listCertificates() {
   const out = [];
   let after = null;
   do {
@@ -145,11 +153,15 @@ export async function listCertificateChapters() {
       `query($type: String!, $after: String) {
         metaobjects(type: $type, first: 250, after: $after) {
           nodes {
-            handle
+            id handle
+            serial: field(key: "serial") { value }
+            size: field(key: "size") { value }
+            buyerName: field(key: "buyer_name") { value }
+            orderNumber: field(key: "order_number") { value }
             pairNumber: field(key: "pair_number") { value }
             product: field(key: "product") {
               value
-              reference { ... on Product { story: metafield(namespace: "evlvex", key: "story") { value } } }
+              reference { ... on Product { title story: metafield(namespace: "evlvex", key: "story") { value } } }
             }
           }
           pageInfo { hasNextPage endCursor }
@@ -159,7 +171,14 @@ export async function listCertificateChapters() {
     );
     for (const n of data.metaobjects.nodes) {
       out.push({
+        id: n.id,
         handle: n.handle,
+        serial: n.serial?.value || n.handle.toUpperCase(),
+        productId: n.product?.value || null,
+        productTitle: n.product?.reference?.title || '',
+        size: n.size?.value || '',
+        buyerName: n.buyerName?.value || '',
+        orderNumber: n.orderNumber?.value || '',
         group: modelGroup(n.product?.value, n.product?.reference?.story?.value),
         pairNumber: n.pairNumber?.value ?? null,
       });
@@ -167,6 +186,20 @@ export async function listCertificateChapters() {
     after = data.metaobjects.pageInfo.hasNextPage ? data.metaobjects.pageInfo.endCursor : null;
   } while (after);
   return out;
+}
+
+/** Write fields on one certificate. */
+export async function updateCertificate(id, fields, label = 'the certificate') {
+  const data = await gql(
+    `mutation($id: ID!, $metaobject: MetaobjectUpdateInput!) {
+      metaobjectUpdate(id: $id, metaobject: $metaobject) {
+        metaobject { id }
+        userErrors { field message code }
+      }
+    }`,
+    { id, metaobject: { fields } }
+  );
+  assertNoUserErrors(data.metaobjectUpdate, `Updating ${label}`);
 }
 
 /** Turn a metaobject's field list into { key: value } (product reference → title). */
