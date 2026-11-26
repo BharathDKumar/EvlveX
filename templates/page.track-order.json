@@ -184,10 +184,23 @@
         "padding_top": 72,
         "padding_bottom": 72
       }
+    },
+    "tracker": {
+      "type": "evlvex-track",
+      "settings": {
+        "label": "Live tracking",
+        "heading": "Track your pair",
+        "text": "Enter the tracking number from your dispatch email or SMS.",
+        "placeholder": "Tracking (AWB) number",
+        "button_label": "Track",
+        "url_pattern": "https://shiprocket.co/tracking/{number}",
+        "note": "Opens the courier's live tracking page in a new tab."
+      }
     }
   },
   "order": [
     "intro",
+    "tracker",
     "steps",
     "find",
     "help"

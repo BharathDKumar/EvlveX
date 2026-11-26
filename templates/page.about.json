@@ -38,7 +38,7 @@
         "text"
       ],
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-2",
         "height": "large",
         "alignment": "center",
         "show_monogram": true,
@@ -129,11 +129,63 @@
         "padding_top": 100,
         "padding_bottom": 100
       }
+    },
+    "collection": {
+      "type": "evlvex-drop-grid",
+      "blocks": {
+        "about-silent-grind": {
+          "type": "card",
+          "settings": {
+            "product": "the-silent-grind",
+            "title": "The Silent Grind",
+            "number": "01",
+            "chip": "Chapter 01",
+            "lead": "The chapters lived in the dark: the struggles, setbacks and battles that aren't always seen.",
+            "shoe": "silent-grind",
+            "model": "",
+            "colourway": "Black / White",
+            "sizes": "UK 6–10",
+            "run": ""
+          }
+        },
+        "about-fresh-start": {
+          "type": "card",
+          "settings": {
+            "product": "a-fresh-start",
+            "title": "A Fresh Start",
+            "number": "02",
+            "chip": "Chapter 02",
+            "lead": "The moment after the struggle, when you stop looking back and choose what comes next.",
+            "shoe": "fresh-start",
+            "model": "",
+            "colourway": "Cream / Sand",
+            "sizes": "UK 6–10",
+            "run": ""
+          }
+        }
+      },
+      "block_order": [
+        "about-silent-grind",
+        "about-fresh-start"
+      ],
+      "settings": {
+        "heading_solid": "The collection",
+        "heading_outline": "",
+        "note": "Two chapters. One story.",
+        "hide_current": false,
+        "grid_bg": false,
+        "button_label": "Shop",
+        "label_model": "Model",
+        "label_colourway": "Colourway",
+        "label_sizes": "Sizes",
+        "label_run": "Run"
+      }
     }
   },
   "order": [
     "opener",
     "story",
+    "collection",
     "never-give-up"
   ]
 }

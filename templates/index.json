@@ -204,7 +204,8 @@
         "heading_solid": "The",
         "heading_outline": "standard",
         "note": "What every pair carries"
-      }
+      },
+      "disabled": true
     },
     "manifesto": {
       "type": "evlvex-manifesto",
