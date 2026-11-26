@@ -65,6 +65,7 @@
         {%- unless skip -%}
         <article class="sd-item" {{ block.shopify_attributes }}>
           {%- comment -%} Several images: on hover (or swipe on phones) the card runs through them, evlvex-gallery.js {%- endcomment -%}
+          <div class="sd-item__frame">
           <a class="sd-item__media" href="{{ url }}" tabindex="-1" aria-hidden="true" data-sd-gallery>
             {%- if s.image != blank -%}
               {{
@@ -110,7 +111,25 @@
               </span>
             {%- endif -%}
           </a>
+          {%- comment -%} Grid cards: chapter, name, price and Shop sit on the photo (v1.16, option A) {%- endcomment -%}
+          {%- if visible > 1 -%}
+            <div class="sd-item__over">
+              <div>
+                {%- if s.chip != blank -%}
+                  <p class="sd-item__over-label">{{ s.chip | escape }}</p>
+                {%- endif -%}
+                <h3 class="sd-item__over-title"><a href="{{ url }}">{{ title | escape }}</a></h3>
+                <p class="sd-item__over-price">{{ price_text }}</p>
+              </div>
+              <a class="sd-pill sd-pill--light" href="{{ url }}">
+                {{- section.settings.button_label | escape -}}
+                <span class="visually-hidden">: {{ title | escape }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+          </div>
 
+          {%- if visible == 1 -%}
           <div class="sd-item__body">
             {%- if s.number != blank or s.chip != blank -%}
               <p class="sd-label">
@@ -137,6 +156,7 @@
               </a>
             </div>
           </div>
+          {%- endif -%}
         </article>
         {%- endunless -%}
       {%- endfor -%}
