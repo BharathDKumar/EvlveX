@@ -427,23 +427,54 @@
 }
 
 /* ---------- Authenticity page (sections/authenticity-lookup.liquid) ---------- */
+/* Two columns on desktop: the box photos (sticky) and the text, steps and lookup. Sand hairlines, black for actions. */
 .authenticity__grid {
   display: grid;
-  gap: 4rem;
-  align-items: center;
+  gap: 4.8rem;
+  align-items: start;
+}
+
+.authenticity__grid > * {
+  min-width: 0;
 }
 
 @media screen and (min-width: 990px) {
   .authenticity__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8rem;
+    grid-template-columns: 1.08fr 1fr;
+    gap: 9.6rem;
   }
 }
 
 .authenticity__media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+/* On phones the text and the lookup come first, the box photos after. */
+@media screen and (max-width: 989px) {
+  .authenticity__media {
+    order: 2;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .authenticity__media {
+    position: sticky;
+    top: calc(var(--header-height, 8rem) + 2.4rem);
+    gap: 1.6rem;
+  }
+}
+
+.authenticity__photo {
+  margin: 0;
   overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background: rgba(var(--color-foreground), 0.04);
+  aspect-ratio: 3 / 2;
+  background: #0b0b0b;
+}
+
+.authenticity__photo--main {
+  grid-column: 1 / -1;
 }
 
 .authenticity__image {
@@ -454,53 +485,73 @@
 }
 
 .authenticity__mark {
+  display: block;
   color: rgb(var(--color-foreground));
 }
 
 .authenticity__content .certificate__eyebrow {
-  margin-top: 2rem;
+  margin-top: 2.4rem;
+  letter-spacing: 0.22em;
 }
 
 .authenticity__heading {
-  margin: 1.2rem 0 0;
+  margin: 1.4rem 0 0;
+  text-wrap: balance;
 }
 
 .authenticity__text {
-  margin-top: 2rem;
-  max-width: 48rem;
-  color: rgba(var(--color-foreground), 0.8);
+  margin-top: 2.4rem;
+  max-width: 50rem;
+  font-size: 1.7rem;
+  line-height: 1.65;
+  color: rgba(var(--color-foreground), 0.82);
+}
+
+.authenticity__text p {
+  margin: 0;
 }
 
 .authenticity__steps {
-  margin: 3.2rem 0 0;
-  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+  margin: 4.8rem 0 0;
+  border-top: 1px solid #e2d9cb;
 }
 
 .authenticity__step {
   display: grid;
-  grid-template-columns: 4.4rem 1fr;
-  gap: 1.2rem;
-  padding: 1.8rem 0;
-  border-bottom: 1px solid rgba(var(--color-foreground), 0.15);
+  grid-template-columns: 7.2rem 1fr;
+  gap: 0;
+  padding: 2.6rem 0;
+  border-bottom: 1px solid #e2d9cb;
+}
+
+@media screen and (max-width: 749px) {
+  .authenticity__step {
+    grid-template-columns: 5.6rem 1fr;
+  }
 }
 
 .authenticity__step-number {
   font-family: var(--font-heading-family);
-  font-size: 2.2rem;
+  font-weight: 800;
+  font-size: 3.6rem;
   line-height: 1;
-  color: rgb(var(--color-foreground));
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(var(--color-foreground));
 }
 
 .authenticity__step-title {
-  margin: 0;
+  margin: 0.2rem 0 0;
   font-family: var(--font-body-family);
-  font-size: 1.2rem;
-  letter-spacing: 0.08em;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .authenticity__step-text {
-  margin-top: 0.6rem;
+  margin-top: 0.8rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
   color: rgba(var(--color-foreground), 0.75);
 }
 
@@ -508,20 +559,33 @@
   margin: 0;
 }
 
+/* The lookup sits on a sand panel so it reads as the page's one action. */
 .authenticity__form {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.2rem;
-  margin-top: 3.6rem;
+  margin-top: 4.8rem;
+  padding: 2.4rem;
+  background: #f3eee6;
+  border-radius: 0.4rem;
 }
 
 @media screen and (min-width: 750px) {
   .authenticity__form {
     grid-template-columns: 1fr auto;
+    padding: 3.2rem;
   }
   .authenticity__form .button {
     min-width: 16rem;
   }
+}
+
+.authenticity__form .field::after {
+  box-shadow: 0 0 0 1px #cfc6b8;
+}
+
+.authenticity__form .field__input {
+  background: #fff;
 }
 
 .authenticity__form .field__input {

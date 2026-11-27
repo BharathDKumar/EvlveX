@@ -21,27 +21,49 @@
 <div class="authenticity color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width section-{{ section.id }}-padding">
     <div class="authenticity__grid">
+      {%- comment -%} The box: one large photo and two details. Theme-editor images replace the built-in box photos. {%- endcomment -%}
       <div class="authenticity__media">
-        {%- if section.settings.image != blank -%}
-          {{
-            section.settings.image
-            | image_url: width: 1400
-            | image_tag:
-              loading: 'lazy',
-              widths: '500, 800, 1100, 1400',
-              sizes: '(min-width: 990px) 50vw, 100vw',
-              class: 'authenticity__image'
-          }}
-        {%- else -%}
-          <img
-            class="authenticity__image"
-            src="{{ 'evx-sg-full.jpg' | asset_url }}"
-            alt="{{ 'evlvex.authenticity.image_alt' | t }}"
-            width="1024"
-            height="768"
-            loading="lazy"
-          >
-        {%- endif -%}
+        {%- liquid
+          assign box_assets = 'evx-box.jpg|evx-box-streak.jpg|evx-box-angle.jpg' | split: '|'
+          assign box_alts = 'The black EvlveX box on satin|The EvlveX box lid in a streak of light|The EvlveX box at an angle, in low light' | split: '|'
+        -%}
+        {%- for i in (0..2) -%}
+          {%- liquid
+            case i
+              when 0
+                assign picked = section.settings.image
+              when 1
+                assign picked = section.settings.image_2
+              else
+                assign picked = section.settings.image_3
+            endcase
+            if i == 0
+              assign tile_class = 'authenticity__photo authenticity__photo--main'
+              assign tile_sizes = '(min-width: 990px) 52vw, 100vw'
+            else
+              assign tile_class = 'authenticity__photo authenticity__photo--detail'
+              assign tile_sizes = '(min-width: 990px) 26vw, 50vw'
+            endif
+          -%}
+          <figure class="{{ tile_class }}">
+            {%- if picked != blank -%}
+              {{
+                picked
+                | image_url: width: 1600
+                | image_tag: loading: 'lazy', widths: '500, 800, 1100, 1600', sizes: tile_sizes, class: 'authenticity__image'
+              }}
+            {%- else -%}
+              <img
+                class="authenticity__image"
+                src="{{ box_assets[i] | asset_url }}"
+                alt="{{ box_alts[i] | escape }}"
+                width="1600"
+                height="1067"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </figure>
+        {%- endfor -%}
       </div>
 
       <div class="authenticity__content">
@@ -161,8 +183,18 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image",
-      "info": "Ideally a close-up of the QR tag or the embroidered monogram."
+      "label": "Main image",
+      "info": "Replaces the built-in photo of the EvlveX box."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Detail image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Detail image 2"
     },
     {
       "type": "text",
