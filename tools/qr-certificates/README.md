@@ -39,7 +39,7 @@ npm run generate -- --count 200 --batch NOV26
 #   → out/NOV26/tags.pdf (print at 100%), out/NOV26/svg/*.svg, out/NOV26/manifest.csv
 
 # By hand (fallback): link the pair in the box to its order
-npm run assign -- --serial EVX-7F3K9QMD --order 1001 --artisan "Marco R." --finished 2026-11-03 \
+npm run assign -- --serial EVX-7F3K9QMD --order EVX-1001 --artisan "Marco R." --finished 2026-11-03 \
   --note "The last pair cut from hide lot 12. The grain runs especially fine across the toe."
 npm run assign -- --serial EVX-7F3K9QMD --order 1002 --name "Priya Sharma" --message "Happy birthday — Arjun"
 
@@ -60,6 +60,7 @@ npm run generate -- --reprint EVX-7F3K9QMD
 - Only name an artisan with `--artisan` if they have agreed to be shown on certificate pages. `--note` is limited to 200 characters.
 - `assign` never prints the customer's email address. The name comes from the order's shipping address (else billing). If an order has no name, pass `--name`.
 - `assign` refuses a serial that `autopack` reserved for a different order (use `--force` to move it).
+- `--order` takes the full order name (`EVX-1003`) or just its number (`1003`).
 - The order number is stored on the certificate for staff use but is never shown on the public page.
 - Without the `read_all_orders` scope, Shopify only exposes orders from the last 60 days.
 - `.env` and `out/` are git-ignored. Keep the token secret, but **keep each batch's `manifest.csv`**.
