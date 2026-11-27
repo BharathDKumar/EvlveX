@@ -17,14 +17,25 @@ const ORDER_FIELDS = `
   }
 `;
 
-/** One order by its number ("1001" or "#1001"), or null. */
+/**
+ * One order by its number, or null. Accepts the full name ("EVX-1003", "#1001") or just the number ("1003"),
+ * whatever order-number prefix the store uses (Settings → General → Order ID format).
+ */
 export async function findOrder(input) {
-  const name = String(input).trim().replace(/^#?/, '#');
+  const raw = String(input).trim().replace(/^#/, '');
   const data = await gql(
-    `query($q: String!) { orders(first: 1, query: $q) { nodes { ${ORDER_FIELDS} } } }`,
-    { q: `name:${name}` }
+    `query($q: String!) { orders(first: 10, query: $q) { nodes { ${ORDER_FIELDS} } } }`,
+    { q: `name:${raw}` }
   );
-  return data.orders.nodes.find((o) => o.name === name) || null;
+  return data.orders.nodes.find((o) => matchesOrderName(o.name, input)) || null;
+}
+
+/** True when `input` names this order: the full name (any case, # optional) or only its number. */
+export function matchesOrderName(name, input) {
+  const want = String(input).trim().replace(/^#/, '').toLowerCase();
+  const have = name.replace(/^#/, '').toLowerCase();
+  if (have === want) return true;
+  return /^\d+$/.test(want) && have.match(/(\d+)$/)?.[1] === want;
 }
 
 /** Every order created in the last `days` days, oldest first (so earlier orders get tags first). */
