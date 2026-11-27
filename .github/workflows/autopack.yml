@@ -36,7 +36,7 @@ jobs:
         id: secrets
         working-directory: .
         env:
-          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE || vars.SHOPIFY_STORE }}
           TEST_MAIL: ${{ inputs.test_mail }}
         run: |
           if [ -z "$SHOPIFY_STORE" ] && [ "$TEST_MAIL" != "true" ]; then
@@ -61,9 +61,10 @@ jobs:
           # EvlveX mail is on Zoho (organisation account, India). Override with repository variables if it moves.
           SMTP_HOST: ${{ vars.SMTP_HOST || 'smtppro.zoho.in' }}
           SMTP_PORT: ${{ vars.SMTP_PORT || '465' }}
-          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+          # Passwords only from Secrets; the plain values may be Secrets or Variables.
+          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE || vars.SHOPIFY_STORE }}
           SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
           SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_USER: ${{ secrets.SMTP_USER || vars.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
+          MAIL_TO: ${{ secrets.MAIL_TO || vars.MAIL_TO }}
