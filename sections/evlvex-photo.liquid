@@ -1,0 +1,153 @@
+{%- comment -%}
+  EvlveX — one editorial photograph, wide, with an optional caption.
+  Shows the chosen image, or one of the theme's own shoot photos (docs/brand/shoe-images.md).
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .evx-photo__figure {
+    margin: 0;
+  }
+  .evx-photo__frame {
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    background: #0b0b0b;
+  }
+  .evx-photo__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .evx-photo__caption {
+    margin-top: 1.4rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(var(--color-foreground), 0.65);
+    text-align: center;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  case section.settings.photo
+    when 'card'
+      assign photo_src = 'evx-comeback-card.jpg'
+      assign photo_alt = 'The COMEBACK Series 01 card'
+    when 'box'
+      assign photo_src = 'evx-box.jpg'
+      assign photo_alt = 'The black EvlveX box on satin'
+    else
+      assign photo_src = 'evx-comeback-pair.jpg'
+      assign photo_alt = 'COMEBACK Series 01: The Silent Grind and A Fresh Start with the COMEBACK card'
+  endcase
+  assign alt = section.settings.alt | default: photo_alt
+-%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} section-{{ section.id }}-padding">
+    <figure class="evx-photo__figure{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="evx-photo__frame">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 2400
+            | image_tag:
+              widths: '600, 900, 1200, 1600, 2000, 2400',
+              sizes: '(min-width: 1200px) 1100px, 100vw',
+              loading: 'lazy',
+              alt: alt
+          }}
+        {%- else -%}
+          <img src="{{ photo_src | asset_url }}" alt="{{ alt | escape }}" width="1600" height="1067" loading="lazy">
+        {%- endif -%}
+      </div>
+      {%- if section.settings.caption != blank -%}
+        <figcaption class="evx-photo__caption">{{ section.settings.caption | escape }}</figcaption>
+      {%- endif -%}
+    </figure>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "EvlveX photo",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "photo",
+      "label": "Built-in photo",
+      "options": [
+        { "value": "pair", "label": "Both models with the COMEBACK card" },
+        { "value": "card", "label": "The COMEBACK card" },
+        { "value": "box", "label": "The box" }
+      ],
+      "default": "pair"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Replaces the built-in photo."
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Alt text"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption"
+    },
+    {
+      "type": "checkbox",
+      "id": "narrow",
+      "label": "Narrow width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX photo"
+    }
+  ]
+}
+{% endschema %}
