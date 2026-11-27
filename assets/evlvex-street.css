@@ -410,8 +410,8 @@ evlvex-drop-hero :is(p, h2, h3) {
 
 .sd-spec--tl { grid-area: tl; }
 .sd-spec--tr { grid-area: tr; justify-self: end; text-align: right; }
-.sd-spec--bl { grid-area: bl; align-self: center; padding-right: 4rem; }
-.sd-spec--br { grid-area: br; align-self: center; justify-self: end; }
+.sd-spec--bl { grid-area: bl; align-self: end; padding-right: 4rem; }
+.sd-spec--br { grid-area: br; align-self: end; justify-self: end; }
 
 /* Without the top labels the word starts right under the header */
 .sd-hero--no-labels .sd-giant {
