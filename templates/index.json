@@ -68,6 +68,7 @@
       ],
       "settings": {
         "label": "COMEBACK",
+        "show_labels": false,
         "autoplay": true,
         "speed": 8,
         "tl_label": "Collection",
@@ -81,7 +82,7 @@
         "comeback": {
           "type": "item",
           "settings": {
-            "text": "COMEBACK"
+            "text": "Limited edition"
           }
         },
         "story": {

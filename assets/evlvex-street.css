@@ -283,7 +283,7 @@ evlvex-drop-hero :is(p, h2, h3) {
     'bl card br';
   align-content: start;
   min-height: max(64rem, calc(100svh - var(--sd-hero-top, 14rem)));
-  padding: 4rem var(--sd-gutter) 7.2rem;
+  padding: 4rem var(--sd-gutter) 5.6rem;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.6s var(--sd-ease), visibility 0s linear 0.6s;
@@ -306,7 +306,7 @@ evlvex-drop-hero :is(p, h2, h3) {
   letter-spacing: -0.01em;
   text-transform: uppercase;
   /* fit the whole word: a condensed letter is about 0.53 em wide; --len = letters (set in Liquid) */
-  font-size: min(18vw, calc(94vw / (var(--len, 5) * 0.56)));
+  font-size: min(15vw, calc(94vw / (var(--len, 5) * 0.56)));
   color: rgb(var(--sd-ink));
   text-align: center;
   white-space: nowrap;
@@ -329,9 +329,9 @@ evlvex-drop-hero :is(p, h2, h3) {
   position: relative;
   z-index: 2;
   display: block;
-  width: 25vw;
-  max-width: 44rem;
-  margin-top: -1.2vw;
+  /* as large as fits: the whole card stays on the first screen under the word (about 15vw tall) */
+  width: max(24rem, min(30vw, 52rem, calc((100svh - var(--sd-hero-top, 14rem) - 15vw - 4.8rem) * 0.8)));
+  margin-top: 0;
   aspect-ratio: 4 / 5;
   border: 1rem solid rgb(var(--sd-paper));
   background: rgb(var(--sd-ink));
@@ -410,8 +410,13 @@ evlvex-drop-hero :is(p, h2, h3) {
 
 .sd-spec--tl { grid-area: tl; }
 .sd-spec--tr { grid-area: tr; justify-self: end; text-align: right; }
-.sd-spec--bl { grid-area: bl; align-self: end; }
-.sd-spec--br { grid-area: br; align-self: end; justify-self: end; }
+.sd-spec--bl { grid-area: bl; align-self: center; padding-right: 4rem; }
+.sd-spec--br { grid-area: br; align-self: center; justify-self: end; }
+
+/* Without the top labels the word starts right under the header */
+.sd-hero--no-labels .sd-giant {
+  margin-top: 0;
+}
 
 .sd-hero__dots {
   position: absolute;
@@ -485,8 +490,8 @@ evlvex-drop-hero :is(p, h2, h3) {
   .sd-card {
     grid-area: card;
     justify-self: center;
-    width: 66vw;
-    margin-top: -2vw;
+    width: 76vw;
+    margin-top: 1vw;
     transform: rotate(calc(var(--rot, -6deg) * 1.6)) scale(0.94);
   }
 
@@ -496,6 +501,10 @@ evlvex-drop-hero :is(p, h2, h3) {
 
   .sd-hero__dots {
     bottom: 2.4rem;
+  }
+
+  .sd-hero--no-labels .sd-giant {
+    margin-top: 1.2rem;
   }
 }
 

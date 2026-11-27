@@ -15,7 +15,7 @@
 
 {%- if slide_total > 0 -%}
   <evlvex-drop-hero
-    class="sd-hero sd-grid-bg"
+    class="sd-hero sd-grid-bg{% unless section.settings.show_labels %} sd-hero--no-labels{% endunless %}"
     role="region"
     aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
     aria-label="{{ section.settings.label | default: 'COMEBACK' | escape }}"
@@ -94,16 +94,18 @@
             {%- endif -%}
           </a>
 
-          <div class="sd-spec sd-spec--tl">
-            {{ section.settings.tl_label | escape }}
-            <span class="sd-spec__value">{{ section.settings.tl_value | escape }}</span>
-            {{ section.settings.tl_sub | escape }}
-          </div>
-          <div class="sd-spec sd-spec--tr">
-            {{ s.tr_label | escape }}
-            <span class="sd-spec__value">{{ s.tr_value | escape }}</span>
-            {{ s.tr_sub | escape }}
-          </div>
+          {%- if section.settings.show_labels -%}
+            <div class="sd-spec sd-spec--tl">
+              {{ section.settings.tl_label | escape }}
+              <span class="sd-spec__value">{{ section.settings.tl_value | escape }}</span>
+              {{ section.settings.tl_sub | escape }}
+            </div>
+            <div class="sd-spec sd-spec--tr">
+              {{ s.tr_label | escape }}
+              <span class="sd-spec__value">{{ s.tr_value | escape }}</span>
+              {{ s.tr_sub | escape }}
+            </div>
+          {%- endif -%}
           <div class="sd-spec sd-spec--bl">
             {{ s.bl_label | escape }}
             {%- if forloop.first -%}
@@ -176,6 +178,13 @@
       "unit": "s",
       "label": "Slide length",
       "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_labels",
+      "label": "Show the labels above the big word",
+      "info": "Top left (every slide) and top right (per slide). Off gives the photo more room.",
+      "default": true
     },
     {
       "type": "header",
