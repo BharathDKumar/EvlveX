@@ -51,6 +51,7 @@ npm run assign -- --serial EVX-7F3K9QMD --clear
 npm run generate -- --count 6 --batch PROOF --offline                                 # nothing created in Shopify
 npm run generate -- --count 3 --batch TEST --base-url https://w3wigc-de.myshopify.com    # test tags only
 npm run generate -- --reprint EVX-7F3K9QMD
+npm run generate -- --rerender NOV26-PRINT     # redraw an existing batch's tags.pdf + svg/ from its manifest
 ```
 
 ## Good to know

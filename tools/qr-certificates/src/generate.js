@@ -1,6 +1,7 @@
 // npm run generate -- --count 200 --batch NOV26 [--offline] [--base-url https://…]
 // npm run generate -- --reprint EVX-7F3K9QMD[,EVX-…]
 // npm run generate -- --from stock.csv --batch NOV26   one certificate per pair in a stock list (product, size, pair no.)
+// npm run generate -- --rerender NOV26                 redraw out/NOV26 artwork from its manifest (no Shopify calls)
 //
 // Creates new serials as Active `evlvex_certificate` metaobjects in Shopify and writes
 // out/<batch>/{svg/*.svg, tags.pdf, manifest.csv}. See docs/spec/qr-tooling.md and docs/spec/operations.md §1.
@@ -12,7 +13,7 @@ import { assertNoUserErrors, getCertificate, gql, listCertificateChapters, model
 import { chapterFields, nextPairNumber } from './chapter.js';
 import { expandPairs, groupLabel, parseStockList } from './stocklist.js';
 import { newSerial, normaliseSerial, serialToHandle } from './serial.js';
-import { writeOutputs } from './output.js';
+import { parseManifest, writeOutputs } from './output.js';
 
 const { values: args } = parseArgs({
   options: {
@@ -22,6 +23,7 @@ const { values: args } = parseArgs({
     'base-url': { type: 'string' },
     reprint: { type: 'string' },
     from: { type: 'string' },
+    rerender: { type: 'string' },
     help: { type: 'boolean', short: 'h', default: false },
   },
 });
@@ -33,7 +35,14 @@ if (args.help) {
   npm run generate -- --count 3 --batch TEST --base-url https://w3wigc-de.myshopify.com   test tags
   npm run generate -- --reprint EVX-7F3K9QMD,EVX-…       re-create artwork for existing serials
   npm run generate -- --from stock.csv --batch NOV26     one certificate per pair in a stock list
-                                                         (columns: product, size, count [, color, artisan, finished, note])`);
+                                                         (columns: product, size, count [, color, artisan, finished, note])
+  npm run generate -- --rerender NOV26                   redraw tags.pdf + svg/ of an existing batch from its
+                                                         manifest.csv (same serials and URLs; nothing sent to Shopify)`);
+  process.exit(0);
+}
+
+if (args.rerender) {
+  await rerender(args.rerender);
   process.exit(0);
 }
 
@@ -146,6 +155,18 @@ async function createCertificate(serial, handle, batch, extraFields = []) {
   return true;
 }
 
+/** Redraw an existing batch's artwork from its manifest. The manifest (the batch record) is left untouched. */
+async function rerender(batch) {
+  const outDir = path.join(ROOT, 'out', batch.trim());
+  const file = path.join(outDir, 'manifest.csv');
+  if (!existsSync(file)) fail(`No manifest at ${file}. Check the batch name.`);
+  const items = parseManifest(readFileSync(file, 'utf8'));
+  if (!items.length) fail(`${file} lists no tags.`);
+  const test = items.some((i) => /myshopify\.com/i.test(i.url));
+  await writeOutputs(outDir, items, { batch: path.basename(outDir), note: test ? 'TEST' : '', manifest: false });
+  console.log(`✔ Redrew ${items.length} tag(s) in ${outDir} (tags.pdf, svg/). manifest.csv unchanged.`);
+}
+
 async function reprint(list) {
   const serials = list.split(',').map((s) => s.trim()).filter(Boolean);
   const items = [];
@@ -153,11 +174,16 @@ async function reprint(list) {
     const serial = normaliseSerial(raw);
     if (!serial) fail(`"${raw}" is not a valid serial (expected EVX-XXXXXXXX).`);
     const handle = serialToHandle(serial);
+    const item = { serial, handle, url: certificateUrl(baseUrl, handle) };
     if (!args.offline) {
       const cert = await getCertificate(handle);
       if (!cert) fail(`${serial} does not exist in Shopify. Check the serial, or add --offline to print it anyway.`);
+      // Model and size come from the certificate; colour is only kept in the batch manifest.
+      const field = (key) => cert.fields?.find((f) => f.key === key);
+      item.product = field('product')?.reference?.title || '';
+      item.size = field('size')?.value || '';
     }
-    items.push({ serial, handle, url: certificateUrl(baseUrl, handle) });
+    items.push(item);
   }
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace('T', '-').slice(0, 15);
   const batch = `REPRINT-${stamp}`;

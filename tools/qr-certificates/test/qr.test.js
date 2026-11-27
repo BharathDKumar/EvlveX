@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import jsQR from 'jsqr';
-import { qrMatrix, sheetSlots, tagSvg } from '../src/qr.js';
+import { fitSize, qrMatrix, sheetSlots, TAG, tagLines, tagSvg } from '../src/qr.js';
+import { parseManifest } from '../src/output.js';
 
 // Rasterise the matrix (with quiet zone) and paint the logo area mid-tone, like the printed gold monogram.
 function rasterise(m, scale = 6, quiet = 4) {
@@ -42,13 +43,47 @@ for (const url of urls) {
   });
 }
 
-test('tag SVG contains the serial and is well-formed', () => {
+test('tag SVG contains the serial and is well-formed (2 × 2.5 in)', () => {
   const svg = tagSvg('EVX-7F3K9QMD', urls[0]);
   assert.match(svg, /^<\?xml/);
   assert.match(svg, />EVX-7F3K9QMD</);
-  assert.match(svg, /width="30mm" height="40mm"/);
+  assert.match(svg, /width="50.8mm" height="63.5mm"/);
 });
 
-test('A4 sheet fits 30 tags of 30×40 mm', () => {
-  assert.equal(sheetSlots().length, 30);
+test('tag SVG shows model, colour and size', () => {
+  const svg = tagSvg('EVX-7F3K9QMD', urls[0], { product: 'The Silent Grind', color: 'Black', size: 'UK 10' });
+  assert.match(svg, />The Silent Grind</);
+  assert.match(svg, />Black · UK 10</);
+  assert.match(tagSvg('EVX-7F3K9QMD', urls[0], { product: 'A & B' }), />A &amp; B</);
+});
+
+test('long model names shrink to fit the tag', () => {
+  assert.equal(fitSize('The Silent Grind', TAG.modelSize, { bold: true }), TAG.modelSize);
+  const long = 'An Exceptionally Long Model Name Indeed';
+  const size = fitSize(long, TAG.modelSize, { bold: true });
+  assert.ok(size < TAG.modelSize);
+  assert.ok(long.length * 0.6 * size <= TAG.width - 2 * TAG.textPad + 1e-6);
+});
+
+test('tagLines joins colour and size, skipping blanks', () => {
+  assert.deepEqual(tagLines({ product: 'A Fresh Start', color: 'Off-White', size: 'UK 8' }), { model: 'A Fresh Start', variant: 'Off-White · UK 8' });
+  assert.deepEqual(tagLines({ product: 'X', size: 'UK 8' }), { model: 'X', variant: 'UK 8' });
+  assert.deepEqual(tagLines(), { model: '', variant: '' });
+});
+
+test('A4 sheet fits 12 tags of 2 × 2.5 in', () => {
+  assert.equal(sheetSlots().length, 12);
+});
+
+test('parseManifest reads a stock-list manifest back', () => {
+  const csv = 'serial,handle,url,batch,created_at,product,color,size,pair_number\n'
+    + 'EVX-VCQ8ZQP0,evx-vcq8zqp0,https://evlvex.in/pages/authentic/evx-vcq8zqp0,NOV26,2026-11-17T07:44:41.841Z,"Grind, The",Black,UK 10,1\n';
+  const [item] = parseManifest(csv);
+  assert.equal(item.serial, 'EVX-VCQ8ZQP0');
+  assert.equal(item.product, 'Grind, The');
+  assert.equal(item.size, 'UK 10');
+  assert.equal(item.pairNumber, 1);
+  assert.equal(item.group, 'Grind, The · Black · UK 10');
+  const [plain] = parseManifest('serial,handle,url,batch,created_at\nEVX-A,evx-a,https://x/y,B,2026\n');
+  assert.equal(plain.group, undefined);
 });

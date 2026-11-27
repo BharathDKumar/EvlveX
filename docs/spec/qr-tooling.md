@@ -36,7 +36,8 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 | `npm run merge -- --batches NOV26,NOV26-2 --out NOV26-PRINT` | Combines batches into one print set (one sheet per model and size, pair-number order). Use it when a run was interrupted and finished as a second batch; creates nothing in Shopify |
 | `npm run generate -- --count 6 --batch TEST --offline` | Same, but **does not touch Shopify**. For checking print quality |
 | `npm run generate -- --count 3 --batch TEST --base-url https://w3wigc-de.myshopify.com` | Test tags that point at the myshopify domain. **Never print these for real pairs** |
-| `npm run generate -- --reprint EVX-7F3K9QMD` | Re-creates the tag artwork for an existing serial |
+| `npm run generate -- --reprint EVX-7F3K9QMD` | Re-creates the tag artwork for an existing serial (with its model and size from Shopify; colour is only in the batch manifest) |
+| `npm run generate -- --rerender NOV26-PRINT` | Redraws `tags.pdf` and `svg/` of an existing batch from its `manifest.csv` (same serials and URLs). Use it after a tag layout change. Creates nothing in Shopify and leaves the manifest unchanged |
 | `npm run assign -- --serial EVX-… --order 1001 [--size 42] [--message "…"] [--name "…"] [--line 2] [--artisan "…"] [--finished YYYY-MM-DD] [--note "…"] [--pair-number 42] [--force]` | Links a serial to an order and records the pair's chapter (see §3) |
 | `npm run assign -- --serial EVX-… --clear` | Un-assigns a pair (returns / exchanges); keeps the pair's chapter fields |
 | `npm run lookup -- --serial EVX-…` | Shows a certificate's current data |
@@ -54,7 +55,7 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 
 ## 4. Output files (`out/<batch>/`)
 - `svg/EVX-XXXXXXXX.svg`: one tag per serial (vector, for label printers)
-- `tags.pdf`: A4 sheet of 30 × 40 mm tags with cut marks (QR 22 mm square, serial underneath, monogram in the QR centre)
+- `tags.pdf`: A4 sheets of 2 × 2.5 in (50.8 × 63.5 mm) tags, 12 per sheet, with cut marks. Each tag has a 34 mm QR with the monogram in the centre, then the **model name**, **colour · size** (stock-list batches), the serial and the EVLVEX · CERTIFIED wordmark
 - `manifest.csv`: `serial, handle, url, batch, created_at`
 
 ## 5. `autopack`: automatic tag assignment
