@@ -1,7 +1,7 @@
 // QR matrix + tag artwork (SVG and PDF), with the EvlveX monogram in the centre.
 //
-// Tag: 30 × 40 mm. QR data area 22 mm wide (quiet zone ≥ 4 modules from the tag edge),
-// serial underneath, small EVLVEX wordmark at the bottom.
+// Tag: 2 × 2.5 in (50.8 × 63.5 mm). QR data area 34 mm wide (quiet zone ≥ 4 modules from the tag edge),
+// then the model name, colour · size, the serial and a small EVLVEX wordmark at the bottom.
 // Error correction "H" recovers ~30% damage; the logo clears < 6% of modules and
 // never touches finder or alignment patterns.
 import QRCode from 'qrcode';
@@ -18,15 +18,48 @@ try {
 export const COLORS = { ink: '#111111', accent: '#111111', paper: '#FFFFFF', guide: '#BBBBBB' };
 
 export const TAG = {
-  width: 30, // mm
-  height: 40,
-  qrSize: 22,
-  qrTop: 4,
-  serialBaseline: 30.6,
-  serialSize: 2.7,
-  wordmarkBaseline: 36.2,
-  wordmarkSize: 1.7,
+  width: 50.8, // mm (2 in)
+  height: 63.5, // mm (2.5 in)
+  inches: '2 × 2.5 in',
+  qrSize: 34,
+  qrTop: 4.5,
+  textPad: 3, // minimum side margin for text
+  modelBaseline: 44.6,
+  modelSize: 3.8,
+  variantBaseline: 49.4,
+  variantSize: 3.2,
+  ruleY: 51.9,
+  ruleWidth: 20,
+  serialBaseline: 56.5,
+  serialSize: 2.9,
+  serialSpacing: 0.4,
+  wordmarkBaseline: 60.6,
+  wordmarkSize: 1.9,
+  wordmarkSpacing: 0.5,
 };
+
+/**
+ * The two product lines printed under the QR: model name, then "colour · size".
+ * @param {{product?:string, color?:string, size?:string}} [details]
+ */
+export function tagLines(details = {}) {
+  const model = String(details.product || '').trim();
+  const variant = [details.color, details.size].map((v) => String(v || '').trim()).filter(Boolean).join(' · ');
+  return { model, variant };
+}
+
+// Approximate Helvetica advance widths (em) — enough to shrink a long name so it never runs off the tag.
+const EM = { regular: 0.56, bold: 0.6 };
+/** Font size (mm) that fits `text` in the tag's text width, never larger than `size`. */
+export function fitSize(text, size, { bold = false, spacing = 0 } = {}) {
+  const avail = TAG.width - 2 * TAG.textPad;
+  const n = [...text].length;
+  if (!n) return size;
+  const width = n * (bold ? EM.bold : EM.regular) * size + (n - 1) * spacing;
+  return width <= avail ? size : Math.floor(((avail - (n - 1) * spacing) / (n * (bold ? EM.bold : EM.regular))) * 1000) / 1000;
+}
+
+const escapeXml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]);
 
 const LOGO_RATIO = 0.26; // logo diameter as a fraction of the module count
 
@@ -92,8 +125,8 @@ function* runs(dark) {
 
 const fmt = (n) => Number(n.toFixed(3));
 
-/** Full tag artwork as an SVG string (units: mm). */
-export function tagSvg(serial, url) {
+/** Full tag artwork as an SVG string (units: mm). `details` adds the model, colour and size lines. */
+export function tagSvg(serial, url, details = {}) {
   const m = qrMatrix(url);
   const unit = TAG.qrSize / m.size;
   const ox = (TAG.width - TAG.qrSize) / 2;
@@ -111,6 +144,21 @@ export function tagSvg(serial, url) {
   const ring = MONOGRAM.ring;
   const bars = MONOGRAM.bars.map(([x, y, w, h]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}"/>`).join('');
 
+  const { model, variant } = tagLines(details);
+  const font = 'font-family="Helvetica, Arial, sans-serif" text-anchor="middle"';
+  const cx = fmt(TAG.width / 2);
+  const text = [];
+  if (model) {
+    text.push(`<text x="${cx}" y="${TAG.modelBaseline}" ${font} font-weight="bold" font-size="${fitSize(model, TAG.modelSize, { bold: true })}" fill="${COLORS.ink}">${escapeXml(model)}</text>`);
+  }
+  if (variant) {
+    text.push(`<text x="${cx}" y="${TAG.variantBaseline}" ${font} font-size="${fitSize(variant, TAG.variantSize)}" fill="${COLORS.ink}">${escapeXml(variant)}</text>`);
+  }
+  if (model || variant) {
+    const rx = (TAG.width - TAG.ruleWidth) / 2;
+    text.push(`<line x1="${fmt(rx)}" y1="${TAG.ruleY}" x2="${fmt(rx + TAG.ruleWidth)}" y2="${TAG.ruleY}" stroke="${COLORS.guide}" stroke-width="0.2"/>`);
+  }
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${TAG.width}mm" height="${TAG.height}mm" viewBox="0 0 ${TAG.width} ${TAG.height}">
   <title>EvlveX certificate tag ${serial}</title>
@@ -120,16 +168,33 @@ export function tagSvg(serial, url) {
     <circle cx="${ring.cx}" cy="${ring.cy}" r="${ring.r}" fill="none" stroke="${COLORS.accent}" stroke-width="${ring.stroke}"/>
     <g fill="${COLORS.accent}">${bars}</g>
   </g>
-  <text x="${TAG.width / 2}" y="${TAG.serialBaseline}" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="${TAG.serialSize}" letter-spacing="0.35" fill="${COLORS.ink}">${serial}</text>
-  <text x="${TAG.width / 2}" y="${TAG.wordmarkBaseline}" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="${TAG.wordmarkSize}" letter-spacing="0.42" fill="${COLORS.accent}">EVLVEX · CERTIFIED</text>
+  ${text.join('\n  ')}
+  <text x="${cx}" y="${TAG.serialBaseline}" ${font} font-size="${TAG.serialSize}" letter-spacing="${TAG.serialSpacing}" fill="${COLORS.ink}">${serial}</text>
+  <text x="${cx}" y="${TAG.wordmarkBaseline}" ${font} font-size="${TAG.wordmarkSize}" letter-spacing="${TAG.wordmarkSpacing}" fill="${COLORS.accent}">EVLVEX · CERTIFIED</text>
 </svg>
 `;
 }
 
 const MM = 72 / 25.4; // PDF points per mm
 
-/** Draw one tag on a PDFKit document at (x, y) in mm, with a light cut guide. */
-export function drawTagPdf(doc, xMm, yMm, serial, url) {
+/** Draw one centred line of text with its baseline at `baselineMm`, shrunk to fit the tag width. */
+function centredText(doc, text, x, baselineMm, sizeMm, { font = 'Helvetica', spacingMm = 0, color = COLORS.ink, y }) {
+  const avail = (TAG.width - 2 * TAG.textPad) * MM;
+  let pt = sizeMm * MM;
+  const spacing = spacingMm * MM;
+  doc.font(font).fontSize(pt);
+  const w = doc.widthOfString(text, { characterSpacing: spacing });
+  if (w > avail) {
+    pt *= avail / w;
+    doc.fontSize(pt);
+  }
+  doc.fillColor(color).text(text, x, y + baselineMm * MM - pt * 0.8, {
+    width: TAG.width * MM, align: 'center', characterSpacing: spacing, lineBreak: false,
+  });
+}
+
+/** Draw one tag on a PDFKit document at (x, y) in mm, with a light cut guide. `details` adds model, colour and size. */
+export function drawTagPdf(doc, xMm, yMm, serial, url, details = {}) {
   const m = qrMatrix(url);
   const unit = (TAG.qrSize / m.size) * MM;
   const x = xMm * MM;
@@ -160,17 +225,21 @@ export function drawTagPdf(doc, xMm, yMm, serial, url) {
   for (const [bx, by, bw, bh] of MONOGRAM.bars) doc.rect(lx + bx * s, ly + by * s, bw * s, bh * s);
   doc.fill().restore();
 
-  // Serial + wordmark (PDFKit positions text by its top, so offset from the baseline)
-  const serialPt = TAG.serialSize * MM;
-  doc.font('Helvetica').fontSize(serialPt).fillColor(COLORS.ink)
-    .text(serial, x, y + TAG.serialBaseline * MM - serialPt * 0.8, {
-      width: TAG.width * MM, align: 'center', characterSpacing: 0.35 * MM, lineBreak: false,
-    });
-  const wordPt = TAG.wordmarkSize * MM;
-  doc.font('Helvetica').fontSize(wordPt).fillColor(COLORS.accent)
-    .text('EVLVEX · CERTIFIED', x, y + TAG.wordmarkBaseline * MM - wordPt * 0.8, {
-      width: TAG.width * MM, align: 'center', characterSpacing: 0.42 * MM, lineBreak: false,
-    });
+  // Model, colour · size, a short rule (PDFKit positions text by its top, so centredText offsets from the baseline)
+  const { model, variant } = tagLines(details);
+  if (model) centredText(doc, model, x, TAG.modelBaseline, TAG.modelSize, { font: 'Helvetica-Bold', y });
+  if (variant) centredText(doc, variant, x, TAG.variantBaseline, TAG.variantSize, { y });
+  if (model || variant) {
+    const rx = x + ((TAG.width - TAG.ruleWidth) / 2) * MM;
+    doc.save().lineWidth(0.2 * MM).strokeColor(COLORS.guide)
+      .moveTo(rx, y + TAG.ruleY * MM).lineTo(rx + TAG.ruleWidth * MM, y + TAG.ruleY * MM).stroke().restore();
+  }
+
+  // Serial + wordmark
+  centredText(doc, serial, x, TAG.serialBaseline, TAG.serialSize, { spacingMm: TAG.serialSpacing, y });
+  centredText(doc, 'EVLVEX · CERTIFIED', x, TAG.wordmarkBaseline, TAG.wordmarkSize, {
+    spacingMm: TAG.wordmarkSpacing, color: COLORS.accent, y,
+  });
 }
 
 export const A4 = { width: 210, height: 297, margin: 12, gap: 5 };
