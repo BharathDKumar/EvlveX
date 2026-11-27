@@ -1,0 +1,386 @@
+/* EvlveX launch countdown (sections/evlvex-countdown.liquid), password page only. */
+
+/* The section shows the big logo itself, so the header keeps only the password link. */
+.password-header__brand,
+.password-header .password-content {
+  visibility: hidden;
+}
+
+@media screen and (max-width: 749px) {
+  .password-header__brand,
+  .password-header .password-content {
+    display: none;
+  }
+
+  .password-header {
+    align-items: flex-end;
+    padding: 1.6rem 2rem 0;
+  }
+}
+
+.evx-cd {
+  --evx-cd-ink: 17, 17, 17;
+  --evx-cd-sand: 243, 238, 230;
+  --evx-cd-sand-deep: 216, 203, 180;
+  color: rgb(var(--evx-cd-ink));
+  background: #fff;
+}
+
+.evx-cd *,
+.evx-cd *::before,
+.evx-cd *::after {
+  box-sizing: border-box;
+}
+
+.evx-cd [hidden] {
+  display: none !important;
+}
+
+.evx-cd__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5.6rem;
+  align-items: center;
+  max-width: 144rem;
+  margin: 0 auto;
+  padding: 2rem 8rem 6rem;
+}
+
+.evx-cd__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.evx-cd__brand {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  color: rgb(var(--evx-cd-ink));
+}
+
+.evx-cd__mark {
+  width: 9.6rem;
+  height: 9.6rem;
+}
+
+.evx-cd__word {
+  height: 4.6rem;
+  width: auto;
+}
+
+.evx-cd__title {
+  margin: 3.2rem 0 0;
+  font-family: var(--font-heading-family);
+  font-weight: 900;
+  font-size: 7.2rem;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: rgb(var(--evx-cd-ink));
+  max-width: 7em;
+}
+
+.evx-cd__series {
+  display: block;
+  margin-top: 0.45em;
+  padding-left: 0.2em;
+  font-weight: 500;
+  font-size: 0.36em;
+  letter-spacing: 0.5em;
+}
+
+.evx-cd__label {
+  margin: 3rem 0 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(var(--evx-cd-ink));
+}
+
+.evx-cd__clock {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+
+.evx-cd__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.evx-cd__num {
+  font-family: var(--font-heading-family);
+  font-weight: 900;
+  font-size: 12rem;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--evx-cd-ink));
+}
+
+.evx-cd__unit--outline .evx-cd__num {
+  color: transparent;
+  -webkit-text-stroke: 0.25rem rgb(var(--evx-cd-ink));
+}
+
+.evx-cd__name {
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--evx-cd-ink), 0.62);
+}
+
+.evx-cd__sep {
+  font-family: var(--font-heading-family);
+  font-weight: 900;
+  font-size: 8rem;
+  line-height: 1.1;
+  color: rgb(var(--evx-cd-sand-deep));
+}
+
+.evx-cd__done {
+  margin: 2rem 0 0;
+  font-family: var(--font-heading-family);
+  font-weight: 800;
+  font-size: 2.4rem;
+  color: rgb(var(--evx-cd-ink));
+}
+
+.evx-cd__text {
+  margin: 3rem 0 0;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: rgba(var(--evx-cd-ink), 0.65);
+}
+
+.evx-cd__form {
+  width: 100%;
+  max-width: 42rem;
+  margin-top: 1.8rem;
+}
+
+.evx-cd__field {
+  display: flex;
+  align-items: center;
+  height: 5.4rem;
+  padding: 0 0.6rem 0 2.4rem;
+  border: 0.1rem solid rgb(var(--evx-cd-ink));
+  border-radius: 99rem;
+  background: #fff;
+}
+
+.evx-cd__field:focus-within {
+  box-shadow: 0 0 0 0.2rem rgba(var(--evx-cd-ink), 0.25);
+}
+
+.evx-cd__field input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 1.5rem;
+  color: rgb(var(--evx-cd-ink));
+}
+
+.evx-cd__field button {
+  flex-shrink: 0;
+  height: 4.2rem;
+  padding: 0 2.2rem;
+  border: 0;
+  border-radius: 99rem;
+  background: rgb(var(--evx-cd-ink));
+  color: #fff;
+  font: inherit;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.evx-cd__field button:focus-visible {
+  outline: 0.2rem solid rgb(var(--evx-cd-ink));
+  outline-offset: 0.3rem;
+}
+
+.evx-cd__msg {
+  margin: 1.2rem 0 0;
+  font-size: 1.4rem;
+  color: rgb(var(--evx-cd-ink));
+}
+
+.evx-cd__msg--error {
+  color: #b3261e;
+}
+
+.evx-cd__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 56rem;
+  border-radius: 2.2rem;
+  background: rgb(var(--evx-cd-sand));
+}
+
+.evx-cd__photo {
+  width: 78%;
+  max-width: 52rem;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 0.8rem solid #fff;
+  border-radius: 1.4rem;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.22);
+  transform: rotate(-4deg);
+}
+
+.evx-cd__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Tape: the same black band as the home page (evlvex-tape). */
+.evx-cd__tape {
+  overflow: hidden;
+  padding: 1.4rem 0;
+  background: rgb(var(--evx-cd-ink));
+  color: #fff;
+}
+
+.evx-cd__track {
+  display: flex;
+  width: max-content;
+  animation: evx-cd-tape var(--evx-cd-tape-speed, 40s) linear infinite;
+}
+
+.evx-cd__tape:hover .evx-cd__track {
+  animation-play-state: paused;
+}
+
+.evx-cd__list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evx-cd__item {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.evx-cd__item::after {
+  content: '';
+  width: 0.4rem;
+  height: 0.4rem;
+  margin: 0 2.8rem;
+  border-radius: 50%;
+  background: rgb(var(--evx-cd-sand-deep));
+}
+
+@keyframes evx-cd-tape {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evx-cd__track {
+    animation: none;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .evx-cd__grid {
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+    padding: 1.2rem 2rem 4rem;
+  }
+
+  .evx-cd__copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  .evx-cd__brand {
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .evx-cd__mark {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .evx-cd__word {
+    height: 3.6rem;
+  }
+
+  .evx-cd__title {
+    margin-top: 2.4rem;
+    font-size: 4.2rem;
+  }
+
+  .evx-cd__label {
+    margin-top: 2.2rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+  }
+
+  .evx-cd__clock {
+    gap: 0.4rem;
+  }
+
+  .evx-cd__num {
+    font-size: 7.2rem;
+  }
+
+  .evx-cd__unit--outline .evx-cd__num {
+    -webkit-text-stroke: 0.2rem rgb(var(--evx-cd-ink));
+  }
+
+  .evx-cd__sep {
+    font-size: 4.4rem;
+    line-height: 1.3;
+  }
+
+  .evx-cd__name {
+    font-size: 1rem;
+  }
+
+  .evx-cd__text {
+    margin-top: 2.2rem;
+    font-size: 1.5rem;
+  }
+
+  .evx-cd__field {
+    height: 5rem;
+  }
+
+  .evx-cd__field button {
+    padding: 0 1.6rem;
+    font-size: 1.3rem;
+  }
+
+  .evx-cd__visual {
+    min-height: 30rem;
+  }
+
+  .evx-cd__photo {
+    width: 76%;
+  }
+}
