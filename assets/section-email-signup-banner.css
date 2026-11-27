@@ -96,3 +96,76 @@
     justify-content: right;
   }
 }
+
+/* EvlveX launch countdown (password page) */
+.evx-countdown {
+  margin-top: 2.4rem;
+}
+
+.evx-countdown[hidden],
+.evx-countdown [hidden] {
+  display: none !important;
+}
+
+.evx-countdown__label {
+  margin: 0 0 1.2rem;
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+}
+
+.evx-countdown__clock {
+  display: inline-flex;
+  gap: 1rem;
+}
+
+.evx-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 8.4rem;
+  padding: 1.4rem 1rem 1.1rem;
+  background: #f3eee6;
+  border-radius: 0.6rem;
+}
+
+.evx-countdown__num {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 4rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: rgb(17, 17, 17);
+}
+
+.evx-countdown__name {
+  margin-top: 0.6rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.65);
+}
+
+.evx-countdown__done {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2rem;
+  color: rgb(17, 17, 17);
+}
+
+@media screen and (max-width: 749px) {
+  .evx-countdown__clock {
+    gap: 0.6rem;
+  }
+
+  .evx-countdown__unit {
+    min-width: 6.8rem;
+    padding: 1.1rem 0.6rem 0.9rem;
+  }
+
+  .evx-countdown__num {
+    font-size: 3rem;
+  }
+}
