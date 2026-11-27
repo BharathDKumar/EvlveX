@@ -1,0 +1,263 @@
+{%- comment -%}
+  EvlveX launch countdown (password page, option C, 28 Nov 2026): big logo, "The Comeback / Series 01",
+  a giant clock (minutes outlined), the waiting-list email form, one tilted box photo on sand, and the
+  black ticker tape from the home page. Styles: assets/evlvex-countdown.css.
+  The store does not open by itself at zero: switch off the password in Admin.
+{%- endcomment -%}
+{{ 'evlvex-countdown.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign tape_items = section.blocks | where: 'type', 'tape_item'
+-%}
+
+<div class="evx-cd" data-launch="{{ section.settings.launch_at | escape }}">
+  <div class="evx-cd__grid">
+    <div class="evx-cd__copy">
+      <div class="evx-cd__brand">
+        {%- render 'evlvex-monogram', size: 96, class: 'evx-cd__mark' -%}
+        {%- render 'evlvex-wordmark', class: 'evx-cd__word', title: shop.name -%}
+      </div>
+
+      <h1 class="evx-cd__title">
+        {{ section.settings.heading | escape }}
+        {%- if section.settings.series != blank -%}
+          <span class="evx-cd__series">{{ section.settings.series | escape }}</span>
+        {%- endif -%}
+      </h1>
+
+      {%- if section.settings.label != blank -%}
+        <p class="evx-cd__label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+
+      <div class="evx-cd__clock" role="timer" aria-live="off">
+        <div class="evx-cd__unit" data-unit="days" hidden>
+          <span class="evx-cd__num">--</span><span class="evx-cd__name">Days</span>
+        </div>
+        <span class="evx-cd__sep" data-sep="days" aria-hidden="true" hidden>:</span>
+        <div class="evx-cd__unit" data-unit="hours">
+          <span class="evx-cd__num">--</span><span class="evx-cd__name">Hours</span>
+        </div>
+        <span class="evx-cd__sep" aria-hidden="true">:</span>
+        <div class="evx-cd__unit evx-cd__unit--outline" data-unit="minutes">
+          <span class="evx-cd__num">--</span><span class="evx-cd__name">Min</span>
+        </div>
+        <span class="evx-cd__sep" aria-hidden="true">:</span>
+        <div class="evx-cd__unit" data-unit="seconds">
+          <span class="evx-cd__num">--</span><span class="evx-cd__name">Sec</span>
+        </div>
+      </div>
+      <p class="evx-cd__done" hidden>{{ section.settings.done_text | escape }}</p>
+
+      {%- if section.settings.text != blank -%}
+        <p class="evx-cd__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+
+      {%- form 'customer', class: 'evx-cd__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="evx-cd__field">
+          <label class="visually-hidden" for="EvxCdEmail-{{ section.id }}">{{ 'newsletter.label' | t }}</label>
+          <input
+            id="EvxCdEmail-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            value="{{ form.email }}"
+            placeholder="Your email"
+            autocomplete="email"
+            autocorrect="off"
+            autocapitalize="off"
+            required
+            aria-required="true"
+            {% if form.errors %}
+              aria-invalid="true" aria-describedby="EvxCdError-{{ section.id }}"
+            {% endif %}
+          >
+          <button type="submit" name="commit">{{ section.settings.button_label | escape }}</button>
+        </div>
+        {%- if form.errors -%}
+          <p class="evx-cd__msg evx-cd__msg--error" id="EvxCdError-{{ section.id }}">
+            {{ form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email }}
+          </p>
+        {%- elsif form.posted_successfully? -%}
+          <p class="evx-cd__msg" tabindex="-1" autofocus>{{ 'newsletter.success' | t }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
+    <div class="evx-cd__visual">
+      <div class="evx-cd__photo">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag:
+              widths: '500, 800, 1100, 1400',
+              sizes: '(min-width: 990px) 40vw, 80vw',
+              loading: 'eager',
+              alt: section.settings.image.alt
+          }}
+        {%- else -%}
+          <img
+            src="{{ 'evx-box.jpg' | asset_url }}"
+            width="1600"
+            height="1067"
+            alt="The EvlveX box with the EVLVEX logo in copper on the lid"
+            loading="eager"
+          >
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if tape_items.size > 0 -%}
+    <div class="evx-cd__tape" style="--evx-cd-tape-speed: {{ section.settings.tape_speed }}s;">
+      <div class="evx-cd__track">
+        {%- for copy in (1..2) -%}
+          <ul class="evx-cd__list" {% if copy == 2 %}aria-hidden="true"{% endif %}>
+            {%- for repeat in (1..3) -%}
+              {%- for block in tape_items -%}
+                <li
+                  class="evx-cd__item"
+                  {% if copy == 1 and repeat == 1 %}{{ block.shopify_attributes }}{% endif %}
+                  {% if repeat > 1 and copy == 1 %}aria-hidden="true"{% endif %}
+                >
+                  {{- block.settings.text | escape -}}
+                </li>
+              {%- endfor -%}
+            {%- endfor -%}
+          </ul>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  (function () {
+    var root = document.currentScript.previousElementSibling;
+    var end = Date.parse(root.getAttribute('data-launch'));
+    var clock = root.querySelector('.evx-cd__clock');
+    var done = root.querySelector('.evx-cd__done');
+    if (isNaN(end)) { clock.hidden = true; return; }
+    var get = function (u) { return root.querySelector('[data-unit="' + u + '"]'); };
+    var days = get('days');
+    var daysSep = root.querySelector('[data-sep="days"]');
+    var num = function (el) { return el.querySelector('.evx-cd__num'); };
+    var cells = { d: num(days), h: num(get('hours')), m: num(get('minutes')), s: num(get('seconds')) };
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var timer;
+    function tick() {
+      var left = Math.max(0, Math.floor((end - Date.now()) / 1000));
+      if (left === 0) {
+        clock.hidden = true;
+        done.hidden = false;
+        clearInterval(timer);
+        return;
+      }
+      var d = Math.floor(left / 86400);
+      days.hidden = daysSep.hidden = d === 0;
+      cells.d.textContent = pad(d);
+      cells.h.textContent = pad(Math.floor((left % 86400) / 3600));
+      cells.m.textContent = pad(Math.floor((left % 3600) / 60));
+      cells.s.textContent = pad(left % 60);
+    }
+    tick();
+    timer = setInterval(tick, 1000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "EvlveX countdown",
+  "tag": "section",
+  "class": "section evx-cd-section",
+  "enabled_on": {
+    "templates": ["password"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "launch_at",
+      "label": "Launch time",
+      "info": "Date, time and time zone, e.g. 2026-11-28T09:00:00+05:30 (9:00 AM India time)",
+      "default": "2026-11-28T09:00:00+05:30"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Comeback"
+    },
+    {
+      "type": "text",
+      "id": "series",
+      "label": "Line under the heading",
+      "default": "Series 01"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Text above the clock",
+      "default": "Opens Saturday 28 Nov · 9:00 AM IST"
+    },
+    {
+      "type": "text",
+      "id": "done_text",
+      "label": "Text when the clock reaches zero",
+      "default": "We're opening now. Refresh the page in a minute."
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text above the email field",
+      "default": "Limited, numbered run. Leave your email to be first in line."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button",
+      "default": "Notify me"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo",
+      "info": "Empty: the EvlveX box photo"
+    },
+    {
+      "type": "range",
+      "id": "tape_speed",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "s",
+      "label": "Tape: time for one loop",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tape_item",
+      "name": "Tape word",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Limited edition"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EvlveX countdown",
+      "blocks": [
+        { "type": "tape_item", "settings": { "text": "Limited edition" } },
+        { "type": "tape_item", "settings": { "text": "Every pair has a story" } },
+        { "type": "tape_item", "settings": { "text": "Make your comeback" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
