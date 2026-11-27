@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import jsQR from 'jsqr';
-import { fitSize, qrMatrix, sheetSlots, TAG, tagLines, tagSvg } from '../src/qr.js';
+import { fitSize, MONOGRAM, qrMatrix, sheetSlots, TAG, tagSvg, tagText, textWidth, wrapWords } from '../src/qr.js';
 import { parseManifest } from '../src/output.js';
 
 // Rasterise the matrix (with quiet zone) and paint the logo area mid-tone, like the printed gold monogram.
@@ -43,36 +43,52 @@ for (const url of urls) {
   });
 }
 
-test('tag SVG contains the serial and is well-formed (2 × 2.5 in)', () => {
+test('tag SVG is landscape 2.5 in wide × 2 in tall and uses the brand monogram', () => {
   const svg = tagSvg('EVX-7F3K9QMD', urls[0]);
   assert.match(svg, /^<\?xml/);
   assert.match(svg, />EVX-7F3K9QMD</);
-  assert.match(svg, /width="50.8mm" height="63.5mm"/);
+  assert.match(svg, /width="63.5mm" height="50.8mm"/);
+  assert.ok(svg.includes(MONOGRAM.d), 'monogram path from assets/evlvex-monogram.svg');
 });
 
 test('tag SVG shows model, colour and size', () => {
   const svg = tagSvg('EVX-7F3K9QMD', urls[0], { product: 'The Silent Grind', color: 'Black', size: 'UK 10' });
-  assert.match(svg, />The Silent Grind</);
-  assert.match(svg, />Black · UK 10</);
+  assert.match(svg, />The Silent</);
+  assert.match(svg, />Grind</);
+  assert.match(svg, />Black</);
+  assert.match(svg, />UK 10</);
   assert.match(tagSvg('EVX-7F3K9QMD', urls[0], { product: 'A & B' }), />A &amp; B</);
 });
 
-test('long model names shrink to fit the tag', () => {
-  assert.equal(fitSize('The Silent Grind', TAG.modelSize, { bold: true }), TAG.modelSize);
-  const long = 'An Exceptionally Long Model Name Indeed';
-  const size = fitSize(long, TAG.modelSize, { bold: true });
-  assert.ok(size < TAG.modelSize);
-  assert.ok(long.length * 0.6 * size <= TAG.width - 2 * TAG.textPad + 1e-6);
+test('every text line fits the column, and long names wrap to two lines', () => {
+  for (const details of [
+    { product: 'The Silent Grind', color: 'Black', size: 'UK 10' },
+    { product: 'A Fresh Start', color: 'Off-White', size: 'UK 6' },
+    { product: 'An Exceptionally Long Model Name Indeed', color: 'Burnished Oxblood Brown', size: 'UK 10.5' },
+  ]) {
+    const lines = tagText('EVX-MD6XC8DZ', details);
+    for (const t of lines) {
+      assert.ok(t.x + textWidth(t.text, t.font, t.size, t.spacing) <= TAG.textRight + 1e-6, `"${t.text}" overflows`);
+    }
+    assert.ok(lines.filter((t) => t.font === TAG.model.font && t.y < TAG.color.baseline).length <= 2);
+  }
+  assert.deepEqual(wrapWords('The Silent Grind', TAG.model.font, TAG.model.size), ['The Silent', 'Grind']);
+  assert.ok(fitSize('W'.repeat(40), 'Helvetica', 3) < 3);
 });
 
-test('tagLines joins colour and size, skipping blanks', () => {
-  assert.deepEqual(tagLines({ product: 'A Fresh Start', color: 'Off-White', size: 'UK 8' }), { model: 'A Fresh Start', variant: 'Off-White · UK 8' });
-  assert.deepEqual(tagLines({ product: 'X', size: 'UK 8' }), { model: 'X', variant: 'UK 8' });
-  assert.deepEqual(tagLines(), { model: '', variant: '' });
+test('text column keeps a 4-module quiet zone right of the QR', () => {
+  for (const url of urls) {
+    const moduleMm = TAG.qrSize / qrMatrix(url).size;
+    assert.ok(TAG.textLeft - (TAG.qrLeft + TAG.qrSize) >= 4 * moduleMm - 1e-6, url);
+  }
 });
 
-test('A4 sheet fits 12 tags of 2 × 2.5 in', () => {
-  assert.equal(sheetSlots().length, 12);
+test('A4 sheet fits 15 tags of 2.5 × 2 in', () => {
+  const slots = sheetSlots();
+  assert.equal(slots.length, 15);
+  for (const [x, y] of slots) {
+    assert.ok(x >= 5 && x + TAG.width <= 205 && y >= 5 && y + TAG.height <= 292);
+  }
 });
 
 test('parseManifest reads a stock-list manifest back', () => {
