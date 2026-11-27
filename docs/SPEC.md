@@ -48,10 +48,11 @@ The website must:
 
 ---
 
-## Current state (19 Nov 2026)
+## Current state (28 Nov 2026)
 - **Live theme:** https://evlvex.in serves the theme **EvlveX/main**. That theme is connected to the GitHub repository and updates automatically from the `main` branch, usually within a minute ([deployment.md §2](spec/deployment.md)).
-- **Storefront: paused before launch** (decided 19 Nov 2026). The password page *"The COMEBACK is coming"* collects emails for a waiting list. The password is switched on in Admin (Online Store → Preferences → Password protection); the API cannot toggle it.
+- **Storefront: paused before launch** (decided 19 Nov 2026). **Launch is set for Saturday 28 Nov 2026, 9:00 AM IST.** The password page *"The COMEBACK is coming"* collects emails for a waiting list and shows a countdown to that time. The countdown is a *Countdown* block in the email signup banner; change its time and text in the theme editor → Password page. When it reaches zero it says *"We're opening now. Refresh the page in a minute."* The store does not open by itself: the password is switched off in Admin (Online Store → Preferences → Password protection), and the API cannot toggle it.
 - **Store data:**
+  - **Launch check, 28 Nov 2026 (Admin API, read only):** both products Active and published to the Online Store at ₹3,435, sizes UK 6–10, 117 + 118 pairs in stock, all photos with alt text; all nine pages published; the five policies filled in (no `[FILL IN]` left); The Collection holds both products.
   - **Products:** both are Active with limited-edition SEO and tags.
   - **Pages and menu:** all nine pages and the main menu exist.
   - **The Collection:** exists at `/collections/all` but is not published yet.
@@ -81,7 +82,7 @@ The website must:
 | 9 | Store policies are written ([docs/policies/](policies/README.md)): paste them into Admin → Settings → Policies and fill in the business details (legal name, address, GSTIN, phone, Grievance Officer, court city). Have a lawyer or CA review them | Brand / legal | launch |
 | 10 | Tag supplier and material (satin label vs sticker) | Production | first batch |
 | 11 | Main and footer menus (Shop, The Chapters, About, Care, Authenticity, Contact) | Store owner | navigation |
-| 12 | Before launch: turn off Theme settings → EvlveX → *Show demo photography* once real images are uploaded | Store owner | launch |
+| 12 | ~~Turn off *Show demo photography*~~ **Keep it on (28 Nov 2026):** since the 27 Nov shoot, the "demo" images are the real studio crops (`assets/evx-*.jpg`). Turning it off would put plain monogram plates wherever no image is chosen in the theme editor | — | — |
 | 13 | **Certificate names are listed through the sitemap** ([qr-certificates.md §4](spec/qr-certificates.md)). Decide before the first pair is assigned: show only first name + last initial (theme change), or keep full names and say so in the privacy policy | Brand / developer | first assigned pair |
 | 14 | **"International standards":** the owner wants to say the shoes meet international standards. There is no certificate or test yet, so the site says "designed and made in India; every pair inspected". Add the claim only with proof (e.g. ISO 9001 factory, SATRA or BIS test report), naming it exactly | Brand / production | premium positioning |
 
