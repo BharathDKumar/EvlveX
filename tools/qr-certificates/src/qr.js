@@ -1,10 +1,11 @@
 // QR matrix + tag artwork (SVG and PDF), with the EvlveX monogram in the centre.
 //
-// Tag: landscape, 2.5 in wide × 2 in tall (63.5 × 50.8 mm).
-//   Left:  34 mm QR with the EvlveX monogram (assets/evlvex-monogram.svg, the brand file) in the centre.
-//   Right: model name (bold, up to two lines), colour, size (large), the serial and the EVLVEX · CERTIFIED wordmark.
+// Tag: landscape, 5.0 cm wide × 4.0 cm tall (50 × 40 mm; ≈ 1.97 × 1.57 in).
+//   Top left:  27 mm QR with the EvlveX monogram (assets/evlvex-monogram.svg, the brand file) in the centre.
+//   Top right: model name (bold, up to two lines), colour, size (large).
+//   Bottom:    a thin rule, then the serial (left) and the EVLVEX · CERTIFIED wordmark (right).
 // Error correction "H" recovers ~30% damage; the logo clears < 6% of modules and
-// never touches finder or alignment patterns. The text column starts ≥ 4 modules right of the QR (quiet zone).
+// never touches finder or alignment patterns. Text and rule stay ≥ 4 modules clear of the QR (quiet zone).
 import QRCode from 'qrcode';
 import PDFDocument from 'pdfkit';
 import { readFileSync } from 'node:fs';
@@ -21,22 +22,25 @@ try {
 export const COLORS = { ink: '#111111', accent: '#111111', paper: '#FFFFFF', guide: '#BBBBBB' };
 
 export const TAG = {
-  width: 63.5, // mm (2.5 in)
-  height: 50.8, // mm (2 in)
-  inches: '2.5 in wide × 2 in tall',
-  qrSize: 34,
-  qrLeft: 4.2,
-  qrTop: 8.4, // (height − qrSize) / 2
-  textLeft: 42.6, // QR right edge + 4.4 mm quiet zone
-  textRight: 60.8,
-  model: { size: 3.6, baselines: [11.9, 16.3], single: 14.1, font: 'Helvetica-Bold' },
-  color: { size: 3.0, baseline: 22.6, font: 'Helvetica' },
-  size: { size: 5.2, baseline: 29.4, font: 'Helvetica-Bold' },
-  ruleY: 32.8,
-  serial: { size: 2.5, baseline: 37.4, spacing: 0.1, font: 'Helvetica' },
-  wordmark: { size: 1.6, baseline: 42.2, spacing: 0.15, font: 'Helvetica' },
+  width: 50, // mm (5.0 cm)
+  height: 40, // mm (4.0 cm)
+  label: '5.0 × 4.0 cm',
+  qrSize: 27,
+  qrLeft: 2.8,
+  qrTop: 2.8,
+  textLeft: 32.6, // QR right edge + 2.8 mm quiet zone (≥ 4 modules)
+  textRight: 47.4,
+  model: { size: 2.9, baselines: [6.8, 10.6], single: 8.7, font: 'Helvetica-Bold' },
+  color: { size: 2.5, baseline: 16.8, font: 'Helvetica' },
+  size: { size: 4.4, baseline: 25.0, font: 'Helvetica-Bold' },
+  bandLeft: 2.8,
+  bandRight: 47.2,
+  ruleY: 32.8, // QR bottom (29.8) + ≥ 4 modules
+  serial: { size: 2.4, baseline: 37.0, spacing: 0.08, font: 'Helvetica' },
+  wordmark: { size: 1.5, baseline: 37.0, spacing: 0.12, font: 'Helvetica' },
 };
 const TEXT_WIDTH = TAG.textRight - TAG.textLeft;
+const BAND_GAP = 3; // mm between serial and wordmark
 
 const LOGO_RATIO = 0.26; // logo diameter as a fraction of the module count
 
@@ -102,13 +106,19 @@ export function tagText(serial, details = {}) {
   }
   add(String(details.color || '').trim(), TAG.color);
   add(String(details.size || '').trim(), TAG.size);
-  add(serial, TAG.serial);
-  add('EVLVEX · CERTIFIED', TAG.wordmark);
+
+  // Bottom band: serial on the left, wordmark right-aligned; each gets its share of the band width.
+  const band = TAG.bandRight - TAG.bandLeft;
+  const word = 'EVLVEX · CERTIFIED';
+  const ws = TAG.wordmark;
+  const wordSize = fitSize(word, ws.font, ws.size, band * 0.42, ws.spacing);
+  const wordW = textWidth(word, ws.font, wordSize, ws.spacing);
+  const ss = TAG.serial;
+  const serialSize = fitSize(serial, ss.font, ss.size, band - wordW - BAND_GAP, ss.spacing);
+  out.push({ text: serial, x: TAG.bandLeft, y: ss.baseline, size: serialSize, font: ss.font, spacing: ss.spacing });
+  out.push({ text: word, x: TAG.bandRight - wordW, y: ws.baseline, size: wordSize, font: ws.font, spacing: ws.spacing });
   return out;
 }
-
-/** True when a tag has product details (and so gets the thin rule above the serial). */
-const hasDetails = (d = {}) => Boolean(d.product || d.color || d.size);
 
 const escapeXml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]);
 
@@ -190,9 +200,7 @@ export function tagSvg(serial, url, details = {}) {
     const spacing = t.spacing ? ` letter-spacing="${t.spacing}"` : '';
     return `<text x="${fmt(t.x)}" y="${fmt(t.y)}" font-family="Helvetica, Arial, sans-serif"${weight} font-size="${fmt(t.size)}"${spacing} fill="${COLORS.ink}">${escapeXml(t.text)}</text>`;
   });
-  if (hasDetails(details)) {
-    text.push(`<line x1="${TAG.textLeft}" y1="${TAG.ruleY}" x2="${TAG.textRight}" y2="${TAG.ruleY}" stroke="${COLORS.guide}" stroke-width="0.2"/>`);
-  }
+  text.push(`<line x1="${TAG.bandLeft}" y1="${TAG.ruleY}" x2="${TAG.bandRight}" y2="${TAG.ruleY}" stroke="${COLORS.guide}" stroke-width="0.2"/>`);
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${TAG.width}mm" height="${TAG.height}mm" viewBox="0 0 ${TAG.width} ${TAG.height}">
@@ -234,15 +242,13 @@ export function drawTagPdf(doc, xMm, yMm, serial, url, details = {}) {
   doc.save().translate(ox + logo.x, oy + logo.y).scale(logo.s)
     .path(MONOGRAM.d).fill(COLORS.accent, 'even-odd').restore();
 
-  // Text column
+  // Text: product column beside the QR, serial + wordmark along the bottom
   for (const t of tagText(serial, details)) {
     doc.font(t.font).fontSize(t.size * MM).fillColor(COLORS.ink)
       .text(t.text, x + t.x * MM, y + t.y * MM, { baseline: 'alphabetic', characterSpacing: t.spacing * MM, lineBreak: false });
   }
-  if (hasDetails(details)) {
-    doc.save().lineWidth(0.2 * MM).strokeColor(COLORS.guide)
-      .moveTo(x + TAG.textLeft * MM, y + TAG.ruleY * MM).lineTo(x + TAG.textRight * MM, y + TAG.ruleY * MM).stroke().restore();
-  }
+  doc.save().lineWidth(0.2 * MM).strokeColor(COLORS.guide)
+    .moveTo(x + TAG.bandLeft * MM, y + TAG.ruleY * MM).lineTo(x + TAG.bandRight * MM, y + TAG.ruleY * MM).stroke().restore();
 }
 
 // 3 × 5 tags of 63.5 × 50.8 mm per A4 sheet (7 mm page margin, 2 mm between tags).

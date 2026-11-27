@@ -9,7 +9,7 @@ Command details are in [qr-tooling.md](qr-tooling.md); the certificate fields ar
 ## 1. Generate and print a batch (production)
 1. Put the stock list in `tools/qr-certificates/stock/` (one row per model, colour and size, with a count; see [qr-tooling.md §2](qr-tooling.md)) and run `npm run generate -- --from stock/<file>.csv --batch NOV26` in `tools/qr-certificates/`. Each pair gets a certificate with its product, size and pair number, and the PDF has one sheet per model and size. (Without a list: `npm run generate -- --count 200 --batch NOV26` makes blank serials; product and size are then filled in at packing.)
 2. Open `out/NOV26/tags.pdf` and print it:
-   - **Tag size:** 2.5 in wide × 2 in tall (63.5 × 50.8 mm), 15 per A4 sheet. A 34 mm QR with the EvlveX monogram in the centre; model name, colour, size and serial beside it.
+   - **Tag size:** 5.0 cm wide × 4.0 cm tall (50 × 40 mm), 18 per A4 sheet. A 27 mm QR with the EvlveX monogram in the centre; model name, colour and size beside it; serial along the bottom.
    - **Material:** printed satin or woven label sewn under the tongue or insole, **plus** a matching sticker on the shoe box.
    - Print a test sheet first and scan 3 tags with an iPhone and an Android phone.
 3. Keep `out/NOV26/manifest.csv` as the record of which serials exist.

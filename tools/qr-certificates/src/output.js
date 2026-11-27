@@ -103,7 +103,7 @@ async function writePdf(file, items, meta) {
 
   pagesOf.forEach((page, p) => {
     doc.addPage();
-    const header = `EvlveX · batch ${meta.batch} · sheet ${p + 1}/${pagesOf.length} · tags ${TAG.inches} (${TAG.width}×${TAG.height} mm) — print at 100% (no "fit to page")${meta.note ? ' · ' + meta.note : ''}`;
+    const header = `EvlveX · batch ${meta.batch} · sheet ${p + 1}/${pagesOf.length} · tags ${TAG.label} (${TAG.width}×${TAG.height} mm) — print at 100% (no "fit to page")${meta.note ? ' · ' + meta.note : ''}`;
     doc.font('Helvetica').fontSize(6.5).fillColor('#888888')
       .text(header, A4.margin * MM, 5 * MM, { width: (A4.width - 2 * A4.margin) * MM, align: 'center', lineBreak: false });
     if (page.group) {

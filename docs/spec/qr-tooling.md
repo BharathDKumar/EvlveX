@@ -55,7 +55,7 @@ Location: `tools/qr-certificates/` (Node.js). It creates serials and tag artwork
 
 ## 4. Output files (`out/<batch>/`)
 - `svg/EVX-XXXXXXXX.svg`: one tag per serial (vector, for label printers)
-- `tags.pdf`: A4 sheets of landscape tags, **2.5 in wide × 2 in tall** (63.5 × 50.8 mm), 15 per sheet (3 × 5), with cut marks. Left: a 34 mm QR with the brand monogram (`assets/evlvex-monogram.svg`) in the centre. Right: the **model name**, **colour** and **size** (stock-list batches), the serial and the EVLVEX · CERTIFIED wordmark
+- `tags.pdf`: A4 sheets of landscape tags, **5.0 cm wide × 4.0 cm tall** (50 × 40 mm, ≈ 1.97 × 1.57 in), 18 per sheet (3 × 6), with cut marks. Top left: a 27 mm QR with the brand monogram (`assets/evlvex-monogram.svg`) in the centre. Beside it: the **model name**, **colour** and **size** (stock-list batches). Along the bottom: the serial and the EVLVEX · CERTIFIED wordmark
 - `manifest.csv`: `serial, handle, url, batch, created_at`
 
 ## 5. `autopack`: automatic tag assignment

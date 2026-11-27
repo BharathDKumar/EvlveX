@@ -43,11 +43,11 @@ for (const url of urls) {
   });
 }
 
-test('tag SVG is landscape 2.5 in wide × 2 in tall and uses the brand monogram', () => {
+test('tag SVG is 5.0 cm wide × 4.0 cm tall and uses the brand monogram', () => {
   const svg = tagSvg('EVX-7F3K9QMD', urls[0]);
   assert.match(svg, /^<\?xml/);
   assert.match(svg, />EVX-7F3K9QMD</);
-  assert.match(svg, /width="63.5mm" height="50.8mm"/);
+  assert.match(svg, /width="50mm" height="40mm"/);
   assert.ok(svg.includes(MONOGRAM.d), 'monogram path from assets/evlvex-monogram.svg');
 });
 
@@ -68,24 +68,33 @@ test('every text line fits the column, and long names wrap to two lines', () => 
   ]) {
     const lines = tagText('EVX-MD6XC8DZ', details);
     for (const t of lines) {
-      assert.ok(t.x + textWidth(t.text, t.font, t.size, t.spacing) <= TAG.textRight + 1e-6, `"${t.text}" overflows`);
+      const right = t.x + textWidth(t.text, t.font, t.size, t.spacing);
+      const limit = t.y > TAG.ruleY ? TAG.bandRight : TAG.textRight;
+      assert.ok(right <= limit + 1e-6, `"${t.text}" overflows`);
+      assert.ok(t.x >= (t.y > TAG.ruleY ? TAG.bandLeft : TAG.textLeft) - 1e-6, `"${t.text}" starts too far left`);
     }
     assert.ok(lines.filter((t) => t.font === TAG.model.font && t.y < TAG.color.baseline).length <= 2);
+    // serial and wordmark share the bottom line without touching
+    const [serial, word] = lines.slice(-2);
+    assert.ok(serial.x + textWidth(serial.text, serial.font, serial.size, serial.spacing) < word.x);
+    assert.ok(serial.size >= 2, 'serial stays readable');
   }
   assert.deepEqual(wrapWords('The Silent Grind', TAG.model.font, TAG.model.size), ['The Silent', 'Grind']);
   assert.ok(fitSize('W'.repeat(40), 'Helvetica', 3) < 3);
 });
 
-test('text column keeps a 4-module quiet zone right of the QR', () => {
+test('QR keeps a 4-module quiet zone to the tag edges, the text column and the rule', () => {
   for (const url of urls) {
-    const moduleMm = TAG.qrSize / qrMatrix(url).size;
-    assert.ok(TAG.textLeft - (TAG.qrLeft + TAG.qrSize) >= 4 * moduleMm - 1e-6, url);
+    const q = 4 * (TAG.qrSize / qrMatrix(url).size) - 1e-6;
+    assert.ok(TAG.qrLeft >= q && TAG.qrTop >= q, `edges: ${url}`);
+    assert.ok(TAG.textLeft - (TAG.qrLeft + TAG.qrSize) >= q, `text: ${url}`);
+    assert.ok(TAG.ruleY - (TAG.qrTop + TAG.qrSize) >= q, `rule: ${url}`);
   }
 });
 
-test('A4 sheet fits 15 tags of 2.5 × 2 in', () => {
+test('A4 sheet fits 18 tags of 5.0 × 4.0 cm', () => {
   const slots = sheetSlots();
-  assert.equal(slots.length, 15);
+  assert.equal(slots.length, 18);
   for (const [x, y] of slots) {
     assert.ok(x >= 5 && x + TAG.width <= 205 && y >= 5 && y + TAG.height <= 292);
   }
