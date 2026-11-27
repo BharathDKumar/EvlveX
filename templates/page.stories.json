@@ -28,31 +28,13 @@
           "settings": {
             "text": "Never give up. Make your comeback."
           }
-        },
-        "link-1": {
-          "type": "chapter_link",
-          "settings": {
-            "number": "01",
-            "label": "The Silent Grind",
-            "anchor": "the-silent-grind"
-          }
-        },
-        "link-2": {
-          "type": "chapter_link",
-          "settings": {
-            "number": "02",
-            "label": "A Fresh Start",
-            "anchor": "a-fresh-start"
-          }
         }
       },
       "block_order": [
         "eyebrow",
         "heading",
         "text",
-        "statement",
-        "link-1",
-        "link-2"
+        "statement"
       ],
       "settings": {
         "color_scheme": "scheme-2",
