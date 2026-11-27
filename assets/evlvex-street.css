@@ -1067,6 +1067,21 @@ evlvex-drop-hero :is(p, h2, h3) {
   font-weight: 500;
 }
 
+/* Cards with several images: they fade through on hover (evlvex-gallery.js); the dots sit on the photo */
+.card-wrapper .evx-card-gallery > .sd-item__dots {
+  top: auto;
+  bottom: 1.2rem;
+  left: 50%;
+  display: flex;
+  width: auto;
+  height: auto;
+  z-index: 2;
+}
+
+.card-wrapper .evx-card-gallery > .sd-item__dots:has(i:only-child) {
+  display: none;
+}
+
 /* ---------- Phone ---------- */
 @media screen and (max-width: 749px) {
   .sd-head {

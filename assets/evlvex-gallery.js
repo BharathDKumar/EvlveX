@@ -1,13 +1,18 @@
 /*
   EvlveX — small gallery helpers (loaded on every page from layout/theme.liquid).
-  1. Product cards ([data-sd-gallery], sections/evlvex-drop-grid.liquid): on hover the card runs through its images
-     (one per second); on touch screens a swipe changes the image. Dots show the current image.
+  1. Product cards ([data-sd-gallery]): "The drop" cards (sections/evlvex-drop-grid.liquid) and Dawn product cards on
+     the collection, search and related-products grids (snippets/card-product.liquid). On hover the card runs
+     through its images (one per second); on touch screens a swipe changes the image. Dots show the current image.
   2. Product page gallery (Dawn media-gallery with thumbnails): adds previous / next arrows and an "1 / 3" counter on
-     the main image on desktop, driving Dawn's own thumbnails so everything stays in sync.
-  Nothing moves for visitors who prefer reduced motion (hover cycling is off; arrows and swipe still work).
+     the main image on desktop, driving Dawn's own thumbnails so everything stays in sync. The images also change on
+     their own every 4 seconds while the main image is fully on screen; this pauses on hover, keyboard focus, while
+     the zoom is open or the tab is hidden, and restarts its count after any arrow, thumbnail or swipe.
+  Nothing moves on its own for visitors who prefer reduced motion (arrows and swipe still work).
 */
 (() => {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const desktop = window.matchMedia('(min-width: 750px)');
+  const AUTOPLAY_MS = 4000;
 
   // ---------- 1. Product card hover gallery ----------
   const initCard = (media) => {
@@ -33,31 +38,42 @@
       timer = null;
       show(0);
     };
-    const card = media.closest('.sd-item') || media;
+    const card = media.closest('.sd-item, .card-wrapper') || media;
     card.addEventListener('mouseenter', start);
     card.addEventListener('mouseleave', stop);
 
+    // Swipe on the whole card: on Dawn cards the product link's overlay sits above the image
+    // Vertical scrolling stays with the browser; horizontal moves come to us instead of a pointercancel
+    card.style.touchAction = 'pan-y';
     let startX = null;
-    media.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') startX = e.clientX; }, { passive: true });
-    media.addEventListener('pointerup', (e) => {
+    let startY = null;
+    const isSwipe = (e) => Math.abs(e.clientX - startX) > 30 && Math.abs(e.clientX - startX) > Math.abs(e.clientY - startY);
+    card.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') { startX = e.clientX; startY = e.clientY; } }, { passive: true });
+    card.addEventListener('pointermove', (e) => { if (startX !== null && isSwipe(e)) media.dataset.sdSwiped = '1'; }, { passive: true });
+    card.addEventListener('pointerup', (e) => {
       if (startX === null) return;
       const dx = e.clientX - startX;
+      const swipe = isSwipe(e);
       startX = null;
-      if (Math.abs(dx) > 30) show(index + (dx < 0 ? 1 : -1));
+      if (swipe) show(index + (dx < 0 ? 1 : -1));
     }, { passive: true });
+    card.addEventListener('pointercancel', () => { startX = null; }, { passive: true });
     // A swipe should not open the product
-    media.addEventListener('click', (e) => { if (media.dataset.sdSwiped) { e.preventDefault(); delete media.dataset.sdSwiped; } });
-    media.addEventListener('pointermove', (e) => { if (startX !== null && Math.abs(e.clientX - startX) > 30) media.dataset.sdSwiped = '1'; }, { passive: true });
+    card.addEventListener('click', (e) => { if (media.dataset.sdSwiped) { e.preventDefault(); delete media.dataset.sdSwiped; } }, true);
   };
 
-  // ---------- 2. Product page: arrows on the main image ----------
+  // ---------- 2. Product page: arrows on the main image, and autoplay ----------
   const initProductGallery = (gallery) => {
     if (gallery.dataset.sdArrows) return;
     const thumbs = Array.from(gallery.querySelectorAll('.thumbnail-list__item .thumbnail'));
     const wrapper = gallery.querySelector('slider-component[id^="GalleryViewer"]') || gallery.querySelector('.product__media-list')?.parentElement;
     if (thumbs.length < 2 || !wrapper) return;
     gallery.dataset.sdArrows = '1';
-    const current = () => Math.max(0, thumbs.findIndex((t) => t.getAttribute('aria-current') === 'true'));
+    // Desktop shows one image at a time and Dawn marks its thumbnail; on phones the visible slide is the slider's page
+    const current = () => {
+      if (!desktop.matches && wrapper.currentPage) return Math.min(thumbs.length - 1, Math.max(0, wrapper.currentPage - 1));
+      return Math.max(0, thumbs.findIndex((t) => t.getAttribute('aria-current') === 'true'));
+    };
     const bar = document.createElement('div');
     bar.className = 'sd-gallery-nav';
     bar.innerHTML =
@@ -67,15 +83,51 @@
     wrapper.appendChild(bar);
     const count = bar.querySelector('.sd-gallery-nav__count');
     const update = () => { count.textContent = `${current() + 1} / ${thumbs.length}`; };
+    const step = (dir) => {
+      const next = (current() + dir + thumbs.length) % thumbs.length;
+      thumbs[next].click();
+      window.setTimeout(update, 50);
+    };
+
+    // Autoplay
+    let timer = null;
+    let hovered = false;
+    let focused = false;
+    const fullyInView = () => {
+      const active = wrapper.querySelector('.product__media-item.is-active') || wrapper;
+      const r = active.getBoundingClientRect();
+      // Dawn scrolls the window back to the image if it is above the screen, so only move when it is all in view
+      return r.height > 0 && r.top >= 0 && r.bottom <= window.innerHeight + 1;
+    };
+    const tick = () => {
+      if (hovered || focused || document.hidden || document.querySelector('product-modal[open]') || !fullyInView()) return;
+      step(1);
+    };
+    const restart = () => {
+      if (reduced) return;
+      window.clearInterval(timer);
+      timer = window.setInterval(tick, AUTOPLAY_MS);
+    };
+
     bar.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-dir]');
       if (!btn) return;
-      const next = (current() + Number(btn.dataset.dir) + thumbs.length) % thumbs.length;
-      thumbs[next].click();
-      window.setTimeout(update, 50);
+      step(Number(btn.dataset.dir));
+      restart();
     });
-    thumbs.forEach((t) => t.addEventListener('click', () => window.setTimeout(update, 50)));
+    thumbs.forEach((t) => t.addEventListener('click', (e) => {
+      window.setTimeout(update, 50);
+      if (e.isTrusted) restart();
+    }));
+    gallery.addEventListener('mouseenter', () => { hovered = true; });
+    gallery.addEventListener('mouseleave', () => { hovered = false; });
+    // Keyboard focus only: a mouse click on a thumbnail also focuses it, and that should not stop the autoplay
+    gallery.addEventListener('focusin', (e) => { focused = e.target.matches(':focus-visible'); });
+    gallery.addEventListener('focusout', (e) => { if (!gallery.contains(e.relatedTarget)) focused = false; });
+    // A swipe on phones
+    wrapper.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') restart(); }, { passive: true });
     update();
+    restart();
   };
 
   const init = (root = document) => {

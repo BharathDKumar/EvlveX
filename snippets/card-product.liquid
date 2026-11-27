@@ -71,8 +71,22 @@
           style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
         >
           {%- if card_product.featured_media -%}
+            {%- comment -%}
+              EvlveX: with several images the card runs through them on hover (swipe on phones), assets/evlvex-gallery.js
+            {%- endcomment -%}
+            {%- liquid
+              assign evx_slides = false
+              if card_product.media.size > 1
+                assign evx_slides = true
+              endif
+            -%}
             <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-              <div class="media media--transparent media--hover-effect">
+              <div
+                class="media media--transparent{% if evx_slides %} evx-card-gallery{% else %} media--hover-effect{% endif %}"
+                {% if evx_slides %}
+                  data-sd-gallery
+                {% endif %}
+              >
                 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
                 <img
                   srcset="
@@ -87,7 +101,7 @@
                   src="{{ card_product.featured_media | image_url: width: 533 }}"
                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                   alt="{{ card_product.featured_media.alt | default: card_product.title | escape }}"
-                  class="motion-reduce"
+                  class="motion-reduce{% if evx_slides %} sd-item__slide is-on{% endif %}"
                   {% unless lazy_load == false %}
                     loading="lazy"
                   {% endunless %}
@@ -96,7 +110,31 @@
                 >
                 {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
 
-                {%- if card_product.media[1] != null and show_secondary_image -%}
+                {%- if evx_slides -%}
+                  {%- assign evx_slide_count = 1 -%}
+                  {%- for media in card_product.media -%}
+                    {%- if evx_slide_count >= 5 -%}{%- break -%}{%- endif -%}
+                    {%- if media.id == card_product.featured_media.id or media.preview_image == blank -%}
+                      {%- continue -%}
+                    {%- endif -%}
+                    {%- assign evx_slide_count = evx_slide_count | plus: 1 -%}
+                    {{
+                      media.preview_image
+                      | image_url: width: 1066
+                      | image_tag:
+                        widths: '360, 533, 720, 940, 1066',
+                        sizes: '(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)',
+                        loading: 'lazy',
+                        alt: '',
+                        class: 'motion-reduce sd-item__slide'
+                    }}
+                  {%- endfor -%}
+                  <span class="sd-item__dots" aria-hidden="true">
+                    {%- for i in (1..evx_slide_count) -%}
+                      <i{% if forloop.first %} class="is-on"{% endif %}></i>
+                    {%- endfor -%}
+                  </span>
+                {%- elsif card_product.media[1] != null and show_secondary_image -%}
                   <img
                     srcset="
                       {%- if card_product.media[1].width >= 165 -%}{{ card_product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
