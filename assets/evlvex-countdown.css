@@ -38,8 +38,8 @@
 
 .evx-cd__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5.6rem;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4.8rem;
   align-items: center;
   max-width: 144rem;
   margin: 0 auto;
@@ -73,20 +73,20 @@
   margin: 3.2rem 0 0;
   font-family: var(--font-heading-family);
   font-weight: 900;
-  font-size: 7.2rem;
-  line-height: 0.95;
+  font-size: 5.2rem;
+  line-height: 1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: rgb(var(--evx-cd-ink));
-  max-width: 7em;
 }
 
 .evx-cd__series {
   display: block;
-  margin-top: 0.45em;
-  padding-left: 0.2em;
+  margin-top: 0.8rem;
+  padding-left: 0.2rem;
   font-weight: 500;
-  font-size: 0.36em;
+  font-size: 1.9rem;
   letter-spacing: 0.5em;
 }
 
@@ -115,7 +115,7 @@
 .evx-cd__num {
   font-family: var(--font-heading-family);
   font-weight: 900;
-  font-size: 12rem;
+  font-size: 11rem;
   line-height: 0.9;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
@@ -226,14 +226,14 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  min-height: 56rem;
+  min-height: 62rem;
   border-radius: 2.2rem;
   background: rgb(var(--evx-cd-sand));
 }
 
 .evx-cd__photo {
-  width: 78%;
-  max-width: 52rem;
+  width: 90%;
+  max-width: 72rem;
   aspect-ratio: 3 / 2;
   overflow: hidden;
   border: 0.8rem solid #fff;
@@ -332,7 +332,11 @@
 
   .evx-cd__title {
     margin-top: 2.4rem;
-    font-size: 4.2rem;
+    font-size: 3.4rem;
+  }
+
+  .evx-cd__series {
+    font-size: 1.4rem;
   }
 
   .evx-cd__label {
@@ -377,10 +381,10 @@
   }
 
   .evx-cd__visual {
-    min-height: 30rem;
+    min-height: 34rem;
   }
 
   .evx-cd__photo {
-    width: 76%;
+    width: 90%;
   }
 }
