@@ -21,9 +21,9 @@
     assign s = story.settings
     case s.shoe
       when 'fresh-start'
-        assign photo = 'evx-fs-wide.jpg|1366|1024'
+        assign photo = 'evx-fs-wide.jpg|1600|1200'
       else
-        assign photo = 'evx-sg-full.jpg|960|720'
+        assign photo = 'evx-sg-full.jpg|1600|1067'
     endcase
     assign photo_parts = photo | split: '|'
     assign word = s.title_solid | append: ' ' | append: s.title_outline | strip

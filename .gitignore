@@ -2,3 +2,6 @@ node_modules/
 .env
 tools/qr-certificates/out/
 .shopify/
+
+# Raw camera originals (15-22 MB each); masters in docs/brand/campaign/ are committed
+docs/brand/campaign/raw/
