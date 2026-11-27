@@ -18,32 +18,39 @@
 {%- enddoc -%}
 {%- if settings.evx_demo_images -%}
   {%- liquid
-    assign sg_full = 'evx-sg-full|960|720|The Silent Grind: two black low-top sneakers with the white EvlveX monogram'
-    assign sg_card = 'evx-sg-card|1024|1280|The Silent Grind: black low-top sneaker with the white EvlveX monogram'
-    assign sg_mono = 'evx-sg-monogram|397|445|The white EvlveX monogram on The Silent Grind, among white feathers'
-    assign sg_sole = 'evx-sg-sole|392|490|The Silent Grind on black feathers in a navy velvet box'
-    assign fs_full = 'evx-fs-full|950|530|A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram'
-    assign fs_card = 'evx-fs-card|1024|1280|A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram'
-    assign fs_wide = 'evx-fs-wide|1366|1024|A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram'
-    assign fs_mono = 'evx-fs-monogram|389|295|A Fresh Start in its black box with a thank-you card'
-    assign fs_lace = 'evx-fs-laces|397|460|A Fresh Start on white feathers in a cream box'
-    assign pair = 'evx-comeback-pair|399|445|COMEBACK: A Fresh Start and The Silent Grind with their boxes'
+    assign sg_full = 'evx-sg-full|1600|1067|The Silent Grind: black low-top sneaker with the white EvlveX monogram, side view'
+    assign sg_card = 'evx-sg-card|1200|1500|The Silent Grind: black low-top sneaker with the white EvlveX monogram'
+    assign sg_mono = 'evx-sg-monogram|1000|1120|The embroidered white EvlveX monogram on The Silent Grind'
+    assign sg_sole = 'evx-sg-sole|1600|1067|The Silent Grind: the NEVER GIVE UP heel and the black and white outsole'
+    assign sg_heel = 'evx-sg-heel|1600|1067|NEVER GIVE UP on the heel of The Silent Grind'
+    assign sg_hold = 'evx-sg-hold|1200|1500|The Silent Grind held to the chest, monogram in the light'
+    assign sg_duo = 'evx-sg-duo|1600|1200|The Silent Grind from above and from the side'
+    assign fs_full = 'evx-fs-full|1600|900|A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram'
+    assign fs_card = 'evx-fs-card|1200|1500|A Fresh Start: cream and sand low-top sneaker on a gum sole'
+    assign fs_wide = 'evx-fs-wide|1600|1200|A Fresh Start: cream and sand low-top sneaker with an embossed EvlveX monogram'
+    assign fs_mono = 'evx-fs-monogram|1000|760|The embossed EvlveX monogram on A Fresh Start'
+    assign fs_lace = 'evx-fs-laces|1000|1500|A Fresh Start from above: sand laces and the EvlveX tongue'
+    assign fs_heel = 'evx-fs-heel|1600|1067|NEVER GIVE UP on the heel of A Fresh Start'
+    assign pair = 'evx-comeback-pair|1600|1067|COMEBACK Series 01: The Silent Grind and A Fresh Start with the COMEBACK card'
+    assign card = 'evx-comeback-card|1600|1067|The COMEBACK Series 01 card'
+    assign box = 'evx-box|1600|1067|The black EvlveX box on satin'
+    assign box_streak = 'evx-box-streak|1600|1067|The EvlveX box lid in a streak of light'
 
     case kind
       when 'hero'
-        assign demo_pool = pair | append: ';' | append: sg_full | append: ';' | append: fs_wide
+        assign demo_pool = pair | append: ';' | append: sg_full | append: ';' | append: fs_wide | append: ';' | append: sg_duo
       when 'lifestyle'
-        assign demo_pool = sg_sole | append: ';' | append: fs_lace | append: ';' | append: sg_full | append: ';' | append: fs_full
+        assign demo_pool = sg_hold | append: ';' | append: sg_duo | append: ';' | append: fs_full | append: ';' | append: sg_full | append: ';' | append: fs_lace
       when 'atelier'
-        assign demo_pool = sg_mono | append: ';' | append: fs_mono | append: ';' | append: sg_sole | append: ';' | append: fs_lace
+        assign demo_pool = sg_mono | append: ';' | append: fs_mono | append: ';' | append: sg_heel | append: ';' | append: fs_heel | append: ';' | append: box | append: ';' | append: sg_sole | append: ';' | append: fs_lace
       when 'product'
         assign demo_pool = sg_card | append: ';' | append: fs_card
       when 'collection'
-        assign demo_pool = pair | append: ';' | append: sg_card | append: ';' | append: fs_card
+        assign demo_pool = pair | append: ';' | append: sg_card | append: ';' | append: fs_card | append: ';' | append: box
       when 'article'
-        assign demo_pool = sg_full | append: ';' | append: fs_wide | append: ';' | append: sg_mono | append: ';' | append: fs_mono
+        assign demo_pool = sg_full | append: ';' | append: fs_wide | append: ';' | append: card | append: ';' | append: box_streak | append: ';' | append: sg_heel
       else
-        assign demo_pool = sg_full | append: ';' | append: fs_wide | append: ';' | append: sg_mono | append: ';' | append: fs_lace
+        assign demo_pool = sg_full | append: ';' | append: fs_wide | append: ';' | append: sg_hold | append: ';' | append: fs_lace | append: ';' | append: pair
     endcase
 
     assign demo_items = demo_pool | split: ';'
