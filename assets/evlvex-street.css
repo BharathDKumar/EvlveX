@@ -1025,34 +1025,38 @@ evlvex-drop-hero :is(p, h2, h3) {
   text-transform: uppercase;
 }
 
+/* Product buttons (v1.19): Add to cart is the outline button, Buy it now the filled one.
+   Dawn draws each button's edge in ::after from --color-button / --color-button-text. */
 .evx-t-product .product-form__submit {
-  --color-button: var(--sd-ink);
-  --color-button-text: var(--sd-paper);
-  background-color: rgb(var(--sd-ink));
-  color: rgb(var(--sd-paper));
-}
-
-/* Add to cart carries Dawn's outline class but is drawn filled, so it gets the filled hover */
-.evx-t-product .product-form__submit:not([disabled]):not([aria-disabled='true']):hover {
-  --color-button: var(--evx-brass);
-  --color-button-text: var(--sd-paper);
-  background-color: rgb(var(--evx-brass));
-  color: rgb(var(--sd-paper));
-}
-
-.evx-t-product .shopify-payment-button__button--unbranded {
+  --color-button: var(--sd-paper);
+  --color-button-text: var(--sd-ink);
   background-color: transparent;
   color: rgb(var(--sd-ink));
   box-shadow: inset 0 0 0 1px rgb(var(--sd-ink));
 }
 
-.evx-t-product .shopify-payment-button__button--unbranded:hover:not([disabled]) {
-  /* Dawn draws the edge in ::after from these two colours */
-  --color-button: var(--evx-brass);
+.evx-t-product .product-form__submit:not([disabled]):not([aria-disabled='true']):hover {
+  --color-button: var(--sd-paper);
   --color-button-text: var(--evx-brass);
   background-color: transparent;
   color: rgb(var(--evx-brass-ink));
   box-shadow: inset 0 0 0 1px rgb(var(--evx-brass));
+}
+
+.evx-t-product .shopify-payment-button__button--unbranded {
+  --color-button: var(--sd-ink);
+  --color-button-text: var(--sd-paper);
+  background-color: rgb(var(--sd-ink));
+  color: rgb(var(--sd-paper));
+  box-shadow: none;
+}
+
+.evx-t-product .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  --color-button: var(--evx-brass);
+  --color-button-text: var(--sd-paper);
+  background-color: rgb(var(--evx-brass));
+  color: rgb(var(--sd-paper));
+  box-shadow: none;
 }
 
 .evx-t-product .product__accordion .accordion {
