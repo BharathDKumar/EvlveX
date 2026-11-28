@@ -1038,6 +1038,9 @@ evlvex-drop-hero :is(p, h2, h3) {
 }
 
 .evx-t-product .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  /* Dawn draws the edge in ::after from these two colours */
+  --color-button: var(--evx-brass);
+  --color-button-text: var(--evx-brass);
   background-color: transparent;
   color: rgb(var(--evx-brass-ink));
   box-shadow: inset 0 0 0 1px rgb(var(--evx-brass));
