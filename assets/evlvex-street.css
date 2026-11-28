@@ -138,20 +138,24 @@ h2.h5 {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.25s var(--sd-ease);
+  transition: background-color 0.25s var(--sd-ease), color 0.25s var(--sd-ease);
 }
 
+/* Button colours (v1.19, frame A2): black → deep brass with white text */
 .sd-pill:hover {
-  background: rgba(var(--sd-ink), 0.85);
+  background: rgb(var(--evx-brass));
+  color: rgb(var(--sd-paper));
 }
 
+/* On black bands and photos: deep brass → white */
 .sd-pill--light {
-  background: rgb(var(--sd-paper));
-  color: rgb(var(--sd-ink));
+  background: rgb(var(--evx-brass));
+  color: rgb(var(--sd-paper));
 }
 
 .sd-pill--light:hover {
-  background: rgb(var(--sd-sand));
+  background: rgb(var(--sd-paper));
+  color: rgb(var(--sd-ink));
 }
 
 .sd-pill:focus-visible {
@@ -998,7 +1002,7 @@ evlvex-drop-hero :is(p, h2, h3) {
 
 .evx-t-product .product-form__input--pill input[type='radio']:checked + label {
   background: rgb(var(--sd-ink));
-  border-color: rgb(var(--sd-ink));
+  border-color: rgb(var(--evx-brass));
   color: rgb(var(--sd-paper));
 }
 
@@ -1019,6 +1023,14 @@ evlvex-drop-hero :is(p, h2, h3) {
   color: rgb(var(--sd-paper));
 }
 
+/* Add to cart carries Dawn's outline class but is drawn filled, so it gets the filled hover */
+.evx-t-product .product-form__submit:not([disabled]):not([aria-disabled='true']):hover {
+  --color-button: var(--evx-brass);
+  --color-button-text: var(--sd-paper);
+  background-color: rgb(var(--evx-brass));
+  color: rgb(var(--sd-paper));
+}
+
 .evx-t-product .shopify-payment-button__button--unbranded {
   background-color: transparent;
   color: rgb(var(--sd-ink));
@@ -1026,8 +1038,9 @@ evlvex-drop-hero :is(p, h2, h3) {
 }
 
 .evx-t-product .shopify-payment-button__button--unbranded:hover:not([disabled]) {
-  background-color: rgb(var(--sd-ink));
-  color: rgb(var(--sd-paper));
+  background-color: transparent;
+  color: rgb(var(--evx-brass-ink));
+  box-shadow: inset 0 0 0 1px rgb(var(--evx-brass));
 }
 
 .evx-t-product .product__accordion .accordion {
