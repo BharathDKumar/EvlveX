@@ -31,7 +31,18 @@ The house palette is **black and white**, with neutral greys only. It follows pr
 | Grey | `#E5E5E5` | feature blocks, newsletter, sale badge |
 | Mid grey | `#757575` | muted text (eyebrows, captions); hairlines are the text color at 15% |
 
-There is **no accent color**: links, rules, underlines, the seal and chapter numbers use the text color, so they are black on light sections and white on dark ones.
+Since v1.14 the site's surfaces are white and warm sand (`#F3EEE6`, `#E2D8C8`) with black, not the greys above.
+
+**Buttons only: deep brass** (v1.19, chosen 28 Nov 2026 from six frames):
+
+| Name | Hex | Use |
+|---|---|---|
+| Deep brass | `#8F6B3A` | hover fill of black buttons (white text); resting fill of buttons on black sections; edge of the selected size |
+| Brass ink | `#7A5C33` | text and edge of outline buttons on hover, on light sections |
+
+White text on deep brass is 4.85:1 (passes WCAG AA). Do not use the lighter brass `#B08D57` with white text (3.1:1). Brass is never used for body text, headings, the logo or the monogram.
+
+Apart from buttons there is **no accent color**: links, rules, underlines, the seal and chapter numbers use the text color, so they are black on light sections and white on dark ones.
 
 The Shopify color-scheme mapping is in [theme.md §1](theme.md).
 

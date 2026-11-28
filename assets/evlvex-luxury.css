@@ -4,17 +4,40 @@
   Theme settings (config/settings_data.json); this file only adds typography detail,
   spacing and motion. Brand system: docs/spec/brand-and-content.md.
 
-  Look: black & white, bold uppercase sans headings (Archivo), pill buttons.
-  There is no accent color: accents use the scheme's foreground, so they are
-  black on light schemes and white on dark ones.
+  Look: black, white and sand, bold uppercase sans headings (Archivo), pill buttons.
+  Deep brass (#8F6B3A) is used only for buttons (v1.19, frame A2): black
+  buttons turn brass with white text on hover; on black sections buttons are
+  brass and turn white on hover. Other accents use the scheme's foreground.
 */
 
 :root {
   --evx-noir: 17, 17, 17;
   --evx-white: 255, 255, 255;
   --evx-grey: 117, 117, 117;
+  --evx-brass: 143, 107, 58; /* #8F6B3A — white text on it is 4.85:1 */
+  --evx-brass-ink: 122, 92, 51; /* #7A5C33 — brass text/edges on light surfaces */
   --evx-tracking-wide: 0.08em;
   --evx-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Button hover colours per scheme. Each section's scheme class sets them, so
+   the nearest scheme wins (a black band inside a white page gets its own). */
+:root,
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-4 {
+  --evx-hover-fill: var(--evx-brass);
+  --evx-hover-label: var(--evx-white);
+  --evx-outline-hover-fill: transparent;
+  --evx-outline-hover-label: var(--evx-brass-ink);
+}
+
+.color-scheme-3,
+.color-scheme-5 {
+  --evx-hover-fill: var(--evx-white);
+  --evx-hover-label: var(--evx-noir);
+  --evx-outline-hover-fill: rgb(var(--evx-white));
+  --evx-outline-hover-label: var(--evx-noir);
 }
 
 /* ---------- Typography ---------- */
@@ -300,13 +323,21 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
   transition: background-color 200ms var(--evx-ease), color 200ms var(--evx-ease), opacity 200ms var(--evx-ease);
 }
 
-.button:not(.button--secondary):not(.button--tertiary):not([disabled]):hover {
-  opacity: 0.7;
+/* Filled buttons: black → deep brass on light sections, brass → white on black ones */
+.button:not(.button--secondary):not(.button--tertiary):not([disabled]):not([aria-disabled='true']):hover,
+.shopify-challenge__button:hover,
+.customer button:not([disabled]):hover {
+  --color-button: var(--evx-hover-fill);
+  --color-button-text: var(--evx-hover-label);
+  background-color: rgb(var(--evx-hover-fill));
+  color: rgb(var(--evx-hover-label));
 }
 
-.button--secondary:not([disabled]):hover {
-  background-color: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
+/* Outline buttons: brass edge and text on light sections, white fill on black ones */
+.button--secondary:not([disabled]):not([aria-disabled='true']):hover {
+  --color-button-text: var(--evx-outline-hover-label);
+  background-color: var(--evx-outline-hover-fill);
+  color: rgb(var(--evx-outline-hover-label));
 }
 
 /* Inline links: thin underline in the text color */

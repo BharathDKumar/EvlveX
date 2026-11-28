@@ -204,6 +204,12 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Button colours (v1.19, frame A2): black → deep brass on hover */
+.evx-cd__field button:hover {
+  background: rgb(var(--evx-brass, 143, 107, 58));
 }
 
 .evx-cd__field button:focus-visible {
