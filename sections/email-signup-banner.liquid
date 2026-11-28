@@ -66,6 +66,66 @@
             <h2 class="email-signup-banner__heading {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
               {{ block.settings.heading | escape }}
             </h2>
+          {%- when 'countdown' -%}
+            <div
+              class="evx-countdown"
+              data-launch="{{ block.settings.launch_at | escape }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.label != blank -%}
+                <p class="evx-countdown__label">{{ block.settings.label | escape }}</p>
+              {%- endif -%}
+              <div class="evx-countdown__clock" role="timer" aria-live="off">
+                <div class="evx-countdown__unit" data-unit="days">
+                  <span class="evx-countdown__num">--</span><span class="evx-countdown__name">Days</span>
+                </div>
+                <div class="evx-countdown__unit">
+                  <span class="evx-countdown__num" data-unit="hours">--</span><span class="evx-countdown__name">Hours</span>
+                </div>
+                <div class="evx-countdown__unit">
+                  <span class="evx-countdown__num" data-unit="minutes">--</span><span class="evx-countdown__name">Min</span>
+                </div>
+                <div class="evx-countdown__unit">
+                  <span class="evx-countdown__num" data-unit="seconds">--</span><span class="evx-countdown__name">Sec</span>
+                </div>
+              </div>
+              <p class="evx-countdown__done" hidden>{{ block.settings.done_text | escape }}</p>
+            </div>
+            <script>
+              (function () {
+                var root = document.currentScript.previousElementSibling;
+                var end = Date.parse(root.getAttribute('data-launch'));
+                if (isNaN(end)) { root.hidden = true; return; }
+                var clock = root.querySelector('.evx-countdown__clock');
+                var done = root.querySelector('.evx-countdown__done');
+                var daysBox = root.querySelector('[data-unit="days"]');
+                var cells = {
+                  days: daysBox.querySelector('.evx-countdown__num'),
+                  hours: root.querySelector('[data-unit="hours"]'),
+                  minutes: root.querySelector('[data-unit="minutes"]'),
+                  seconds: root.querySelector('[data-unit="seconds"]')
+                };
+                var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+                var timer;
+                function tick() {
+                  var left = Math.max(0, Math.floor((end - Date.now()) / 1000));
+                  if (left === 0) {
+                    clock.hidden = true;
+                    done.hidden = false;
+                    clearInterval(timer);
+                    return;
+                  }
+                  var d = Math.floor(left / 86400);
+                  cells.days.textContent = pad(d);
+                  daysBox.hidden = d === 0;
+                  cells.hours.textContent = pad(Math.floor((left % 86400) / 3600));
+                  cells.minutes.textContent = pad(Math.floor((left % 3600) / 60));
+                  cells.seconds.textContent = pad(left % 60);
+                }
+                tick();
+                timer = setInterval(tick, 1000);
+              })();
+            </script>
           {%- when 'paragraph' -%}
             <div class="newsletter__subheading rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
               {{ block.settings.text }}
@@ -387,6 +447,32 @@
       "type": "email_form",
       "name": "t:sections.email-signup-banner.blocks.email_form.name",
       "limit": 1
+    },
+    {
+      "type": "countdown",
+      "name": "Countdown",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "launch_at",
+          "label": "Launch time",
+          "info": "Date, time and time zone, e.g. 2026-11-28T09:00:00+05:30 (9:00 AM India time)",
+          "default": "2026-11-28T09:00:00+05:30"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Text above the clock",
+          "default": "Opens Saturday 28 Nov · 9:00 AM IST"
+        },
+        {
+          "type": "text",
+          "id": "done_text",
+          "label": "Text when the clock reaches zero",
+          "default": "We're opening now. Refresh the page in a minute."
+        }
+      ]
     }
   ],
   "presets": [
