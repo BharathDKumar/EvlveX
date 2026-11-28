@@ -998,11 +998,20 @@ evlvex-drop-hero :is(p, h2, h3) {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0;
+  transition: border-color 0.2s var(--sd-ease), color 0.2s var(--sd-ease), box-shadow 0.2s var(--sd-ease);
+}
+
+/* Size buttons (v1.19, frame A2): brass edge and text on hover; the chosen size is black with a brass edge */
+.evx-t-product .product-form__input--pill input[type='radio']:not(:checked) + label:hover {
+  border-color: rgb(var(--evx-brass));
+  box-shadow: inset 0 0 0 1px rgb(var(--evx-brass));
+  color: rgb(var(--evx-brass-ink));
 }
 
 .evx-t-product .product-form__input--pill input[type='radio']:checked + label {
   background: rgb(var(--sd-ink));
   border-color: rgb(var(--evx-brass));
+  box-shadow: inset 0 0 0 1px rgb(var(--evx-brass));
   color: rgb(var(--sd-paper));
 }
 
